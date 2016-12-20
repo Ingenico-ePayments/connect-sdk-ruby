@@ -6,6 +6,7 @@ require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specif
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/invoice_payment_method_specific_output'
+require 'ingenico/connect/sdk/domain/payment/mobile_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/order_output'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_output'
@@ -36,6 +37,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::InvoicePaymentMethodSpecificOutput}
         attr_accessor :invoice_payment_method_specific_output
 
+        # {Ingenico::Connect::SDK::Domain::Payment::MobilePaymentMethodSpecificOutput}
+        attr_accessor :mobile_payment_method_specific_output
+
         # String
         attr_accessor :payment_method
 
@@ -53,6 +57,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'cashPaymentMethodSpecificOutput', @cash_payment_method_specific_output)
           add_to_hash(hash, 'directDebitPaymentMethodSpecificOutput', @direct_debit_payment_method_specific_output)
           add_to_hash(hash, 'invoicePaymentMethodSpecificOutput', @invoice_payment_method_specific_output)
+          add_to_hash(hash, 'mobilePaymentMethodSpecificOutput', @mobile_payment_method_specific_output)
           add_to_hash(hash, 'paymentMethod', @payment_method)
           add_to_hash(hash, 'redirectPaymentMethodSpecificOutput', @redirect_payment_method_specific_output)
           add_to_hash(hash, 'sepaDirectDebitPaymentMethodSpecificOutput', @sepa_direct_debit_payment_method_specific_output)
@@ -93,6 +98,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['invoicePaymentMethodSpecificOutput']]
             end
             @invoice_payment_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::InvoicePaymentMethodSpecificOutput.new_from_hash(hash['invoicePaymentMethodSpecificOutput'])
+          end
+          if hash.has_key?('mobilePaymentMethodSpecificOutput')
+            if !(hash['mobilePaymentMethodSpecificOutput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['mobilePaymentMethodSpecificOutput']]
+            end
+            @mobile_payment_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::MobilePaymentMethodSpecificOutput.new_from_hash(hash['mobilePaymentMethodSpecificOutput'])
           end
           if hash.has_key?('paymentMethod')
             @payment_method = hash['paymentMethod']

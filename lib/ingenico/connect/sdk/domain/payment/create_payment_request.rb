@@ -8,6 +8,7 @@ require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specif
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/invoice_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/mobile_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/order'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_input'
@@ -41,6 +42,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::InvoicePaymentMethodSpecificInput}
         attr_accessor :invoice_payment_method_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::MobilePaymentMethodSpecificInput}
+        attr_accessor :mobile_payment_method_specific_input
+
         # {Ingenico::Connect::SDK::Domain::Payment::Order}
         attr_accessor :order
 
@@ -59,6 +63,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'encryptedCustomerInput', @encrypted_customer_input)
           add_to_hash(hash, 'fraudFields', @fraud_fields)
           add_to_hash(hash, 'invoicePaymentMethodSpecificInput', @invoice_payment_method_specific_input)
+          add_to_hash(hash, 'mobilePaymentMethodSpecificInput', @mobile_payment_method_specific_input)
           add_to_hash(hash, 'order', @order)
           add_to_hash(hash, 'redirectPaymentMethodSpecificInput', @redirect_payment_method_specific_input)
           add_to_hash(hash, 'sepaDirectDebitPaymentMethodSpecificInput', @sepa_direct_debit_payment_method_specific_input)
@@ -105,6 +110,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['invoicePaymentMethodSpecificInput']]
             end
             @invoice_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::InvoicePaymentMethodSpecificInput.new_from_hash(hash['invoicePaymentMethodSpecificInput'])
+          end
+          if hash.has_key?('mobilePaymentMethodSpecificInput')
+            if !(hash['mobilePaymentMethodSpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['mobilePaymentMethodSpecificInput']]
+            end
+            @mobile_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::MobilePaymentMethodSpecificInput.new_from_hash(hash['mobilePaymentMethodSpecificInput'])
           end
           if hash.has_key?('order')
             if !(hash['order'].is_a? Hash)

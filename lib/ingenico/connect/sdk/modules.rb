@@ -116,6 +116,10 @@ end
 module Ingenico::Connect::SDK::Domain::Token
 end
 
+# Contains data classes that are used for cryptography services.
+module Ingenico::Connect::SDK::Domain::Publickey
+end
+
 # Contains the general data classes that are used in multiple different types of requests.
 # These classes can be serialized and used in communication with the GlobalCollect platform.
 module Ingenico::Connect::SDK::Domain::Definitions

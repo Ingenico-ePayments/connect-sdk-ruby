@@ -6,6 +6,7 @@ require 'ingenico/connect/sdk/domain/payment/order_output'
 require 'ingenico/connect/sdk/domain/payment/refund_bank_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_card_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_e_wallet_method_specific_output'
+require 'ingenico/connect/sdk/domain/payment/refund_mobile_method_specific_output'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -26,6 +27,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::RefundEWalletMethodSpecificOutput}
         attr_accessor :e_wallet_refund_method_specific_output
 
+        # {Ingenico::Connect::SDK::Domain::Payment::RefundMobileMethodSpecificOutput}
+        attr_accessor :mobile_refund_method_specific_output
+
         # String
         attr_accessor :payment_method
 
@@ -35,6 +39,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'bankRefundMethodSpecificOutput', @bank_refund_method_specific_output)
           add_to_hash(hash, 'cardRefundMethodSpecificOutput', @card_refund_method_specific_output)
           add_to_hash(hash, 'eWalletRefundMethodSpecificOutput', @e_wallet_refund_method_specific_output)
+          add_to_hash(hash, 'mobileRefundMethodSpecificOutput', @mobile_refund_method_specific_output)
           add_to_hash(hash, 'paymentMethod', @payment_method)
           hash
         end
@@ -61,6 +66,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['eWalletRefundMethodSpecificOutput']]
             end
             @e_wallet_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundEWalletMethodSpecificOutput.new_from_hash(hash['eWalletRefundMethodSpecificOutput'])
+          end
+          if hash.has_key?('mobileRefundMethodSpecificOutput')
+            if !(hash['mobileRefundMethodSpecificOutput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['mobileRefundMethodSpecificOutput']]
+            end
+            @mobile_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundMobileMethodSpecificOutput.new_from_hash(hash['mobileRefundMethodSpecificOutput'])
           end
           if hash.has_key?('paymentMethod')
             @payment_method = hash['paymentMethod']
