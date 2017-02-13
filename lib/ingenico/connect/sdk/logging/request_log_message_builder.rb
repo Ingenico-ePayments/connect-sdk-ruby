@@ -33,10 +33,11 @@ module Ingenico::Connect::SDK
         if @uri.query.nil?
           return @uri.path
         else
-          return @uri.path + '?' + @uri.query unless @uri.query.nil?
+          return "#{@uri.path}?#{@uri.query}" unless @uri.query.nil?
         end
         # @uri.path + '?' + empty_if_null(@uri.query)
       end
+
     end
   end
 end

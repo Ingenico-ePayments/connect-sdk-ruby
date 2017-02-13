@@ -7,8 +7,20 @@ describe ValueObfuscator do
   let(:keep_start_count) { 20 }
   let(:keep_end_count) { 30 }
 
+  it 'cannot be explicitly instantiated' do
+    expect{ValueObfuscator.new(fixed_length,
+                              keep_start_count,
+                              keep_end_count)
+    }.to raise_error(NoMethodError)
+
+    expect{ValueObfuscator.private_new(fixed_length,
+                              keep_start_count,
+                              keep_end_count)
+    }.to raise_error(NoMethodError)
+  end
+
   it 'can be initialized correctly' do
-    sample = ValueObfuscator.send(:new, fixed_length,
+    sample = ValueObfuscator.send(:private_new, fixed_length,
                                   keep_start_count, keep_end_count)
     expect(sample.instance_variable_get(:@fixed_length)).to eq(10)
     expect(sample.instance_variable_get(:@keep_start_count)).to eq(20)
@@ -51,7 +63,7 @@ describe ValueObfuscator do
   end
 
   context '.obfuscate_value' do
-    subject(:sample) { ValueObfuscator.send(:new, fixed_length,
+    subject(:sample) { ValueObfuscator.send(:private_new, fixed_length,
                                             keep_start_count, keep_end_count) }
     let(:value) { 'str' }
 

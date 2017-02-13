@@ -26,6 +26,9 @@ module Ingenico::Connect::SDK
         # true/false
         attr_accessor :auto_tokenized
 
+        # true/false
+        attr_accessor :can_be_iframed
+
         # {Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints}
         attr_accessor :display_hints
 
@@ -59,6 +62,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'allowsRecurring', @allows_recurring)
           add_to_hash(hash, 'allowsTokenization', @allows_tokenization)
           add_to_hash(hash, 'autoTokenized', @auto_tokenized)
+          add_to_hash(hash, 'canBeIframed', @can_be_iframed)
           add_to_hash(hash, 'displayHints', @display_hints)
           add_to_hash(hash, 'fields', @fields)
           add_to_hash(hash, 'id', @id)
@@ -90,6 +94,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('autoTokenized')
             @auto_tokenized = hash['autoTokenized']
+          end
+          if hash.has_key?('canBeIframed')
+            @can_be_iframed = hash['canBeIframed']
           end
           if hash.has_key?('displayHints')
             if !(hash['displayHints'].is_a? Hash)

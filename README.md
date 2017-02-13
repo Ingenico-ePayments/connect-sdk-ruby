@@ -28,6 +28,7 @@ Note that the source code of the unit tests, integration tests and the examples 
 ## Requirements
 
 Ruby 2.2 and higher versions are required. Ruby 2.1.10 is also supported but is not suggested because official support has ended and security maintenance will end soon.
+As for JRuby, version 9.0.0.0 and higher are supported.
 In addition, the following package is required:
 
 * [httpclient](https://github.com/nahi/httpclient) 2.8 or higher
@@ -76,7 +77,7 @@ After the Ruby SDK has been installed, it can be required in Ruby program as fol
 
     require 'ingenico/connect/sdk'
 
-## Running tests 
+## Running tests
 
 There are two types of tests: unit tests and integration tests. The unit tests will work out-of-the-box; for the integration tests some configuration is required.
 First, some environment variables need to be set:

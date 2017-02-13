@@ -7,12 +7,12 @@ module Ingenico::Connect::SDK
       # @see Ingenico::Connect::SDK::Logging::StdoutCommunicatorLogger
       # @see Ingenico::Connect::SDK::Logging::RubyCommunicatorLogger
       def initialize
-        raise NotImplementedError("#{self.class.name} is not implemented.")
+        raise NotImplementedError.new("#{self.class.name} is not implemented.")
       end
 
       # logs a message with or without exception
       def log(message, thrown=false)
-        raise NotImplementedError("#{self.class.name}#log() is not implemented.")
+        raise NotImplementedError.new("#{self.class.name}#log() is not implemented.")
       end
     end
   end

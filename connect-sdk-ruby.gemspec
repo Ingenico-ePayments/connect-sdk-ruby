@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name           = 'connect-sdk-ruby'
-  spec.version        = '1.1.0'
+  spec.version        = '1.2.0'
   spec.authors        = ['Ingenico ePayments']
   spec.email          = ['github@epay.ingenico.com']
   spec.summary        = %q{SDK to communicate with the GlobalCollect platform using the Ingenico Connect Server API}
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.test_files     = spec.files.grep(%r{^(test|spec|features)\/})
   spec.require_paths  = ['lib']
 
-  spec.required_ruby_version = '~> 2.0'
+  spec.required_ruby_version = '>= 2.0'
 
   spec.add_dependency 'httpclient', '~> 2.8'
 

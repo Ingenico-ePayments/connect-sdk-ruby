@@ -85,7 +85,7 @@ describe DefaultConnection do
           ).to eq(socket_timeout)
 
           pc = connection.instance_variable_get(:@proxy_configuration)
-        
+
           expect(pc.host).to eq('test-proxy')
           expect(pc.port).to eq(80)
           expect(pc.scheme).to eq('http')
@@ -97,7 +97,7 @@ describe DefaultConnection do
   end # construction
 
   context 'sending and receiving' do
-    
+
     class DummyResponse
       def status
         200
@@ -142,17 +142,11 @@ describe DefaultConnection do
       end
 
       let(:headers) { { 'header1' => 'dummy', 'header2' => 'yammy' } }
-      let(:sdk_headers) do
-        arr = []
-        headers.each { |k, v| arr << Ingenico::Connect::SDK::ResponseHeader.new(k, v) }
-        arr
-      end
+      let(:sdk_headers) { headers.map {|k, v| Ingenico::Connect::SDK::ResponseHeader.new(k, v) } }
       let(:uri) { URI('http://foobar.com/v1/1234/services/convert/amount?source=EUR&amount=1000&target=USD') }
 
       def expected_header_str(headers)
-        str = ''
-        headers.each { |k, v| str += k + '=' + '"' + v + '"' + ', '}
-        str.chomp(', ')
+        headers.inject('') { |str, (k, v)| %Q{#{str}#{k}="#{v}", }}.chomp(', ')
       end
 
       def sdk_headers_to_s(sdk_headers)

@@ -4,7 +4,16 @@ module Ingenico::Connect::SDK
     # Class responsible for obfuscating sensitive data in a message body.
     class ValueObfuscator
 
-      private
+      class << self
+
+        alias_method :private_new, :new
+
+        def new(*args)
+          raise NoMethodError.new('ValueObfuscator should not explicitly instantiated!')
+        end
+
+        private :private_new, :new
+      end
 
       # Creates a new ValueObfuscator.
       # fixed_length::      If greater than 0, all values that will be obfuscated
@@ -22,27 +31,26 @@ module Ingenico::Connect::SDK
 
       public
 
-      @@ALL = ValueObfuscator.new(0, 0, 0)
-
       def self.ALL
-        @@ALL
+        # use lazy instantiation
+        @@ALL ||= ValueObfuscator.send(:private_new, 0, 0, 0)
       end
 
       # Creates a new ValueObfuscator that replaces any sensitive data with a _fixed_length_ line of asterisks.
       def self.fixed_length(fixed_length)
-        ValueObfuscator.new(fixed_length, 0, 0)
+        ValueObfuscator.send(:private_new, fixed_length, 0, 0)
       end
 
       # Creates a new ValueObfuscator that retains only the first _count_ characters of any value to obfuscate
       # and replaces the rest with asterisks.
       def self.keep_start_count(count)
-        ValueObfuscator.new(0, count, 0)
+        ValueObfuscator.send(:private_new, 0, count, 0)
       end
 
       # Creates a new ValueObfuscator that retains only the last _count_ characters of any value to obfuscate
       # and replaces the rest with asterisks.
       def self.keep_end_count(count)
-        ValueObfuscator.new(0, 0, count)
+        ValueObfuscator.send(:private_new, 0, 0, count)
       end
 
       # Obfuscates the parameter value.
@@ -168,9 +176,6 @@ module Ingenico::Connect::SDK
           super(name, fixedLength)
         end
 
-        # with_keep_start_count and with_keep_end_count are the same
-        # no need to override
-        
         def build
           HeaderObfuscator.new(obfuscators)
         end
@@ -200,7 +205,7 @@ module Ingenico::Connect::SDK
         # The negative lookbehind is to allow escaped quotes to be part of
         # the value. What this does not allow currently is having values end
         # with a \ (which would be escaped to \\).
-        regex = pn.inject("([\"'])(") { |r, p| r += Regexp.quote(p) + '|'}.chop +
+        regex = pn.inject("([\"'])(") { |r, p| "#{r}#{Regexp.quote(p)}|"}.chop <<
           ")\\1\\s*:\\s*(?:([\"'])(.*?)(?<!\\\\)\\3|([^\"'\\s]\\S*))"
         /#{regex}/m # dotall mode
       end
@@ -226,7 +231,6 @@ module Ingenico::Connect::SDK
 
       class Builder < Obfuscator::Builder
         def initialize
-          # implement the class
           @obfuscators = {}
         end
 
@@ -256,7 +260,7 @@ module Ingenico::Connect::SDK
       end
     end # end of property obfuscator
 
-    class LoggingUtil
+    module LoggingUtil
       @@PROPERTY_OBFUSCATOR = PropertyObfuscator.builder
         .with_keep_end_count("cardNumber", 4)
         .with_keep_end_count("expiryDate", 2)
@@ -283,8 +287,6 @@ module Ingenico::Connect::SDK
         .with_fixed_length("X-GCS-Authentication-Token", 8)
         .with_fixed_length("X-GCS-CallerPassword", 8)
         .build
-
-      private_class_method :new
 
       def self.obfuscate_body(body)
         @@PROPERTY_OBFUSCATOR.obfuscate(body)

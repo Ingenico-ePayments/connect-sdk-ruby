@@ -18,7 +18,7 @@ module Ingenico::Connect::SDK
     attr_reader :value
 
     def to_s
-      name + '=' + value
+      "#{name}=#{value}"
     end
   end
 end

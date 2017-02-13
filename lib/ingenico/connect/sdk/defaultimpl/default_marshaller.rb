@@ -1,15 +1,16 @@
 require 'json'
+require 'singleton'
 
 module Ingenico::Connect::SDK
   module DefaultImpl
-
-    # Marshals objects to and from JSON format.
+    # marshals objects to and from JSON format.
     # Currently supports marshalling and unmarshalling of classes that support class.new_from_hash and class#to_h
     class DefaultMarshaller < Ingenico::Connect::SDK::Marshaller
-      @@INSTANCE = DefaultMarshaller.new
+      include Singleton
 
-      def self.INSTANCE
-        @@INSTANCE
+      # NOTE: this alias is needed to not break existing method calls depending on old interface
+      class << self
+        alias_method :INSTANCE, :instance
       end
 
       # marshals the _request_object_ to a JSON string using request_object#to_h

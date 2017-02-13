@@ -3,21 +3,24 @@ require 'uri'
 require 'httpclient'
 
 # @private :nodoc: this is not our class
-class HTTPClient
-  # (monkey) patch to gain access to the session pool size in HTTPClient
-  def session_count
-    sess_pool = @session_manager.instance_variable_get(:@sess_pool)
-    sess_pool.size
+module RefineHTTPClient
+  refine HTTPClient do
+    # (monkey) patch to gain access to the session pool size in HTTPClient
+    def session_count
+      sess_pool = @session_manager.instance_variable_get(:@sess_pool)
+      sess_pool.size
+    end
   end
 end
 
 module Ingenico::Connect::SDK
   module DefaultImpl
-
     class DefaultConnection < PooledConnection
 
-      CONTENT_TYPE = 'Content-Type'
-      JSON_CONTENT_TYPE = 'application/json'
+      using RefineHTTPClient
+
+      CONTENT_TYPE = 'Content-Type'.freeze
+      JSON_CONTENT_TYPE = 'application/json'.freeze
 
       # Initialized using a hash containing the following parameters:
       # connect_timeout::     Connection timeout in seconds.
@@ -182,16 +185,12 @@ module Ingenico::Connect::SDK
 
       # Converts a {Ingenico::Connect::SDK::RequestHeader} list headers to a hash
       def convert_from_sdk_headers(headers)
-        hash = {}
-        headers.each { |h| hash[h.name] =  h.value }
-        hash
+        headers.inject({}) { |hash, h| hash[h.name] =  h.value ; hash}
       end
 
       # Converts a hash to a {Ingenico::Connect::SDK::ResponseHeader} list
       def convert_to_sdk_headers(headers)
-        arr = []
-        headers.each { |k, v| arr << Ingenico::Connect::SDK::ResponseHeader.new(k, v) }
-        arr
+        headers.inject([]) { |arr, (k, v)| arr << Ingenico::Connect::SDK::ResponseHeader.new(k, v) }
       end
 
       # converts a HTTPClient response to a {Ingenico::Connect::SDK::Response}

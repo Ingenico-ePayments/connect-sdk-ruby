@@ -41,7 +41,7 @@ module Ingenico::Connect::SDK
 
       # Constructs and returns the log message as a string.
       def get_message
-        raise NotImplementedError("#{self.class.name}#get_message() is not implemented.")
+        raise NotImplementedError.new("#{self.class.name}#get_message() is not implemented.")
       end
 
       def to_s
@@ -56,6 +56,7 @@ module Ingenico::Connect::SDK
       protected def empty_if_null(value)
         value.nil? ? '' : value
       end
+
     end
   end
 end

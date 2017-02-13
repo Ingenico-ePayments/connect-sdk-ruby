@@ -36,11 +36,11 @@ module Ingenico::Connect::SDK
       # Opens or creates a new file in write-only mode with _filename_.
       def self.create_logfile(filename)
         logdev = begin
-                   open(filename, (File::WRONLY | File::APPEND | File::CREAT | File::EXCL))
-                 rescue Errno::EEXIST
-                   # file is created by another process
-                   open_logfile(filename)
-                 end
+                  open(filename, (File::WRONLY | File::APPEND | File::CREAT | File::EXCL))
+                rescue Errno::EEXIST
+                  # file is created by another process
+                  open_logfile(filename)
+                end
         logdev.sync = true
         logdev
       end

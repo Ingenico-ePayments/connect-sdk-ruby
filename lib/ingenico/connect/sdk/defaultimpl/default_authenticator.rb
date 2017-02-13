@@ -6,11 +6,12 @@ module Ingenico::Connect::SDK
 
     # Authenticates requests made to the GlobalCollect platform using the HMAC algorithm.
     class DefaultAuthenticator < Authenticator
+
       # HMAC algorithm used to generate the signature
-      HMAC_ALGOR = 'SHA256'
-      CONTENT_TYPE = 'Content-Type'
-      DATE = 'Date'
-      XGCS = 'x-gcs'
+      HMAC_ALGOR = 'SHA256'.freeze
+      CONTENT_TYPE = 'Content-Type'.freeze
+      DATE = 'Date'.freeze
+      XGCS = 'x-gcs'.freeze
 
       # Construct a new DefaultAuthenticator instance that can sign requests
       # with the provided _api_key_id_ and _secret_api_key_.
@@ -69,11 +70,9 @@ module Ingenico::Connect::SDK
 
         xgc_http_headers.sort! { |(h1, v1), (h2, v2)| h1 <=> h2 } unless xgc_http_headers.empty?
 
-        data = http_method.upcase + "\n" +
-            content_type + "\n" + date + "\n"
-        data += xgc_http_headers.inject('') { |s, (k, v)| s + k + ':' + v + "\n" } unless xgc_http_headers.empty?
-        data += canonical_resource + "\n" unless canonical_resource.nil?
-        data
+        data = "#{http_method.upcase}\n#{content_type}\n#{date}\n"
+        data << xgc_http_headers.inject('') { |s, (k, v)| "#{s}#{k}:#{v}\n" } unless xgc_http_headers.empty?
+        data << "#{canonical_resource}\n" unless canonical_resource.nil?
       end
 
       # Applies the HMAC algorithm to the canonicalized data to obtain an HMAC digest.
@@ -88,7 +87,7 @@ module Ingenico::Connect::SDK
 
       # Returns the encoded URI path without the HTTP method and including all decoded query parameters.
       def to_canonical_resource(resource_uri)
-        return resource_uri.path + '?' + resource_uri.query if resource_uri.query
+        return "#{resource_uri.path}?#{resource_uri.query}" if resource_uri.query
         return resource_uri.path
       end
 

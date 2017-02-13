@@ -6,9 +6,7 @@ module Ingenico::Connect::SDK
 
     # Create a new header using the name and value given as parameters.
     def initialize(name, value)
-      if name.nil?
-        raise ArgumentError.new('name is required')
-      end
+      raise ArgumentError.new('name is required') if name.nil? or name.strip.empty?
       @name = name
       @value = value
     end
@@ -19,7 +17,7 @@ module Ingenico::Connect::SDK
     attr_reader :value
 
     def to_s
-      name + ':' + value
+      "#{name}:#{value}"
     end
   end
 end

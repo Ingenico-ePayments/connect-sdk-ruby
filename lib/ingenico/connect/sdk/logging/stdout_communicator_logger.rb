@@ -1,4 +1,5 @@
 require 'English'
+require 'singleton'
 
 module Ingenico::Connect::SDK
   module Logging
@@ -6,18 +7,15 @@ module Ingenico::Connect::SDK
     # {Ingenico::Connect::SDK::Logging::CommunicatorLogger} that logs the messages to $stdout.
     class StdoutCommunicatorLogger < CommunicatorLogger
 
+      include Singleton
+
       def initialize
         # implement the interface
       end
 
-      # singleton
-      @@INSTANCE = StdoutCommunicatorLogger.new
-
-      private_class_method :new
-
-      # Returns the StdoutCommunicatorLogger instance
-      def self.INSTANCE
-        @@INSTANCE
+      # NOTE: this is needed to not break method calls based on old interface
+      class << self
+        alias_method :INSTANCE, :instance
       end
 
       # Logs a single error or non-error message to $stdout.
