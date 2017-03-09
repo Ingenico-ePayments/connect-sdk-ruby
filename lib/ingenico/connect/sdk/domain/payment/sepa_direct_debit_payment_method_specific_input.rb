@@ -26,6 +26,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :token
 
+        # true/false
+        attr_accessor :tokenize
+
         def to_h
           hash = super
           add_to_hash(hash, 'dateCollect', @date_collect)
@@ -33,6 +36,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'isRecurring', @is_recurring)
           add_to_hash(hash, 'recurringPaymentSequenceIndicator', @recurring_payment_sequence_indicator)
           add_to_hash(hash, 'token', @token)
+          add_to_hash(hash, 'tokenize', @tokenize)
           hash
         end
 
@@ -52,6 +56,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('token')
             @token = hash['token']
+          end
+          if hash.has_key?('tokenize')
+            @tokenize = hash['tokenize']
           end
         end
       end

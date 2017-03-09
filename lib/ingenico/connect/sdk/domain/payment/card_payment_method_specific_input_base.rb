@@ -32,6 +32,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :token
 
+        # true/false
+        attr_accessor :tokenize
+
         def to_h
           hash = super
           add_to_hash(hash, 'authorizationMode', @authorization_mode)
@@ -41,6 +44,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'skipAuthentication', @skip_authentication)
           add_to_hash(hash, 'skipFraudService', @skip_fraud_service)
           add_to_hash(hash, 'token', @token)
+          add_to_hash(hash, 'tokenize', @tokenize)
           hash
         end
 
@@ -66,6 +70,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('token')
             @token = hash['token']
+          end
+          if hash.has_key?('tokenize')
+            @tokenize = hash['tokenize']
           end
         end
       end

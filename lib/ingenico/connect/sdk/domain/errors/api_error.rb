@@ -12,10 +12,16 @@ module Ingenico::Connect::SDK
       class APIError < Ingenico::Connect::SDK::DataObject
 
         # String
+        attr_accessor :category
+
+        # String
         attr_accessor :code
 
         # Integer
         attr_accessor :http_status_code
+
+        # String
+        attr_accessor :id
 
         # String
         attr_accessor :message
@@ -28,8 +34,10 @@ module Ingenico::Connect::SDK
 
         def to_h
           hash = super
+          add_to_hash(hash, 'category', @category)
           add_to_hash(hash, 'code', @code)
           add_to_hash(hash, 'httpStatusCode', @http_status_code)
+          add_to_hash(hash, 'id', @id)
           add_to_hash(hash, 'message', @message)
           add_to_hash(hash, 'propertyName', @property_name)
           add_to_hash(hash, 'requestId', @request_id)
@@ -38,11 +46,17 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key?('category')
+            @category = hash['category']
+          end
           if hash.has_key?('code')
             @code = hash['code']
           end
           if hash.has_key?('httpStatusCode')
             @http_status_code = hash['httpStatusCode']
+          end
+          if hash.has_key?('id')
+            @id = hash['id']
           end
           if hash.has_key?('message')
             @message = hash['message']
