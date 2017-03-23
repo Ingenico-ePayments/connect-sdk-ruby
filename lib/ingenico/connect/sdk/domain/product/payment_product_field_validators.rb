@@ -3,6 +3,7 @@
 # https://developer.globalcollect.com/documentation/api/server/
 #
 require 'ingenico/connect/sdk/data_object'
+require 'ingenico/connect/sdk/domain/product/boleto_bancario_requiredness_validator'
 require 'ingenico/connect/sdk/domain/product/empty_validator'
 require 'ingenico/connect/sdk/domain/product/fixed_list_validator'
 require 'ingenico/connect/sdk/domain/product/length_validator'
@@ -15,6 +16,9 @@ module Ingenico::Connect::SDK
 
       # Class {https://developer.globalcollect.com/documentation/api/server/#schema_PaymentProductFieldValidators PaymentProductFieldValidators}
       class PaymentProductFieldValidators < Ingenico::Connect::SDK::DataObject
+
+        # {Ingenico::Connect::SDK::Domain::Product::BoletoBancarioRequirednessValidator}
+        attr_accessor :boleto_bancario_requiredness
 
         # {Ingenico::Connect::SDK::Domain::Product::EmptyValidator}
         attr_accessor :email_address
@@ -39,6 +43,7 @@ module Ingenico::Connect::SDK
 
         def to_h
           hash = super
+          add_to_hash(hash, 'boletoBancarioRequiredness', @boleto_bancario_requiredness)
           add_to_hash(hash, 'emailAddress', @email_address)
           add_to_hash(hash, 'expirationDate', @expiration_date)
           add_to_hash(hash, 'fixedList', @fixed_list)
@@ -51,6 +56,12 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key?('boletoBancarioRequiredness')
+            if !(hash['boletoBancarioRequiredness'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['boletoBancarioRequiredness']]
+            end
+            @boleto_bancario_requiredness = Ingenico::Connect::SDK::Domain::Product::BoletoBancarioRequirednessValidator.new_from_hash(hash['boletoBancarioRequiredness'])
+          end
           if hash.has_key?('emailAddress')
             if !(hash['emailAddress'].is_a? Hash)
               raise TypeError, "value '%s' is not a Hash" % [hash['emailAddress']]
