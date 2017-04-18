@@ -12,6 +12,8 @@ module Ingenico::Connect::SDK
       class RedirectPaymentProduct809SpecificInput < Ingenico::Connect::SDK::DataObject
 
         # String
+        #
+        # Deprecated; Use RedirectPaymentMethodSpecificInput.expirationPeriod instead
         attr_accessor :expiration_period
 
         # String

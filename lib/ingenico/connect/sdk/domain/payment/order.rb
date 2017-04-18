@@ -8,6 +8,7 @@ require 'ingenico/connect/sdk/domain/payment/additional_order_input'
 require 'ingenico/connect/sdk/domain/payment/customer'
 require 'ingenico/connect/sdk/domain/payment/line_item'
 require 'ingenico/connect/sdk/domain/payment/order_references'
+require 'ingenico/connect/sdk/domain/payment/shopping_cart'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -31,6 +32,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::OrderReferences}
         attr_accessor :references
 
+        # {Ingenico::Connect::SDK::Domain::Payment::ShoppingCart}
+        attr_accessor :shopping_cart
+
         def to_h
           hash = super
           add_to_hash(hash, 'additionalInput', @additional_input)
@@ -38,6 +42,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'customer', @customer)
           add_to_hash(hash, 'items', @items)
           add_to_hash(hash, 'references', @references)
+          add_to_hash(hash, 'shoppingCart', @shopping_cart)
           hash
         end
 
@@ -75,6 +80,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['references']]
             end
             @references = Ingenico::Connect::SDK::Domain::Payment::OrderReferences.new_from_hash(hash['references'])
+          end
+          if hash.has_key?('shoppingCart')
+            if !(hash['shoppingCart'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['shoppingCart']]
+            end
+            @shopping_cart = Ingenico::Connect::SDK::Domain::Payment::ShoppingCart.new_from_hash(hash['shoppingCart'])
           end
         end
       end

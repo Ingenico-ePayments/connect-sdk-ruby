@@ -18,6 +18,8 @@ module Ingenico::Connect::SDK
         attr_accessor :airline_data
 
         # {Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData}
+        #
+        # Deprecated; Use Order.shoppingCart instead
         attr_accessor :level3_summary_data
 
         # Integer

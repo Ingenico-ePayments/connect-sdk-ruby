@@ -9,15 +9,23 @@ module Ingenico::Connect::SDK
     module Payment
 
       # Class {https://developer.globalcollect.com/documentation/api/server/#schema_Level3SummaryData Level3SummaryData}
+      #
+      # Deprecated; Use ShoppingCart instead
       class Level3SummaryData < Ingenico::Connect::SDK::DataObject
 
         # Integer
+        #
+        # Deprecated; Use ShoppingCart.discountAmount instead
         attr_accessor :discount_amount
 
         # Integer
+        #
+        # Deprecated; Use ShoppingCart.dutyAmount instead
         attr_accessor :duty_amount
 
         # Integer
+        #
+        # Deprecated; Use ShoppingCart.shippingAmount instead
         attr_accessor :shipping_amount
 
         def to_h
