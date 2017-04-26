@@ -10,11 +10,11 @@ Productgroups = Ingenico::Connect::SDK::Merchant::Productgroups
 def example
   get_client do |client|
     query = Productgroups::GetProductgroupParams.new
+    query.country_code = 'NL'
+    query.currency_code = 'EUR'
+    query.locale = 'en_US'
     query.amount = 1000
     query.is_recurring = true
-    query.country_code = 'NL'
-    query.locale = 'en_US'
-    query.currency_code = 'EUR'
     query.add_hide('fields')
 
     response = client.merchant('merchantId').productgroups().get('cards', query)

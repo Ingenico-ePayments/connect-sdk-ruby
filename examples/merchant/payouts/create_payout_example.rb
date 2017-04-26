@@ -16,8 +16,8 @@ require 'ingenico/connect/sdk/domain/payout/payout_customer'
 require 'ingenico/connect/sdk/domain/payout/payout_references'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
-Payout = Ingenico::Connect::SDK::Domain::Payout
 Payment = Ingenico::Connect::SDK::Domain::Payment
+Payout = Ingenico::Connect::SDK::Domain::Payout
 
 def example
   get_client do |client|

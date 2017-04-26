@@ -6,9 +6,9 @@ require 'ingenico/connect/sdk/factory'
 require 'ingenico/connect/sdk/domain/definitions/address'
 require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
 require 'ingenico/connect/sdk/domain/definitions/bank_account_bban'
-require 'ingenico/connect/sdk/domain/riskassessments/risk_assessment_bank_account'
 require 'ingenico/connect/sdk/domain/riskassessments/customer_risk_assessment'
 require 'ingenico/connect/sdk/domain/riskassessments/order_risk_assessment'
+require 'ingenico/connect/sdk/domain/riskassessments/risk_assessment_bank_account'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Riskassessments = Ingenico::Connect::SDK::Domain::Riskassessments

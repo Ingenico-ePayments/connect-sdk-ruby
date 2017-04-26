@@ -27,7 +27,7 @@ module Ingenico::Connect::SDK
         # Resource /{{merchantId}}/products
         #
         # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products_get Get payment products}
-        # query::   {Ingenico::Connect::SDK::Merchant::Products::FindParams}
+        # query::   {Ingenico::Connect::SDK::Merchant::Products::FindProductsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProducts}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -57,7 +57,7 @@ module Ingenico::Connect::SDK
         #
         # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__get Get payment product}
         # payment_product_id:: Integer
-        # query::              {Ingenico::Connect::SDK::Merchant::Products::GetParams}
+        # query::              {Ingenico::Connect::SDK::Merchant::Products::GetProductParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProductResponse}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -114,9 +114,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Product::Directory,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -149,9 +147,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Product::PaymentProductNetworksResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -183,9 +179,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Publickey::PublicKey,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

@@ -11,8 +11,8 @@ def example
   get_client do |client|
     query = Services::ConvertAmountParams.new
     query.source = 'EUR'
-    query.amount = 100
     query.target = 'USD'
+    query.amount = 100
 
     response = client.merchant('merchantId').services().convert_amount(query)
   end

@@ -5,7 +5,7 @@ module Ingenico::Connect::SDK
 
   # Manages metadata about the server using the SDK
   class MetaDataProvider
-    @@SDK_VERSION = '1.5.0'
+    @@SDK_VERSION = '1.5.1'
     @@SERVER_META_INFO_HEADER = 'X-GCS-ServerMetaInfo'
     @@PROHIBITED_HEADERS = [@@SERVER_META_INFO_HEADER, 'X-GCS-Idempotence-Key',
                             'Date', 'Content-Type', 'Authorization'].sort!.freeze

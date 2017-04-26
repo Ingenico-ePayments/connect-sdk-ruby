@@ -24,7 +24,7 @@ module Ingenico::Connect::SDK
         # Resource /{{merchantId}}/productgroups
         #
         # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__productgroups_get Get payment product groups}
-        # query::   {Ingenico::Connect::SDK::Merchant::Productgroups::FindParams}
+        # query::   {Ingenico::Connect::SDK::Merchant::Productgroups::FindProductgroupsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProductGroups}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -54,7 +54,7 @@ module Ingenico::Connect::SDK
         #
         # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__productgroups__paymentProductGroupId__get Get payment product group}
         # payment_product_group_id:: String
-        # query::                    {Ingenico::Connect::SDK::Merchant::Productgroups::GetParams}
+        # query::                    {Ingenico::Connect::SDK::Merchant::Productgroups::GetProductgroupParams}
         # context::                  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProductGroupResponse}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -78,9 +78,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Product::PaymentProductGroupResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

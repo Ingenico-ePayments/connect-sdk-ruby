@@ -13,7 +13,6 @@ module Ingenico::Connect::SDK
 
         # String
         attr_accessor :mandate_cancel_date
-        attr_accessor :mandate_cancel_date
 
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters

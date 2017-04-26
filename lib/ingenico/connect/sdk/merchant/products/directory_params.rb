@@ -12,17 +12,16 @@ module Ingenico::Connect::SDK
       class DirectoryParams < Ingenico::Connect::SDK::ParamRequest
 
         # String
-        attr_accessor :currency_code
+        attr_accessor :country_code
 
         # String
-        attr_accessor :country_code
-        attr_accessor :currency_code, :country_code
+        attr_accessor :currency_code
 
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters
           result = []
-          add_parameter(result, 'currencyCode', @currency_code)
           add_parameter(result, 'countryCode', @country_code)
+          add_parameter(result, 'currencyCode', @currency_code)
           result
         end
       end

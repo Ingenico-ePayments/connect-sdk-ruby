@@ -41,7 +41,7 @@ module ValidationDict
     message =~ REQUEST_START
     id = $1  # capture id from the regular expression above
     expect(message).to match(GET_METHOD)
-    expect(message).to match(%r(uri:          '/v1/1234/services/convert/amount\?source=EUR&amount=1000&target=USD'))
+    expect(message).to match(%r(uri:          '/v1/1234/services/convert/amount\?source=EUR&target=USD&amount=1000'))
     validate_request_headers(message)
     return id
   end
@@ -248,7 +248,7 @@ describe 'DefaultConnectionLogging' do
   it 'can log a GET request with parameters' do
     response_body = IO.read(resource_prefix + 'convertAmount.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/convert/amount?amount=1000&source=EUR&target=USD')
+    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/convert/amount?source=EUR&target=USD&amount=1000')
         .to_return(status: 200, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 

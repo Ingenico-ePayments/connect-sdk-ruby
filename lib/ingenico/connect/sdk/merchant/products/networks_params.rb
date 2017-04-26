@@ -22,7 +22,6 @@ module Ingenico::Connect::SDK
 
         # true/false
         attr_accessor :is_recurring
-        attr_accessor :country_code, :currency_code, :amount, :is_recurring
 
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters

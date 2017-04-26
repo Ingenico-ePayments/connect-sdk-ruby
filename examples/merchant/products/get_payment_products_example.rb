@@ -10,11 +10,11 @@ Products = Ingenico::Connect::SDK::Merchant::Products
 def example
   get_client do |client|
     query = Products::FindProductsParams.new
+    query.country_code = 'US'
+    query.currency_code = 'USD'
+    query.locale = 'en_US'
     query.amount = 1000
     query.is_recurring = true
-    query.country_code = 'US'
-    query.locale = 'en_US'
-    query.currency_code = 'USD'
     query.add_hide('fields')
 
     response = client.merchant('merchantId').products().find(query)

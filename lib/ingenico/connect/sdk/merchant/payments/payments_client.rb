@@ -126,10 +126,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Payment::PaymentApprovalResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            402 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -162,9 +159,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Payment::CancelPaymentResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            402 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -197,9 +192,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Payment::CancelApprovalPaymentResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -232,10 +225,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Payment::PaymentResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-            405 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -307,9 +297,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Token::CreateTokenResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

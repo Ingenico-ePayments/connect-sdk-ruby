@@ -107,9 +107,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Services::GetIINDetailsResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            404 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -137,9 +135,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Services::TestConnection,
             context)
         rescue ResponseException => e
-          error_type = {
-            403 => Ingenico::Connect::SDK::Domain::Errors::ErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

@@ -6,12 +6,12 @@ require 'ingenico/connect/sdk/factory'
 require 'ingenico/connect/sdk/domain/definitions/address'
 require 'ingenico/connect/sdk/domain/definitions/card_without_cvv'
 require 'ingenico/connect/sdk/domain/definitions/company_information'
-require 'ingenico/connect/sdk/domain/token/update_token_request'
 require 'ingenico/connect/sdk/domain/token/customer_token'
 require 'ingenico/connect/sdk/domain/token/personal_information_token'
 require 'ingenico/connect/sdk/domain/token/personal_name_token'
 require 'ingenico/connect/sdk/domain/token/token_card'
 require 'ingenico/connect/sdk/domain/token/token_card_data'
+require 'ingenico/connect/sdk/domain/token/update_token_request'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Token = Ingenico::Connect::SDK::Domain::Token

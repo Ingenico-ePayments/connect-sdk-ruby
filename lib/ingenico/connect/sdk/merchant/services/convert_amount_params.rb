@@ -14,19 +14,18 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :source
 
-        # Integer
-        attr_accessor :amount
-
         # String
         attr_accessor :target
-        attr_accessor :source, :amount, :target
+
+        # Integer
+        attr_accessor :amount
 
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters
           result = []
           add_parameter(result, 'source', @source)
-          add_parameter(result, 'amount', @amount)
           add_parameter(result, 'target', @target)
+          add_parameter(result, 'amount', @amount)
           result
         end
       end

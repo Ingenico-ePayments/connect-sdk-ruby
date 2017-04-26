@@ -10,8 +10,8 @@ Products = Ingenico::Connect::SDK::Merchant::Products
 def example
   get_client do |client|
     query = Products::DirectoryParams.new
-    query.currency_code = 'EUR'
     query.country_code = 'NL'
+    query.currency_code = 'EUR'
 
     response = client.merchant('merchantId').products().directory(809, query)
   end

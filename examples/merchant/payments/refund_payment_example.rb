@@ -10,14 +10,14 @@ require 'ingenico/connect/sdk/domain/definitions/bank_account_iban'
 require 'ingenico/connect/sdk/domain/definitions/contact_details_base'
 require 'ingenico/connect/sdk/domain/payment/address_personal'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
-require 'ingenico/connect/sdk/domain/refund/refund_request'
 require 'ingenico/connect/sdk/domain/refund/bank_refund_method_specific_input'
 require 'ingenico/connect/sdk/domain/refund/refund_customer'
 require 'ingenico/connect/sdk/domain/refund/refund_references'
+require 'ingenico/connect/sdk/domain/refund/refund_request'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
-Refund = Ingenico::Connect::SDK::Domain::Refund
 Payment = Ingenico::Connect::SDK::Domain::Payment
+Refund = Ingenico::Connect::SDK::Domain::Refund
 
 def example
   get_client do |client|

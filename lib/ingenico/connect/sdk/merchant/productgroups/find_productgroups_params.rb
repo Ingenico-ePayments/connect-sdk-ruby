@@ -11,24 +11,23 @@ module Ingenico::Connect::SDK
       # Query parameters for {https://developer.globalcollect.com/documentation/api/server/#__merchantId__productgroups_get Get payment product groups}
       class FindProductgroupsParams < Ingenico::Connect::SDK::ParamRequest
 
-        # Integer
-        attr_accessor :amount
-
-        # Array of String
-        attr_accessor :hide
-
-        # true/false
-        attr_accessor :is_recurring
-
         # String
         attr_accessor :country_code
 
         # String
-        attr_accessor :locale
+        attr_accessor :currency_code
 
         # String
-        attr_accessor :currency_code
-        attr_accessor :amount, :hide, :is_recurring, :country_code, :locale, :currency_code
+        attr_accessor :locale
+
+        # Integer
+        attr_accessor :amount
+
+        # true/false
+        attr_accessor :is_recurring
+
+        # Array of String
+        attr_accessor :hide
 
         # Adds the parameter _value_ to the _hide_ Array
         def add_hide(value)
@@ -41,12 +40,12 @@ module Ingenico::Connect::SDK
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters
           result = []
-          add_parameter(result, 'amount', @amount)
-          add_parameter(result, 'hide', @hide)
-          add_parameter(result, 'isRecurring', @is_recurring)
           add_parameter(result, 'countryCode', @country_code)
-          add_parameter(result, 'locale', @locale)
           add_parameter(result, 'currencyCode', @currency_code)
+          add_parameter(result, 'locale', @locale)
+          add_parameter(result, 'amount', @amount)
+          add_parameter(result, 'isRecurring', @is_recurring)
+          add_parameter(result, 'hide', @hide)
           result
         end
       end

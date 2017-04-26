@@ -9,9 +9,9 @@ require 'ingenico/connect/sdk/domain/definitions/airline_data'
 require 'ingenico/connect/sdk/domain/definitions/airline_flight_leg'
 require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
 require 'ingenico/connect/sdk/domain/definitions/card'
-require 'ingenico/connect/sdk/domain/riskassessments/risk_assessment_card'
 require 'ingenico/connect/sdk/domain/riskassessments/customer_risk_assessment'
 require 'ingenico/connect/sdk/domain/riskassessments/order_risk_assessment'
+require 'ingenico/connect/sdk/domain/riskassessments/risk_assessment_card'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Riskassessments = Ingenico::Connect::SDK::Domain::Riskassessments

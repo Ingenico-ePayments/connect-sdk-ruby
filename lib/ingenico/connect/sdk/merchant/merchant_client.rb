@@ -26,14 +26,6 @@ module Ingenico::Connect::SDK
         super(parent, path_context)
       end
 
-      # Resource /{{merchantId}}/hostedcheckouts
-      #
-      # Create new hosted checkout
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient}
-      def hostedcheckouts
-        Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient.new(self, nil)
-      end
-
       # Resource /{{merchantId}}/payments
       #
       # Create, cancel and approve payments
@@ -50,20 +42,20 @@ module Ingenico::Connect::SDK
         Ingenico::Connect::SDK::Merchant::Payouts::PayoutsClient.new(self, nil)
       end
 
-      # Resource /{{merchantId}}/productgroups
-      #
-      # Get information about payment product groups
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient}
-      def productgroups
-        Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient.new(self, nil)
-      end
-
       # Resource /{{merchantId}}/products
       #
       # Get information about payment products
       # Returns:: {Ingenico::Connect::SDK::Merchant::Products::ProductsClient}
       def products
         Ingenico::Connect::SDK::Merchant::Products::ProductsClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/productgroups
+      #
+      # Get information about payment product groups
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient}
+      def productgroups
+        Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/refunds
@@ -104,6 +96,14 @@ module Ingenico::Connect::SDK
       # Returns:: {Ingenico::Connect::SDK::Merchant::Tokens::TokensClient}
       def tokens
         Ingenico::Connect::SDK::Merchant::Tokens::TokensClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/hostedcheckouts
+      #
+      # Create new hosted checkout
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient}
+      def hostedcheckouts
+        Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient.new(self, nil)
       end
     end
   end

@@ -3,8 +3,8 @@
 # https://developer.globalcollect.com/documentation/api/server/
 #
 require 'ingenico/connect/sdk/factory'
-require 'ingenico/connect/sdk/domain/payment/approve_payment_request'
 require 'ingenico/connect/sdk/domain/payment/approve_payment_non_sepa_direct_debit_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/approve_payment_request'
 require 'ingenico/connect/sdk/domain/payment/order_approve_payment'
 require 'ingenico/connect/sdk/domain/payment/order_references_approve_payment'
 
