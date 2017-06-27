@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/token/abstract_token'
 require 'ingenico/connect/sdk/domain/token/customer_token'
@@ -10,7 +10,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_TokenEWallet TokenEWallet}
       class TokenEWallet < Ingenico::Connect::SDK::Domain::Token::AbstractToken
 
         # {Ingenico::Connect::SDK::Domain::Token::CustomerToken}

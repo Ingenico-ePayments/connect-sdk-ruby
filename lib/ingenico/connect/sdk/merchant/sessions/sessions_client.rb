@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -22,7 +22,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/sessions
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__sessions_post Create Session}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/sessions/create.html Create session}
         # body::    {Ingenico::Connect::SDK::Domain::Sessions::SessionRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Sessions::SessionResponse}

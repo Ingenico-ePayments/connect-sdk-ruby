@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/fraud_results'
 require 'ingenico/connect/sdk/domain/definitions/fraud_results_retail_decisions'
@@ -9,7 +9,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_CardFraudResults CardFraudResults}
       class CardFraudResults < Ingenico::Connect::SDK::Domain::Definitions::FraudResults
 
         # String

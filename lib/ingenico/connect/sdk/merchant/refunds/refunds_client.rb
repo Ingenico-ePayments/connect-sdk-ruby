@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -22,7 +22,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/refunds/{{refundId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__refunds__refundId__get Get refund}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/get.html Get refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Refund::RefundResponse}
@@ -54,7 +54,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/refunds/{{refundId}}/approve
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__refunds__refundId__approve_post Approve refund}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/approve.html Approve refund}
         # refund_id:: String
         # body::      {Ingenico::Connect::SDK::Domain::Refund::ApproveRefundRequest}
         # context::   {Ingenico::Connect::SDK::CallContext}
@@ -87,7 +87,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/refunds/{{refundId}}/cancel
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__refunds__refundId__cancel_post Cancel refund}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancel.html Cancel refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -119,7 +119,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/refunds/{{refundId}}/cancelapproval
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__refunds__refundId__cancelapproval_post Undo approve refund}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancelapproval.html Undo approve refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)

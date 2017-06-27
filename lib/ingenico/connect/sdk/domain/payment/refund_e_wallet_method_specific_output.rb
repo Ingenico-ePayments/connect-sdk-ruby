@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/payment/refund_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_payment_product840_specific_output'
@@ -9,7 +9,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_RefundEWalletMethodSpecificOutput RefundEWalletMethodSpecificOutput}
       class RefundEWalletMethodSpecificOutput < Ingenico::Connect::SDK::Domain::Payment::RefundMethodSpecificOutput
 
         # {Ingenico::Connect::SDK::Domain::Payment::RefundPaymentProduct840SpecificOutput}

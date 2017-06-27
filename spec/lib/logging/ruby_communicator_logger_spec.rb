@@ -23,6 +23,7 @@ describe RubyCommunicatorLogger do
     File.delete(filename)
   end
 
+
   context 'logging without error' do
 
     let(:errorLevel) { Logger::WARN }
@@ -32,6 +33,13 @@ describe RubyCommunicatorLogger do
       let(:logLevel) { Logger::INFO }
       let(:tag) { 'I' }
 
+      it 'should not throw an exception when logging unicode strings' do
+        message =  ResponseLogMessageBuilder.new("aaa", 2345, 45.32)
+        body = "Schröder"
+        content = "JSON"
+        message.set_body(body, content)
+        sample.log(message.get_message())
+      end
       it 'logs with the correct logLevel and message' do
         sample.log(msg)
         line = IO.readlines(filename).last

@@ -41,6 +41,16 @@ end
 module Ingenico::Connect::SDK::Domain::Payment
 end
 
+# Contains the client used to access the capture service.
+# @see https://developer.globalcollect.com/documentation/api/server/#captures
+module Ingenico::Connect::SDK::Merchant::Captures
+end
+
+# Contains data classes that are used in capture services.
+# @see https://developer.globalcollect.com/documentation/api/server/#captures
+module Ingenico::Connect::SDK::Domain::Capture
+end
+
 # Contains the client used to access the payout service.
 # @see https://developer.globalcollect.com/documentation/api/server/#payouts
 module Ingenico::Connect::SDK::Merchant::Payouts

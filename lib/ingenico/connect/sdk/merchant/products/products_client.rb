@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -26,7 +26,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/products
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products_get Get payment products}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/find.html Get payment products}
         # query::   {Ingenico::Connect::SDK::Merchant::Products::FindProductsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProducts}
@@ -55,7 +55,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/products/{{paymentProductId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__get Get payment product}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/get.html Get payment product}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::GetProductParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -88,7 +88,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/products/{{paymentProductId}}/directory
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__directory_get Get payment product directory}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/directory.html Get payment product directory}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::DirectoryParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -121,7 +121,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/products/{{paymentProductId}}/networks
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__networks_get Get payment product networks}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/networks.html Get payment product networks}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::NetworksParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -154,7 +154,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/products/{{paymentProductId}}/publicKey
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__publicKey_get Get payment product specific public key}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/publicKey.html Get payment product specific public key}
         # payment_product_id:: Integer
         # context::            {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Publickey::PublicKey}

@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name           = 'connect-sdk-ruby'
-  spec.version        = '1.5.1'
+  spec.version        = '1.6.0'
   spec.authors        = ['Ingenico ePayments']
   spec.email          = ['github@epay.ingenico.com']
   spec.summary        = %q{SDK to communicate with the GlobalCollect platform using the Ingenico Connect Server API}

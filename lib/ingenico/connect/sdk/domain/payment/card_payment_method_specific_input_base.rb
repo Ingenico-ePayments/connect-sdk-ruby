@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_payment_method_specific_input'
 
@@ -8,7 +8,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_CardPaymentMethodSpecificInputBase CardPaymentMethodSpecificInputBase}
       class CardPaymentMethodSpecificInputBase < Ingenico::Connect::SDK::Domain::Definitions::AbstractPaymentMethodSpecificInput
 
         # String
@@ -35,6 +34,9 @@ module Ingenico::Connect::SDK
         # true/false
         attr_accessor :tokenize
 
+        # String
+        attr_accessor :transaction_channel
+
         def to_h
           hash = super
           add_to_hash(hash, 'authorizationMode', @authorization_mode)
@@ -45,6 +47,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'skipFraudService', @skip_fraud_service)
           add_to_hash(hash, 'token', @token)
           add_to_hash(hash, 'tokenize', @tokenize)
+          add_to_hash(hash, 'transactionChannel', @transaction_channel)
           hash
         end
 
@@ -73,6 +76,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('tokenize')
             @tokenize = hash['tokenize']
+          end
+          if hash.has_key?('transactionChannel')
+            @transaction_channel = hash['transactionChannel']
           end
         end
       end

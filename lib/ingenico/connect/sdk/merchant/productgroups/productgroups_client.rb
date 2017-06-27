@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -23,7 +23,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/productgroups
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__productgroups_get Get payment product groups}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/find.html Get payment product groups}
         # query::   {Ingenico::Connect::SDK::Merchant::Productgroups::FindProductgroupsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProductGroups}
@@ -52,7 +52,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/productgroups/{{paymentProductGroupId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__productgroups__paymentProductGroupId__get Get payment product group}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/get.html Get payment product group}
         # payment_product_group_id:: String
         # query::                    {Ingenico::Connect::SDK::Merchant::Productgroups::GetProductgroupParams}
         # context::                  {Ingenico::Connect::SDK::CallContext}

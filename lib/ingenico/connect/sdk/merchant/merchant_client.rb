@@ -1,8 +1,9 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
+require 'ingenico/connect/sdk/merchant/captures/captures_client'
 require 'ingenico/connect/sdk/merchant/hostedcheckouts/hostedcheckouts_client'
 require 'ingenico/connect/sdk/merchant/payments/payments_client'
 require 'ingenico/connect/sdk/merchant/payouts/payouts_client'
@@ -32,6 +33,14 @@ module Ingenico::Connect::SDK
       # Returns:: {Ingenico::Connect::SDK::Merchant::Payments::PaymentsClient}
       def payments
         Ingenico::Connect::SDK::Merchant::Payments::PaymentsClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/captures
+      #
+      # Get capture
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Captures::CapturesClient}
+      def captures
+        Ingenico::Connect::SDK::Merchant::Captures::CapturesClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/payouts

@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/param_request'
 
@@ -8,7 +8,7 @@ module Ingenico::Connect::SDK
   module Merchant
     module Tokens
 
-      # Query parameters for {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens__tokenId__delete Delete token}
+      # Query parameters for {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/delete.html Delete token}
       class DeleteTokenParams < Ingenico::Connect::SDK::ParamRequest
 
         # String

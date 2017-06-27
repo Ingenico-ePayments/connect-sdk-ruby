@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -23,7 +23,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/hostedcheckouts
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__hostedcheckouts_post Create hosted checkout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/create.html Create hosted checkout}
         # body::    {Ingenico::Connect::SDK::Domain::Hostedcheckout::CreateHostedCheckoutRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedcheckout::CreateHostedCheckoutResponse}
@@ -53,7 +53,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/hostedcheckouts/{{hostedCheckoutId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__hostedcheckouts__hostedCheckoutId__get Get hosted checkout status}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/get.html Get hosted checkout status}
         # hosted_checkout_id:: String
         # context::            {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedcheckout::GetHostedCheckoutResponse}

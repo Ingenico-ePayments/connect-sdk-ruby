@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -23,7 +23,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/tokens
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens_post Create token}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/create.html Create token}
         # body::    {Ingenico::Connect::SDK::Domain::Token::CreateTokenRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Token::CreateTokenResponse}
@@ -53,7 +53,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/tokens/{{tokenId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens__tokenId__get Get token}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/get.html Get token}
         # token_id:: String
         # context::  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Token::TokenResponse}
@@ -85,7 +85,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/tokens/{{tokenId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens__tokenId__put Update token}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/update.html Update token}
         # token_id:: String
         # body::     {Ingenico::Connect::SDK::Domain::Token::UpdateTokenRequest}
         # context::  {Ingenico::Connect::SDK::CallContext}
@@ -118,7 +118,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/tokens/{{tokenId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens__tokenId__delete Delete token}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/delete.html Delete token}
         # token_id:: String
         # query::    {Ingenico::Connect::SDK::Merchant::Tokens::DeleteTokenParams}
         # context::  {Ingenico::Connect::SDK::CallContext}
@@ -150,7 +150,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/tokens/{{tokenId}}/approvesepadirectdebit
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__tokens__tokenId__approvesepadirectdebit_post Approve SEPA DD mandate}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/approvesepadirectdebit.html Approve SEPA DD mandate}
         # token_id:: String
         # body::     {Ingenico::Connect::SDK::Domain::Token::ApproveTokenRequest}
         # context::  {Ingenico::Connect::SDK::CallContext}

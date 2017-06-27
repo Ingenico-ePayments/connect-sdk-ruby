@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/factory'
 require 'ingenico/connect/sdk/merchant/products/networks_params'
@@ -10,8 +10,8 @@ Products = Ingenico::Connect::SDK::Merchant::Products
 def example
   get_client do |client|
     query = Products::NetworksParams.new
-    query.country_code = 'NL'
-    query.currency_code = 'EUR'
+    query.country_code = 'US'
+    query.currency_code = 'USD'
     query.amount = 1000
     query.is_recurring = true
 

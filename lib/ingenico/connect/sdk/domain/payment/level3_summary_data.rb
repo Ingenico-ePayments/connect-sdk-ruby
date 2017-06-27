@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/data_object'
 
@@ -8,24 +8,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_Level3SummaryData Level3SummaryData}
-      #
-      # Deprecated; Use ShoppingCart instead
+      # Deprecated; Use Order.shoppingCart instead
       class Level3SummaryData < Ingenico::Connect::SDK::DataObject
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.discountAmount instead
+        # Deprecated; Use ShoppingCart.amountbreakdown with type DISCOUNT instead
         attr_accessor :discount_amount
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.dutyAmount instead
+        # Deprecated; Use ShoppingCart.amountbreakdown with type DUTY instead
         attr_accessor :duty_amount
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.shippingAmount instead
+        # Deprecated; Use ShoppingCart.amountbreakdown with type SHIPPING instead
         attr_accessor :shipping_amount
 
         def to_h

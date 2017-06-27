@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -23,7 +23,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/payouts
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__payouts_post Create payout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/create.html Create payout}
         # body::    {Ingenico::Connect::SDK::Domain::Payout::CreatePayoutRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
@@ -56,7 +56,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/payouts/{{payoutId}}
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__payouts__payoutId__get Get payout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/get.html Get payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
@@ -88,7 +88,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/payouts/{{payoutId}}/approve
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__payouts__payoutId__approve_post Approve payout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/approve.html Approve payout}
         # payout_id:: String
         # body::      {Ingenico::Connect::SDK::Domain::Payout::ApprovePayoutRequest}
         # context::   {Ingenico::Connect::SDK::CallContext}
@@ -122,7 +122,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/payouts/{{payoutId}}/cancel
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__payouts__payoutId__cancel_post Cancel payout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancel.html Cancel payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -154,7 +154,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/payouts/{{payoutId}}/cancelapproval
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__payouts__payoutId__cancelapproval_post Undo approve payout}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancelapproval.html Undo approve payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)

@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/param_request'
 
@@ -8,7 +8,7 @@ module Ingenico::Connect::SDK
   module Merchant
     module Products
 
-      # Query parameters for {https://developer.globalcollect.com/documentation/api/server/#__merchantId__products__paymentProductId__get Get payment product}
+      # Query parameters for {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/get.html Get payment product}
       class GetProductParams < Ingenico::Connect::SDK::ParamRequest
 
         # String

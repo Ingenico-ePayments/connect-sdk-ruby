@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
@@ -22,7 +22,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/riskassessments/bankaccounts
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__riskassessments_bankaccounts_post Risk-assess bank account}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/riskassessments/bankaccounts.html Risk-assess bankaccount}
         # body::    {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentBankAccount}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse}
@@ -52,7 +52,7 @@ module Ingenico::Connect::SDK
 
         # Resource /{{merchantId}}/riskassessments/cards
         #
-        # {https://developer.globalcollect.com/documentation/api/server/#__merchantId__riskassessments_cards_post Risk-assess card}
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/riskassessments/cards.html Risk-assess card}
         # body::    {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentCard}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse}

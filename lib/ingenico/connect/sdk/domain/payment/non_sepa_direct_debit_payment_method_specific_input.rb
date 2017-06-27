@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_product705_specific_input'
@@ -9,7 +9,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_NonSepaDirectDebitPaymentMethodSpecificInput NonSepaDirectDebitPaymentMethodSpecificInput}
       class NonSepaDirectDebitPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Definitions::AbstractPaymentMethodSpecificInput
 
         # String

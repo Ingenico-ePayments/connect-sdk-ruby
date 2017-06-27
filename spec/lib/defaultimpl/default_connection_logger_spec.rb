@@ -29,6 +29,7 @@ module ValidationDict
   DUMMY_HEADER = %r(Dummy="none")
   DATA_JSON_HEADER = %r(Content-Type="application/json")
   DATA_JSON = %r(content-type: 'application/json')
+  UNICODE_BODY_NAME= %r(Schröder)
 
   def validate_request_headers(message)
     expect(message).to match(DATEHEADER)
@@ -115,6 +116,34 @@ module ValidationDict
     return id
   end
 
+  def createPayment_unicode_request(message)
+    expect(message).to match(REQUEST_START)
+    message =~ REQUEST_START
+    id = $1  # capture id from the regular expression above
+    expect(message).to match(POST_METHOD)
+    expect(message).to match(%r(uri:          '/v1/1234/payments'))
+    validate_request_headers(message)
+    expect(message).to match(DATA_JSON_HEADER)
+    expect(message).to match(DATA_JSON)
+    # token match to validate that a body is in the message
+    expect(message).to match(%r("cardPaymentMethodSpecificInput":))
+    return id
+  end
+
+  def createPayment_unicode_response(message)
+    expect(message).to match(RESPONSE_START)
+    message =~ RESPONSE_START
+    id = $1  # capture id from the regular expression above
+    expect(message).to match(STATUS_201)
+    expect(message).to match(%r(Location="api-sandbox\.globalcollect\.com/v1/1234/payments/000000123410000595980000100001"))
+    expect(message).to match(DATA_JSON_HEADER)
+    # expect(message).to match(DUMMY_HEADER)
+    expect(message).to match(DATEHEADER)
+    expect(message).to match(DATA_JSON)
+    expect(message).to match(UNICODE_BODY_NAME)
+    # token match to validate that a body is in the message
+    return id
+  end
   def createPayment_request(message)
     expect(message).to match(REQUEST_START)
     message =~ REQUEST_START
@@ -297,6 +326,24 @@ describe 'DefaultConnectionLogging' do
     expect(response.payment.id).to_not be_nil
 
     validate_request_and_response(logger.entries[0], logger.entries[1], 'createPayment')
+  end
+  it 'can log POST responses with unicode body' do
+      response_body = IO.read(resource_prefix + 'createPayment.unicode.json')
+    request = create_payment_request
+
+    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/1234/payments')
+        .to_return(status: 201, body: response_body,
+                   headers: base_headers.merge({'Content-Type' => 'application/json',
+                                                'Location' => 'api-sandbox.globalcollect.com/v1/1234/payments/000000123410000595980000100001'}))
+
+    CLIENT.enable_logging(logger)
+    response = CLIENT.merchant('1234').payments.create(request)
+
+    expect(response).to_not be_nil
+    expect(response.payment).to_not be_nil
+    expect(response.payment.id).to_not be_nil
+
+    validate_request_and_response(logger.entries[0], logger.entries[1], 'createPayment_unicode')
   end
 
   # tests create payment with an invalid card number

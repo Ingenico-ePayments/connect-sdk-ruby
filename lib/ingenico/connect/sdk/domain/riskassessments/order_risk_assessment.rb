@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/additional_order_input_airline_data'
@@ -11,7 +11,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Riskassessments
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_OrderRiskAssessment OrderRiskAssessment}
       class OrderRiskAssessment < Ingenico::Connect::SDK::DataObject
 
         # {Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData}

@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_order_status'
 require 'ingenico/connect/sdk/domain/definitions/order_status_output'
@@ -10,7 +10,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Payout
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_PayoutResult PayoutResult}
       class PayoutResult < Ingenico::Connect::SDK::Domain::Definitions::AbstractOrderStatus
 
         # {Ingenico::Connect::SDK::Domain::Payment::OrderOutput}

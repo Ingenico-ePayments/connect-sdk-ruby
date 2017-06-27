@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://developer.globalcollect.com/documentation/api/server/
+# https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/product/label_template_element'
@@ -9,7 +9,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
-      # Class {https://developer.globalcollect.com/documentation/api/server/#schema_AccountOnFileDisplayHints AccountOnFileDisplayHints}
       class AccountOnFileDisplayHints < Ingenico::Connect::SDK::DataObject
 
         # Array of {Ingenico::Connect::SDK::Domain::Product::LabelTemplateElement}
