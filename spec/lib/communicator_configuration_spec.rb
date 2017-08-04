@@ -157,7 +157,8 @@ describe 'CommunicatorConfiguration' do
             connect.api.integrator: Ingenico.Integrator
             connect.api.shoppingCartExtension.creator: Ingenico.Creator
             connect.api.shoppingCartExtension.name: Ingenico.ShoppingCarts
-            connect.api.shoppingCartExtension.version: 1.0'
+            connect.api.shoppingCartExtension.version: 1.0
+            connect.api.shoppingCartExtension.extensionId: ExtensionId'
     config = YAML.load(yaml)
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
@@ -175,5 +176,6 @@ describe 'CommunicatorConfiguration' do
     expect(communicator_config.shopping_cart_extension.creator).to eq('Ingenico.Creator')
     expect(communicator_config.shopping_cart_extension.name).to eq('Ingenico.ShoppingCarts')
     expect(communicator_config.shopping_cart_extension.version).to eq('1.0')
+    expect(communicator_config.shopping_cart_extension.extension_id).to eq('ExtensionId')
   end
 end

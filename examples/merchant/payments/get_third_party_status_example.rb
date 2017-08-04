@@ -3,22 +3,11 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/factory'
-require 'ingenico/connect/sdk/merchant/products/get_product_params'
 
-Products = Ingenico::Connect::SDK::Merchant::Products
 
 def example
   get_client do |client|
-    query = Products::GetProductParams.new
-    query.country_code = 'US'
-    query.currency_code = 'USD'
-    query.locale = 'en_US'
-    query.amount = 1000
-    query.is_recurring = true
-    query.force_basic_flow = false
-    query.add_hide('fields')
-
-    response = client.merchant('merchantId').products().get(1, query)
+    response = client.merchant('merchantId').payments().third_party_status('paymentId')
   end
 end
 

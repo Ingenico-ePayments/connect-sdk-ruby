@@ -103,13 +103,14 @@ module Ingenico::Connect::SDK
     end
 
     def get_shopping_cart_extension(properties, prefix)
-      creator= properties[prefix + '.shoppingCartExtension.creator']
-      name= properties[prefix + '.shoppingCartExtension.name']
-      version= properties[prefix + '.shoppingCartExtension.version']
-      if creator.nil? && name.nil? && version.nil?
+      creator = properties[prefix + '.shoppingCartExtension.creator']
+      name = properties[prefix + '.shoppingCartExtension.name']
+      version = properties[prefix + '.shoppingCartExtension.version']
+      extension_id = properties[prefix + '.shoppingCartExtension.extensionId']
+      if creator.nil? && name.nil? && version.nil? && extension_id.nil?
         nil
       else
-        Domain::Metadata::ShoppingCartExtension.new(creator, name, version)
+        Domain::Metadata::ShoppingCartExtension.new(creator, name, version, extension_id)
       end
     end
 

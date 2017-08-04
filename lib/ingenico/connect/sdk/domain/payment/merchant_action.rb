@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/key_value_pair'
 require 'ingenico/connect/sdk/domain/payment/redirect_data'
+require 'ingenico/connect/sdk/domain/product/payment_product_field'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -14,6 +15,9 @@ module Ingenico::Connect::SDK
 
         # String
         attr_accessor :action_type
+
+        # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductField}
+        attr_accessor :form_fields
 
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectData}
         attr_accessor :redirect_data
@@ -27,6 +31,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'actionType', @action_type)
+          add_to_hash(hash, 'formFields', @form_fields)
           add_to_hash(hash, 'redirectData', @redirect_data)
           add_to_hash(hash, 'renderingData', @rendering_data)
           add_to_hash(hash, 'showData', @show_data)
@@ -37,6 +42,15 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key?('actionType')
             @action_type = hash['actionType']
+          end
+          if hash.has_key?('formFields')
+            if !(hash['formFields'].is_a? Array)
+              raise TypeError, "value '%s' is not an Array" % [hash['formFields']]
+            end
+            @form_fields = []
+            hash['formFields'].each do |e|
+              @form_fields << Ingenico::Connect::SDK::Domain::Product::PaymentProductField.new_from_hash(e)
+            end
           end
           if hash.has_key?('redirectData')
             if !(hash['redirectData'].is_a? Hash)

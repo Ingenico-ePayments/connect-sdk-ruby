@@ -29,6 +29,9 @@ module Ingenico::Connect::SDK
         # Array of String
         attr_accessor :hide
 
+        # true/false
+        attr_accessor :force_basic_flow
+
         # Adds the parameter _value_ to the _hide_ Array
         def add_hide(value)
           unless @hide
@@ -46,6 +49,7 @@ module Ingenico::Connect::SDK
           add_parameter(result, 'amount', @amount)
           add_parameter(result, 'isRecurring', @is_recurring)
           add_parameter(result, 'hide', @hide)
+          add_parameter(result, 'forceBasicFlow', @force_basic_flow)
           result
         end
       end
