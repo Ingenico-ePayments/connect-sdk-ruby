@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # Indicates that a payment is declined by the GlobalCollect platform or one of its downstream partners/acquirers.
+  # Indicates that a payment is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
   class DeclinedPaymentException < DeclinedTransactionException
 
     # Create a new DeclinedPaymentException.
@@ -15,7 +15,7 @@ module Ingenico::Connect::SDK
       @errors = errors
     end
 
-    # The declined payment result returned by the GlobalCollect platform.
+    # The declined payment result returned by the Ingenico ePayments platform.
     # Given as a {Ingenico::Connect::SDK::Domain::Payment::CreatePaymentResult} object.
     def payment_result
       if @errors.nil?
@@ -34,7 +34,7 @@ module Ingenico::Connect::SDK
         payment = nil
       end
       if payment.nil?
-        'the GlobalCollect platform returned a declined payment response'
+        'the Ingenico ePayments platform returned a declined payment response'
       else
         "declined payment '" + payment.id + "' with status '" +
             payment.status + "'"

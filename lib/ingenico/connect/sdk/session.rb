@@ -2,12 +2,12 @@ require 'uri'
 
 module Ingenico::Connect::SDK
 
-  # Contains networking and authentication data needed to communicate with the GlobalCollect platform
+  # Contains networking and authentication data needed to communicate with the Ingenico ePayments platform
   class Session
 
     # Construct a new Session.
     # The session object stores the following:
-    # api_endpoint::        The base url to the GlobalCollect platform, given as a string and converted to a {URI} object
+    # api_endpoint::        The base url to the Ingenico ePayments platform, given as a string and converted to a {URI} object
     # connection::          An instance of the {Ingenico::Connect::SDK::Connection} class used to communicate with
     # authenticator::       An instance of the {Ingenico::Connect::SDK::Authenticator} class used for authenticating messages sent
     # meta_data_provider::  An instance of the {Ingenico::Connect::SDK::MetaDataProvider} class containing information relevant for sending requests
@@ -27,7 +27,7 @@ module Ingenico::Connect::SDK
       @meta_data_provider = meta_data_provider
     end
 
-    # The base URI to the GlobalCollect platform as a {URI} object
+    # The base URI to the Ingenico ePayments platform as a {URI} object
     attr_reader :api_endpoint
     # An instance of the {Ingenico::Connect::SDK::Connection} class used to communicate with
     attr_reader :connection

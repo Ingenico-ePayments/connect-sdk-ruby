@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # This exception is used when an error occurs during network communication with the GlobalCollect platform.
+  # This exception is used when an error occurs during network communication with the Ingenico ePayments platform.
   # A common cause is a timeout while connecting or when receiving or sending data.
   class CommunicationException < RuntimeError
 

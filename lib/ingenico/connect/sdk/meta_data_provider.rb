@@ -5,13 +5,13 @@ module Ingenico::Connect::SDK
 
   # Manages metadata about the server using the SDK
   class MetaDataProvider
-    @@SDK_VERSION = '1.7.0'
+    @@SDK_VERSION = '1.8.0'
     @@SERVER_META_INFO_HEADER = 'X-GCS-ServerMetaInfo'
     @@PROHIBITED_HEADERS = [@@SERVER_META_INFO_HEADER, 'X-GCS-Idempotence-Key',
                             'Date', 'Content-Type', 'Authorization'].sort!.freeze
     @@CHARSET = 'utf-8'
 
-    # Stores metadata about the server so it can be sent to the GlobalCollect platform
+    # Stores metadata about the server so it can be sent to the Ingenico ePayments platform
     class ServerMetaInfo < DataObject
       @platform_identifier = nil
       @sdk_identifier = nil

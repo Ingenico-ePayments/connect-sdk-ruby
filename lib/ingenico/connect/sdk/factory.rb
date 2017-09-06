@@ -29,9 +29,9 @@ module Ingenico::Connect::SDK
     #                           to be used by the client.
     # meta_data_provider::      {Ingenico::Connect::SDK::MetaDataProvider} that stores the metadata for the communicating client.
     # connection::              Implementation of {Ingenico::Connect::SDK::Connection} that can be used to communicate
-    #                           with the GlobalCollect Platform.
+    #                           with the Ingenico ePayments platform.
     # authenticator::           Implementation of {Ingenico::Connect::SDK::Authenticator} that can authenticate messages
-    #                           sent to the GlobalCollect platform.
+    #                           sent to the Ingenico ePayments platform.
     def self.create_session_from_configuration(configuration, meta_data_provider: nil,
                                                connection: nil, authenticator: nil)
       unless meta_data_provider
@@ -61,9 +61,9 @@ module Ingenico::Connect::SDK
     # secret_api_key::          Secret key used for authentication to the GlobalCollect service.
     # meta_data_provider::      {Ingenico::Connect::SDK::MetaDataProvider} that stores the metadata for the communicating client.
     # connection::              Implementation of {Ingenico::Connect::SDK::Connection} that can be used to communicate
-    #                           with the GlobalCollect Platform.
+    #                           with the Ingenico ePayments platform.
     # authenticator::           Implementation of {Ingenico::Connect::SDK::Authenticator} that can authenticate messages
-    #                           sent to the GlobalCollect platform.
+    #                           sent to the Ingenico ePayments platform.
     def self.create_session_from_file(configuration_file_name, api_key_id, secret_api_key,
                                       meta_data_provider: nil, connection: nil, authenticator: nil)
       configuration = create_configuration(configuration_file_name, api_key_id, secret_api_key)

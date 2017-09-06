@@ -2,7 +2,7 @@ require 'uri'
 
 module Ingenico::Connect::SDK
 
-  # Class responsible for facilitating communication with the GlobalCollect platform.
+  # Class responsible for facilitating communication with the Ingenico ePayments platform.
   # It combines the following classes to provide communication functionality:
   #
   # session::     {Ingenico::Connect::SDK::Session} that stores data for network communication and facilitates network communication
@@ -27,13 +27,13 @@ module Ingenico::Connect::SDK
       @marshaller = marshaller
     end
 
-    # Performs a GET request to the GlobalCollect platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
+    # Performs a GET request to the Ingenico ePayments platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
     #
     # Throws:
     # ResponseException::       Thrown if the request could not be fulfilled successfully.
     #                           This occurs for example if the request is not authenticated correctly
     # NotFoundException::       Thrown if the requested resource is not found
-    # CommunicationException::  Thrown if there is an error in communicating with the GlobalCollect platform.
+    # CommunicationException::  Thrown if there is an error in communicating with the Ingenico ePayments platform.
     #                           This occurs for example if a timeout occurs.
     def get(relative_path, request_headers, request_parameters, response_type, context)
       connection = @session.connection
@@ -51,13 +51,13 @@ module Ingenico::Connect::SDK
       process_response(response, response_type, relative_path, context)
     end
 
-    # Performs a DELETE request to the GlobalCollect platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
+    # Performs a DELETE request to the Ingenico ePayments platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
     #
     # Throws:
     # ResponseException::       Thrown if the request could not be fulfilled successfully.
     #                           This occurs for example if the request is not authenticated correctly.
     # NotFoundException::       Thrown if the referred resource is not found.
-    # CommunicationException::  Thrown if there is an error in communicating with the GlobalCollect platform.
+    # CommunicationException::  Thrown if there is an error in communicating with the Ingenico ePayments platform.
     #                           This occurs for example if a timeout occurs.
     def delete(relative_path, request_headers, request_parameters, response_type, context)
       connection = @session.connection
@@ -75,13 +75,13 @@ module Ingenico::Connect::SDK
       process_response(response, response_type, relative_path, context)
     end
 
-    # Performs a POST request to the GlobalCollect platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
+    # Performs a POST request to the Ingenico ePayments platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
     #
     # Throws:
     # ResponseException::       Thrown if the request could not be fulfilled successfully.
     #                           This occurs for example if the request is not authenticated correctly.
     # NotFoundException::       Thrown if the referred resource is not found.
-    # CommunicationException::  Thrown if there is an error in communicating with the GlobalCollect platform.
+    # CommunicationException::  Thrown if there is an error in communicating with the Ingenico ePayments platform.
     #                           This occurs for example if a timeout occurs.
     def post(relative_path, request_headers, request_parameters, request_body,
              response_type, context)
@@ -105,13 +105,13 @@ module Ingenico::Connect::SDK
       process_response(response, response_type, relative_path, context)
     end
 
-    # Performs a PUT request to the GlobalCollect platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
+    # Performs a PUT request to the Ingenico ePayments platform and returns the response as a {Ingenico::Connect::SDK::Response} object.
     #
     # Throws:
     # ResponseException::       Thrown if the request could not be fulfilled successfully.
     #                           This occurs for example if the request is not authenticated correctly.
     # NotFoundException::       Thrown if the referred resource is not found.
-    # CommunicationException::  Thrown if there is an error in communicating with the GlobalCollect platform.
+    # CommunicationException::  Thrown if there is an error in communicating with the Ingenico ePayments platform.
     #                           This occurs for example if a timeout occurs.
     def put(relative_path, request_headers, request_parameters, request_body,
             response_type, context)
@@ -209,7 +209,7 @@ module Ingenico::Connect::SDK
     # Adds several standard headers to the http headers.
     #
     # http_method::     'GET', 'DELETE', 'POST' or 'PUT' depending on the HTTP method being used
-    # uri::             The full URI as a URI object to the GlobalCollect platform,
+    # uri::             The full URI as a URI object to the Ingenico ePayments platform,
     #                   including the relative path and request parameters.
     # request_headers:: List of {Ingenico::Connect::SDK::RequestHeader} in which which new headers will be added
     # context::         {Ingenico::Connect::SDK::CallContext} object that will be used to produce

@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/product/account_on_file'
+require 'ingenico/connect/sdk/domain/product/authentication_indicator'
 require 'ingenico/connect/sdk/domain/product/payment_product_display_hints'
 require 'ingenico/connect/sdk/domain/product/payment_product_field'
 
@@ -21,6 +22,9 @@ module Ingenico::Connect::SDK
 
         # true/false
         attr_accessor :allows_tokenization
+
+        # {Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator}
+        attr_accessor :authentication_indicator
 
         # true/false
         attr_accessor :auto_tokenized
@@ -60,6 +64,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'accountsOnFile', @accounts_on_file)
           add_to_hash(hash, 'allowsRecurring', @allows_recurring)
           add_to_hash(hash, 'allowsTokenization', @allows_tokenization)
+          add_to_hash(hash, 'authenticationIndicator', @authentication_indicator)
           add_to_hash(hash, 'autoTokenized', @auto_tokenized)
           add_to_hash(hash, 'canBeIframed', @can_be_iframed)
           add_to_hash(hash, 'displayHints', @display_hints)
@@ -90,6 +95,12 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('allowsTokenization')
             @allows_tokenization = hash['allowsTokenization']
+          end
+          if hash.has_key?('authenticationIndicator')
+            if !(hash['authenticationIndicator'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['authenticationIndicator']]
+            end
+            @authentication_indicator = Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator.new_from_hash(hash['authenticationIndicator'])
           end
           if hash.has_key?('autoTokenized')
             @auto_tokenized = hash['autoTokenized']

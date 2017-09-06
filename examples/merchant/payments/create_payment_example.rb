@@ -21,6 +21,7 @@ require 'ingenico/connect/sdk/domain/payment/order_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order_references'
 require 'ingenico/connect/sdk/domain/payment/personal_information'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
+require 'ingenico/connect/sdk/domain/payment/shopping_cart'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Payment = Ingenico::Connect::SDK::Domain::Payment
@@ -96,6 +97,16 @@ def example
     customer.shipping_address = shipping_address
     customer.vat_number = '1234AB5678CD'
 
+    invoice_data = Payment::OrderInvoiceData.new
+    invoice_data.invoice_date = '20140306191500'
+    invoice_data.invoice_number = '000000123'
+
+    references = Payment::OrderReferences.new
+    references.descriptor = 'Fast and Furry-ous'
+    references.invoice_data = invoice_data
+    references.merchant_order_id = 123456
+    references.merchant_reference = 'AcmeOrder0001'
+
     items = []
 
     item1_amount_of_money = Definitions::AmountOfMoney.new
@@ -128,21 +139,14 @@ def example
 
     items << item2
 
-    invoice_data = Payment::OrderInvoiceData.new
-    invoice_data.invoice_date = '20140306191500'
-    invoice_data.invoice_number = '000000123'
-
-    references = Payment::OrderReferences.new
-    references.descriptor = 'Fast and Furry-ous'
-    references.invoice_data = invoice_data
-    references.merchant_order_id = 123456
-    references.merchant_reference = 'AcmeOrder0001'
+    shopping_cart = Payment::ShoppingCart.new
+    shopping_cart.items = items
 
     order = Payment::Order.new
     order.amount_of_money = amount_of_money
     order.customer = customer
-    order.items = items
     order.references = references
+    order.shopping_cart = shopping_cart
 
     body = Payment::CreatePaymentRequest.new
     body.card_payment_method_specific_input = card_payment_method_specific_input

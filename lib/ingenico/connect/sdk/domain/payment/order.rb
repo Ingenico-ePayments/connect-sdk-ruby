@@ -26,6 +26,8 @@ module Ingenico::Connect::SDK
         attr_accessor :customer
 
         # Array of {Ingenico::Connect::SDK::Domain::Payment::LineItem}
+        #
+        # Deprecated; Use ShoppingCart.items instead
         attr_accessor :items
 
         # {Ingenico::Connect::SDK::Domain::Payment::OrderReferences}

@@ -2,14 +2,14 @@ module Ingenico::Connect::SDK
 
   # A CommunicatorConfiguration stores all data used to initialize an {Ingenico::Connect::SDK::Communicator}. It stores the following:
   #
-  # api_endpoint::            The base url to the GlobalCollect platform.
+  # api_endpoint::            The base url to the Ingenico ePayments platform.
   # api_key_id::              The identifier of the _secret_api_key_ used to authenticate requests.
-  # secret_api_key::          The key used to authenticate requests sent to the GlobalCollect platform.
+  # secret_api_key::          The key used to authenticate requests sent to the Ingenico ePayments platform.
   # authorization_type::      String describing the authorization protocol to follow.
-  # connect_timeout::         The number of seconds before a connection attempt with the GlobalCollect platform times out.
+  # connect_timeout::         The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
   # socket_timeout::          The number of seconds before a timeout occurs
-  #                           when transmitting data to or from the GlobalCollect platform.
-  # max_connections::         The number of connections with the GlobalCollect platform
+  #                           when transmitting data to or from the Ingenico ePayments platform.
+  # max_connections::         The number of connections with the Ingenico ePayments platform
   #                           that are kept alive in the connection pool. These connections will be reused when possible.
   # proxy_configuration::     {Ingenico::Connect::SDK::ProxyConfiguration} instance that stores the url to a proxy to be used in all communication,
   #                           or nil if no proxy should be used.
@@ -22,14 +22,14 @@ module Ingenico::Connect::SDK
     # properties::              A hash that may contain any of the other parameters.
     #                           If a parameter is given in both the _properties_ and separately,
     #                           the separate value takes precedence.
-    # api_endpoint::            The base url to the GlobalCollect platform.
+    # api_endpoint::            The base url to the Ingenico ePayments platform.
     # api_key_id::              The identifier of the _secret_api_key_ used to authenticate requests.
-    # secret_api_key::          The key used to authenticate requests sent to the GlobalCollect platform.
+    # secret_api_key::          The key used to authenticate requests sent to the Ingenico ePayments platform.
     # authorization_type::      String describing the authorization protocol to follow.
-    # connect_timeout::         The number of seconds before a connection attempt with the GlobalCollect platform times out.
+    # connect_timeout::         The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
     # socket_timeout::          The number of seconds before a timeout occurs
-    #                           when transmitting data to or from the GlobalCollect platform.
-    # max_connections::         The number of connections with the GlobalCollect platform
+    #                           when transmitting data to or from the Ingenico ePayments platform.
+    # max_connections::         The number of connections with the Ingenico ePayments platform
     #                           that are kept alive in the connection pool. These connections will be reused when possible.
     # proxy_configuration::     {Ingenico::Connect::SDK::ProxyConfiguration} instance that stores the url to a proxy to be used in all communication,
     #                           or nil if no proxy should be used.
@@ -83,7 +83,7 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # Base URL to the GlobalCollect platform
+    # Base URL to the Ingenico ePayments platform
     attr_accessor :api_endpoint
 
     # Identifier of the _secret_api_key_ used in authentication.

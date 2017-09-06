@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # Indicates that a transaction is declined by the GlobalCollect platform or one of its downstream partners/acquirers.
+  # Indicates that a transaction is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
   class DeclinedTransactionException < ApiException
 
     # Create a new DeclinedTransactionException.

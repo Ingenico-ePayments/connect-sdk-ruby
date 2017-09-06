@@ -4,7 +4,7 @@ require 'base64'
 module Ingenico::Connect::SDK
   module DefaultImpl
 
-    # Authenticates requests made to the GlobalCollect platform using the HMAC algorithm.
+    # Authenticates requests made to the Ingenico ePayments platform using the HMAC algorithm.
     class DefaultAuthenticator < Authenticator
 
       # HMAC algorithm used to generate the signature

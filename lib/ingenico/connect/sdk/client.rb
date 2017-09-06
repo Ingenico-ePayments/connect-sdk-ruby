@@ -12,7 +12,7 @@ module Ingenico
   module Connect
     module SDK
 
-      # GlobalCollect platform client.
+      # Ingenico ePayments platform client.
       #
       # This client and all its child clients are bound to one specific value for the X-GCS-ClientMetaInfo header.
       #

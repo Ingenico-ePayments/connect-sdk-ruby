@@ -99,25 +99,25 @@ module Ingenico::Connect::SDK
         @http_client.session_count
       end
 
-      # Performs a GET request to the GlobalCollect platform
+      # Performs a GET request to the Ingenico ePayments platform
       # @see request
       def get(uri, request_headers)
         request('get', uri, request_headers)
       end
 
-      # Performs a DELETE request to the GlobalCollect platform
+      # Performs a DELETE request to the Ingenico ePayments platform
       # @see request
       def delete(uri, request_headers)
         request('delete', uri, request_headers)
       end
 
-      # Performs a POST request to the GlobalCollect platform
+      # Performs a POST request to the Ingenico ePayments platform
       # @see request
       def post(uri, request_headers, body)
         request('post', uri, request_headers, body)
       end
 
-      # Performs a PUT request to the GlobalCollect platform
+      # Performs a PUT request to the Ingenico ePayments platform
       # @see request
       def put(uri, request_headers, body)
         request('put', uri, request_headers, body)
@@ -125,7 +125,7 @@ module Ingenico::Connect::SDK
 
       # performs a HTTP request and returns the response as an {Ingenico::Connect::SDK::Response} object.
       # Also ensures the request is logged when sent and its response is logged when received.
-      # Raises {Ingenico::Connect::SDK::CommunicationException} when communication with the GlobalCollect platform was not successful.
+      # Raises {Ingenico::Connect::SDK::CommunicationException} when communication with the Ingenico ePayments platform was not successful.
       # method::          'GET', 'DELETE', 'POST' or 'PUT' depending on the HTTP method being used.
       # uri::             Full URI of the location the request is targeted at, including query parameters.
       # request_headers:: {Ingenico::Connect::SDK::RequestHeader} list of headers that should be used as HTTP headers in the request.

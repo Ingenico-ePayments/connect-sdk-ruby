@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # Indicates that a payout is declined by the GlobalCollect platform or one of its downstream partners/acquirers.
+  # Indicates that a payout is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
   class DeclinedPayoutException < DeclinedTransactionException
 
     # Create a new DeclinedPayoutException.
@@ -15,7 +15,7 @@ module Ingenico::Connect::SDK
       @errors = errors
     end
 
-    # The declined payout result as returned by the GlobalCollect platform.
+    # The declined payout result as returned by the Ingenico ePayments platform.
     # Given as a {Ingenico::Connect::SDK::Domain::Payout::PayoutResult} object.
     def payout_result
       if @errors.nil?
@@ -34,7 +34,7 @@ module Ingenico::Connect::SDK
         payout = nil
       end
       if payout.nil?
-        'the GlobalCollect platform returned a declined payout response'
+        'the Ingenico ePayments platform returned a declined payout response'
       else
         "declined payment '" + payout.id + "' with status '" +
             payout.status + "'"

@@ -19,7 +19,7 @@ module Ingenico::Connect::SDK
     # and only the first request will be processed.
     attr_reader :idempotence_key
 
-    # If two or more requests arrive at the GlobalCollect platform with the same _idempotence_key_,
+    # If two or more requests arrive at the Ingenico ePayments platform with the same _idempotence_key_,
     # the _idempotence_request_timestamp_ will be set to the arrival time of the first of these requests.
     attr_accessor :idempotence_request_timestamp
   end

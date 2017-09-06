@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # Abstract class that is responsible for authenticating requests sent to the GlobalCollect platform.
+  # Abstract class that is responsible for authenticating requests sent to the Ingenico ePayments platform.
   class Authenticator
 
     # Creates a signature to authenticate a request.

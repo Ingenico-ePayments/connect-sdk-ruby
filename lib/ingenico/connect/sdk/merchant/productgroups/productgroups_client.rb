@@ -32,10 +32,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def find(query, context=nil)
           uri = instantiate_uri('/{apiVersion}/{merchantId}/productgroups', nil)
           return @communicator.get(
@@ -62,10 +62,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def get(payment_product_group_id, query, context=nil)
           path_context = {
             'paymentProductGroupId' => payment_product_group_id,

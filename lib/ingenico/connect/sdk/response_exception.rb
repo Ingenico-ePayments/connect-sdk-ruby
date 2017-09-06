@@ -1,33 +1,33 @@
 module Ingenico::Connect::SDK
 
-  # Exception used internally in the SDK to indicate an error response was received from the GlobalCollect platform.
+  # Exception used internally in the SDK to indicate an error response was received from the Ingenico ePayments platform.
   class ResponseException < RuntimeError
 
     def initialize(response)
-      super('the GlobalCollect platform returned an error response')
+      super('the Ingenico ePayments platform returned an error response')
       @response = response
     end
 
-    # {Ingenico::Connect::SDK::Response} object that was returned by the GlobalCollect platform
+    # {Ingenico::Connect::SDK::Response} object that was returned by the Ingenico ePayments platform
     attr_reader :response
 
-    # HTTP status code that was returned by the GlobalCollect platform
+    # HTTP status code that was returned by the Ingenico ePayments platform
     def status_code
       @response.status_code
     end
 
-    # string HTTP message body that was returned by the GlobalCollect platform
+    # string HTTP message body that was returned by the Ingenico ePayments platform
     def body
       @response.body
     end
 
-    # List of {Ingenico::Connect::SDK::ResponseHeader} that represent the HTTP headers used in the response from the GlobalCollect platform
+    # List of {Ingenico::Connect::SDK::ResponseHeader} that represent the HTTP headers used in the response from the Ingenico ePayments platform
     def headers
       @response.headers
     end
 
     # Returns the {Ingenico::Connect::SDK::ResponseHeader} that corresponds to the given _header_name_
-    # used in the HTTP response from the GlobalCollect platform, or *nil* if the header was not present in the response.
+    # used in the HTTP response from the Ingenico ePayments platform, or *nil* if the header was not present in the response.
     def get_header(header_name)
       @response.get_header(header_name)
     end

@@ -12,7 +12,7 @@ describe 'RiskAssessments' do
   before(:context){WebMock.allow_net_connect!}
   after(:context){WebMock.disable_net_connect!}
 
-  it 'can let the GlobalCollect platform assess risks' do
+  it 'can let the Ingenico ePayments platform assess risks' do
     bank_account_bban = Ingenico::Connect::SDK::Domain::Definitions::BankAccountBban.new
     bank_account_bban.country_code = 'DE'
     bank_account_bban.account_number = '0532013000'

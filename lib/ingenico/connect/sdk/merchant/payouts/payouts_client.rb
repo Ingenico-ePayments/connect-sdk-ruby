@@ -27,16 +27,16 @@ module Ingenico::Connect::SDK
         # body::    {Ingenico::Connect::SDK::Domain::Payout::CreatePayoutRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
-        # Raises:: {Ingenico::Connect::SDK::DeclinedPayoutException} if the GlobalCollect platform declined / rejected the payout. The payout result will be available from the exception.
+        # Raises:: {Ingenico::Connect::SDK::DeclinedPayoutException} if the Ingenico ePayments platform declined / rejected the payout. The payout result will be available from the exception.
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
         # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def create(body, context=nil)
           uri = instantiate_uri('/{apiVersion}/{merchantId}/payouts', nil)
           return @communicator.post(
@@ -65,10 +65,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def get(payout_id, context=nil)
           path_context = {
             'payoutId' => payout_id,
@@ -98,10 +98,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def approve(payout_id, body, context=nil)
           path_context = {
             'payoutId' => payout_id,
@@ -130,10 +130,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def cancel(payout_id, context=nil)
           path_context = {
             'payoutId' => payout_id,
@@ -162,10 +162,10 @@ module Ingenico::Connect::SDK
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
         # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
         #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the GlobalCollect platform,  
-        #          the GlobalCollect platform was unable to process a message from a downstream partner/acquirer,  
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the GlobalCollect platform returned any other error
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
         def cancelapproval(payout_id, context=nil)
           path_context = {
             'payoutId' => payout_id,

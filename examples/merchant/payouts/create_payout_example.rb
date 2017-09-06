@@ -11,6 +11,7 @@ require 'ingenico/connect/sdk/domain/definitions/bank_account_iban'
 require 'ingenico/connect/sdk/domain/definitions/company_information'
 require 'ingenico/connect/sdk/domain/definitions/contact_details_base'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
+require 'ingenico/connect/sdk/domain/payout/bank_transfer_payout_method_specific_input'
 require 'ingenico/connect/sdk/domain/payout/create_payout_request'
 require 'ingenico/connect/sdk/domain/payout/payout_customer'
 require 'ingenico/connect/sdk/domain/payout/payout_references'
@@ -55,17 +56,20 @@ def example
     customer.contact_details = contact_details
     customer.name = name
 
+    bank_transfer_payout_method_specific_input = Payout::BankTransferPayoutMethodSpecificInput.new
+    bank_transfer_payout_method_specific_input.bank_account_iban = bank_account_iban
+    bank_transfer_payout_method_specific_input.customer = customer
+    bank_transfer_payout_method_specific_input.payout_date = '20150102'
+    bank_transfer_payout_method_specific_input.payout_text = 'Payout Acme'
+    bank_transfer_payout_method_specific_input.swift_code = 'swift'
+
     references = Payout::PayoutReferences.new
     references.merchant_reference = 'AcmeOrder001'
 
     body = Payout::CreatePayoutRequest.new
     body.amount_of_money = amount_of_money
-    body.bank_account_iban = bank_account_iban
-    body.customer = customer
-    body.payout_date = '20150102'
-    body.payout_text = 'Payout Acme'
+    body.bank_transfer_payout_method_specific_input = bank_transfer_payout_method_specific_input
     body.references = references
-    body.swift_code = 'swift'
 
     begin
       response = client.merchant('merchantId').payouts().create(body)

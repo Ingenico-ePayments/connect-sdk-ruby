@@ -2,7 +2,7 @@ require 'ingenico/connect/sdk/declined_transaction_exception'
 
 module Ingenico::Connect::SDK
 
-  # Indicates that a refund is declined by the GlobalCollect platform or one of its downstream partners/acquirers.
+  # Indicates that a refund is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
   class DeclinedRefundException < DeclinedTransactionException
 
     # Create a new DeclinedRefundException
@@ -17,7 +17,7 @@ module Ingenico::Connect::SDK
       @errors = errors
     end
 
-    # The declined refund result as returned by the GlobalCollect platform.
+    # The declined refund result as returned by the Ingenico ePayments platform.
     # Given as a {Ingenico::Connect::SDK::Domain::Refund::RefundResult} object.
     def refund_result
       if @errors.nil?
@@ -36,7 +36,7 @@ module Ingenico::Connect::SDK
         refund = nil
       end
       if refund.nil?
-        'the GlobalCollect platform returned a declined refund response'
+        'the Ingenico ePayments platform returned a declined refund response'
       else
         "declined refund '" + refund.id + "' with status '" +
             refund.status + "'"

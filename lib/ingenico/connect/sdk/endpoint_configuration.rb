@@ -5,7 +5,7 @@ module Ingenico::Connect::SDK
   # Base class for configuration classes in the SDK.
   # This class stores the following:
   #
-  # _api_endpoint_::        Base URL to the GlobalCollect platform, stored as a string.
+  # _api_endpoint_::        Base URL to the Ingenico ePayments platform, stored as a string.
   # _connect_timeout_::     Timeout in seconds before a connection attempt times out.
   # _socket_timeout_::      Timeout in seconds that occurs after not receiving transmitted data for _socket_timeout_ seconds.
   # _max_connections_::     The number of connections in the connection pool that will be kept alive.
@@ -25,15 +25,15 @@ module Ingenico::Connect::SDK
     # The following settings are searched:
     #
     # endpoint::                This property is searched for *endpoint.host*, *endpoint.scheme* and *endpoint.port*.
-    #                           The found host, scheme and port are used to construct the base URL to the GlobalCollect platform.
-    # connectTimeout::          The number of seconds before a connection attempt with the GlobalCollect platform times out.
+    #                           The found host, scheme and port are used to construct the base URL to the Ingenico ePayments platform.
+    # connectTimeout::          The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
     # socketTimeout::           The number of seconds before a timeout occurs
-    #                           when transmitting data to or from the GlobalCollect platform.
-    # maxConnections::          The number of connections with the GlobalCollect platform
+    #                           when transmitting data to or from the Ingenico ePayments platform.
+    # maxConnections::          The number of connections with the Ingenico ePayments platform
     #                           that are kept alive in the connection pool. These connections will be reused when possible.
     # proxy::                   This property is searched for *proxy.uri*, *proxy.username* and *proxy.password*.
     #                           The found URI, username and password are used
-    #                           for connecting to the GlobalCollect platform using a proxy.
+    #                           for connecting to the Ingenico ePayments platform using a proxy.
     # integrator::              String
     # shoppingCartExtension::   Will be used to initialize a {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension}.
     def initialize(properties=nil, prefix=nil)
@@ -116,13 +116,13 @@ module Ingenico::Connect::SDK
 
     public
 
-    # The number of seconds before a connection attempt with the GlobalCollect platform times out.
+    # The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
     attr_accessor :connect_timeout
 
-    # The number of seconds before a timeout occurs when transmitting data to or from the GlobalCollect platform.
+    # The number of seconds before a timeout occurs when transmitting data to or from the Ingenico ePayments platform.
     attr_accessor :socket_timeout
 
-    # The number of connections with the GlobalCollect platform that are kept alive in the connection pool.
+    # The number of connections with the Ingenico ePayments platform that are kept alive in the connection pool.
     # These connections will be reused when possible.
     attr_accessor :max_connections
 
@@ -134,7 +134,7 @@ module Ingenico::Connect::SDK
     # {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension} containing shopping cart-related metadata.
     attr_accessor :shopping_cart_extension
 
-    # The base URL to the GlobalCollect platform.
+    # The base URL to the Ingenico ePayments platform.
     attr_reader :api_endpoint
   end
 end

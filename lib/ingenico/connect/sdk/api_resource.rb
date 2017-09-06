@@ -2,8 +2,8 @@ require 'ingenico/connect/sdk/domain/errors/error_response'
 
 module Ingenico::Connect::SDK
 
-  # Base class of all GlobalCollect platform API resources.
-  # Provides shared functionality to facilitate communication with the GlobalCollect platform.
+  # Base class of all Ingenico ePayments platform API resources.
+  # Provides shared functionality to facilitate communication with the Ingenico ePayments platform.
   class ApiResource
 
     # Creates a new ApiResource.
@@ -36,7 +36,7 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # {Ingenico::Connect::SDK::Communicator} instance that provides communication with the GlobalCollect platform.
+    # {Ingenico::Connect::SDK::Communicator} instance that provides communication with the Ingenico ePayments platform.
     attr_reader :communicator
 
     # JSON string containing client info specific to the current client.

@@ -1,6 +1,6 @@
 module Ingenico::Connect::SDK
 
-  # Raised when a resource is not found on the GlobalCollect platform.
+  # Raised when a resource is not found on the Ingenico ePayments platform.
   # This error corresponds to a 404 HTTP response.
   class NotFoundException < RuntimeError
 

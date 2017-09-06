@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/payment/complete_payment_card_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/order'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -14,9 +15,13 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::CompletePaymentCardPaymentMethodSpecificInput}
         attr_accessor :card_payment_method_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::Order}
+        attr_accessor :order
+
         def to_h
           hash = super
           add_to_hash(hash, 'cardPaymentMethodSpecificInput', @card_payment_method_specific_input)
+          add_to_hash(hash, 'order', @order)
           hash
         end
 
@@ -27,6 +32,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['cardPaymentMethodSpecificInput']]
             end
             @card_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::CompletePaymentCardPaymentMethodSpecificInput.new_from_hash(hash['cardPaymentMethodSpecificInput'])
+          end
+          if hash.has_key?('order')
+            if !(hash['order'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['order']]
+            end
+            @order = Ingenico::Connect::SDK::Domain::Payment::Order.new_from_hash(hash['order'])
           end
         end
       end

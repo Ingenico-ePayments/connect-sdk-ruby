@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/address'
 require 'ingenico/connect/sdk/domain/payment/payment_product840_customer_account'
+require 'ingenico/connect/sdk/domain/payment/protection_eligibility'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -18,10 +19,14 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Definitions::Address}
         attr_accessor :customer_address
 
+        # {Ingenico::Connect::SDK::Domain::Payment::ProtectionEligibility}
+        attr_accessor :protection_eligibility
+
         def to_h
           hash = super
           add_to_hash(hash, 'customerAccount', @customer_account)
           add_to_hash(hash, 'customerAddress', @customer_address)
+          add_to_hash(hash, 'protectionEligibility', @protection_eligibility)
           hash
         end
 
@@ -38,6 +43,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['customerAddress']]
             end
             @customer_address = Ingenico::Connect::SDK::Domain::Definitions::Address.new_from_hash(hash['customerAddress'])
+          end
+          if hash.has_key?('protectionEligibility')
+            if !(hash['protectionEligibility'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['protectionEligibility']]
+            end
+            @protection_eligibility = Ingenico::Connect::SDK::Domain::Payment::ProtectionEligibility.new_from_hash(hash['protectionEligibility'])
           end
         end
       end

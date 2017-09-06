@@ -9,7 +9,7 @@ describe 'convertAmount with the server' do
   before(:context){WebMock.allow_net_connect!}
   after(:context){WebMock.disable_net_connect!}
 
-  it 'communicates with the GlobalCollect platform' do
+  it 'communicates with the Ingenico ePayments platform' do
 
     request = Ingenico::Connect::SDK::Merchant::Services::ConvertAmountParams.new
     request.amount = 123
