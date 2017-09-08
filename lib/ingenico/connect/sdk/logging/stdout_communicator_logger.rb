@@ -6,14 +6,13 @@ module Ingenico::Connect::SDK
 
     # {Ingenico::Connect::SDK::Logging::CommunicatorLogger} that logs the messages to $stdout.
     class StdoutCommunicatorLogger < CommunicatorLogger
-
       include Singleton
 
       def initialize
         # implement the interface
       end
 
-      # NOTE: this is needed to not break method calls based on old interface
+      # NOTE: this alias is needed to not break existing method calls depending on old interface
       class << self
         alias_method :INSTANCE, :instance
       end

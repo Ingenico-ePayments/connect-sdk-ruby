@@ -142,3 +142,7 @@ end
 # Contains data classes related to shopping cart functionality.
 module Ingenico::Connect::SDK::Domain::MetaData
 end
+
+# Contains data classes related to webhooks functionality.
+module Ingenico::Connect::SDK::Webhooks
+end

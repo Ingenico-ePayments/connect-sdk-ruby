@@ -32,6 +32,7 @@ As for JRuby, version 9.0.0.0 and higher are supported.
 In addition, the following package is required:
 
 * [httpclient](https://github.com/nahi/httpclient) 2.8 or higher
+* [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby) 1.0 or higher
 
 ## Installation
 
