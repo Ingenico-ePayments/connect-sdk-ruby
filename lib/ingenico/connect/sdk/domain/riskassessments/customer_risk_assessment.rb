@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/address'
 require 'ingenico/connect/sdk/domain/payment/address_personal'
+require 'ingenico/connect/sdk/domain/riskassessments/contact_details_risk_assessment'
 require 'ingenico/connect/sdk/domain/riskassessments/personal_information_risk_assessment'
 
 module Ingenico::Connect::SDK
@@ -15,6 +16,9 @@ module Ingenico::Connect::SDK
 
         # {Ingenico::Connect::SDK::Domain::Definitions::Address}
         attr_accessor :billing_address
+
+        # {Ingenico::Connect::SDK::Domain::Riskassessments::ContactDetailsRiskAssessment}
+        attr_accessor :contact_details
 
         # String
         attr_accessor :locale
@@ -28,6 +32,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'billingAddress', @billing_address)
+          add_to_hash(hash, 'contactDetails', @contact_details)
           add_to_hash(hash, 'locale', @locale)
           add_to_hash(hash, 'personalInformation', @personal_information)
           add_to_hash(hash, 'shippingAddress', @shipping_address)
@@ -41,6 +46,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['billingAddress']]
             end
             @billing_address = Ingenico::Connect::SDK::Domain::Definitions::Address.new_from_hash(hash['billingAddress'])
+          end
+          if hash.has_key?('contactDetails')
+            if !(hash['contactDetails'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['contactDetails']]
+            end
+            @contact_details = Ingenico::Connect::SDK::Domain::Riskassessments::ContactDetailsRiskAssessment.new_from_hash(hash['contactDetails'])
           end
           if hash.has_key?('locale')
             @locale = hash['locale']
