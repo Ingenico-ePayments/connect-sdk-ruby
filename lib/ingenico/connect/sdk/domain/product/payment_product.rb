@@ -38,6 +38,9 @@ module Ingenico::Connect::SDK
         # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductField}
         attr_accessor :fields
 
+        # String
+        attr_accessor :fields_warning
+
         # Integer
         attr_accessor :id
 
@@ -69,6 +72,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'canBeIframed', @can_be_iframed)
           add_to_hash(hash, 'displayHints', @display_hints)
           add_to_hash(hash, 'fields', @fields)
+          add_to_hash(hash, 'fieldsWarning', @fields_warning)
           add_to_hash(hash, 'id', @id)
           add_to_hash(hash, 'maxAmount', @max_amount)
           add_to_hash(hash, 'minAmount', @min_amount)
@@ -122,6 +126,9 @@ module Ingenico::Connect::SDK
             hash['fields'].each do |e|
               @fields << Ingenico::Connect::SDK::Domain::Product::PaymentProductField.new_from_hash(e)
             end
+          end
+          if hash.has_key?('fieldsWarning')
+            @fields_warning = hash['fieldsWarning']
           end
           if hash.has_key?('id')
             @id = hash['id']

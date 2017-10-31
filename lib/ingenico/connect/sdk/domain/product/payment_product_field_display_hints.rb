@@ -25,6 +25,9 @@ module Ingenico::Connect::SDK
         attr_accessor :label
 
         # String
+        attr_accessor :link
+
+        # String
         attr_accessor :mask
 
         # true/false
@@ -45,6 +48,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'displayOrder', @display_order)
           add_to_hash(hash, 'formElement', @form_element)
           add_to_hash(hash, 'label', @label)
+          add_to_hash(hash, 'link', @link)
           add_to_hash(hash, 'mask', @mask)
           add_to_hash(hash, 'obfuscate', @obfuscate)
           add_to_hash(hash, 'placeholderLabel', @placeholder_label)
@@ -69,6 +73,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('label')
             @label = hash['label']
+          end
+          if hash.has_key?('link')
+            @link = hash['link']
           end
           if hash.has_key?('mask')
             @mask = hash['mask']

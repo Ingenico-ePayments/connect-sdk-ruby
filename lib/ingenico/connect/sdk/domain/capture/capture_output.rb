@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_output'
+require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/invoice_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/mobile_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_method_specific_output'
@@ -33,6 +34,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentMethodSpecificOutput}
         attr_accessor :direct_debit_payment_method_specific_output
 
+        # {Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificOutput}
+        attr_accessor :e_invoice_payment_method_specific_output
+
         # {Ingenico::Connect::SDK::Domain::Payment::InvoicePaymentMethodSpecificOutput}
         attr_accessor :invoice_payment_method_specific_output
 
@@ -55,6 +59,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'cardPaymentMethodSpecificOutput', @card_payment_method_specific_output)
           add_to_hash(hash, 'cashPaymentMethodSpecificOutput', @cash_payment_method_specific_output)
           add_to_hash(hash, 'directDebitPaymentMethodSpecificOutput', @direct_debit_payment_method_specific_output)
+          add_to_hash(hash, 'eInvoicePaymentMethodSpecificOutput', @e_invoice_payment_method_specific_output)
           add_to_hash(hash, 'invoicePaymentMethodSpecificOutput', @invoice_payment_method_specific_output)
           add_to_hash(hash, 'mobilePaymentMethodSpecificOutput', @mobile_payment_method_specific_output)
           add_to_hash(hash, 'paymentMethod', @payment_method)
@@ -91,6 +96,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['directDebitPaymentMethodSpecificOutput']]
             end
             @direct_debit_payment_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentMethodSpecificOutput.new_from_hash(hash['directDebitPaymentMethodSpecificOutput'])
+          end
+          if hash.has_key?('eInvoicePaymentMethodSpecificOutput')
+            if !(hash['eInvoicePaymentMethodSpecificOutput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['eInvoicePaymentMethodSpecificOutput']]
+            end
+            @e_invoice_payment_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificOutput.new_from_hash(hash['eInvoicePaymentMethodSpecificOutput'])
           end
           if hash.has_key?('invoicePaymentMethodSpecificOutput')
             if !(hash['invoicePaymentMethodSpecificOutput'].is_a? Hash)

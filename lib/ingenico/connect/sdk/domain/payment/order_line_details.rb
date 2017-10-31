@@ -14,10 +14,16 @@ module Ingenico::Connect::SDK
         attr_accessor :discount_amount
 
         # Integer
+        attr_accessor :google_product_category_id
+
+        # Integer
         attr_accessor :line_amount_total
 
         # String
         attr_accessor :product_code
+
+        # String
+        attr_accessor :product_name
 
         # Integer
         attr_accessor :product_price
@@ -37,8 +43,10 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'discountAmount', @discount_amount)
+          add_to_hash(hash, 'googleProductCategoryId', @google_product_category_id)
           add_to_hash(hash, 'lineAmountTotal', @line_amount_total)
           add_to_hash(hash, 'productCode', @product_code)
+          add_to_hash(hash, 'productName', @product_name)
           add_to_hash(hash, 'productPrice', @product_price)
           add_to_hash(hash, 'productType', @product_type)
           add_to_hash(hash, 'quantity', @quantity)
@@ -52,11 +60,17 @@ module Ingenico::Connect::SDK
           if hash.has_key?('discountAmount')
             @discount_amount = hash['discountAmount']
           end
+          if hash.has_key?('googleProductCategoryId')
+            @google_product_category_id = hash['googleProductCategoryId']
+          end
           if hash.has_key?('lineAmountTotal')
             @line_amount_total = hash['lineAmountTotal']
           end
           if hash.has_key?('productCode')
             @product_code = hash['productCode']
+          end
+          if hash.has_key?('productName')
+            @product_name = hash['productName']
           end
           if hash.has_key?('productPrice')
             @product_price = hash['productPrice']

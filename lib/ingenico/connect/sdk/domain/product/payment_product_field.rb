@@ -24,12 +24,16 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :type
 
+        # true/false
+        attr_accessor :used_for_lookup
+
         def to_h
           hash = super
           add_to_hash(hash, 'dataRestrictions', @data_restrictions)
           add_to_hash(hash, 'displayHints', @display_hints)
           add_to_hash(hash, 'id', @id)
           add_to_hash(hash, 'type', @type)
+          add_to_hash(hash, 'usedForLookup', @used_for_lookup)
           hash
         end
 
@@ -52,6 +56,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('type')
             @type = hash['type']
+          end
+          if hash.has_key?('usedForLookup')
+            @used_for_lookup = hash['usedForLookup']
           end
         end
       end

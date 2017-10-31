@@ -7,6 +7,7 @@ require 'ingenico/connect/sdk/domain/definitions/fraud_fields'
 require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/invoice_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/mobile_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_method_specific_input'
@@ -31,6 +32,9 @@ module Ingenico::Connect::SDK
 
         # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentMethodSpecificInput}
         attr_accessor :direct_debit_payment_method_specific_input
+
+        # {Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificInput}
+        attr_accessor :e_invoice_payment_method_specific_input
 
         # String
         attr_accessor :encrypted_customer_input
@@ -59,6 +63,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'cardPaymentMethodSpecificInput', @card_payment_method_specific_input)
           add_to_hash(hash, 'cashPaymentMethodSpecificInput', @cash_payment_method_specific_input)
           add_to_hash(hash, 'directDebitPaymentMethodSpecificInput', @direct_debit_payment_method_specific_input)
+          add_to_hash(hash, 'eInvoicePaymentMethodSpecificInput', @e_invoice_payment_method_specific_input)
           add_to_hash(hash, 'encryptedCustomerInput', @encrypted_customer_input)
           add_to_hash(hash, 'fraudFields', @fraud_fields)
           add_to_hash(hash, 'invoicePaymentMethodSpecificInput', @invoice_payment_method_specific_input)
@@ -94,6 +99,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['directDebitPaymentMethodSpecificInput']]
             end
             @direct_debit_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentMethodSpecificInput.new_from_hash(hash['directDebitPaymentMethodSpecificInput'])
+          end
+          if hash.has_key?('eInvoicePaymentMethodSpecificInput')
+            if !(hash['eInvoicePaymentMethodSpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['eInvoicePaymentMethodSpecificInput']]
+            end
+            @e_invoice_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificInput.new_from_hash(hash['eInvoicePaymentMethodSpecificInput'])
           end
           if hash.has_key?('encryptedCustomerInput')
             @encrypted_customer_input = hash['encryptedCustomerInput']
