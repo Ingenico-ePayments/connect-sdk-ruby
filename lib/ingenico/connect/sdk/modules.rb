@@ -51,6 +51,16 @@ end
 module Ingenico::Connect::SDK::Domain::Capture
 end
 
+# Contains the client used to access the mandate service.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/
+module Ingenico::Connect::SDK::Merchant::Mandates
+end
+
+# Contains data classes that are used in mandate services.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/
+module Ingenico::Connect::SDK::Domain::Mandates
+end
+
 # Contains the client used to access the payout service.
 # @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/
 module Ingenico::Connect::SDK::Merchant::Payouts

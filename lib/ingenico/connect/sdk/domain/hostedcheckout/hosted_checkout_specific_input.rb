@@ -20,6 +20,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Hostedcheckout::PaymentProductFiltersHostedCheckout}
         attr_accessor :payment_product_filters
 
+        # true/false
+        attr_accessor :return_cancel_state
+
         # String
         attr_accessor :return_url
 
@@ -37,6 +40,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'isRecurring', @is_recurring)
           add_to_hash(hash, 'locale', @locale)
           add_to_hash(hash, 'paymentProductFilters', @payment_product_filters)
+          add_to_hash(hash, 'returnCancelState', @return_cancel_state)
           add_to_hash(hash, 'returnUrl', @return_url)
           add_to_hash(hash, 'showResultPage', @show_result_page)
           add_to_hash(hash, 'tokens', @tokens)
@@ -57,6 +61,9 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentProductFilters']]
             end
             @payment_product_filters = Ingenico::Connect::SDK::Domain::Hostedcheckout::PaymentProductFiltersHostedCheckout.new_from_hash(hash['paymentProductFilters'])
+          end
+          if hash.has_key?('returnCancelState')
+            @return_cancel_state = hash['returnCancelState']
           end
           if hash.has_key?('returnUrl')
             @return_url = hash['returnUrl']

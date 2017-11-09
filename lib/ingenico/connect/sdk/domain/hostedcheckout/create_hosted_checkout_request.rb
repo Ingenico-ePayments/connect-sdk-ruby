@@ -8,8 +8,10 @@ require 'ingenico/connect/sdk/domain/hostedcheckout/hosted_checkout_specific_inp
 require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/order'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/sepa_direct_debit_payment_method_specific_input_base'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -26,6 +28,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::CashPaymentMethodSpecificInputBase}
         attr_accessor :cash_payment_method_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificInputBase}
+        attr_accessor :e_invoice_payment_method_specific_input
+
         # {Ingenico::Connect::SDK::Domain::Definitions::FraudFields}
         attr_accessor :fraud_fields
 
@@ -38,15 +43,20 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentMethodSpecificInputBase}
         attr_accessor :redirect_payment_method_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentMethodSpecificInputBase}
+        attr_accessor :sepa_direct_debit_payment_method_specific_input
+
         def to_h
           hash = super
           add_to_hash(hash, 'bankTransferPaymentMethodSpecificInput', @bank_transfer_payment_method_specific_input)
           add_to_hash(hash, 'cardPaymentMethodSpecificInput', @card_payment_method_specific_input)
           add_to_hash(hash, 'cashPaymentMethodSpecificInput', @cash_payment_method_specific_input)
+          add_to_hash(hash, 'eInvoicePaymentMethodSpecificInput', @e_invoice_payment_method_specific_input)
           add_to_hash(hash, 'fraudFields', @fraud_fields)
           add_to_hash(hash, 'hostedCheckoutSpecificInput', @hosted_checkout_specific_input)
           add_to_hash(hash, 'order', @order)
           add_to_hash(hash, 'redirectPaymentMethodSpecificInput', @redirect_payment_method_specific_input)
+          add_to_hash(hash, 'sepaDirectDebitPaymentMethodSpecificInput', @sepa_direct_debit_payment_method_specific_input)
           hash
         end
 
@@ -69,6 +79,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['cashPaymentMethodSpecificInput']]
             end
             @cash_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::CashPaymentMethodSpecificInputBase.new_from_hash(hash['cashPaymentMethodSpecificInput'])
+          end
+          if hash.has_key?('eInvoicePaymentMethodSpecificInput')
+            if !(hash['eInvoicePaymentMethodSpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['eInvoicePaymentMethodSpecificInput']]
+            end
+            @e_invoice_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificInputBase.new_from_hash(hash['eInvoicePaymentMethodSpecificInput'])
           end
           if hash.has_key?('fraudFields')
             if !(hash['fraudFields'].is_a? Hash)
@@ -93,6 +109,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['redirectPaymentMethodSpecificInput']]
             end
             @redirect_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentMethodSpecificInputBase.new_from_hash(hash['redirectPaymentMethodSpecificInput'])
+          end
+          if hash.has_key?('sepaDirectDebitPaymentMethodSpecificInput')
+            if !(hash['sepaDirectDebitPaymentMethodSpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['sepaDirectDebitPaymentMethodSpecificInput']]
+            end
+            @sepa_direct_debit_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentMethodSpecificInputBase.new_from_hash(hash['sepaDirectDebitPaymentMethodSpecificInput'])
           end
         end
       end

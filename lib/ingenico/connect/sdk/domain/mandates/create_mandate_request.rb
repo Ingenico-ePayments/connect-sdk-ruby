@@ -2,13 +2,13 @@
 # This class was auto-generated from the API references found at
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
-require 'ingenico/connect/sdk/domain/definitions/redirect_data_base'
+require 'ingenico/connect/sdk/domain/mandates/create_mandate_base'
 
 module Ingenico::Connect::SDK
   module Domain
-    module Payment
+    module Mandates
 
-      class RedirectData < Ingenico::Connect::SDK::Domain::Definitions::RedirectDataBase
+      class CreateMandateRequest < Ingenico::Connect::SDK::Domain::Mandates::CreateMandateBase
       end
     end
   end

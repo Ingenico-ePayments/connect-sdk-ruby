@@ -6,9 +6,9 @@ require 'ingenico/connect/sdk/domain/definitions/redirect_data_base'
 
 module Ingenico::Connect::SDK
   module Domain
-    module Payment
+    module Mandates
 
-      class RedirectData < Ingenico::Connect::SDK::Domain::Definitions::RedirectDataBase
+      class MandateRedirectData < Ingenico::Connect::SDK::Domain::Definitions::RedirectDataBase
       end
     end
   end

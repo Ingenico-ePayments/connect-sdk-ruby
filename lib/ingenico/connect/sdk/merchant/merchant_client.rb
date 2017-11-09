@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/merchant/captures/captures_client'
 require 'ingenico/connect/sdk/merchant/hostedcheckouts/hostedcheckouts_client'
+require 'ingenico/connect/sdk/merchant/mandates/mandates_client'
 require 'ingenico/connect/sdk/merchant/payments/payments_client'
 require 'ingenico/connect/sdk/merchant/payouts/payouts_client'
 require 'ingenico/connect/sdk/merchant/productgroups/productgroups_client'
@@ -65,6 +66,14 @@ module Ingenico::Connect::SDK
       # Returns:: {Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient}
       def productgroups
         Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/mandates
+      #
+      # Create, get and update mandates
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient}
+      def mandates
+        Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/refunds
