@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/domain/payment/order_output'
 require 'ingenico/connect/sdk/domain/payment/refund_bank_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_card_method_specific_output'
+require 'ingenico/connect/sdk/domain/payment/refund_e_invoice_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_e_wallet_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_mobile_method_specific_output'
 
@@ -23,6 +24,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::RefundCardMethodSpecificOutput}
         attr_accessor :card_refund_method_specific_output
 
+        # {Ingenico::Connect::SDK::Domain::Payment::RefundEInvoiceMethodSpecificOutput}
+        attr_accessor :e_invoice_refund_method_specific_output
+
         # {Ingenico::Connect::SDK::Domain::Payment::RefundEWalletMethodSpecificOutput}
         attr_accessor :e_wallet_refund_method_specific_output
 
@@ -37,6 +41,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'amountPaid', @amount_paid)
           add_to_hash(hash, 'bankRefundMethodSpecificOutput', @bank_refund_method_specific_output)
           add_to_hash(hash, 'cardRefundMethodSpecificOutput', @card_refund_method_specific_output)
+          add_to_hash(hash, 'eInvoiceRefundMethodSpecificOutput', @e_invoice_refund_method_specific_output)
           add_to_hash(hash, 'eWalletRefundMethodSpecificOutput', @e_wallet_refund_method_specific_output)
           add_to_hash(hash, 'mobileRefundMethodSpecificOutput', @mobile_refund_method_specific_output)
           add_to_hash(hash, 'paymentMethod', @payment_method)
@@ -59,6 +64,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['cardRefundMethodSpecificOutput']]
             end
             @card_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundCardMethodSpecificOutput.new_from_hash(hash['cardRefundMethodSpecificOutput'])
+          end
+          if hash.has_key?('eInvoiceRefundMethodSpecificOutput')
+            if !(hash['eInvoiceRefundMethodSpecificOutput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['eInvoiceRefundMethodSpecificOutput']]
+            end
+            @e_invoice_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundEInvoiceMethodSpecificOutput.new_from_hash(hash['eInvoiceRefundMethodSpecificOutput'])
           end
           if hash.has_key?('eWalletRefundMethodSpecificOutput')
             if !(hash['eWalletRefundMethodSpecificOutput'].is_a? Hash)
