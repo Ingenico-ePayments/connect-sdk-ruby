@@ -24,9 +24,6 @@ module Ingenico::Connect::SDK
         attr_accessor :recurrence_type
 
         # String
-        attr_accessor :return_url
-
-        # String
         attr_accessor :signature_type
 
         def to_h
@@ -35,7 +32,6 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'customerReference', @customer_reference)
           add_to_hash(hash, 'language', @language)
           add_to_hash(hash, 'recurrenceType', @recurrence_type)
-          add_to_hash(hash, 'returnUrl', @return_url)
           add_to_hash(hash, 'signatureType', @signature_type)
           hash
         end
@@ -56,9 +52,6 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('recurrenceType')
             @recurrence_type = hash['recurrenceType']
-          end
-          if hash.has_key?('returnUrl')
-            @return_url = hash['returnUrl']
           end
           if hash.has_key?('signatureType')
             @signature_type = hash['signatureType']
