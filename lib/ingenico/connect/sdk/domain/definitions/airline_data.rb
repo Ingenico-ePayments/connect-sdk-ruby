@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/airline_flight_leg'
+require 'ingenico/connect/sdk/domain/definitions/airline_passenger'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -50,6 +51,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :passenger_name
 
+        # Array of {Ingenico::Connect::SDK::Domain::Definitions::AirlinePassenger}
+        attr_accessor :passengers
+
         # String
         attr_accessor :place_of_issue
 
@@ -83,6 +87,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'merchantCustomerId', @merchant_customer_id)
           add_to_hash(hash, 'name', @name)
           add_to_hash(hash, 'passengerName', @passenger_name)
+          add_to_hash(hash, 'passengers', @passengers)
           add_to_hash(hash, 'placeOfIssue', @place_of_issue)
           add_to_hash(hash, 'pnr', @pnr)
           add_to_hash(hash, 'pointOfSale', @point_of_sale)
@@ -138,6 +143,15 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('passengerName')
             @passenger_name = hash['passengerName']
+          end
+          if hash.has_key?('passengers')
+            if !(hash['passengers'].is_a? Array)
+              raise TypeError, "value '%s' is not an Array" % [hash['passengers']]
+            end
+            @passengers = []
+            hash['passengers'].each do |e|
+              @passengers << Ingenico::Connect::SDK::Domain::Definitions::AirlinePassenger.new_from_hash(e)
+            end
           end
           if hash.has_key?('placeOfIssue')
             @place_of_issue = hash['placeOfIssue']

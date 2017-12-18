@@ -41,6 +41,9 @@ module Ingenico::Connect::SDK
         attr_accessor :origin_airport
 
         # String
+        attr_accessor :service_class
+
+        # String
         attr_accessor :stopover_code
 
         def to_h
@@ -55,6 +58,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'flightNumber', @flight_number)
           add_to_hash(hash, 'number', @number)
           add_to_hash(hash, 'originAirport', @origin_airport)
+          add_to_hash(hash, 'serviceClass', @service_class)
           add_to_hash(hash, 'stopoverCode', @stopover_code)
           hash
         end
@@ -90,6 +94,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('originAirport')
             @origin_airport = hash['originAirport']
+          end
+          if hash.has_key?('serviceClass')
+            @service_class = hash['serviceClass']
           end
           if hash.has_key?('stopoverCode')
             @stopover_code = hash['stopoverCode']

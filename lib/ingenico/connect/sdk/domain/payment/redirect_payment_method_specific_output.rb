@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/bank_account_iban'
+require 'ingenico/connect/sdk/domain/definitions/fraud_results'
 require 'ingenico/connect/sdk/domain/payment/abstract_payment_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/payment_product836_specific_output'
 require 'ingenico/connect/sdk/domain/payment/payment_product840_specific_output'
@@ -16,6 +17,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban}
         attr_accessor :bank_account_iban
 
+        # {Ingenico::Connect::SDK::Domain::Definitions::FraudResults}
+        attr_accessor :fraud_results
+
         # {Ingenico::Connect::SDK::Domain::Payment::PaymentProduct836SpecificOutput}
         attr_accessor :payment_product836_specific_output
 
@@ -25,6 +29,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'bankAccountIban', @bank_account_iban)
+          add_to_hash(hash, 'fraudResults', @fraud_results)
           add_to_hash(hash, 'paymentProduct836SpecificOutput', @payment_product836_specific_output)
           add_to_hash(hash, 'paymentProduct840SpecificOutput', @payment_product840_specific_output)
           hash
@@ -37,6 +42,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['bankAccountIban']]
             end
             @bank_account_iban = Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban.new_from_hash(hash['bankAccountIban'])
+          end
+          if hash.has_key?('fraudResults')
+            if !(hash['fraudResults'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['fraudResults']]
+            end
+            @fraud_results = Ingenico::Connect::SDK::Domain::Definitions::FraudResults.new_from_hash(hash['fraudResults'])
           end
           if hash.has_key?('paymentProduct836SpecificOutput')
             if !(hash['paymentProduct836SpecificOutput'].is_a? Hash)

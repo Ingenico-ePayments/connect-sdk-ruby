@@ -11,6 +11,9 @@ module Ingenico::Connect::SDK
 
       class CreateMandateBase < Ingenico::Connect::SDK::DataObject
 
+        # String
+        attr_accessor :alias
+
         # {Ingenico::Connect::SDK::Domain::Mandates::MandateCustomer}
         attr_accessor :customer
 
@@ -28,6 +31,7 @@ module Ingenico::Connect::SDK
 
         def to_h
           hash = super
+          add_to_hash(hash, 'alias', @alias)
           add_to_hash(hash, 'customer', @customer)
           add_to_hash(hash, 'customerReference', @customer_reference)
           add_to_hash(hash, 'language', @language)
@@ -38,6 +42,9 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key?('alias')
+            @alias = hash['alias']
+          end
           if hash.has_key?('customer')
             if !(hash['customer'].is_a? Hash)
               raise TypeError, "value '%s' is not a Hash" % [hash['customer']]

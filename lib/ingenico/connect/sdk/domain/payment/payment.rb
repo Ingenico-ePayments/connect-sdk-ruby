@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_order_status'
+require 'ingenico/connect/sdk/domain/payment/hosted_checkout_specific_output'
 require 'ingenico/connect/sdk/domain/payment/payment_output'
 require 'ingenico/connect/sdk/domain/payment/payment_status_output'
 
@@ -11,6 +12,9 @@ module Ingenico::Connect::SDK
     module Payment
 
       class Payment < Ingenico::Connect::SDK::Domain::Definitions::AbstractOrderStatus
+
+        # {Ingenico::Connect::SDK::Domain::Payment::HostedCheckoutSpecificOutput}
+        attr_accessor :hosted_checkout_specific_output
 
         # {Ingenico::Connect::SDK::Domain::Payment::PaymentOutput}
         attr_accessor :payment_output
@@ -23,6 +27,7 @@ module Ingenico::Connect::SDK
 
         def to_h
           hash = super
+          add_to_hash(hash, 'hostedCheckoutSpecificOutput', @hosted_checkout_specific_output)
           add_to_hash(hash, 'paymentOutput', @payment_output)
           add_to_hash(hash, 'status', @status)
           add_to_hash(hash, 'statusOutput', @status_output)
@@ -31,6 +36,12 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key?('hostedCheckoutSpecificOutput')
+            if !(hash['hostedCheckoutSpecificOutput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['hostedCheckoutSpecificOutput']]
+            end
+            @hosted_checkout_specific_output = Ingenico::Connect::SDK::Domain::Payment::HostedCheckoutSpecificOutput.new_from_hash(hash['hostedCheckoutSpecificOutput'])
+          end
           if hash.has_key?('paymentOutput')
             if !(hash['paymentOutput'].is_a? Hash)
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentOutput']]

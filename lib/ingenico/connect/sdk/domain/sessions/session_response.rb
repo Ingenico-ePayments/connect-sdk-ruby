@@ -11,6 +11,12 @@ module Ingenico::Connect::SDK
       class SessionResponse < Ingenico::Connect::SDK::DataObject
 
         # String
+        attr_accessor :asset_url
+
+        # String
+        attr_accessor :client_api_url
+
+        # String
         attr_accessor :client_session_id
 
         # String
@@ -24,6 +30,8 @@ module Ingenico::Connect::SDK
 
         def to_h
           hash = super
+          add_to_hash(hash, 'assetUrl', @asset_url)
+          add_to_hash(hash, 'clientApiUrl', @client_api_url)
           add_to_hash(hash, 'clientSessionId', @client_session_id)
           add_to_hash(hash, 'customerId', @customer_id)
           add_to_hash(hash, 'invalidTokens', @invalid_tokens)
@@ -33,6 +41,12 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key?('assetUrl')
+            @asset_url = hash['assetUrl']
+          end
+          if hash.has_key?('clientApiUrl')
+            @client_api_url = hash['clientApiUrl']
+          end
           if hash.has_key?('clientSessionId')
             @client_session_id = hash['clientSessionId']
           end
