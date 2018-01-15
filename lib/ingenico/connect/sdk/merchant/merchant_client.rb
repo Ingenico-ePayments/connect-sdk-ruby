@@ -28,6 +28,14 @@ module Ingenico::Connect::SDK
         super(parent, path_context)
       end
 
+      # Resource /{{merchantId}}/hostedcheckouts
+      #
+      # Create new hosted checkout
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient}
+      def hostedcheckouts
+        Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient.new(self, nil)
+      end
+
       # Resource /{{merchantId}}/payments
       #
       # Create, cancel and approve payments
@@ -44,20 +52,20 @@ module Ingenico::Connect::SDK
         Ingenico::Connect::SDK::Merchant::Captures::CapturesClient.new(self, nil)
       end
 
+      # Resource /{{merchantId}}/refunds
+      #
+      # Create, cancel and approve refunds
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Refunds::RefundsClient}
+      def refunds
+        Ingenico::Connect::SDK::Merchant::Refunds::RefundsClient.new(self, nil)
+      end
+
       # Resource /{{merchantId}}/payouts
       #
       # Create, cancel and approve payouts
       # Returns:: {Ingenico::Connect::SDK::Merchant::Payouts::PayoutsClient}
       def payouts
         Ingenico::Connect::SDK::Merchant::Payouts::PayoutsClient.new(self, nil)
-      end
-
-      # Resource /{{merchantId}}/products
-      #
-      # Get information about payment products
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Products::ProductsClient}
-      def products
-        Ingenico::Connect::SDK::Merchant::Products::ProductsClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/productgroups
@@ -68,20 +76,12 @@ module Ingenico::Connect::SDK
         Ingenico::Connect::SDK::Merchant::Productgroups::ProductgroupsClient.new(self, nil)
       end
 
-      # Resource /{{merchantId}}/mandates
+      # Resource /{{merchantId}}/products
       #
-      # Create, get and update mandates
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient}
-      def mandates
-        Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient.new(self, nil)
-      end
-
-      # Resource /{{merchantId}}/refunds
-      #
-      # Create, cancel and approve refunds
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Refunds::RefundsClient}
-      def refunds
-        Ingenico::Connect::SDK::Merchant::Refunds::RefundsClient.new(self, nil)
+      # Get information about payment products
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Products::ProductsClient}
+      def products
+        Ingenico::Connect::SDK::Merchant::Products::ProductsClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/riskassessments
@@ -100,14 +100,6 @@ module Ingenico::Connect::SDK
         Ingenico::Connect::SDK::Merchant::Services::ServicesClient.new(self, nil)
       end
 
-      # Resource /{{merchantId}}/sessions
-      #
-      # Create new Session for Client2Server API calls
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient}
-      def sessions
-        Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient.new(self, nil)
-      end
-
       # Resource /{{merchantId}}/tokens
       #
       # Create, delete and update tokens
@@ -116,12 +108,20 @@ module Ingenico::Connect::SDK
         Ingenico::Connect::SDK::Merchant::Tokens::TokensClient.new(self, nil)
       end
 
-      # Resource /{{merchantId}}/hostedcheckouts
+      # Resource /{{merchantId}}/mandates
       #
-      # Create new hosted checkout
-      # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient}
-      def hostedcheckouts
-        Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient.new(self, nil)
+      # Create, get and update mandates
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient}
+      def mandates
+        Ingenico::Connect::SDK::Merchant::Mandates::MandatesClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/sessions
+      #
+      # Create new Session for Client2Server API calls
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient}
+      def sessions
+        Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient.new(self, nil)
       end
     end
   end

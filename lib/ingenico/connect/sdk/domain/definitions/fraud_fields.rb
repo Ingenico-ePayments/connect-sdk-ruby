@@ -28,7 +28,10 @@ module Ingenico::Connect::SDK
         attr_accessor :default_form_fill
 
         # true/false
-        attr_accessor :finger_print_activated
+        attr_accessor :device_fingerprint_activated
+
+        # String
+        attr_accessor :device_fingerprint_transaction_id
 
         # String
         attr_accessor :gift_card_type
@@ -70,7 +73,8 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'cardOwnerAddress', @card_owner_address)
           add_to_hash(hash, 'customerIpAddress', @customer_ip_address)
           add_to_hash(hash, 'defaultFormFill', @default_form_fill)
-          add_to_hash(hash, 'fingerPrintActivated', @finger_print_activated)
+          add_to_hash(hash, 'deviceFingerprintActivated', @device_fingerprint_activated)
+          add_to_hash(hash, 'deviceFingerprintTransactionId', @device_fingerprint_transaction_id)
           add_to_hash(hash, 'giftCardType', @gift_card_type)
           add_to_hash(hash, 'giftMessage', @gift_message)
           add_to_hash(hash, 'hasForgottenPwd', @has_forgotten_pwd)
@@ -105,8 +109,11 @@ module Ingenico::Connect::SDK
           if hash.has_key?('defaultFormFill')
             @default_form_fill = hash['defaultFormFill']
           end
-          if hash.has_key?('fingerPrintActivated')
-            @finger_print_activated = hash['fingerPrintActivated']
+          if hash.has_key?('deviceFingerprintActivated')
+            @device_fingerprint_activated = hash['deviceFingerprintActivated']
+          end
+          if hash.has_key?('deviceFingerprintTransactionId')
+            @device_fingerprint_transaction_id = hash['deviceFingerprintTransactionId']
           end
           if hash.has_key?('giftCardType')
             @gift_card_type = hash['giftCardType']

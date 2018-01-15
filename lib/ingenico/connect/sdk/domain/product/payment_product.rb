@@ -32,6 +32,9 @@ module Ingenico::Connect::SDK
         # true/false
         attr_accessor :can_be_iframed
 
+        # true/false
+        attr_accessor :device_fingerprint_enabled
+
         # {Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints}
         attr_accessor :display_hints
 
@@ -70,6 +73,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'authenticationIndicator', @authentication_indicator)
           add_to_hash(hash, 'autoTokenized', @auto_tokenized)
           add_to_hash(hash, 'canBeIframed', @can_be_iframed)
+          add_to_hash(hash, 'deviceFingerprintEnabled', @device_fingerprint_enabled)
           add_to_hash(hash, 'displayHints', @display_hints)
           add_to_hash(hash, 'fields', @fields)
           add_to_hash(hash, 'fieldsWarning', @fields_warning)
@@ -111,6 +115,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('canBeIframed')
             @can_be_iframed = hash['canBeIframed']
+          end
+          if hash.has_key?('deviceFingerprintEnabled')
+            @device_fingerprint_enabled = hash['deviceFingerprintEnabled']
           end
           if hash.has_key?('displayHints')
             if !(hash['displayHints'].is_a? Hash)

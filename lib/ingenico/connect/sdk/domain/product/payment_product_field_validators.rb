@@ -40,6 +40,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Product::RegularExpressionValidator}
         attr_accessor :regular_expression
 
+        # {Ingenico::Connect::SDK::Domain::Product::EmptyValidator}
+        attr_accessor :terms_and_conditions
+
         def to_h
           hash = super
           add_to_hash(hash, 'boletoBancarioRequiredness', @boleto_bancario_requiredness)
@@ -50,6 +53,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'luhn', @luhn)
           add_to_hash(hash, 'range', @range)
           add_to_hash(hash, 'regularExpression', @regular_expression)
+          add_to_hash(hash, 'termsAndConditions', @terms_and_conditions)
           hash
         end
 
@@ -102,6 +106,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['regularExpression']]
             end
             @regular_expression = Ingenico::Connect::SDK::Domain::Product::RegularExpressionValidator.new_from_hash(hash['regularExpression'])
+          end
+          if hash.has_key?('termsAndConditions')
+            if !(hash['termsAndConditions'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['termsAndConditions']]
+            end
+            @terms_and_conditions = Ingenico::Connect::SDK::Domain::Product::EmptyValidator.new_from_hash(hash['termsAndConditions'])
           end
         end
       end

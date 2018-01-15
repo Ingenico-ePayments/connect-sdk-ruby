@@ -51,7 +51,7 @@ def example
     body.recurrence_type = 'UNIQUE'
     body.signature_type = 'UNSIGNED'
 
-    response = client.merchant('merchantId').mandates().create(body)
+    response = client.merchant('merchantId').mandates().create_with_mandate_reference('42268d8067df43e18a50a2ebf4bdb729', body)
   end
 end
 
