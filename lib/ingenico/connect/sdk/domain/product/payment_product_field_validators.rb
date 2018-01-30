@@ -28,6 +28,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Product::FixedListValidator}
         attr_accessor :fixed_list
 
+        # {Ingenico::Connect::SDK::Domain::Product::EmptyValidator}
+        attr_accessor :iban
+
         # {Ingenico::Connect::SDK::Domain::Product::LengthValidator}
         attr_accessor :length
 
@@ -49,6 +52,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'emailAddress', @email_address)
           add_to_hash(hash, 'expirationDate', @expiration_date)
           add_to_hash(hash, 'fixedList', @fixed_list)
+          add_to_hash(hash, 'iban', @iban)
           add_to_hash(hash, 'length', @length)
           add_to_hash(hash, 'luhn', @luhn)
           add_to_hash(hash, 'range', @range)
@@ -82,6 +86,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['fixedList']]
             end
             @fixed_list = Ingenico::Connect::SDK::Domain::Product::FixedListValidator.new_from_hash(hash['fixedList'])
+          end
+          if hash.has_key?('iban')
+            if !(hash['iban'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['iban']]
+            end
+            @iban = Ingenico::Connect::SDK::Domain::Product::EmptyValidator.new_from_hash(hash['iban'])
           end
           if hash.has_key?('length')
             if !(hash['length'].is_a? Hash)

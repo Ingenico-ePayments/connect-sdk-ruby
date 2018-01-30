@@ -20,6 +20,9 @@ module Ingenico::Connect::SDK
         attr_accessor :line_amount_total
 
         # String
+        attr_accessor :product_category
+
+        # String
         attr_accessor :product_code
 
         # String
@@ -45,6 +48,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'discountAmount', @discount_amount)
           add_to_hash(hash, 'googleProductCategoryId', @google_product_category_id)
           add_to_hash(hash, 'lineAmountTotal', @line_amount_total)
+          add_to_hash(hash, 'productCategory', @product_category)
           add_to_hash(hash, 'productCode', @product_code)
           add_to_hash(hash, 'productName', @product_name)
           add_to_hash(hash, 'productPrice', @product_price)
@@ -65,6 +69,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('lineAmountTotal')
             @line_amount_total = hash['lineAmountTotal']
+          end
+          if hash.has_key?('productCategory')
+            @product_category = hash['productCategory']
           end
           if hash.has_key?('productCode')
             @product_code = hash['productCode']

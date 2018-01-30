@@ -32,6 +32,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :tokens
 
+        # true/false
+        attr_accessor :validate_shopping_cart
+
         # String
         attr_accessor :variant
 
@@ -44,6 +47,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'returnUrl', @return_url)
           add_to_hash(hash, 'showResultPage', @show_result_page)
           add_to_hash(hash, 'tokens', @tokens)
+          add_to_hash(hash, 'validateShoppingCart', @validate_shopping_cart)
           add_to_hash(hash, 'variant', @variant)
           hash
         end
@@ -73,6 +77,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('tokens')
             @tokens = hash['tokens']
+          end
+          if hash.has_key?('validateShoppingCart')
+            @validate_shopping_cart = hash['validateShoppingCart']
           end
           if hash.has_key?('variant')
             @variant = hash['variant']
