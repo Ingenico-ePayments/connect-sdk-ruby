@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_product705_specific_input'
+require 'ingenico/connect/sdk/domain/payment/non_sepa_direct_debit_payment_product730_specific_input'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -23,6 +24,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct705SpecificInput}
         attr_accessor :payment_product705_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct730SpecificInput}
+        attr_accessor :payment_product730_specific_input
+
         # String
         attr_accessor :recurring_payment_sequence_indicator
 
@@ -38,6 +42,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'directDebitText', @direct_debit_text)
           add_to_hash(hash, 'isRecurring', @is_recurring)
           add_to_hash(hash, 'paymentProduct705SpecificInput', @payment_product705_specific_input)
+          add_to_hash(hash, 'paymentProduct730SpecificInput', @payment_product730_specific_input)
           add_to_hash(hash, 'recurringPaymentSequenceIndicator', @recurring_payment_sequence_indicator)
           add_to_hash(hash, 'token', @token)
           add_to_hash(hash, 'tokenize', @tokenize)
@@ -60,6 +65,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct705SpecificInput']]
             end
             @payment_product705_specific_input = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct705SpecificInput.new_from_hash(hash['paymentProduct705SpecificInput'])
+          end
+          if hash.has_key?('paymentProduct730SpecificInput')
+            if !(hash['paymentProduct730SpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct730SpecificInput']]
+            end
+            @payment_product730_specific_input = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct730SpecificInput.new_from_hash(hash['paymentProduct730SpecificInput'])
           end
           if hash.has_key?('recurringPaymentSequenceIndicator')
             @recurring_payment_sequence_indicator = hash['recurringPaymentSequenceIndicator']
