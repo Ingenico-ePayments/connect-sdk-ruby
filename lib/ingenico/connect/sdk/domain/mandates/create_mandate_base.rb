@@ -29,6 +29,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :signature_type
 
+        # String
+        attr_accessor :unique_mandate_reference
+
         def to_h
           hash = super
           add_to_hash(hash, 'alias', @alias)
@@ -37,6 +40,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'language', @language)
           add_to_hash(hash, 'recurrenceType', @recurrence_type)
           add_to_hash(hash, 'signatureType', @signature_type)
+          add_to_hash(hash, 'uniqueMandateReference', @unique_mandate_reference)
           hash
         end
 
@@ -62,6 +66,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('signatureType')
             @signature_type = hash['signatureType']
+          end
+          if hash.has_key?('uniqueMandateReference')
+            @unique_mandate_reference = hash['uniqueMandateReference']
           end
         end
       end

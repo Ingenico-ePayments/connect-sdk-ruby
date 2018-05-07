@@ -37,6 +37,12 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :transaction_channel
 
+        # String
+        attr_accessor :unscheduled_card_on_file_indicator
+
+        # String
+        attr_accessor :unscheduled_card_on_file_requestor
+
         def to_h
           hash = super
           add_to_hash(hash, 'authorizationMode', @authorization_mode)
@@ -48,6 +54,8 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'token', @token)
           add_to_hash(hash, 'tokenize', @tokenize)
           add_to_hash(hash, 'transactionChannel', @transaction_channel)
+          add_to_hash(hash, 'unscheduledCardOnFileIndicator', @unscheduled_card_on_file_indicator)
+          add_to_hash(hash, 'unscheduledCardOnFileRequestor', @unscheduled_card_on_file_requestor)
           hash
         end
 
@@ -79,6 +87,12 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('transactionChannel')
             @transaction_channel = hash['transactionChannel']
+          end
+          if hash.has_key?('unscheduledCardOnFileIndicator')
+            @unscheduled_card_on_file_indicator = hash['unscheduledCardOnFileIndicator']
+          end
+          if hash.has_key?('unscheduledCardOnFileRequestor')
+            @unscheduled_card_on_file_requestor = hash['unscheduledCardOnFileRequestor']
           end
         end
       end
