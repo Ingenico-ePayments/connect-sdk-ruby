@@ -21,7 +21,6 @@ def example
 
     contact_details = Mandates::MandateContactDetails.new
     contact_details.email_address = 'wile.e.coyote@acmelabs.com'
-    contact_details.phone_number = '+1234567890'
 
     mandate_address = Mandates::MandateAddress.new
     mandate_address.city = 'Monumentenvallei'

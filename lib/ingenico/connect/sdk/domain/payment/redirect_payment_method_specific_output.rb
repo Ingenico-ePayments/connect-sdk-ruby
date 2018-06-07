@@ -26,12 +26,16 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::PaymentProduct840SpecificOutput}
         attr_accessor :payment_product840_specific_output
 
+        # String
+        attr_accessor :token
+
         def to_h
           hash = super
           add_to_hash(hash, 'bankAccountIban', @bank_account_iban)
           add_to_hash(hash, 'fraudResults', @fraud_results)
           add_to_hash(hash, 'paymentProduct836SpecificOutput', @payment_product836_specific_output)
           add_to_hash(hash, 'paymentProduct840SpecificOutput', @payment_product840_specific_output)
+          add_to_hash(hash, 'token', @token)
           hash
         end
 
@@ -60,6 +64,9 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct840SpecificOutput']]
             end
             @payment_product840_specific_output = Ingenico::Connect::SDK::Domain::Payment::PaymentProduct840SpecificOutput.new_from_hash(hash['paymentProduct840SpecificOutput'])
+          end
+          if hash.has_key?('token')
+            @token = hash['token']
           end
         end
       end
