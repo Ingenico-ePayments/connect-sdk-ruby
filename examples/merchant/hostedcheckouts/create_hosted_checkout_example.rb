@@ -29,6 +29,7 @@ def example
 
     customer = Payment::Customer.new
     customer.billing_address = billing_address
+    customer.merchant_customer_id = '1234'
 
     order = Payment::Order.new
     order.amount_of_money = amount_of_money

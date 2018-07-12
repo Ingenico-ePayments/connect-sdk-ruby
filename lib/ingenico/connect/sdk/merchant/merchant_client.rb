@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/merchant/captures/captures_client'
 require 'ingenico/connect/sdk/merchant/hostedcheckouts/hostedcheckouts_client'
+require 'ingenico/connect/sdk/merchant/hostedmandatemanagements/hostedmandatemanagements_client'
 require 'ingenico/connect/sdk/merchant/mandates/mandates_client'
 require 'ingenico/connect/sdk/merchant/payments/payments_client'
 require 'ingenico/connect/sdk/merchant/payouts/payouts_client'
@@ -34,6 +35,14 @@ module Ingenico::Connect::SDK
       # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient}
       def hostedcheckouts
         Ingenico::Connect::SDK::Merchant::Hostedcheckouts::HostedcheckoutsClient.new(self, nil)
+      end
+
+      # Resource /{{merchantId}}/hostedmandatemanagements
+      #
+      # Create new hosted mandate management
+      # Returns:: {Ingenico::Connect::SDK::Merchant::Hostedmandatemanagements::HostedmandatemanagementsClient}
+      def hostedmandatemanagements
+        Ingenico::Connect::SDK::Merchant::Hostedmandatemanagements::HostedmandatemanagementsClient.new(self, nil)
       end
 
       # Resource /{{merchantId}}/payments

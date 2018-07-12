@@ -31,6 +31,16 @@ end
 module Ingenico::Connect::SDK::Domain::Hostedcheckout
 end
 
+# Contains the client used to access the HostedMandateManagements service.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/
+module Ingenico::Connect::SDK::Merchant::Hostedmandatemanagements
+end
+
+# Contains data classes that are used in the HostedMandateManagements service.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/
+module Ingenico::Connect::SDK::Domain::Hostedmandatemanagement
+end
+
 # Contains the client used to access the payment service.
 # @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/
 module Ingenico::Connect::SDK::Merchant::Payments
