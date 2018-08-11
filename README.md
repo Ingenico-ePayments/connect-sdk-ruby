@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Ruby SDK helps you to communicate with the [Ingenico Connect](http://www.ingenico.com/epayments) Server API. Its primary features are:
+The Ruby SDK helps you to communicate with the [Ingenico Connect](https://epayments.developer-ingenico.com/) Server API. Its primary features are:
 
 * convenient Ruby library for the API calls and responses
     * marshalls Ruby request objects to HTTP requests
