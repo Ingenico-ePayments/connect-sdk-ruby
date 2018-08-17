@@ -18,6 +18,7 @@ require 'ingenico/connect/sdk/domain/payment/payment_response'
 require 'ingenico/connect/sdk/domain/payment/third_party_status_response'
 require 'ingenico/connect/sdk/domain/refund/refund_error_response'
 require 'ingenico/connect/sdk/domain/refund/refund_response'
+require 'ingenico/connect/sdk/domain/refund/refunds_response'
 require 'ingenico/connect/sdk/domain/token/create_token_response'
 
 module Ingenico::Connect::SDK
@@ -431,6 +432,38 @@ module Ingenico::Connect::SDK
             400 => Ingenico::Connect::SDK::Domain::Refund::RefundErrorResponse,
             404 => Ingenico::Connect::SDK::Domain::Refund::RefundErrorResponse,
           }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_object = @communicator.marshaller.unmarshal(e.body, error_type)
+          raise create_exception(e.status_code, e.body, error_object, context)
+        end
+
+        # Resource /{{merchantId}}/payments/{{paymentId}}/refunds
+        #
+        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/refunds.html Get refunds of payment}
+        # payment_id:: String
+        # context::    {Ingenico::Connect::SDK::CallContext}
+        # Returns:: {Ingenico::Connect::SDK::Domain::Refund::RefundsResponse}
+        # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
+        # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
+        # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
+        # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
+        #          or there was a conflict (HTTP status code 404, 409 or 410)
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
+        #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
+        def refunds(payment_id, context=nil)
+          path_context = {
+            'paymentId' => payment_id,
+          }
+          uri = instantiate_uri('/{apiVersion}/{merchantId}/payments/{paymentId}/refunds', path_context)
+          return @communicator.get(
+            uri,
+            client_headers,
+            nil,
+            Ingenico::Connect::SDK::Domain::Refund::RefundsResponse,
+            context)
+        rescue ResponseException => e
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

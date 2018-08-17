@@ -11,6 +11,8 @@ module Ingenico::Connect::SDK
       class RedirectPaymentProduct840SpecificInput < Ingenico::Connect::SDK::DataObject
 
         # String
+        #
+        # Deprecated; use order.references.descriptor instead.
         attr_accessor :custom
 
         # true/false

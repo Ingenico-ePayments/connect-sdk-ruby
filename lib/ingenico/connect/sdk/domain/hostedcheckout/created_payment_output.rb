@@ -25,6 +25,9 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :payment_status_category
 
+        # true/false
+        attr_accessor :tokenization_succeeded
+
         # String
         attr_accessor :tokens
 
@@ -34,6 +37,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'payment', @payment)
           add_to_hash(hash, 'paymentCreationReferences', @payment_creation_references)
           add_to_hash(hash, 'paymentStatusCategory', @payment_status_category)
+          add_to_hash(hash, 'tokenizationSucceeded', @tokenization_succeeded)
           add_to_hash(hash, 'tokens', @tokens)
           hash
         end
@@ -60,6 +64,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('paymentStatusCategory')
             @payment_status_category = hash['paymentStatusCategory']
+          end
+          if hash.has_key?('tokenizationSucceeded')
+            @tokenization_succeeded = hash['tokenizationSucceeded']
           end
           if hash.has_key?('tokens')
             @tokens = hash['tokens']
