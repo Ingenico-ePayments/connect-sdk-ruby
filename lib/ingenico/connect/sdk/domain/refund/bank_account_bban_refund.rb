@@ -14,11 +14,15 @@ module Ingenico::Connect::SDK
         attr_accessor :bank_city
 
         # String
+        attr_accessor :patronymic_name
+
+        # String
         attr_accessor :swift_code
 
         def to_h
           hash = super
           add_to_hash(hash, 'bankCity', @bank_city)
+          add_to_hash(hash, 'patronymicName', @patronymic_name)
           add_to_hash(hash, 'swiftCode', @swift_code)
           hash
         end
@@ -27,6 +31,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key?('bankCity')
             @bank_city = hash['bankCity']
+          end
+          if hash.has_key?('patronymicName')
+            @patronymic_name = hash['patronymicName']
           end
           if hash.has_key?('swiftCode')
             @swift_code = hash['swiftCode']

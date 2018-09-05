@@ -17,10 +17,14 @@ module Ingenico::Connect::SDK
         # Integer
         attr_accessor :payment_product_id
 
+        # String
+        attr_accessor :token
+
         def to_h
           hash = super
           add_to_hash(hash, 'card', @card)
           add_to_hash(hash, 'paymentProductId', @payment_product_id)
+          add_to_hash(hash, 'token', @token)
           hash
         end
 
@@ -34,6 +38,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('paymentProductId')
             @payment_product_id = hash['paymentProductId']
+          end
+          if hash.has_key?('token')
+            @token = hash['token']
           end
         end
       end

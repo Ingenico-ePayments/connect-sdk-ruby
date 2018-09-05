@@ -22,11 +22,15 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Definitions::ContactDetailsBase}
         attr_accessor :contact_details
 
+        # String
+        attr_accessor :fiscal_number
+
         def to_h
           hash = super
           add_to_hash(hash, 'address', @address)
           add_to_hash(hash, 'companyInformation', @company_information)
           add_to_hash(hash, 'contactDetails', @contact_details)
+          add_to_hash(hash, 'fiscalNumber', @fiscal_number)
           hash
         end
 
@@ -49,6 +53,9 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['contactDetails']]
             end
             @contact_details = Ingenico::Connect::SDK::Domain::Definitions::ContactDetailsBase.new_from_hash(hash['contactDetails'])
+          end
+          if hash.has_key?('fiscalNumber')
+            @fiscal_number = hash['fiscalNumber']
           end
         end
       end
