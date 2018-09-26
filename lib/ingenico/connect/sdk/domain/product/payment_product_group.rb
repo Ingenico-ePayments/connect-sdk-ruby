@@ -16,6 +16,9 @@ module Ingenico::Connect::SDK
         # Array of {Ingenico::Connect::SDK::Domain::Product::AccountOnFile}
         attr_accessor :accounts_on_file
 
+        # true/false
+        attr_accessor :device_fingerprint_enabled
+
         # {Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints}
         attr_accessor :display_hints
 
@@ -28,6 +31,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'accountsOnFile', @accounts_on_file)
+          add_to_hash(hash, 'deviceFingerprintEnabled', @device_fingerprint_enabled)
           add_to_hash(hash, 'displayHints', @display_hints)
           add_to_hash(hash, 'fields', @fields)
           add_to_hash(hash, 'id', @id)
@@ -44,6 +48,9 @@ module Ingenico::Connect::SDK
             hash['accountsOnFile'].each do |e|
               @accounts_on_file << Ingenico::Connect::SDK::Domain::Product::AccountOnFile.new_from_hash(e)
             end
+          end
+          if hash.has_key?('deviceFingerprintEnabled')
+            @device_fingerprint_enabled = hash['deviceFingerprintEnabled']
           end
           if hash.has_key?('displayHints')
             if !(hash['displayHints'].is_a? Hash)

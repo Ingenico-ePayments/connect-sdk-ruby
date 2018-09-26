@@ -14,6 +14,9 @@ module Ingenico::Connect::SDK
         attr_accessor :id
 
         # String
+        attr_accessor :label
+
+        # String
         attr_accessor :type
 
         # String
@@ -22,6 +25,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'id', @id)
+          add_to_hash(hash, 'label', @label)
           add_to_hash(hash, 'type', @type)
           add_to_hash(hash, 'value', @value)
           hash
@@ -31,6 +35,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key?('id')
             @id = hash['id']
+          end
+          if hash.has_key?('label')
+            @label = hash['label']
           end
           if hash.has_key?('type')
             @type = hash['type']

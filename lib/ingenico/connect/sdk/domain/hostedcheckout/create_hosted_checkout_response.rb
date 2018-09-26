@@ -20,6 +20,9 @@ module Ingenico::Connect::SDK
         attr_accessor :invalid_tokens
 
         # String
+        attr_accessor :merchant_reference
+
+        # String
         attr_accessor :partial_redirect_url
 
         def to_h
@@ -27,6 +30,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'RETURNMAC', @returnmac)
           add_to_hash(hash, 'hostedCheckoutId', @hosted_checkout_id)
           add_to_hash(hash, 'invalidTokens', @invalid_tokens)
+          add_to_hash(hash, 'merchantReference', @merchant_reference)
           add_to_hash(hash, 'partialRedirectUrl', @partial_redirect_url)
           hash
         end
@@ -47,6 +51,9 @@ module Ingenico::Connect::SDK
             hash['invalidTokens'].each do |e|
               @invalid_tokens << e
             end
+          end
+          if hash.has_key?('merchantReference')
+            @merchant_reference = hash['merchantReference']
           end
           if hash.has_key?('partialRedirectUrl')
             @partial_redirect_url = hash['partialRedirectUrl']

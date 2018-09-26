@@ -72,6 +72,18 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :ticket_number
 
+        # Integer
+        attr_accessor :total_fare
+
+        # Integer
+        attr_accessor :total_fee
+
+        # Integer
+        attr_accessor :total_taxes
+
+        # String
+        attr_accessor :travel_agency_name
+
         def to_h
           hash = super
           add_to_hash(hash, 'agentNumericCode', @agent_numeric_code)
@@ -94,6 +106,10 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'posCityCode', @pos_city_code)
           add_to_hash(hash, 'ticketDeliveryMethod', @ticket_delivery_method)
           add_to_hash(hash, 'ticketNumber', @ticket_number)
+          add_to_hash(hash, 'totalFare', @total_fare)
+          add_to_hash(hash, 'totalFee', @total_fee)
+          add_to_hash(hash, 'totalTaxes', @total_taxes)
+          add_to_hash(hash, 'travelAgencyName', @travel_agency_name)
           hash
         end
 
@@ -170,6 +186,18 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('ticketNumber')
             @ticket_number = hash['ticketNumber']
+          end
+          if hash.has_key?('totalFare')
+            @total_fare = hash['totalFare']
+          end
+          if hash.has_key?('totalFee')
+            @total_fee = hash['totalFee']
+          end
+          if hash.has_key?('totalTaxes')
+            @total_taxes = hash['totalTaxes']
+          end
+          if hash.has_key?('travelAgencyName')
+            @travel_agency_name = hash['travelAgencyName']
           end
         end
       end
