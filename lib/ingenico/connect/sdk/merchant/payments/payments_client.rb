@@ -60,13 +60,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Payment::CreatePaymentResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            400 => Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse,
-            402 => Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse,
-            403 => Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse,
-            502 => Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse,
-            503 => Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Payment::PaymentErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end
@@ -428,10 +422,7 @@ module Ingenico::Connect::SDK
             Ingenico::Connect::SDK::Domain::Refund::RefundResponse,
             context)
         rescue ResponseException => e
-          error_type = {
-            400 => Ingenico::Connect::SDK::Domain::Refund::RefundErrorResponse,
-            404 => Ingenico::Connect::SDK::Domain::Refund::RefundErrorResponse,
-          }.fetch(e.status_code, Ingenico::Connect::SDK::Domain::Errors::ErrorResponse)
+          error_type = Ingenico::Connect::SDK::Domain::Refund::RefundErrorResponse
           error_object = @communicator.marshaller.unmarshal(e.body, error_type)
           raise create_exception(e.status_code, e.body, error_object, context)
         end

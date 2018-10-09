@@ -16,10 +16,14 @@ module Ingenico::Connect::SDK
         # true/false
         attr_accessor :is_refundable
 
+        # String
+        attr_accessor :three_d_secure_status
+
         def to_h
           hash = super
           add_to_hash(hash, 'isAuthorized', @is_authorized)
           add_to_hash(hash, 'isRefundable', @is_refundable)
+          add_to_hash(hash, 'threeDSecureStatus', @three_d_secure_status)
           hash
         end
 
@@ -30,6 +34,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('isRefundable')
             @is_refundable = hash['isRefundable']
+          end
+          if hash.has_key?('threeDSecureStatus')
+            @three_d_secure_status = hash['threeDSecureStatus']
           end
         end
       end
