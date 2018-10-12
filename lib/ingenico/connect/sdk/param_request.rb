@@ -17,13 +17,13 @@ module Ingenico::Connect::SDK
 
     private
 
-    def add_param(request_parameters, name, value, allow_collection = TRUE)
+    def add_param(request_parameters, name, value, allow_collection = true)
       if value.is_a?(String) || value.is_a?(Integer) || value.class == TrueClass ||
           value.class == FalseClass
         request_parameters.push(RequestParam.new(name, value.to_s))
       elsif allow_collection && value.class == Array
         value.each { |element|
-          add_param(request_parameters, name, element, FALSE)
+          add_param(request_parameters, name, element, false)
         }
       elsif !value.nil?
         raise ArgumentError.new("Unsupported request parameter type: #{value.class}")
