@@ -2,17 +2,18 @@
 # This class was auto-generated from the API references found at
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
-require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/abstract_redirect_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product809_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product816_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product840_specific_input'
+require 'ingenico/connect/sdk/domain/payment/redirect_payment_product863_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product882_specific_input'
 
 module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      class RedirectPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentMethodSpecificInputBase
+      class RedirectPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractRedirectPaymentMethodSpecificInput
 
         # true/false
         attr_accessor :is_recurring
@@ -26,6 +27,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct840SpecificInput}
         attr_accessor :payment_product840_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct863SpecificInput}
+        attr_accessor :payment_product863_specific_input
+
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct882SpecificInput}
         attr_accessor :payment_product882_specific_input
 
@@ -38,6 +42,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'paymentProduct809SpecificInput', @payment_product809_specific_input)
           add_to_hash(hash, 'paymentProduct816SpecificInput', @payment_product816_specific_input)
           add_to_hash(hash, 'paymentProduct840SpecificInput', @payment_product840_specific_input)
+          add_to_hash(hash, 'paymentProduct863SpecificInput', @payment_product863_specific_input)
           add_to_hash(hash, 'paymentProduct882SpecificInput', @payment_product882_specific_input)
           add_to_hash(hash, 'returnUrl', @return_url)
           hash
@@ -65,6 +70,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct840SpecificInput']]
             end
             @payment_product840_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct840SpecificInput.new_from_hash(hash['paymentProduct840SpecificInput'])
+          end
+          if hash.has_key?('paymentProduct863SpecificInput')
+            if !(hash['paymentProduct863SpecificInput'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863SpecificInput']]
+            end
+            @payment_product863_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct863SpecificInput.new_from_hash(hash['paymentProduct863SpecificInput'])
           end
           if hash.has_key?('paymentProduct882SpecificInput')
             if !(hash['paymentProduct882SpecificInput'].is_a? Hash)

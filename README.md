@@ -83,9 +83,9 @@ After the Ruby SDK has been installed, it can be required in Ruby program as fol
 There are two types of tests: unit tests and integration tests. The unit tests will work out-of-the-box; for the integration tests some configuration is required.
 First, some environment variables need to be set:
 
-* `connect.api.apiKeyId` for the API key id to use. This can be retrieved from the Configuration Center.
-* `connect.api.secretApiKey` for the secret API key to use. This can be retrieved from the Configuration Center.
-* `connect.api.merchantId` for your merchant ID.
+* `connect_api_apiKeyId` for the API key id to use. This can be retrieved from the Configuration Center.
+* `connect_api_secretApiKey` for the secret API key to use. This can be retrieved from the Configuration Center.
+* `connect_api_merchantId` for your merchant ID.
 
 In addition, to run the proxy integration tests, the proxy URI, username and password should be set in the `spec/fixtures/resources/properties.proxy.yml` file.
 

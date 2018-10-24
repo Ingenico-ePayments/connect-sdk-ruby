@@ -4,7 +4,7 @@ module Ingenico::Connect::SDK
   # This error corresponds to a 404 HTTP response.
   class NotFoundException < RuntimeError
 
-    def initialize(cause, message=FALSE)
+    def initialize(cause, message=false)
       if message
         super(message)
       else

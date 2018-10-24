@@ -3,14 +3,14 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/card'
-require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/abstract_card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/external_cardholder_authentication_data'
 
 module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      class CardPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::CardPaymentMethodSpecificInputBase
+      class CardPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractCardPaymentMethodSpecificInput
 
         # {Ingenico::Connect::SDK::Domain::Definitions::Card}
         attr_accessor :card

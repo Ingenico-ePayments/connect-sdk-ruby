@@ -16,8 +16,8 @@ module Ingenico::Connect::SDK
     #                     !{'version' => 'v1', 'merchantId' => '1234'}. The final url in this case will be
     #                     https://api-sandbox.globalcollect.com/v1/1234/payments.
     # client_meta_info::  JSON string containing the meta data for the client.
-    def initialize(arg, path_context, client_meta_info=FALSE)
-      if client_meta_info == FALSE
+    def initialize(arg, path_context, client_meta_info=false)
+      if client_meta_info == false
         if arg.nil?
           raise ArgumentError.new('parent is required')
         end
@@ -53,8 +53,8 @@ module Ingenico::Connect::SDK
       end
     end
 
-    def instantiate_uri(uri, path_context=FALSE)
-      if path_context == FALSE
+    def instantiate_uri(uri, path_context=false)
+      if path_context == false
         uri = replace_all(uri, @path_context)
         unless @parent.nil?
           uri = @parent.instantiate_uri(uri)

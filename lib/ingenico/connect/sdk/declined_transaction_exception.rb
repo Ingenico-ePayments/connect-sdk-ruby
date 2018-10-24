@@ -5,8 +5,8 @@ module Ingenico::Connect::SDK
 
     # Create a new DeclinedTransactionException.
     # @see ApiException#initialize
-    def initialize(status_code, response_body, error_id, errors, message=FALSE)
-      if message == FALSE
+    def initialize(status_code, response_body, error_id, errors, message=false)
+      if message == false
         super(status_code, response_body, error_id, errors)
       else
         super(status_code, response_body, error_id, errors, message)

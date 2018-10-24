@@ -2,12 +2,12 @@ require 'spec_helper'
 require 'yaml'
 
 module Integration
-  MERCHANT_ID = ENV['connect.api.merchantId']
-  API_KEY_ID = ENV['connect.api.apiKeyId']
-  SECRET_API_KEY = ENV['connect.api.secretApiKey']
-  raise 'could not access environment variable connect.api.merchantId required for testing' unless MERCHANT_ID
-  raise 'could not access environment variable connect.api.apiKeyId required for testing' unless API_KEY_ID
-  raise 'could not access environment variable connect.api.secretApiKey required for testing' unless SECRET_API_KEY
+  MERCHANT_ID = ENV['connect_api_merchantId']
+  API_KEY_ID = ENV['connect_api_apiKeyId']
+  SECRET_API_KEY = ENV['connect_api_secretApiKey']
+  raise 'could not access environment variable connect_api_merchantId required for testing' unless MERCHANT_ID
+  raise 'could not access environment variable connect_api_apiKeyId required for testing' unless API_KEY_ID
+  raise 'could not access environment variable connect_api_secretApiKey required for testing' unless SECRET_API_KEY
   PROPERTIES_URI = File.absolute_path(File.join(__FILE__, '../fixtures/resources/properties.yml'))
   PROPERTIES_URI_PROXY = File.absolute_path(File.join(__FILE__, '../fixtures/resources/properties.proxy.yml'))
 
@@ -27,10 +27,10 @@ module Integration
                                                        api_key_id: API_KEY_ID,
                                                        secret_api_key: SECRET_API_KEY,
                                                        max_connections: max_connections)
-    host = ENV['connect.api.endpoint.host']
+    host = ENV['connect_api_endpoint_host']
     if host
-      scheme = ENV.fetch('connect.api.endpoint.scheme', 'https')
-      port = ENV.fetch('connect.api.endpoint.port', -1)
+      scheme = ENV.fetch('connect_api_endpoint_scheme', 'https')
+      port = ENV.fetch('connect_api_endpoint_port', -1)
       configuration.api_endpoint = create_uri(scheme, host, port)
     end
     configuration

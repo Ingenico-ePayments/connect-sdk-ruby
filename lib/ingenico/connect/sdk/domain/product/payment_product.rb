@@ -5,6 +5,9 @@
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/product/account_on_file'
 require 'ingenico/connect/sdk/domain/product/authentication_indicator'
+require 'ingenico/connect/sdk/domain/product/payment_product302_specific_data'
+require 'ingenico/connect/sdk/domain/product/payment_product320_specific_data'
+require 'ingenico/connect/sdk/domain/product/payment_product863_specific_data'
 require 'ingenico/connect/sdk/domain/product/payment_product_display_hints'
 require 'ingenico/connect/sdk/domain/product/payment_product_field'
 
@@ -59,6 +62,15 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :payment_method
 
+        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct302SpecificData}
+        attr_accessor :payment_product302_specific_data
+
+        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData}
+        attr_accessor :payment_product320_specific_data
+
+        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData}
+        attr_accessor :payment_product863_specific_data
+
         # String
         attr_accessor :payment_product_group
 
@@ -82,6 +94,9 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'minAmount', @min_amount)
           add_to_hash(hash, 'mobileIntegrationLevel', @mobile_integration_level)
           add_to_hash(hash, 'paymentMethod', @payment_method)
+          add_to_hash(hash, 'paymentProduct302SpecificData', @payment_product302_specific_data)
+          add_to_hash(hash, 'paymentProduct320SpecificData', @payment_product320_specific_data)
+          add_to_hash(hash, 'paymentProduct863SpecificData', @payment_product863_specific_data)
           add_to_hash(hash, 'paymentProductGroup', @payment_product_group)
           add_to_hash(hash, 'usesRedirectionTo3rdParty', @uses_redirection_to3rd_party)
           hash
@@ -151,6 +166,24 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('paymentMethod')
             @payment_method = hash['paymentMethod']
+          end
+          if hash.has_key?('paymentProduct302SpecificData')
+            if !(hash['paymentProduct302SpecificData'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct302SpecificData']]
+            end
+            @payment_product302_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct302SpecificData.new_from_hash(hash['paymentProduct302SpecificData'])
+          end
+          if hash.has_key?('paymentProduct320SpecificData')
+            if !(hash['paymentProduct320SpecificData'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct320SpecificData']]
+            end
+            @payment_product320_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData.new_from_hash(hash['paymentProduct320SpecificData'])
+          end
+          if hash.has_key?('paymentProduct863SpecificData')
+            if !(hash['paymentProduct863SpecificData'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863SpecificData']]
+            end
+            @payment_product863_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData.new_from_hash(hash['paymentProduct863SpecificData'])
           end
           if hash.has_key?('paymentProductGroup')
             @payment_product_group = hash['paymentProductGroup']

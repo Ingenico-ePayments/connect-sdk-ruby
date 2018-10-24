@@ -2,14 +2,14 @@
 # This class was auto-generated from the API references found at
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
-require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/abstract_e_invoice_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_product9000_specific_input'
 
 module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      class EInvoicePaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::EInvoicePaymentMethodSpecificInputBase
+      class EInvoicePaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractEInvoicePaymentMethodSpecificInput
 
         # true/false
         attr_accessor :accepted_terms_and_conditions
