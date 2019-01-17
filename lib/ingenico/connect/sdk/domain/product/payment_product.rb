@@ -50,6 +50,9 @@ module Ingenico::Connect::SDK
         # Integer
         attr_accessor :id
 
+        # true/false
+        attr_accessor :is_java_script_required
+
         # Integer
         attr_accessor :max_amount
 
@@ -90,6 +93,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'fields', @fields)
           add_to_hash(hash, 'fieldsWarning', @fields_warning)
           add_to_hash(hash, 'id', @id)
+          add_to_hash(hash, 'isJavaScriptRequired', @is_java_script_required)
           add_to_hash(hash, 'maxAmount', @max_amount)
           add_to_hash(hash, 'minAmount', @min_amount)
           add_to_hash(hash, 'mobileIntegrationLevel', @mobile_integration_level)
@@ -154,6 +158,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('id')
             @id = hash['id']
+          end
+          if hash.has_key?('isJavaScriptRequired')
+            @is_java_script_required = hash['isJavaScriptRequired']
           end
           if hash.has_key?('maxAmount')
             @max_amount = hash['maxAmount']

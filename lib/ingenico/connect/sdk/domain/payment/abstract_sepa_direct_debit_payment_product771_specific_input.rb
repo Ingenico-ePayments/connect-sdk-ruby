@@ -11,6 +11,8 @@ module Ingenico::Connect::SDK
       class AbstractSepaDirectDebitPaymentProduct771SpecificInput < Ingenico::Connect::SDK::DataObject
 
         # String
+        #
+        # Deprecated; Use existingUniqueMandateReference instead
         attr_accessor :mandate_reference
 
         def to_h

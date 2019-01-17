@@ -23,6 +23,8 @@ module Ingenico::Connect::SDK
         attr_accessor :payment_creation_references
 
         # String
+        #
+        # Deprecated; Use payment.statusOutput.statusCategory instead
         attr_accessor :payment_status_category
 
         # true/false

@@ -25,6 +25,12 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :expiry_date
 
+        # String
+        attr_accessor :pan
+
+        # String
+        attr_accessor :payment_method
+
         def to_h
           hash = super
           add_to_hash(hash, 'cardholderName', @cardholder_name)
@@ -32,6 +38,8 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'dpan', @dpan)
           add_to_hash(hash, 'eci', @eci)
           add_to_hash(hash, 'expiryDate', @expiry_date)
+          add_to_hash(hash, 'pan', @pan)
+          add_to_hash(hash, 'paymentMethod', @payment_method)
           hash
         end
 
@@ -51,6 +59,12 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('expiryDate')
             @expiry_date = hash['expiryDate']
+          end
+          if hash.has_key?('pan')
+            @pan = hash['pan']
+          end
+          if hash.has_key?('paymentMethod')
+            @payment_method = hash['paymentMethod']
           end
         end
       end
