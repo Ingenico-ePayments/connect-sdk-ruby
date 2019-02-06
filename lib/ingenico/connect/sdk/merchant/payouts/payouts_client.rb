@@ -22,9 +22,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/payouts
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/create.html Create payout}
+        # Resource /{{merchantId}}/payouts - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/create.html Create payout}
         # body::    {Ingenico::Connect::SDK::Domain::Payout::CreatePayoutRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
@@ -53,9 +51,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payouts
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/find.html Find payouts}
+        # Resource /{{merchantId}}/payouts - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/find.html Find payouts}
         # query::   {Ingenico::Connect::SDK::Merchant::Payouts::FindPayoutsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::FindPayoutsResponse}
@@ -82,9 +78,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payouts/{{payoutId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/get.html Get payout}
+        # Resource /{{merchantId}}/payouts/{{payoutId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/get.html Get payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
@@ -114,9 +108,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payouts/{{payoutId}}/approve
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/approve.html Approve payout}
+        # Resource /{{merchantId}}/payouts/{{payoutId}}/approve - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/approve.html Approve payout}
         # payout_id:: String
         # body::      {Ingenico::Connect::SDK::Domain::Payout::ApprovePayoutRequest}
         # context::   {Ingenico::Connect::SDK::CallContext}
@@ -148,9 +140,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payouts/{{payoutId}}/cancel
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancel.html Cancel payout}
+        # Resource /{{merchantId}}/payouts/{{payoutId}}/cancel - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancel.html Cancel payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -180,9 +170,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payouts/{{payoutId}}/cancelapproval
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancelapproval.html Undo approve payout}
+        # Resource /{{merchantId}}/payouts/{{payoutId}}/cancelapproval - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payouts/cancelapproval.html Undo approve payout}
         # payout_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)

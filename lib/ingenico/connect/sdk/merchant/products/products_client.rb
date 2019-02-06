@@ -26,9 +26,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/products
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/find.html Get payment products}
+        # Resource /{{merchantId}}/products - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/find.html Get payment products}
         # query::   {Ingenico::Connect::SDK::Merchant::Products::FindProductsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProducts}
@@ -55,9 +53,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/get.html Get payment product}
+        # Resource /{{merchantId}}/products/{{paymentProductId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/get.html Get payment product}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::GetProductParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -88,9 +84,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}/directory
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/directory.html Get payment product directory}
+        # Resource /{{merchantId}}/products/{{paymentProductId}}/directory - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/directory.html Get payment product directory}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::DirectoryParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -121,9 +115,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}/customerDetails
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/customerDetails.html Get customer details}
+        # Resource /{{merchantId}}/products/{{paymentProductId}}/customerDetails - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/customerDetails.html Get customer details}
         # payment_product_id:: Integer
         # body::               {Ingenico::Connect::SDK::Domain::Product::GetCustomerDetailsRequest}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -155,9 +147,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}/deviceFingerprint
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/deviceFingerprint.html Get device fingerprint}
+        # Resource /{{merchantId}}/products/{{paymentProductId}}/deviceFingerprint - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/deviceFingerprint.html Get device fingerprint}
         # payment_product_id:: Integer
         # body::               {Ingenico::Connect::SDK::Domain::Product::DeviceFingerprintRequest}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -189,9 +179,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}/networks
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/networks.html Get payment product networks}
+        # Resource /{{merchantId}}/products/{{paymentProductId}}/networks - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/networks.html Get payment product networks}
         # payment_product_id:: Integer
         # query::              {Ingenico::Connect::SDK::Merchant::Products::NetworksParams}
         # context::            {Ingenico::Connect::SDK::CallContext}
@@ -222,9 +210,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/products/{{paymentProductId}}/publicKey
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/publicKey.html Get payment product specific public key}
+        # Resource /{{merchantId}}/products/{{paymentProductId}}/publicKey - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/publicKey.html Get payment product specific public key}
         # payment_product_id:: Integer
         # context::            {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Publickey::PublicKey}

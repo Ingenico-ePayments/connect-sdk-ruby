@@ -20,9 +20,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/captures/{{captureId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/captures/get.html Get capture}
+        # Resource /{{merchantId}}/captures/{{captureId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/captures/get.html Get capture}
         # capture_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Capture::CaptureResponse}

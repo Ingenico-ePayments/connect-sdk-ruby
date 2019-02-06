@@ -21,6 +21,10 @@ end
 module Ingenico::Connect::SDK::Domain
 end
 
+# Contains data classes that are used in file handling.
+module Ingenico::Connect::SDK::Domain::File
+end
+
 # Contains the client used to access the HostedCheckouts service.
 # @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/
 module Ingenico::Connect::SDK::Merchant::Hostedcheckouts
@@ -59,6 +63,16 @@ end
 # Contains data classes that are used in capture services.
 # @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/captures/
 module Ingenico::Connect::SDK::Domain::Capture
+end
+
+# Contains data classes that are used in dispute services.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/disputes/
+module Ingenico::Connect::SDK::Merchant::Disputes
+end
+
+# Contains data classes that are used in dispute services.
+# @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/disputes/
+module Ingenico::Connect::SDK::Domain::Dispute
 end
 
 # Contains the client used to access the mandate service.

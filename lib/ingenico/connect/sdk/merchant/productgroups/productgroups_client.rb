@@ -22,9 +22,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/productgroups
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/find.html Get payment product groups}
+        # Resource /{{merchantId}}/productgroups - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/find.html Get payment product groups}
         # query::   {Ingenico::Connect::SDK::Merchant::Productgroups::FindProductgroupsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Product::PaymentProductGroups}
@@ -51,9 +49,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/productgroups/{{paymentProductGroupId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/get.html Get payment product group}
+        # Resource /{{merchantId}}/productgroups/{{paymentProductGroupId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/get.html Get payment product group}
         # payment_product_group_id:: String
         # query::                    {Ingenico::Connect::SDK::Merchant::Productgroups::GetProductgroupParams}
         # context::                  {Ingenico::Connect::SDK::CallContext}
@@ -84,9 +80,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/productgroups/{{paymentProductGroupId}}/deviceFingerprint
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/deviceFingerprint.html Get device fingerprint}
+        # Resource /{{merchantId}}/productgroups/{{paymentProductGroupId}}/deviceFingerprint - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/productgroups/deviceFingerprint.html Get device fingerprint}
         # payment_product_group_id:: String
         # body::                     {Ingenico::Connect::SDK::Domain::Product::DeviceFingerprintRequest}
         # context::                  {Ingenico::Connect::SDK::CallContext}

@@ -23,9 +23,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/services/convert/amount
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/convertAmount.html Convert amount}
+        # Resource /{{merchantId}}/services/convert/amount - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/convertAmount.html Convert amount}
         # query::   {Ingenico::Connect::SDK::Merchant::Services::ConvertAmountParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Services::ConvertAmount}
@@ -52,9 +50,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/services/convert/bankaccount
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/bankaccount.html Convert bankaccount}
+        # Resource /{{merchantId}}/services/convert/bankaccount - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/bankaccount.html Convert bankaccount}
         # body::    {Ingenico::Connect::SDK::Domain::Services::BankDetailsRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Services::BankDetailsResponse}
@@ -82,9 +78,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/services/getIINdetails
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/getIINdetails.html Get IIN details}
+        # Resource /{{merchantId}}/services/getIINdetails - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/getIINdetails.html Get IIN details}
         # body::    {Ingenico::Connect::SDK::Domain::Services::GetIINDetailsRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Services::GetIINDetailsResponse}
@@ -112,9 +106,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/services/testconnection
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/testconnection.html Test connection}
+        # Resource /{{merchantId}}/services/testconnection - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/services/testconnection.html Test connection}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Services::TestConnection}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)

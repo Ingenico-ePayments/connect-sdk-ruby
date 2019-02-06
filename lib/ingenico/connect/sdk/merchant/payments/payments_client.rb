@@ -6,6 +6,8 @@ require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
 require 'ingenico/connect/sdk/domain/capture/capture_response'
 require 'ingenico/connect/sdk/domain/capture/captures_response'
+require 'ingenico/connect/sdk/domain/dispute/dispute_response'
+require 'ingenico/connect/sdk/domain/dispute/disputes_response'
 require 'ingenico/connect/sdk/domain/errors/error_response'
 require 'ingenico/connect/sdk/domain/payment/cancel_approval_payment_response'
 require 'ingenico/connect/sdk/domain/payment/cancel_payment_response'
@@ -34,9 +36,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/payments
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/create.html Create payment}
+        # Resource /{{merchantId}}/payments - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/create.html Create payment}
         # body::    {Ingenico::Connect::SDK::Domain::Payment::CreatePaymentRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::CreatePaymentResponse}
@@ -65,9 +65,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/find.html Find payments}
+        # Resource /{{merchantId}}/payments - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/find.html Find payments}
         # query::   {Ingenico::Connect::SDK::Merchant::Payments::FindPaymentsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::FindPaymentsResponse}
@@ -94,9 +92,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/get.html Get payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/get.html Get payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::PaymentResponse}
@@ -126,9 +122,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/complete
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/complete.html Complete payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/complete - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/complete.html Complete payment}
         # payment_id:: String
         # body::       {Ingenico::Connect::SDK::Domain::Payment::CompletePaymentRequest}
         # context::    {Ingenico::Connect::SDK::CallContext}
@@ -160,9 +154,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/thirdpartystatus
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/thirdPartyStatus.html Third party status poll}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/thirdpartystatus - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/thirdPartyStatus.html Third party status poll}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::ThirdPartyStatusResponse}
@@ -192,9 +184,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/tokenize
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/tokenize.html Create a token from payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/tokenize - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/tokenize.html Create a token from payment}
         # payment_id:: String
         # body::       {Ingenico::Connect::SDK::Domain::Payment::TokenizePaymentRequest}
         # context::    {Ingenico::Connect::SDK::CallContext}
@@ -226,9 +216,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/processchallenged
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/processchallenged.html Approves challenged payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/processchallenged - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/processchallenged.html Approves challenged payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::PaymentResponse}
@@ -259,9 +247,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/approve
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/approve.html Approve payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/approve - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/approve.html Approve payment}
         # payment_id:: String
         # body::       {Ingenico::Connect::SDK::Domain::Payment::ApprovePaymentRequest}
         # context::    {Ingenico::Connect::SDK::CallContext}
@@ -293,9 +279,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/capture
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/capture.html Capture payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/capture - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/capture.html Capture payment}
         # payment_id:: String
         # body::       {Ingenico::Connect::SDK::Domain::Payment::CapturePaymentRequest}
         # context::    {Ingenico::Connect::SDK::CallContext}
@@ -327,9 +311,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/cancelapproval
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/cancelapproval.html Undo capture payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/cancelapproval - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/cancelapproval.html Undo capture payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::CancelApprovalPaymentResponse}
@@ -360,9 +342,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/captures
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/captures.html Get captures of payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/captures - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/captures.html Get captures of payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Capture::CapturesResponse}
@@ -392,9 +372,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/refund
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/refund.html Create refund}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/refund - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/refund.html Create refund}
         # payment_id:: String
         # body::       {Ingenico::Connect::SDK::Domain::Refund::RefundRequest}
         # context::    {Ingenico::Connect::SDK::CallContext}
@@ -427,9 +405,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/refunds
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/refunds.html Get refunds of payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/refunds - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/refunds.html Get refunds of payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Refund::RefundsResponse}
@@ -459,9 +435,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/payments/{{paymentId}}/cancel
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/cancel.html Cancel payment}
+        # Resource /{{merchantId}}/payments/{{paymentId}}/cancel - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/cancel.html Cancel payment}
         # payment_id:: String
         # context::    {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Payment::CancelPaymentResponse}
@@ -485,6 +459,68 @@ module Ingenico::Connect::SDK
             nil,
             nil,
             Ingenico::Connect::SDK::Domain::Payment::CancelPaymentResponse,
+            context)
+        rescue ResponseException => e
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
+          error_object = @communicator.marshaller.unmarshal(e.body, error_type)
+          raise create_exception(e.status_code, e.body, error_object, context)
+        end
+
+        # Resource /{{merchantId}}/payments/{{paymentId}}/dispute - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/dispute.html Create dispute}
+        # payment_id:: String
+        # body::       {Ingenico::Connect::SDK::Domain::Dispute::CreateDisputeRequest}
+        # context::    {Ingenico::Connect::SDK::CallContext}
+        # Returns:: {Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse}
+        # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
+        # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
+        # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
+        # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
+        #          or there was a conflict (HTTP status code 404, 409 or 410)
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
+        #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
+        def dispute(payment_id, body, context=nil)
+          path_context = {
+            'paymentId' => payment_id,
+          }
+          uri = instantiate_uri('/{apiVersion}/{merchantId}/payments/{paymentId}/dispute', path_context)
+          return @communicator.post(
+            uri,
+            client_headers,
+            nil,
+            body,
+            Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse,
+            context)
+        rescue ResponseException => e
+          error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
+          error_object = @communicator.marshaller.unmarshal(e.body, error_type)
+          raise create_exception(e.status_code, e.body, error_object, context)
+        end
+
+        # Resource /{{merchantId}}/payments/{{paymentId}}/disputes - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/payments/disputes.html Get disputes}
+        # payment_id:: String
+        # context::    {Ingenico::Connect::SDK::CallContext}
+        # Returns:: {Ingenico::Connect::SDK::Domain::Dispute::DisputesResponse}
+        # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
+        # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
+        # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
+        # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
+        #          or there was a conflict (HTTP status code 404, 409 or 410)
+        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
+        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
+        #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
+        def disputes(payment_id, context=nil)
+          path_context = {
+            'paymentId' => payment_id,
+          }
+          uri = instantiate_uri('/{apiVersion}/{merchantId}/payments/{paymentId}/disputes', path_context)
+          return @communicator.get(
+            uri,
+            client_headers,
+            nil,
+            Ingenico::Connect::SDK::Domain::Dispute::DisputesResponse,
             context)
         rescue ResponseException => e
           error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse

@@ -21,9 +21,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/tokens
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/create.html Create token}
+        # Resource /{{merchantId}}/tokens - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/create.html Create token}
         # body::    {Ingenico::Connect::SDK::Domain::Token::CreateTokenRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Token::CreateTokenResponse}
@@ -51,9 +49,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/tokens/{{tokenId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/get.html Get token}
+        # Resource /{{merchantId}}/tokens/{{tokenId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/get.html Get token}
         # token_id:: String
         # context::  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Token::TokenResponse}
@@ -83,9 +79,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/tokens/{{tokenId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/update.html Update token}
+        # Resource /{{merchantId}}/tokens/{{tokenId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/update.html Update token}
         # token_id:: String
         # body::     {Ingenico::Connect::SDK::Domain::Token::UpdateTokenRequest}
         # context::  {Ingenico::Connect::SDK::CallContext}
@@ -116,9 +110,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/tokens/{{tokenId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/delete.html Delete token}
+        # Resource /{{merchantId}}/tokens/{{tokenId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/delete.html Delete token}
         # token_id:: String
         # query::    {Ingenico::Connect::SDK::Merchant::Tokens::DeleteTokenParams}
         # context::  {Ingenico::Connect::SDK::CallContext}
@@ -148,9 +140,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/tokens/{{tokenId}}/approvesepadirectdebit
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/approvesepadirectdebit.html Approve SEPA DD mandate}
+        # Resource /{{merchantId}}/tokens/{{tokenId}}/approvesepadirectdebit - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/approvesepadirectdebit.html Approve SEPA DD mandate}
         # token_id:: String
         # body::     {Ingenico::Connect::SDK::Domain::Token::ApproveTokenRequest}
         # context::  {Ingenico::Connect::SDK::CallContext}

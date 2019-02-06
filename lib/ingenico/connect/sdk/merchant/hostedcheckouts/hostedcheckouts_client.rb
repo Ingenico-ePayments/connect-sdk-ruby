@@ -21,9 +21,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/hostedcheckouts
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/create.html Create hosted checkout}
+        # Resource /{{merchantId}}/hostedcheckouts - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/create.html Create hosted checkout}
         # body::    {Ingenico::Connect::SDK::Domain::Hostedcheckout::CreateHostedCheckoutRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedcheckout::CreateHostedCheckoutResponse}
@@ -51,9 +49,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/hostedcheckouts/{{hostedCheckoutId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/get.html Get hosted checkout status}
+        # Resource /{{merchantId}}/hostedcheckouts/{{hostedCheckoutId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedcheckouts/get.html Get hosted checkout status}
         # hosted_checkout_id:: String
         # context::            {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedcheckout::GetHostedCheckoutResponse}

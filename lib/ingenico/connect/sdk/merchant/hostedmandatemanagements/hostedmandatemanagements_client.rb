@@ -21,9 +21,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/hostedmandatemanagements
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/create.html Create hosted mandate management}
+        # Resource /{{merchantId}}/hostedmandatemanagements - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/create.html Create hosted mandate management}
         # body::    {Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::CreateHostedMandateManagementRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::CreateHostedMandateManagementResponse}
@@ -51,9 +49,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/hostedmandatemanagements/{{hostedMandateManagementId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/get.html Get hosted mandate management status}
+        # Resource /{{merchantId}}/hostedmandatemanagements/{{hostedMandateManagementId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/hostedmandatemanagements/get.html Get hosted mandate management status}
         # hosted_mandate_management_id:: String
         # context::                      {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::GetHostedMandateManagementResponse}

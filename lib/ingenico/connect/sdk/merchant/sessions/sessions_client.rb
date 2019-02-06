@@ -20,9 +20,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/sessions
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/sessions/create.html Create session}
+        # Resource /{{merchantId}}/sessions - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/sessions/create.html Create session}
         # body::    {Ingenico::Connect::SDK::Domain::Sessions::SessionRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Sessions::SessionResponse}

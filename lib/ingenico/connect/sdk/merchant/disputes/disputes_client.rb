@@ -4,15 +4,15 @@
 #
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/response_exception'
+require 'ingenico/connect/sdk/domain/dispute/dispute_response'
 require 'ingenico/connect/sdk/domain/errors/error_response'
-require 'ingenico/connect/sdk/domain/riskassessments/risk_assessment_response'
 
 module Ingenico::Connect::SDK
   module Merchant
-    module Riskassessments
+    module Disputes
 
-      # Riskassessments client. Thread-safe.
-      class RiskassessmentsClient < Ingenico::Connect::SDK::ApiResource
+      # Disputes client. Thread-safe.
+      class DisputesClient < Ingenico::Connect::SDK::ApiResource
 
         # parent::       {Ingenico::Connect::SDK::ApiResource}
         # path_context:: Hash of String to String
@@ -20,10 +20,10 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/riskassessments/bankaccounts - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/riskassessments/bankaccounts.html Risk-assess bankaccount}
-        # body::    {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentBankAccount}
-        # context:: {Ingenico::Connect::SDK::CallContext}
-        # Returns:: {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse}
+        # Resource /{{merchantId}}/disputes/{{disputeId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/disputes/get.html Get dispute}
+        # dispute_id:: String
+        # context::    {Ingenico::Connect::SDK::CallContext}
+        # Returns:: {Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
         # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
@@ -33,14 +33,16 @@ module Ingenico::Connect::SDK
         #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
         # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
-        def bankaccounts(body, context=nil)
-          uri = instantiate_uri('/{apiVersion}/{merchantId}/riskassessments/bankaccounts', nil)
-          return @communicator.post(
+        def get(dispute_id, context=nil)
+          path_context = {
+            'disputeId' => dispute_id,
+          }
+          uri = instantiate_uri('/{apiVersion}/{merchantId}/disputes/{disputeId}', path_context)
+          return @communicator.get(
             uri,
             client_headers,
             nil,
-            body,
-            Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse,
+            Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse,
             context)
         rescue ResponseException => e
           error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse
@@ -48,10 +50,10 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/riskassessments/cards - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/riskassessments/cards.html Risk-assess card}
-        # body::    {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentCard}
-        # context:: {Ingenico::Connect::SDK::CallContext}
-        # Returns:: {Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse}
+        # Resource /{{merchantId}}/disputes/{{disputeId}}/submit - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/disputes/submit.html Submit dispute}
+        # dispute_id:: String
+        # context::    {Ingenico::Connect::SDK::CallContext}
+        # Returns:: {Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
         # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
         # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
@@ -61,14 +63,17 @@ module Ingenico::Connect::SDK
         #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
         #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
         # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
-        def cards(body, context=nil)
-          uri = instantiate_uri('/{apiVersion}/{merchantId}/riskassessments/cards', nil)
+        def submit(dispute_id, context=nil)
+          path_context = {
+            'disputeId' => dispute_id,
+          }
+          uri = instantiate_uri('/{apiVersion}/{merchantId}/disputes/{disputeId}/submit', path_context)
           return @communicator.post(
             uri,
             client_headers,
             nil,
-            body,
-            Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessmentResponse,
+            nil,
+            Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse,
             context)
         rescue ResponseException => e
           error_type = Ingenico::Connect::SDK::Domain::Errors::ErrorResponse

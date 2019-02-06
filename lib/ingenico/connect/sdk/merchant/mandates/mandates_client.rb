@@ -21,9 +21,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/mandates
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/create.html Create mandate}
+        # Resource /{{merchantId}}/mandates - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/create.html Create mandate}
         # body::    {Ingenico::Connect::SDK::Domain::Mandates::CreateMandateRequest}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Mandates::CreateMandateResponse}
@@ -51,9 +49,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/createWithMandateReference.html Create mandate with mandatereference}
+        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/createWithMandateReference.html Create mandate with mandatereference}
         # unique_mandate_reference:: String
         # body::                     {Ingenico::Connect::SDK::Domain::Mandates::CreateMandateRequest}
         # context::                  {Ingenico::Connect::SDK::CallContext}
@@ -85,9 +81,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/get.html Get mandate}
+        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/get.html Get mandate}
         # unique_mandate_reference:: String
         # context::                  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Mandates::GetMandateResponse}
@@ -117,9 +111,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/block
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/block.html Block mandate}
+        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/block - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/block.html Block mandate}
         # unique_mandate_reference:: String
         # context::                  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Mandates::GetMandateResponse}
@@ -150,9 +142,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/unblock
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/unblock.html Unblock mandate}
+        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/unblock - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/unblock.html Unblock mandate}
         # unique_mandate_reference:: String
         # context::                  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Mandates::GetMandateResponse}
@@ -183,9 +173,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/revoke
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/revoke.html Revoke mandate}
+        # Resource /{{merchantId}}/mandates/{{uniqueMandateReference}}/revoke - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/mandates/revoke.html Revoke mandate}
         # unique_mandate_reference:: String
         # context::                  {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Mandates::GetMandateResponse}

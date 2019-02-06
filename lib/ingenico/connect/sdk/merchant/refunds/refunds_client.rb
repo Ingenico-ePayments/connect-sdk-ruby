@@ -21,9 +21,7 @@ module Ingenico::Connect::SDK
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/refunds
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/find.html Find refunds}
+        # Resource /{{merchantId}}/refunds - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/find.html Find refunds}
         # query::   {Ingenico::Connect::SDK::Merchant::Refunds::FindRefundsParams}
         # context:: {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Refund::FindRefundsResponse}
@@ -50,9 +48,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/refunds/{{refundId}}
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/get.html Get refund}
+        # Resource /{{merchantId}}/refunds/{{refundId}} - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/get.html Get refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Returns:: {Ingenico::Connect::SDK::Domain::Refund::RefundResponse}
@@ -82,9 +78,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/refunds/{{refundId}}/approve
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/approve.html Approve refund}
+        # Resource /{{merchantId}}/refunds/{{refundId}}/approve - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/approve.html Approve refund}
         # refund_id:: String
         # body::      {Ingenico::Connect::SDK::Domain::Refund::ApproveRefundRequest}
         # context::   {Ingenico::Connect::SDK::CallContext}
@@ -115,9 +109,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/refunds/{{refundId}}/cancel
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancel.html Cancel refund}
+        # Resource /{{merchantId}}/refunds/{{refundId}}/cancel - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancel.html Cancel refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -147,9 +139,7 @@ module Ingenico::Connect::SDK
           raise create_exception(e.status_code, e.body, error_object, context)
         end
 
-        # Resource /{{merchantId}}/refunds/{{refundId}}/cancelapproval
-        #
-        # {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancelapproval.html Undo approve refund}
+        # Resource /{{merchantId}}/refunds/{{refundId}}/cancelapproval - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/refunds/cancelapproval.html Undo approve refund}
         # refund_id:: String
         # context::   {Ingenico::Connect::SDK::CallContext}
         # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
