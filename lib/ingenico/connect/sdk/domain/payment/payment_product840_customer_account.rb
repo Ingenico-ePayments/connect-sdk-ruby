@@ -20,6 +20,9 @@ module Ingenico::Connect::SDK
         attr_accessor :company_name
 
         # String
+        attr_accessor :contact_phone
+
+        # String
         attr_accessor :country_code
 
         # String
@@ -42,6 +45,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'accountId', @account_id)
           add_to_hash(hash, 'billingAgreementId', @billing_agreement_id)
           add_to_hash(hash, 'companyName', @company_name)
+          add_to_hash(hash, 'contactPhone', @contact_phone)
           add_to_hash(hash, 'countryCode', @country_code)
           add_to_hash(hash, 'customerAccountStatus', @customer_account_status)
           add_to_hash(hash, 'customerAddressStatus', @customer_address_status)
@@ -61,6 +65,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('companyName')
             @company_name = hash['companyName']
+          end
+          if hash.has_key?('contactPhone')
+            @contact_phone = hash['contactPhone']
           end
           if hash.has_key?('countryCode')
             @country_code = hash['countryCode']

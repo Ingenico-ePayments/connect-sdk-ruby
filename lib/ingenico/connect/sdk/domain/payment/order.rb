@@ -9,6 +9,7 @@ require 'ingenico/connect/sdk/domain/payment/customer'
 require 'ingenico/connect/sdk/domain/payment/line_item'
 require 'ingenico/connect/sdk/domain/payment/order_references'
 require 'ingenico/connect/sdk/domain/payment/seller'
+require 'ingenico/connect/sdk/domain/payment/shipping'
 require 'ingenico/connect/sdk/domain/payment/shopping_cart'
 
 module Ingenico::Connect::SDK
@@ -37,6 +38,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::Seller}
         attr_accessor :seller
 
+        # {Ingenico::Connect::SDK::Domain::Payment::Shipping}
+        attr_accessor :shipping
+
         # {Ingenico::Connect::SDK::Domain::Payment::ShoppingCart}
         attr_accessor :shopping_cart
 
@@ -48,6 +52,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'items', @items)
           add_to_hash(hash, 'references', @references)
           add_to_hash(hash, 'seller', @seller)
+          add_to_hash(hash, 'shipping', @shipping)
           add_to_hash(hash, 'shoppingCart', @shopping_cart)
           hash
         end
@@ -92,6 +97,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['seller']]
             end
             @seller = Ingenico::Connect::SDK::Domain::Payment::Seller.new_from_hash(hash['seller'])
+          end
+          if hash.has_key?('shipping')
+            if !(hash['shipping'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['shipping']]
+            end
+            @shipping = Ingenico::Connect::SDK::Domain::Payment::Shipping.new_from_hash(hash['shipping'])
           end
           if hash.has_key?('shoppingCart')
             if !(hash['shoppingCart'].is_a? Hash)
