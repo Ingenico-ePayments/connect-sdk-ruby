@@ -12,7 +12,7 @@ module Ingenico::Connect::SDK
 
         # String
         #
-        # Deprecated; Use existingUniqueMandateReference instead
+        # Deprecated; Use existingUniqueMandateReference or mandate.uniqueMandateReference instead
         attr_accessor :mandate_reference
 
         def to_h

@@ -16,7 +16,7 @@ module Ingenico::Connect::SDK
 
         # String
         #
-        # Deprecated; use displayElement with ID 'displayName' instead.
+        # Deprecated; Use displayElements instead with ID 'displayName'
         attr_accessor :display_name
 
         # String

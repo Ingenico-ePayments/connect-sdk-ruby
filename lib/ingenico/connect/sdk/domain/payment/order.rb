@@ -29,13 +29,15 @@ module Ingenico::Connect::SDK
 
         # Array of {Ingenico::Connect::SDK::Domain::Payment::LineItem}
         #
-        # Deprecated; Use ShoppingCart.items instead
+        # Deprecated; Use shoppingCart.items instead
         attr_accessor :items
 
         # {Ingenico::Connect::SDK::Domain::Payment::OrderReferences}
         attr_accessor :references
 
         # {Ingenico::Connect::SDK::Domain::Payment::Seller}
+        #
+        # Deprecated; Use Merchant.seller instead
         attr_accessor :seller
 
         # {Ingenico::Connect::SDK::Domain::Payment::Shipping}

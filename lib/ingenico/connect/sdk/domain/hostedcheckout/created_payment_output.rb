@@ -24,7 +24,7 @@ module Ingenico::Connect::SDK
 
         # String
         #
-        # Deprecated; Use payment.statusOutput.statusCategory instead
+        # Deprecated; Use Payment.statusOutput.statusCategory instead
         attr_accessor :payment_status_category
 
         # true/false

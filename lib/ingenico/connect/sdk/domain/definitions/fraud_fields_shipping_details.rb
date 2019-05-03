@@ -8,15 +8,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # Deprecated; No replacement
       class FraudFieldsShippingDetails < Ingenico::Connect::SDK::DataObject
 
         # String
+        #
+        # Deprecated; No replacement
         attr_accessor :method_details
 
         # Integer
+        #
+        # Deprecated; No replacement
         attr_accessor :method_speed
 
         # Integer
+        #
+        # Deprecated; No replacement
         attr_accessor :method_type
 
         def to_h

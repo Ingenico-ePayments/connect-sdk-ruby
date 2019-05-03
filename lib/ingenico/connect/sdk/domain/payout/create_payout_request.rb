@@ -22,12 +22,12 @@ module Ingenico::Connect::SDK
 
         # {Ingenico::Connect::SDK::Domain::Definitions::BankAccountBban}
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.bankAccountBban instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :bank_account_bban
 
         # {Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban}
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.bankAccountIban instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :bank_account_iban
 
         # {Ingenico::Connect::SDK::Domain::Payout::BankTransferPayoutMethodSpecificInput}
@@ -38,17 +38,17 @@ module Ingenico::Connect::SDK
 
         # {Ingenico::Connect::SDK::Domain::Payout::PayoutCustomer}
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.customer instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :customer
 
         # String
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.payoutDate instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :payout_date
 
         # String
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.payoutText instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :payout_text
 
         # {Ingenico::Connect::SDK::Domain::Payout::PayoutReferences}
@@ -56,7 +56,7 @@ module Ingenico::Connect::SDK
 
         # String
         #
-        # Deprecated; Use bankTransferPayoutMethodSpecificInput.swiftCode instead
+        # Deprecated; Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :swift_code
 
         def to_h

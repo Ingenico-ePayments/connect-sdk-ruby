@@ -8,6 +8,7 @@ require 'ingenico/connect/sdk/domain/payment/redirect_payment_product816_specifi
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product840_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product863_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product882_specific_input'
+require 'ingenico/connect/sdk/domain/payment/redirection_data'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -33,7 +34,12 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct882SpecificInput}
         attr_accessor :payment_product882_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::RedirectionData}
+        attr_accessor :redirection_data
+
         # String
+        #
+        # Deprecated; Use redirectionData.returnUrl instead
         attr_accessor :return_url
 
         def to_h
@@ -44,6 +50,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'paymentProduct840SpecificInput', @payment_product840_specific_input)
           add_to_hash(hash, 'paymentProduct863SpecificInput', @payment_product863_specific_input)
           add_to_hash(hash, 'paymentProduct882SpecificInput', @payment_product882_specific_input)
+          add_to_hash(hash, 'redirectionData', @redirection_data)
           add_to_hash(hash, 'returnUrl', @return_url)
           hash
         end
@@ -82,6 +89,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct882SpecificInput']]
             end
             @payment_product882_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct882SpecificInput.new_from_hash(hash['paymentProduct882SpecificInput'])
+          end
+          if hash.has_key?('redirectionData')
+            if !(hash['redirectionData'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['redirectionData']]
+            end
+            @redirection_data = Ingenico::Connect::SDK::Domain::Payment::RedirectionData.new_from_hash(hash['redirectionData'])
           end
           if hash.has_key?('returnUrl')
             @return_url = hash['returnUrl']

@@ -13,9 +13,13 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :name
 
+        # String
+        attr_accessor :vat_number
+
         def to_h
           hash = super
           add_to_hash(hash, 'name', @name)
+          add_to_hash(hash, 'vatNumber', @vat_number)
           hash
         end
 
@@ -23,6 +27,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key?('name')
             @name = hash['name']
+          end
+          if hash.has_key?('vatNumber')
+            @vat_number = hash['vatNumber']
           end
         end
       end

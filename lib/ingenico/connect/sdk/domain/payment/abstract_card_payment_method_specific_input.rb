@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/definitions/abstract_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/card_recurrence_details'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -16,13 +17,20 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :customer_reference
 
+        # {Ingenico::Connect::SDK::Domain::Payment::CardRecurrenceDetails}
+        attr_accessor :recurring
+
         # String
+        #
+        # Deprecated; Use recurring.recurringPaymentSequenceIndicator instead
         attr_accessor :recurring_payment_sequence_indicator
 
         # true/false
         attr_accessor :requires_approval
 
         # true/false
+        #
+        # Deprecated; Use threeDSecure.skipAuthentication instead
         attr_accessor :skip_authentication
 
         # true/false
@@ -38,15 +46,21 @@ module Ingenico::Connect::SDK
         attr_accessor :transaction_channel
 
         # String
+        #
+        # Deprecated; Use unscheduledCardOnFileSequenceIndicator instead
         attr_accessor :unscheduled_card_on_file_indicator
 
         # String
         attr_accessor :unscheduled_card_on_file_requestor
 
+        # String
+        attr_accessor :unscheduled_card_on_file_sequence_indicator
+
         def to_h
           hash = super
           add_to_hash(hash, 'authorizationMode', @authorization_mode)
           add_to_hash(hash, 'customerReference', @customer_reference)
+          add_to_hash(hash, 'recurring', @recurring)
           add_to_hash(hash, 'recurringPaymentSequenceIndicator', @recurring_payment_sequence_indicator)
           add_to_hash(hash, 'requiresApproval', @requires_approval)
           add_to_hash(hash, 'skipAuthentication', @skip_authentication)
@@ -56,6 +70,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'transactionChannel', @transaction_channel)
           add_to_hash(hash, 'unscheduledCardOnFileIndicator', @unscheduled_card_on_file_indicator)
           add_to_hash(hash, 'unscheduledCardOnFileRequestor', @unscheduled_card_on_file_requestor)
+          add_to_hash(hash, 'unscheduledCardOnFileSequenceIndicator', @unscheduled_card_on_file_sequence_indicator)
           hash
         end
 
@@ -66,6 +81,12 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('customerReference')
             @customer_reference = hash['customerReference']
+          end
+          if hash.has_key?('recurring')
+            if !(hash['recurring'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['recurring']]
+            end
+            @recurring = Ingenico::Connect::SDK::Domain::Payment::CardRecurrenceDetails.new_from_hash(hash['recurring'])
           end
           if hash.has_key?('recurringPaymentSequenceIndicator')
             @recurring_payment_sequence_indicator = hash['recurringPaymentSequenceIndicator']
@@ -93,6 +114,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key?('unscheduledCardOnFileRequestor')
             @unscheduled_card_on_file_requestor = hash['unscheduledCardOnFileRequestor']
+          end
+          if hash.has_key?('unscheduledCardOnFileSequenceIndicator')
+            @unscheduled_card_on_file_sequence_indicator = hash['unscheduledCardOnFileSequenceIndicator']
           end
         end
       end

@@ -31,6 +31,8 @@ module Ingenico::Connect::SDK
         attr_accessor :is_e_ticket
 
         # true/false
+        #
+        # Deprecated; Use Order.customer.accountType instead
         attr_accessor :is_registered_customer
 
         # true/false

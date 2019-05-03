@@ -10,6 +10,7 @@ require 'ingenico/connect/sdk/domain/payment/bank_transfer_payment_method_specif
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/cash_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/e_invoice_payment_method_specific_input_base'
+require 'ingenico/connect/sdk/domain/payment/merchant'
 require 'ingenico/connect/sdk/domain/payment/order'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_input_base'
 require 'ingenico/connect/sdk/domain/payment/sepa_direct_debit_payment_method_specific_input_base'
@@ -38,6 +39,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Hostedcheckout::HostedCheckoutSpecificInput}
         attr_accessor :hosted_checkout_specific_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::Merchant}
+        attr_accessor :merchant
+
         # {Ingenico::Connect::SDK::Domain::Hostedcheckout::MobilePaymentMethodSpecificInputHostedCheckout}
         attr_accessor :mobile_payment_method_specific_input
 
@@ -58,6 +62,7 @@ module Ingenico::Connect::SDK
           add_to_hash(hash, 'eInvoicePaymentMethodSpecificInput', @e_invoice_payment_method_specific_input)
           add_to_hash(hash, 'fraudFields', @fraud_fields)
           add_to_hash(hash, 'hostedCheckoutSpecificInput', @hosted_checkout_specific_input)
+          add_to_hash(hash, 'merchant', @merchant)
           add_to_hash(hash, 'mobilePaymentMethodSpecificInput', @mobile_payment_method_specific_input)
           add_to_hash(hash, 'order', @order)
           add_to_hash(hash, 'redirectPaymentMethodSpecificInput', @redirect_payment_method_specific_input)
@@ -102,6 +107,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['hostedCheckoutSpecificInput']]
             end
             @hosted_checkout_specific_input = Ingenico::Connect::SDK::Domain::Hostedcheckout::HostedCheckoutSpecificInput.new_from_hash(hash['hostedCheckoutSpecificInput'])
+          end
+          if hash.has_key?('merchant')
+            if !(hash['merchant'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['merchant']]
+            end
+            @merchant = Ingenico::Connect::SDK::Domain::Payment::Merchant.new_from_hash(hash['merchant'])
           end
           if hash.has_key?('mobilePaymentMethodSpecificInput')
             if !(hash['mobilePaymentMethodSpecificInput'].is_a? Hash)

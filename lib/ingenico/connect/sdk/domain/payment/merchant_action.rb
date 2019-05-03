@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/key_value_pair'
+require 'ingenico/connect/sdk/domain/payment/mobile_three_d_secure_challenge_parameters'
 require 'ingenico/connect/sdk/domain/payment/redirect_data'
 require 'ingenico/connect/sdk/domain/product/payment_product_field'
 
@@ -19,6 +20,9 @@ module Ingenico::Connect::SDK
         # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductField}
         attr_accessor :form_fields
 
+        # {Ingenico::Connect::SDK::Domain::Payment::MobileThreeDSecureChallengeParameters}
+        attr_accessor :mobile_three_d_secure_challenge_parameters
+
         # {Ingenico::Connect::SDK::Domain::Payment::RedirectData}
         attr_accessor :redirect_data
 
@@ -32,6 +36,7 @@ module Ingenico::Connect::SDK
           hash = super
           add_to_hash(hash, 'actionType', @action_type)
           add_to_hash(hash, 'formFields', @form_fields)
+          add_to_hash(hash, 'mobileThreeDSecureChallengeParameters', @mobile_three_d_secure_challenge_parameters)
           add_to_hash(hash, 'redirectData', @redirect_data)
           add_to_hash(hash, 'renderingData', @rendering_data)
           add_to_hash(hash, 'showData', @show_data)
@@ -51,6 +56,12 @@ module Ingenico::Connect::SDK
             hash['formFields'].each do |e|
               @form_fields << Ingenico::Connect::SDK::Domain::Product::PaymentProductField.new_from_hash(e)
             end
+          end
+          if hash.has_key?('mobileThreeDSecureChallengeParameters')
+            if !(hash['mobileThreeDSecureChallengeParameters'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['mobileThreeDSecureChallengeParameters']]
+            end
+            @mobile_three_d_secure_challenge_parameters = Ingenico::Connect::SDK::Domain::Payment::MobileThreeDSecureChallengeParameters.new_from_hash(hash['mobileThreeDSecureChallengeParameters'])
           end
           if hash.has_key?('redirectData')
             if !(hash['redirectData'].is_a? Hash)

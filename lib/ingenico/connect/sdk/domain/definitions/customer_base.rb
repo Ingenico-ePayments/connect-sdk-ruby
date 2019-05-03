@@ -18,6 +18,8 @@ module Ingenico::Connect::SDK
         attr_accessor :merchant_customer_id
 
         # String
+        #
+        # Deprecated; Use companyInformation.vatNumber instead
         attr_accessor :vat_number
 
         def to_h

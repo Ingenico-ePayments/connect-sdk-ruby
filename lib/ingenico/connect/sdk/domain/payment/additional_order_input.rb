@@ -18,7 +18,7 @@ module Ingenico::Connect::SDK
 
         # {Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData}
         #
-        # Deprecated; Use Order.shoppingCart instead
+        # Deprecated; Use Order.shoppingCart.amountBreakdown instead
         attr_accessor :level3_summary_data
 
         # Integer

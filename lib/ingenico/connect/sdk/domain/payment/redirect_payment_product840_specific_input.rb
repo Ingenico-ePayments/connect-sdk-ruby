@@ -12,7 +12,7 @@ module Ingenico::Connect::SDK
 
         # String
         #
-        # Deprecated; use order.references.descriptor instead.
+        # Deprecated; Use Order.references.descriptor instead
         attr_accessor :custom
 
         # true/false

@@ -8,22 +8,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Deprecated; Use Order.shoppingCart instead
+      # Deprecated; Use ShoppingCart.amountBreakdown instead
       class Level3SummaryData < Ingenico::Connect::SDK::DataObject
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.amountbreakdown with type DISCOUNT instead
+        # Deprecated; Use ShoppingCart.amountBreakdown with type DISCOUNT instead
         attr_accessor :discount_amount
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.amountbreakdown with type DUTY instead
+        # Deprecated; Use ShoppingCart.amountBreakdown with type DUTY instead
         attr_accessor :duty_amount
 
         # Integer
         #
-        # Deprecated; Use ShoppingCart.amountbreakdown with type SHIPPING instead
+        # Deprecated; Use ShoppingCart.amountBreakdown with type SHIPPING instead
         attr_accessor :shipping_amount
 
         def to_h

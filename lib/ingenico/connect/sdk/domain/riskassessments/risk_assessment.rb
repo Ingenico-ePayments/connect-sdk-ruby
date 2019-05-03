@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/fraud_fields'
+require 'ingenico/connect/sdk/domain/riskassessments/merchant_risk_assessment'
 require 'ingenico/connect/sdk/domain/riskassessments/order_risk_assessment'
 
 module Ingenico::Connect::SDK
@@ -15,6 +16,9 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Definitions::FraudFields}
         attr_accessor :fraud_fields
 
+        # {Ingenico::Connect::SDK::Domain::Riskassessments::MerchantRiskAssessment}
+        attr_accessor :merchant
+
         # {Ingenico::Connect::SDK::Domain::Riskassessments::OrderRiskAssessment}
         attr_accessor :order
 
@@ -24,6 +28,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           add_to_hash(hash, 'fraudFields', @fraud_fields)
+          add_to_hash(hash, 'merchant', @merchant)
           add_to_hash(hash, 'order', @order)
           add_to_hash(hash, 'paymentProductId', @payment_product_id)
           hash
@@ -36,6 +41,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['fraudFields']]
             end
             @fraud_fields = Ingenico::Connect::SDK::Domain::Definitions::FraudFields.new_from_hash(hash['fraudFields'])
+          end
+          if hash.has_key?('merchant')
+            if !(hash['merchant'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['merchant']]
+            end
+            @merchant = Ingenico::Connect::SDK::Domain::Riskassessments::MerchantRiskAssessment.new_from_hash(hash['merchant'])
           end
           if hash.has_key?('order')
             if !(hash['order'].is_a? Hash)

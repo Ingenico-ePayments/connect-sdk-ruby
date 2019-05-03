@@ -13,24 +13,34 @@ module Ingenico::Connect::SDK
       class FraudFields < Ingenico::Connect::SDK::DataObject
 
         # true/false
+        #
+        # Deprecated; For risk assessments there is no replacement. For other calls, use Order.shipping.addressIndicator instead
         attr_accessor :addresses_are_identical
 
         # String
         attr_accessor :black_list_data
 
         # {Ingenico::Connect::SDK::Domain::Definitions::Address}
+        #
+        # Deprecated; This should be the same as Order.customer.billingAddress
         attr_accessor :card_owner_address
 
         # String
         attr_accessor :customer_ip_address
 
         # String
+        #
+        # Deprecated; Use Order.customer.device.defaultFormFill instead
         attr_accessor :default_form_fill
 
         # true/false
+        #
+        # Deprecated; No replacement
         attr_accessor :device_fingerprint_activated
 
         # String
+        #
+        # Deprecated; Use Order.customer.device.deviceFingerprintTransactionId instead
         attr_accessor :device_fingerprint_transaction_id
 
         # String
@@ -40,30 +50,44 @@ module Ingenico::Connect::SDK
         attr_accessor :gift_message
 
         # true/false
+        #
+        # Deprecated; Use Order.customer.account.hasForgottenPassword instead
         attr_accessor :has_forgotten_pwd
 
         # true/false
+        #
+        # Deprecated; Use Order.customer.account.hasPassword instead
         attr_accessor :has_password
 
         # true/false
+        #
+        # Deprecated; Use Order.customer.isPreviousCustomer instead
         attr_accessor :is_previous_customer
 
         # String
         attr_accessor :order_timezone
 
         # String
+        #
+        # Deprecated; Use Order.shipping.comments instead
         attr_accessor :ship_comments
 
         # String
+        #
+        # Deprecated; Use Order.shipping.trackingNumber instead
         attr_accessor :shipment_tracking_number
 
         # {Ingenico::Connect::SDK::Domain::Definitions::FraudFieldsShippingDetails}
+        #
+        # Deprecated; No replacement
         attr_accessor :shipping_details
 
         # Array of String
         attr_accessor :user_data
 
         # String
+        #
+        # Deprecated; Use Merchant.websiteUrl instead
         attr_accessor :website
 
         def to_h

@@ -14,6 +14,8 @@ require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/contact_details'
 require 'ingenico/connect/sdk/domain/payment/create_payment_request'
 require 'ingenico/connect/sdk/domain/payment/customer'
+require 'ingenico/connect/sdk/domain/payment/device_render_options'
+require 'ingenico/connect/sdk/domain/payment/external_cardholder_authentication_data'
 require 'ingenico/connect/sdk/domain/payment/line_item'
 require 'ingenico/connect/sdk/domain/payment/line_item_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order'
@@ -21,7 +23,11 @@ require 'ingenico/connect/sdk/domain/payment/order_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order_references'
 require 'ingenico/connect/sdk/domain/payment/personal_information'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
+require 'ingenico/connect/sdk/domain/payment/sdk_data_input'
+require 'ingenico/connect/sdk/domain/payment/shipping'
 require 'ingenico/connect/sdk/domain/payment/shopping_cart'
+require 'ingenico/connect/sdk/domain/payment/three_d_secure'
+require 'ingenico/connect/sdk/domain/payment/three_d_secure_data'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Payment = Ingenico::Connect::SDK::Domain::Payment
@@ -34,10 +40,47 @@ def example
     card.cvv = '123'
     card.expiry_date = '1220'
 
+    external_cardholder_authentication_data = Payment::ExternalCardholderAuthenticationData.new
+    external_cardholder_authentication_data.cavv = 'AgAAAAAABk4DWZ4C28yUQAAAAAA='
+    external_cardholder_authentication_data.cavv_algorithm = '1'
+    external_cardholder_authentication_data.eci = 8
+    external_cardholder_authentication_data.three_d_secure_version = 'v2'
+    external_cardholder_authentication_data.three_d_server_transaction_id = '3DSTID1234'
+    external_cardholder_authentication_data.validation_result = 'Y'
+    external_cardholder_authentication_data.xid = 'n3h2uOQPUgnmqhCkXNfxl8pOZJA='
+
+    prior_three_d_secure_data = Payment::ThreeDSecureData.new
+    prior_three_d_secure_data.acs_transaction_id = 'empty'
+    prior_three_d_secure_data.method = 'challenged'
+    prior_three_d_secure_data.utc_timestamp = '201901311530'
+
+    device_render_options = Payment::DeviceRenderOptions.new
+    device_render_options.sdk_interface = 'native'
+    device_render_options.sdk_ui_type = 'multi-select'
+
+    sdk_data = Payment::SdkDataInput.new
+    sdk_data.device_info = 'abc123'
+    sdk_data.device_render_options = device_render_options
+    sdk_data.sdk_app_id = 'xyz'
+    sdk_data.sdk_encrypted_data = 'abc123'
+    sdk_data.sdk_ephemeral_public_key = '123xyz'
+    sdk_data.sdk_max_timeout = '30'
+    sdk_data.sdk_reference_number = 'zaq123'
+    sdk_data.sdk_transaction_id = 'xsw321'
+
+    three_d_secure = Payment::ThreeDSecure.new
+    three_d_secure.authentication_flow = 'browser'
+    three_d_secure.challenge_canvas_size = '600x400'
+    three_d_secure.challenge_indicator = 'challenge-requested'
+    three_d_secure.external_cardholder_authentication_data = external_cardholder_authentication_data
+    three_d_secure.prior_three_d_secure_data = prior_three_d_secure_data
+    three_d_secure.sdk_data = sdk_data
+    three_d_secure.skip_authentication = false
+
     card_payment_method_specific_input = Payment::CardPaymentMethodSpecificInput.new
     card_payment_method_specific_input.card = card
     card_payment_method_specific_input.payment_product_id = 1
-    card_payment_method_specific_input.skip_authentication = false
+    card_payment_method_specific_input.three_d_secure = three_d_secure
 
     amount_of_money = Definitions::AmountOfMoney.new
     amount_of_money.amount = 2980
@@ -54,6 +97,7 @@ def example
 
     company_information = Definitions::CompanyInformation.new
     company_information.name = 'Acme Labs'
+    company_information.vat_number = '1234AB5678CD'
 
     contact_details = Payment::ContactDetails.new
     contact_details.email_address = 'wile.e.coyote@acmelabs.com'
@@ -72,21 +116,6 @@ def example
     personal_information.gender = 'male'
     personal_information.name = name
 
-    shipping_name = Payment::PersonalName.new
-    shipping_name.first_name = 'Road'
-    shipping_name.surname = 'Runner'
-    shipping_name.title = 'Miss'
-
-    shipping_address = Payment::AddressPersonal.new
-    shipping_address.additional_info = 'Suite II'
-    shipping_address.city = 'Monument Valley'
-    shipping_address.country_code = 'US'
-    shipping_address.house_number = '1'
-    shipping_address.name = shipping_name
-    shipping_address.state = 'Utah'
-    shipping_address.street = 'Desertroad'
-    shipping_address.zip = '84536'
-
     customer = Payment::Customer.new
     customer.billing_address = billing_address
     customer.company_information = company_information
@@ -94,8 +123,6 @@ def example
     customer.locale = 'en_US'
     customer.merchant_customer_id = '1234'
     customer.personal_information = personal_information
-    customer.shipping_address = shipping_address
-    customer.vat_number = '1234AB5678CD'
 
     invoice_data = Payment::OrderInvoiceData.new
     invoice_data.invoice_date = '20140306191500'
@@ -106,6 +133,24 @@ def example
     references.invoice_data = invoice_data
     references.merchant_order_id = 123456
     references.merchant_reference = 'AcmeOrder0001'
+
+    shipping_name = Payment::PersonalName.new
+    shipping_name.first_name = 'Road'
+    shipping_name.surname = 'Runner'
+    shipping_name.title = 'Miss'
+
+    address = Payment::AddressPersonal.new
+    address.additional_info = 'Suite II'
+    address.city = 'Monument Valley'
+    address.country_code = 'US'
+    address.house_number = '1'
+    address.name = shipping_name
+    address.state = 'Utah'
+    address.street = 'Desertroad'
+    address.zip = '84536'
+
+    shipping = Payment::Shipping.new
+    shipping.address = address
 
     items = []
 
@@ -146,6 +191,7 @@ def example
     order.amount_of_money = amount_of_money
     order.customer = customer
     order.references = references
+    order.shipping = shipping
     order.shopping_cart = shopping_cart
 
     body = Payment::CreatePaymentRequest.new

@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/additional_order_input_airline_data'
+require 'ingenico/connect/sdk/domain/payment/customer_approve_payment'
 require 'ingenico/connect/sdk/domain/payment/order_references_approve_payment'
 
 module Ingenico::Connect::SDK
@@ -15,12 +16,16 @@ module Ingenico::Connect::SDK
         # {Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData}
         attr_accessor :additional_input
 
+        # {Ingenico::Connect::SDK::Domain::Payment::CustomerApprovePayment}
+        attr_accessor :customer
+
         # {Ingenico::Connect::SDK::Domain::Payment::OrderReferencesApprovePayment}
         attr_accessor :references
 
         def to_h
           hash = super
           add_to_hash(hash, 'additionalInput', @additional_input)
+          add_to_hash(hash, 'customer', @customer)
           add_to_hash(hash, 'references', @references)
           hash
         end
@@ -32,6 +37,12 @@ module Ingenico::Connect::SDK
               raise TypeError, "value '%s' is not a Hash" % [hash['additionalInput']]
             end
             @additional_input = Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData.new_from_hash(hash['additionalInput'])
+          end
+          if hash.has_key?('customer')
+            if !(hash['customer'].is_a? Hash)
+              raise TypeError, "value '%s' is not a Hash" % [hash['customer']]
+            end
+            @customer = Ingenico::Connect::SDK::Domain::Payment::CustomerApprovePayment.new_from_hash(hash['customer'])
           end
           if hash.has_key?('references')
             if !(hash['references'].is_a? Hash)

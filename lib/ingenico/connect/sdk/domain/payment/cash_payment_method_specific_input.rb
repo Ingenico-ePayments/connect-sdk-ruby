@@ -13,6 +13,8 @@ module Ingenico::Connect::SDK
       class CashPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractCashPaymentMethodSpecificInput
 
         # {Ingenico::Connect::SDK::Domain::Payment::CashPaymentProduct1503SpecificInput}
+        #
+        # Deprecated; No replacement
         attr_accessor :payment_product1503_specific_input
 
         # {Ingenico::Connect::SDK::Domain::Payment::CashPaymentProduct1504SpecificInput}
