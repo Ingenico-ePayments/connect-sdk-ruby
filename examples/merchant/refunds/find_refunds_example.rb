@@ -10,6 +10,7 @@ Refunds = Ingenico::Connect::SDK::Merchant::Refunds
 def example
   get_client do |client|
     query = Refunds::FindRefundsParams.new
+    query.hosted_checkout_id = '15c09dac-bf44-486a-af6b-edfd8680a166'
     query.merchant_reference = 'AcmeOrder0001'
     query.merchant_order_id = 123456
     query.offset = 0

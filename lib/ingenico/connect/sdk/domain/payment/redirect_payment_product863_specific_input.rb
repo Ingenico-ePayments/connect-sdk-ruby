@@ -13,9 +13,13 @@ module Ingenico::Connect::SDK
         # String
         attr_accessor :integration_type
 
+        # String
+        attr_accessor :open_id
+
         def to_h
           hash = super
           add_to_hash(hash, 'integrationType', @integration_type)
+          add_to_hash(hash, 'openId', @open_id)
           hash
         end
 
@@ -23,6 +27,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key?('integrationType')
             @integration_type = hash['integrationType']
+          end
+          if hash.has_key?('openId')
+            @open_id = hash['openId']
           end
         end
       end

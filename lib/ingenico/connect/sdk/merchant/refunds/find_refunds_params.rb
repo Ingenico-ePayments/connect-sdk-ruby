@@ -12,6 +12,9 @@ module Ingenico::Connect::SDK
       class FindRefundsParams < Ingenico::Connect::SDK::ParamRequest
 
         # String
+        attr_accessor :hosted_checkout_id
+
+        # String
         attr_accessor :merchant_reference
 
         # Integer
@@ -26,6 +29,7 @@ module Ingenico::Connect::SDK
         # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
         def to_request_parameters
           result = []
+          add_parameter(result, 'hostedCheckoutId', @hosted_checkout_id)
           add_parameter(result, 'merchantReference', @merchant_reference)
           add_parameter(result, 'merchantOrderId', @merchant_order_id)
           add_parameter(result, 'offset', @offset)
