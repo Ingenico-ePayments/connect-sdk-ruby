@@ -14,7 +14,6 @@ require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/contact_details'
 require 'ingenico/connect/sdk/domain/payment/create_payment_request'
 require 'ingenico/connect/sdk/domain/payment/customer'
-require 'ingenico/connect/sdk/domain/payment/device_render_options'
 require 'ingenico/connect/sdk/domain/payment/external_cardholder_authentication_data'
 require 'ingenico/connect/sdk/domain/payment/line_item'
 require 'ingenico/connect/sdk/domain/payment/line_item_invoice_data'
@@ -23,7 +22,6 @@ require 'ingenico/connect/sdk/domain/payment/order_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order_references'
 require 'ingenico/connect/sdk/domain/payment/personal_information'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
-require 'ingenico/connect/sdk/domain/payment/sdk_data_input'
 require 'ingenico/connect/sdk/domain/payment/shipping'
 require 'ingenico/connect/sdk/domain/payment/shopping_cart'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure'
@@ -54,27 +52,12 @@ def example
     prior_three_d_secure_data.method = 'challenged'
     prior_three_d_secure_data.utc_timestamp = '201901311530'
 
-    device_render_options = Payment::DeviceRenderOptions.new
-    device_render_options.sdk_interface = 'native'
-    device_render_options.sdk_ui_type = 'multi-select'
-
-    sdk_data = Payment::SdkDataInput.new
-    sdk_data.device_info = 'abc123'
-    sdk_data.device_render_options = device_render_options
-    sdk_data.sdk_app_id = 'xyz'
-    sdk_data.sdk_encrypted_data = 'abc123'
-    sdk_data.sdk_ephemeral_public_key = '123xyz'
-    sdk_data.sdk_max_timeout = '30'
-    sdk_data.sdk_reference_number = 'zaq123'
-    sdk_data.sdk_transaction_id = 'xsw321'
-
     three_d_secure = Payment::ThreeDSecure.new
     three_d_secure.authentication_flow = 'browser'
     three_d_secure.challenge_canvas_size = '600x400'
     three_d_secure.challenge_indicator = 'challenge-requested'
     three_d_secure.external_cardholder_authentication_data = external_cardholder_authentication_data
     three_d_secure.prior_three_d_secure_data = prior_three_d_secure_data
-    three_d_secure.sdk_data = sdk_data
     three_d_secure.skip_authentication = false
 
     card_payment_method_specific_input = Payment::CardPaymentMethodSpecificInput.new
