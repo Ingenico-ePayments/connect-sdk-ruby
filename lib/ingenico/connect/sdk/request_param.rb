@@ -2,6 +2,9 @@ module Ingenico::Connect::SDK
 
   # Represents a URL request parameter.
   # Each parameter is immutable and has a #name and #value attribute.
+  #
+  # @attr_reader [String] name  Parameter name
+  # @attr_reader [String] value Parameter value
   class RequestParam
 
     def initialize(name, value)
@@ -12,9 +15,7 @@ module Ingenico::Connect::SDK
       @value = value
     end
 
-    # parameter name
     attr_reader :name
-    # parameter value
     attr_reader :value
 
     def to_s

@@ -8,55 +8,56 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Integer] merchant_order_id
+      # @attr [String] merchant_reference
+      # @attr [String] payment_reference
+      # @attr [String] provider_id
+      # @attr [String] provider_reference
+      # @attr [String] reference_orig_payment
       class PaymentReferences < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :merchant_order_id
 
-        # String
         attr_accessor :merchant_reference
 
-        # String
         attr_accessor :payment_reference
 
-        # String
         attr_accessor :provider_id
 
-        # String
         attr_accessor :provider_reference
 
-        # String
         attr_accessor :reference_orig_payment
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'merchantOrderId', @merchant_order_id)
-          add_to_hash(hash, 'merchantReference', @merchant_reference)
-          add_to_hash(hash, 'paymentReference', @payment_reference)
-          add_to_hash(hash, 'providerId', @provider_id)
-          add_to_hash(hash, 'providerReference', @provider_reference)
-          add_to_hash(hash, 'referenceOrigPayment', @reference_orig_payment)
+          hash['merchantOrderId'] = @merchant_order_id unless @merchant_order_id.nil?
+          hash['merchantReference'] = @merchant_reference unless @merchant_reference.nil?
+          hash['paymentReference'] = @payment_reference unless @payment_reference.nil?
+          hash['providerId'] = @provider_id unless @provider_id.nil?
+          hash['providerReference'] = @provider_reference unless @provider_reference.nil?
+          hash['referenceOrigPayment'] = @reference_orig_payment unless @reference_orig_payment.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('merchantOrderId')
+          if hash.has_key? 'merchantOrderId'
             @merchant_order_id = hash['merchantOrderId']
           end
-          if hash.has_key?('merchantReference')
+          if hash.has_key? 'merchantReference'
             @merchant_reference = hash['merchantReference']
           end
-          if hash.has_key?('paymentReference')
+          if hash.has_key? 'paymentReference'
             @payment_reference = hash['paymentReference']
           end
-          if hash.has_key?('providerId')
+          if hash.has_key? 'providerId'
             @provider_id = hash['providerId']
           end
-          if hash.has_key?('providerReference')
+          if hash.has_key? 'providerReference'
             @provider_reference = hash['providerReference']
           end
-          if hash.has_key?('referenceOrigPayment')
+          if hash.has_key? 'referenceOrigPayment'
             @reference_orig_payment = hash['referenceOrigPayment']
           end
         end

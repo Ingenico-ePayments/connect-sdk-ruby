@@ -11,43 +11,38 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentProduct840CustomerAccount] customer_account
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::Address] customer_address
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ProtectionEligibility] protection_eligibility
       class PaymentProduct840SpecificOutput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::PaymentProduct840CustomerAccount}
         attr_accessor :customer_account
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::Address}
         attr_accessor :customer_address
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ProtectionEligibility}
         attr_accessor :protection_eligibility
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'customerAccount', @customer_account)
-          add_to_hash(hash, 'customerAddress', @customer_address)
-          add_to_hash(hash, 'protectionEligibility', @protection_eligibility)
+          hash['customerAccount'] = @customer_account.to_h unless @customer_account.nil?
+          hash['customerAddress'] = @customer_address.to_h unless @customer_address.nil?
+          hash['protectionEligibility'] = @protection_eligibility.to_h unless @protection_eligibility.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('customerAccount')
-            if !(hash['customerAccount'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customerAccount']]
-            end
+          if hash.has_key? 'customerAccount'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customerAccount']] unless hash['customerAccount'].is_a? Hash
             @customer_account = Ingenico::Connect::SDK::Domain::Payment::PaymentProduct840CustomerAccount.new_from_hash(hash['customerAccount'])
           end
-          if hash.has_key?('customerAddress')
-            if !(hash['customerAddress'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customerAddress']]
-            end
+          if hash.has_key? 'customerAddress'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customerAddress']] unless hash['customerAddress'].is_a? Hash
             @customer_address = Ingenico::Connect::SDK::Domain::Definitions::Address.new_from_hash(hash['customerAddress'])
           end
-          if hash.has_key?('protectionEligibility')
-            if !(hash['protectionEligibility'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['protectionEligibility']]
-            end
+          if hash.has_key? 'protectionEligibility'
+            raise TypeError, "value '%s' is not a Hash" % [hash['protectionEligibility']] unless hash['protectionEligibility'].is_a? Hash
             @protection_eligibility = Ingenico::Connect::SDK::Domain::Payment::ProtectionEligibility.new_from_hash(hash['protectionEligibility'])
           end
         end

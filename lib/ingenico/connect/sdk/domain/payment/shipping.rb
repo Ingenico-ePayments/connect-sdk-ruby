@@ -9,72 +9,71 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::AddressPersonal] address
+      # @attr [String] address_indicator
+      # @attr [String] comments
+      # @attr [String] email_address
+      # @attr [String] first_usage_date
+      # @attr [true/false] is_first_usage
+      # @attr [String] tracking_number
+      # @attr [String] type
       class Shipping < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::AddressPersonal}
         attr_accessor :address
 
-        # String
         attr_accessor :address_indicator
 
-        # String
         attr_accessor :comments
 
-        # String
         attr_accessor :email_address
 
-        # String
         attr_accessor :first_usage_date
 
-        # true/false
         attr_accessor :is_first_usage
 
-        # String
         attr_accessor :tracking_number
 
-        # String
         attr_accessor :type
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'address', @address)
-          add_to_hash(hash, 'addressIndicator', @address_indicator)
-          add_to_hash(hash, 'comments', @comments)
-          add_to_hash(hash, 'emailAddress', @email_address)
-          add_to_hash(hash, 'firstUsageDate', @first_usage_date)
-          add_to_hash(hash, 'isFirstUsage', @is_first_usage)
-          add_to_hash(hash, 'trackingNumber', @tracking_number)
-          add_to_hash(hash, 'type', @type)
+          hash['address'] = @address.to_h unless @address.nil?
+          hash['addressIndicator'] = @address_indicator unless @address_indicator.nil?
+          hash['comments'] = @comments unless @comments.nil?
+          hash['emailAddress'] = @email_address unless @email_address.nil?
+          hash['firstUsageDate'] = @first_usage_date unless @first_usage_date.nil?
+          hash['isFirstUsage'] = @is_first_usage unless @is_first_usage.nil?
+          hash['trackingNumber'] = @tracking_number unless @tracking_number.nil?
+          hash['type'] = @type unless @type.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('address')
-            if !(hash['address'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['address']]
-            end
+          if hash.has_key? 'address'
+            raise TypeError, "value '%s' is not a Hash" % [hash['address']] unless hash['address'].is_a? Hash
             @address = Ingenico::Connect::SDK::Domain::Payment::AddressPersonal.new_from_hash(hash['address'])
           end
-          if hash.has_key?('addressIndicator')
+          if hash.has_key? 'addressIndicator'
             @address_indicator = hash['addressIndicator']
           end
-          if hash.has_key?('comments')
+          if hash.has_key? 'comments'
             @comments = hash['comments']
           end
-          if hash.has_key?('emailAddress')
+          if hash.has_key? 'emailAddress'
             @email_address = hash['emailAddress']
           end
-          if hash.has_key?('firstUsageDate')
+          if hash.has_key? 'firstUsageDate'
             @first_usage_date = hash['firstUsageDate']
           end
-          if hash.has_key?('isFirstUsage')
+          if hash.has_key? 'isFirstUsage'
             @is_first_usage = hash['isFirstUsage']
           end
-          if hash.has_key?('trackingNumber')
+          if hash.has_key? 'trackingNumber'
             @tracking_number = hash['trackingNumber']
           end
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
         end

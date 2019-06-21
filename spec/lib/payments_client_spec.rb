@@ -9,7 +9,6 @@ require 'ingenico/connect/sdk/merchant/payments/payments_client'
 PaymentsClient ||= Ingenico::Connect::SDK::Merchant::Payments::PaymentsClient
 Payment ||= Ingenico::Connect::SDK::Domain::Payment
 Definitions ||= Ingenico::Connect::SDK::Domain::Definitions
-Response ||= Ingenico::Connect::SDK::Response
 ResponseHeader ||= Ingenico::Connect::SDK::ResponseHeader
 
 ResponseException ||= Ingenico::Connect::SDK::ResponseException
@@ -29,7 +28,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'pending_approval.json')
-    allow(connection).to receive(:post).and_return(Response.new(201, response_body, nil))
+    allow(connection).to receive(:post).and_yield(201, {}, StringIO.new(response_body))
 
     response = client.merchant('merchantId').payments.create(request_body)
 
@@ -41,7 +40,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'rejected.json')
-    allow(connection).to receive(:post).and_return(Response.new(400, response_body, nil))
+    allow(connection).to receive(:post).and_yield(400, {}, StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(DeclinedPaymentException){|error|
       expect(error.message).to include("payment '000002000020142544360000100001'")
@@ -57,7 +56,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'invalid_request.json')
-    allow(connection).to receive(:post).and_return(Response.new(400, response_body, nil))
+    allow(connection).to receive(:post).and_yield(400, {}, StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(ValidationException){|error|
       expect(error.message).to include(response_body)
@@ -68,7 +67,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'invalid_authorization.json')
-    allow(connection).to receive(:post).and_return(Response.new(401, response_body, nil))
+    allow(connection).to receive(:post).and_yield(401, {}, StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(ApiException){|error|
 
@@ -80,7 +79,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'duplicate_request.json')
-    allow(connection).to receive(:post).and_return(Response.new(409, response_body, nil))
+    allow(connection).to receive(:post).and_yield(409, {}, StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(ReferenceException){|error|
       expect(error.message).to include(response_body)
@@ -92,7 +91,7 @@ describe PaymentsClient do
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'duplicate_request.json')
     context = Ingenico::Connect::SDK::CallContext.new('key')
-    allow(connection).to receive(:post).and_return(Response.new(409, response_body, nil))
+    allow(connection).to receive(:post).and_yield(409, {}, StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body, context)}
         .to raise_error(IdempotenceException){|error|
@@ -105,7 +104,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'not_found.html')
-    allow(connection).to receive(:post).and_return(Response.new(404, response_body, [ResponseHeader.new('content-type', 'text/html')]))
+    allow(connection).to receive(:post).and_yield(404, [ResponseHeader.new('content-type', 'text/html')], StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(Ingenico::Connect::SDK::NotFoundException){|error|
       expect(error.cause).to be_a(ResponseException)
@@ -117,7 +116,7 @@ describe PaymentsClient do
     connection = double(Ingenico::Connect::SDK::Connection)
     client = init_client(connection)
     response_body = IO.read(resource_prefix + 'method_not_allowed.html')
-    allow(connection).to receive(:post).and_return(Response.new(405, response_body, [ResponseHeader.new('content-type', 'text/html')]))
+    allow(connection).to receive(:post).and_yield(405, [ResponseHeader.new('content-type', 'text/html')], StringIO.new(response_body))
 
     expect{client.merchant('merchantId').payments.create(request_body)}.to raise_error(CommunicationException){|error|
       expect(error.cause).to be_a(ResponseException)

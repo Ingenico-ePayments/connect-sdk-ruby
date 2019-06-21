@@ -8,83 +8,84 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] city
+      # @attr [String] country
+      # @attr [String] email_address
+      # @attr [String] first_name
+      # @attr [String] fiscal_number
+      # @attr [String] language_code
+      # @attr [String] phone_number
+      # @attr [String] street
+      # @attr [String] surname
+      # @attr [String] zip
       class GetCustomerDetailsResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :city
 
-        # String
         attr_accessor :country
 
-        # String
         attr_accessor :email_address
 
-        # String
         attr_accessor :first_name
 
-        # String
         attr_accessor :fiscal_number
 
-        # String
         attr_accessor :language_code
 
-        # String
         attr_accessor :phone_number
 
-        # String
         attr_accessor :street
 
-        # String
         attr_accessor :surname
 
-        # String
         attr_accessor :zip
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'city', @city)
-          add_to_hash(hash, 'country', @country)
-          add_to_hash(hash, 'emailAddress', @email_address)
-          add_to_hash(hash, 'firstName', @first_name)
-          add_to_hash(hash, 'fiscalNumber', @fiscal_number)
-          add_to_hash(hash, 'languageCode', @language_code)
-          add_to_hash(hash, 'phoneNumber', @phone_number)
-          add_to_hash(hash, 'street', @street)
-          add_to_hash(hash, 'surname', @surname)
-          add_to_hash(hash, 'zip', @zip)
+          hash['city'] = @city unless @city.nil?
+          hash['country'] = @country unless @country.nil?
+          hash['emailAddress'] = @email_address unless @email_address.nil?
+          hash['firstName'] = @first_name unless @first_name.nil?
+          hash['fiscalNumber'] = @fiscal_number unless @fiscal_number.nil?
+          hash['languageCode'] = @language_code unless @language_code.nil?
+          hash['phoneNumber'] = @phone_number unless @phone_number.nil?
+          hash['street'] = @street unless @street.nil?
+          hash['surname'] = @surname unless @surname.nil?
+          hash['zip'] = @zip unless @zip.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('city')
+          if hash.has_key? 'city'
             @city = hash['city']
           end
-          if hash.has_key?('country')
+          if hash.has_key? 'country'
             @country = hash['country']
           end
-          if hash.has_key?('emailAddress')
+          if hash.has_key? 'emailAddress'
             @email_address = hash['emailAddress']
           end
-          if hash.has_key?('firstName')
+          if hash.has_key? 'firstName'
             @first_name = hash['firstName']
           end
-          if hash.has_key?('fiscalNumber')
+          if hash.has_key? 'fiscalNumber'
             @fiscal_number = hash['fiscalNumber']
           end
-          if hash.has_key?('languageCode')
+          if hash.has_key? 'languageCode'
             @language_code = hash['languageCode']
           end
-          if hash.has_key?('phoneNumber')
+          if hash.has_key? 'phoneNumber'
             @phone_number = hash['phoneNumber']
           end
-          if hash.has_key?('street')
+          if hash.has_key? 'street'
             @street = hash['street']
           end
-          if hash.has_key?('surname')
+          if hash.has_key? 'surname'
             @surname = hash['surname']
           end
-          if hash.has_key?('zip')
+          if hash.has_key? 'zip'
             @zip = hash['zip']
           end
         end

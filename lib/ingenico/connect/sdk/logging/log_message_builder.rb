@@ -2,24 +2,22 @@ module Ingenico::Connect::SDK
   module Logging
 
     # Abstract class used to construct a message describing a request or response.
+    #
+    # @attr_reader [String] request_id   An identifier assigned to the request and response
+    # @attr_reader [String] headers      Request or response headers in string form
+    # @attr_reader [String] body         Request or response body as a string
+    # @attr_reader [String] content_type Content type of the body, generally 'application/json' or 'text/html'
     class LogMessageBuilder
 
-      # An identifier assigned to the request and response
       attr_reader :request_id
-
-      # Request or response headers in string form
       attr_reader :headers
-
-      # Request or response body as a string
       attr_reader :body
-
-      # Content type of the body, generally 'application/json' or 'text/html'
       attr_reader :content_type
 
       # Create a new LogMessageBuilder
-      def initialize(requestId)
-        raise ArgumentError if requestId.nil? or requestId.empty?
-        @request_id = requestId
+      def initialize(request_id)
+        raise ArgumentError if request_id.nil? or request_id.empty?
+        @request_id = request_id
         @headers = ''
       end
 
@@ -32,10 +30,15 @@ module Ingenico::Connect::SDK
       end
 
       # Sets the body of this message to the parameter body.
-      # body::          The message body
-      # content_type::  The content type of the body
+
+      # @param body         [String] the message body
+      # @param content_type [String] the content type of the body
       def set_body(body, content_type)
-        @body = LoggingUtil.obfuscate_body(body)
+        if is_binary(content_type)
+          @body = "<binary content>"
+        else
+          @body = LoggingUtil.obfuscate_body(body)
+        end
         @content_type = content_type
       end
 
@@ -57,6 +60,15 @@ module Ingenico::Connect::SDK
         value.nil? ? '' : value
       end
 
+      # Returns whether or not the content type is binary
+      def is_binary(content_type)
+        if content_type.nil?
+          return false
+        else
+          content_type = content_type.downcase
+          return !(content_type.start_with?("text/") || content_type.include?("json") || content_type.include?("xml"))
+        end
+      end
     end
   end
 end

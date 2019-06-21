@@ -10,47 +10,44 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] avs_result
+      # @attr [String] cvv_result
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraugsterResults] fraugster
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraudResultsRetailDecisions] retail_decisions
       class CardFraudResults < Ingenico::Connect::SDK::Domain::Definitions::FraudResults
 
-        # String
         attr_accessor :avs_result
 
-        # String
         attr_accessor :cvv_result
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::FraugsterResults}
         attr_accessor :fraugster
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::FraudResultsRetailDecisions}
         attr_accessor :retail_decisions
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'avsResult', @avs_result)
-          add_to_hash(hash, 'cvvResult', @cvv_result)
-          add_to_hash(hash, 'fraugster', @fraugster)
-          add_to_hash(hash, 'retailDecisions', @retail_decisions)
+          hash['avsResult'] = @avs_result unless @avs_result.nil?
+          hash['cvvResult'] = @cvv_result unless @cvv_result.nil?
+          hash['fraugster'] = @fraugster.to_h unless @fraugster.nil?
+          hash['retailDecisions'] = @retail_decisions.to_h unless @retail_decisions.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('avsResult')
+          if hash.has_key? 'avsResult'
             @avs_result = hash['avsResult']
           end
-          if hash.has_key?('cvvResult')
+          if hash.has_key? 'cvvResult'
             @cvv_result = hash['cvvResult']
           end
-          if hash.has_key?('fraugster')
-            if !(hash['fraugster'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['fraugster']]
-            end
+          if hash.has_key? 'fraugster'
+            raise TypeError, "value '%s' is not a Hash" % [hash['fraugster']] unless hash['fraugster'].is_a? Hash
             @fraugster = Ingenico::Connect::SDK::Domain::Definitions::FraugsterResults.new_from_hash(hash['fraugster'])
           end
-          if hash.has_key?('retailDecisions')
-            if !(hash['retailDecisions'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['retailDecisions']]
-            end
+          if hash.has_key? 'retailDecisions'
+            raise TypeError, "value '%s' is not a Hash" % [hash['retailDecisions']] unless hash['retailDecisions'].is_a? Hash
             @retail_decisions = Ingenico::Connect::SDK::Domain::Definitions::FraudResultsRetailDecisions.new_from_hash(hash['retailDecisions'])
           end
         end

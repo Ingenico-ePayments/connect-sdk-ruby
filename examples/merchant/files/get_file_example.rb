@@ -7,7 +7,13 @@ require 'ingenico/connect/sdk/factory'
 
 def example
   get_client do |client|
-    response = client.merchant('merchantId').products().public_key(320)
+    client.merchant('merchantId').files.get_file('fileId') do |headers, response_body|
+        # Use the headers and response body
+        # For instance:
+        while chunk = response_body.read(8192)
+          # do something with the chunk
+        end
+    end
   end
 end
 

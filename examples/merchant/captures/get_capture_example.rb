@@ -7,7 +7,7 @@ require 'ingenico/connect/sdk/factory'
 
 def example
   get_client do |client|
-    response = client.merchant('merchantId').captures().get('captureId')
+    response = client.merchant('merchantId').captures.get('captureId')
   end
 end
 

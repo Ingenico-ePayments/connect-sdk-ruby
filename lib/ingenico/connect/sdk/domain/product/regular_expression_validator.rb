@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] regular_expression
       class RegularExpressionValidator < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :regular_expression
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'regularExpression', @regular_expression)
+          hash['regularExpression'] = @regular_expression unless @regular_expression.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('regularExpression')
+          if hash.has_key? 'regularExpression'
             @regular_expression = hash['regularExpression']
           end
         end

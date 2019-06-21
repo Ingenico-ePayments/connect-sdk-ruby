@@ -11,61 +11,56 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::Card] card
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ExternalCardholderAuthenticationData] external_cardholder_authentication_data
+      # @attr [true/false] is_recurring
+      # @attr [String] return_url
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecure] three_d_secure
       class CardPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractCardPaymentMethodSpecificInput
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::Card}
         attr_accessor :card
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ExternalCardholderAuthenticationData}
         #
-        # Deprecated; Use threeDSecure.externalCardholderAuthenticationData instead
+        # @deprecated Use threeDSecure.externalCardholderAuthenticationData instead
         attr_accessor :external_cardholder_authentication_data
 
-        # true/false
         attr_accessor :is_recurring
 
-        # String
         #
-        # Deprecated; Use threeDSecure.redirectionData.returnUrl instead
+        # @deprecated Use threeDSecure.redirectionData.returnUrl instead
         attr_accessor :return_url
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ThreeDSecure}
         attr_accessor :three_d_secure
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'card', @card)
-          add_to_hash(hash, 'externalCardholderAuthenticationData', @external_cardholder_authentication_data)
-          add_to_hash(hash, 'isRecurring', @is_recurring)
-          add_to_hash(hash, 'returnUrl', @return_url)
-          add_to_hash(hash, 'threeDSecure', @three_d_secure)
+          hash['card'] = @card.to_h unless @card.nil?
+          hash['externalCardholderAuthenticationData'] = @external_cardholder_authentication_data.to_h unless @external_cardholder_authentication_data.nil?
+          hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
+          hash['returnUrl'] = @return_url unless @return_url.nil?
+          hash['threeDSecure'] = @three_d_secure.to_h unless @three_d_secure.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('card')
-            if !(hash['card'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['card']]
-            end
+          if hash.has_key? 'card'
+            raise TypeError, "value '%s' is not a Hash" % [hash['card']] unless hash['card'].is_a? Hash
             @card = Ingenico::Connect::SDK::Domain::Definitions::Card.new_from_hash(hash['card'])
           end
-          if hash.has_key?('externalCardholderAuthenticationData')
-            if !(hash['externalCardholderAuthenticationData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['externalCardholderAuthenticationData']]
-            end
+          if hash.has_key? 'externalCardholderAuthenticationData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['externalCardholderAuthenticationData']] unless hash['externalCardholderAuthenticationData'].is_a? Hash
             @external_cardholder_authentication_data = Ingenico::Connect::SDK::Domain::Payment::ExternalCardholderAuthenticationData.new_from_hash(hash['externalCardholderAuthenticationData'])
           end
-          if hash.has_key?('isRecurring')
+          if hash.has_key? 'isRecurring'
             @is_recurring = hash['isRecurring']
           end
-          if hash.has_key?('returnUrl')
+          if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']
           end
-          if hash.has_key?('threeDSecure')
-            if !(hash['threeDSecure'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['threeDSecure']]
-            end
+          if hash.has_key? 'threeDSecure'
+            raise TypeError, "value '%s' is not a Hash" % [hash['threeDSecure']] unless hash['threeDSecure'].is_a? Hash
             @three_d_secure = Ingenico::Connect::SDK::Domain::Payment::ThreeDSecure.new_from_hash(hash['threeDSecure'])
           end
         end

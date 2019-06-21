@@ -9,30 +9,29 @@ module Ingenico::Connect::SDK
   module Domain
     module Mandates
 
+      # @attr [Ingenico::Connect::SDK::Domain::Mandates::MandatePersonalName] name
+      # @attr [String] title
       class MandatePersonalInformation < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Mandates::MandatePersonalName}
         attr_accessor :name
 
-        # String
         attr_accessor :title
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'name', @name)
-          add_to_hash(hash, 'title', @title)
+          hash['name'] = @name.to_h unless @name.nil?
+          hash['title'] = @title unless @title.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('name')
-            if !(hash['name'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['name']]
-            end
+          if hash.has_key? 'name'
+            raise TypeError, "value '%s' is not a Hash" % [hash['name']] unless hash['name'].is_a? Hash
             @name = Ingenico::Connect::SDK::Domain::Mandates::MandatePersonalName.new_from_hash(hash['name'])
           end
-          if hash.has_key?('title')
+          if hash.has_key? 'title'
             @title = hash['title']
           end
         end

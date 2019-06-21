@@ -3,6 +3,9 @@ module Ingenico::Connect::SDK
   # This exception is thrown when a response from the Ingenico ePayments platform indicates
   # a request with the same _idempotence_key_ was received earlier.
   # The _idempotence_request_timestamp_ indicates the time when the first request with this _idempotence_key_ arrived.
+  #
+  # @attr_reader [String] idempotence_key                The idempotence key used in the request.
+  # @attr_reader [Integer] idempotence_request_timestamp A timestamp indicating the arrival time of the request that conflicts with the request just sent.
   class IdempotenceException < ApiException
 
     # Create a new IdempotenceException
@@ -15,10 +18,7 @@ module Ingenico::Connect::SDK
       @idempotence_request_timestamp = idempotence_request_timestamp
     end
 
-    # The idempotence key used in the request.
     attr_reader :idempotence_key
-
-    # A timestamp indicating the arrival time of the request that conflicts with the request just sent.
     attr_reader :idempotence_request_timestamp
   end
 end

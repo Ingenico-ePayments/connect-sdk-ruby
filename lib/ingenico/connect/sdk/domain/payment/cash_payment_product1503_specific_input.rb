@@ -8,23 +8,24 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # Deprecated; No replacement
+      # @attr [String] return_url
+      # @deprecated No replacement
       class CashPaymentProduct1503SpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # String
         #
-        # Deprecated; No replacement, since Boleto Bancario no longer needs a return URL
+        # @deprecated No replacement, since Boleto Bancario no longer needs a return URL
         attr_accessor :return_url
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'returnUrl', @return_url)
+          hash['returnUrl'] = @return_url unless @return_url.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('returnUrl')
+          if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']
           end
         end

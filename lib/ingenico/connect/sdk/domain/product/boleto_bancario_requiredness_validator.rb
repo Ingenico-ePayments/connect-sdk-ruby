@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Integer] fiscal_number_length
       class BoletoBancarioRequirednessValidator < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :fiscal_number_length
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'fiscalNumberLength', @fiscal_number_length)
+          hash['fiscalNumberLength'] = @fiscal_number_length unless @fiscal_number_length.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('fiscalNumberLength')
+          if hash.has_key? 'fiscalNumberLength'
             @fiscal_number_length = hash['fiscalNumberLength']
           end
         end

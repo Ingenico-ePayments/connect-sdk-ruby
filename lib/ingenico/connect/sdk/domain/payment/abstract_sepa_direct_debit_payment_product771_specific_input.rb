@@ -8,22 +8,23 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] mandate_reference
       class AbstractSepaDirectDebitPaymentProduct771SpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # String
         #
-        # Deprecated; Use existingUniqueMandateReference or mandate.uniqueMandateReference instead
+        # @deprecated Use existingUniqueMandateReference or mandate.uniqueMandateReference instead
         attr_accessor :mandate_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'mandateReference', @mandate_reference)
+          hash['mandateReference'] = @mandate_reference unless @mandate_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('mandateReference')
+          if hash.has_key? 'mandateReference'
             @mandate_reference = hash['mandateReference']
           end
         end

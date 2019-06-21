@@ -39,7 +39,7 @@ def example
     body.hosted_checkout_specific_input = hosted_checkout_specific_input
     body.order = order
 
-    response = client.merchant('merchantId').hostedcheckouts().create(body)
+    response = client.merchant('merchantId').hostedcheckouts.create(body)
   end
 end
 

@@ -11,106 +11,101 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::CustomerAccountAuthentication] authentication
+      # @attr [String] change_date
+      # @attr [true/false] changed_during_checkout
+      # @attr [String] create_date
+      # @attr [true/false] had_suspicious_activity
+      # @attr [true/false] has_forgotten_password
+      # @attr [true/false] has_password
+      # @attr [String] password_change_date
+      # @attr [true/false] password_changed_during_checkout
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentAccountOnFile] payment_account_on_file
+      # @attr [String] payment_account_on_file_type
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::CustomerPaymentActivity] payment_activity
       class CustomerAccount < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::CustomerAccountAuthentication}
         attr_accessor :authentication
 
-        # String
         attr_accessor :change_date
 
-        # true/false
         attr_accessor :changed_during_checkout
 
-        # String
         attr_accessor :create_date
 
-        # true/false
         attr_accessor :had_suspicious_activity
 
-        # true/false
         attr_accessor :has_forgotten_password
 
-        # true/false
         attr_accessor :has_password
 
-        # String
         attr_accessor :password_change_date
 
-        # true/false
         attr_accessor :password_changed_during_checkout
 
-        # {Ingenico::Connect::SDK::Domain::Payment::PaymentAccountOnFile}
         attr_accessor :payment_account_on_file
 
-        # String
         attr_accessor :payment_account_on_file_type
 
-        # {Ingenico::Connect::SDK::Domain::Payment::CustomerPaymentActivity}
         attr_accessor :payment_activity
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'authentication', @authentication)
-          add_to_hash(hash, 'changeDate', @change_date)
-          add_to_hash(hash, 'changedDuringCheckout', @changed_during_checkout)
-          add_to_hash(hash, 'createDate', @create_date)
-          add_to_hash(hash, 'hadSuspiciousActivity', @had_suspicious_activity)
-          add_to_hash(hash, 'hasForgottenPassword', @has_forgotten_password)
-          add_to_hash(hash, 'hasPassword', @has_password)
-          add_to_hash(hash, 'passwordChangeDate', @password_change_date)
-          add_to_hash(hash, 'passwordChangedDuringCheckout', @password_changed_during_checkout)
-          add_to_hash(hash, 'paymentAccountOnFile', @payment_account_on_file)
-          add_to_hash(hash, 'paymentAccountOnFileType', @payment_account_on_file_type)
-          add_to_hash(hash, 'paymentActivity', @payment_activity)
+          hash['authentication'] = @authentication.to_h unless @authentication.nil?
+          hash['changeDate'] = @change_date unless @change_date.nil?
+          hash['changedDuringCheckout'] = @changed_during_checkout unless @changed_during_checkout.nil?
+          hash['createDate'] = @create_date unless @create_date.nil?
+          hash['hadSuspiciousActivity'] = @had_suspicious_activity unless @had_suspicious_activity.nil?
+          hash['hasForgottenPassword'] = @has_forgotten_password unless @has_forgotten_password.nil?
+          hash['hasPassword'] = @has_password unless @has_password.nil?
+          hash['passwordChangeDate'] = @password_change_date unless @password_change_date.nil?
+          hash['passwordChangedDuringCheckout'] = @password_changed_during_checkout unless @password_changed_during_checkout.nil?
+          hash['paymentAccountOnFile'] = @payment_account_on_file.to_h unless @payment_account_on_file.nil?
+          hash['paymentAccountOnFileType'] = @payment_account_on_file_type unless @payment_account_on_file_type.nil?
+          hash['paymentActivity'] = @payment_activity.to_h unless @payment_activity.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('authentication')
-            if !(hash['authentication'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['authentication']]
-            end
+          if hash.has_key? 'authentication'
+            raise TypeError, "value '%s' is not a Hash" % [hash['authentication']] unless hash['authentication'].is_a? Hash
             @authentication = Ingenico::Connect::SDK::Domain::Payment::CustomerAccountAuthentication.new_from_hash(hash['authentication'])
           end
-          if hash.has_key?('changeDate')
+          if hash.has_key? 'changeDate'
             @change_date = hash['changeDate']
           end
-          if hash.has_key?('changedDuringCheckout')
+          if hash.has_key? 'changedDuringCheckout'
             @changed_during_checkout = hash['changedDuringCheckout']
           end
-          if hash.has_key?('createDate')
+          if hash.has_key? 'createDate'
             @create_date = hash['createDate']
           end
-          if hash.has_key?('hadSuspiciousActivity')
+          if hash.has_key? 'hadSuspiciousActivity'
             @had_suspicious_activity = hash['hadSuspiciousActivity']
           end
-          if hash.has_key?('hasForgottenPassword')
+          if hash.has_key? 'hasForgottenPassword'
             @has_forgotten_password = hash['hasForgottenPassword']
           end
-          if hash.has_key?('hasPassword')
+          if hash.has_key? 'hasPassword'
             @has_password = hash['hasPassword']
           end
-          if hash.has_key?('passwordChangeDate')
+          if hash.has_key? 'passwordChangeDate'
             @password_change_date = hash['passwordChangeDate']
           end
-          if hash.has_key?('passwordChangedDuringCheckout')
+          if hash.has_key? 'passwordChangedDuringCheckout'
             @password_changed_during_checkout = hash['passwordChangedDuringCheckout']
           end
-          if hash.has_key?('paymentAccountOnFile')
-            if !(hash['paymentAccountOnFile'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentAccountOnFile']]
-            end
+          if hash.has_key? 'paymentAccountOnFile'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentAccountOnFile']] unless hash['paymentAccountOnFile'].is_a? Hash
             @payment_account_on_file = Ingenico::Connect::SDK::Domain::Payment::PaymentAccountOnFile.new_from_hash(hash['paymentAccountOnFile'])
           end
-          if hash.has_key?('paymentAccountOnFileType')
+          if hash.has_key? 'paymentAccountOnFileType'
             @payment_account_on_file_type = hash['paymentAccountOnFileType']
           end
-          if hash.has_key?('paymentActivity')
-            if !(hash['paymentActivity'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentActivity']]
-            end
+          if hash.has_key? 'paymentActivity'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentActivity']] unless hash['paymentActivity'].is_a? Hash
             @payment_activity = Ingenico::Connect::SDK::Domain::Payment::CustomerPaymentActivity.new_from_hash(hash['paymentActivity'])
           end
         end

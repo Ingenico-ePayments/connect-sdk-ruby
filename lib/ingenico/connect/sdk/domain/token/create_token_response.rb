@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [true/false] is_new_token
+      # @attr [String] token
       class CreateTokenResponse < Ingenico::Connect::SDK::DataObject
 
-        # true/false
         attr_accessor :is_new_token
 
-        # String
         attr_accessor :token
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'isNewToken', @is_new_token)
-          add_to_hash(hash, 'token', @token)
+          hash['isNewToken'] = @is_new_token unless @is_new_token.nil?
+          hash['token'] = @token unless @token.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('isNewToken')
+          if hash.has_key? 'isNewToken'
             @is_new_token = hash['isNewToken']
           end
-          if hash.has_key?('token')
+          if hash.has_key? 'token'
             @token = hash['token']
           end
         end

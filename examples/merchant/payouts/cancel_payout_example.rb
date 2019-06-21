@@ -7,7 +7,7 @@ require 'ingenico/connect/sdk/factory'
 
 def example
   get_client do |client|
-    client.merchant('merchantId').payouts().cancel('payoutId')
+    client.merchant('merchantId').payouts.cancel('payoutId')
   end
 end
 

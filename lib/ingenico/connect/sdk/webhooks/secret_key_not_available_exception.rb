@@ -1,6 +1,8 @@
 module Ingenico::Connect::SDK
   module Webhooks
     # Raised when an error caused a secret to become not available.
+    #
+    # @attr_reader [String] key_id
     class SecretKeyNotAvailableException < SignatureValidationException
 
       def initialize(args)

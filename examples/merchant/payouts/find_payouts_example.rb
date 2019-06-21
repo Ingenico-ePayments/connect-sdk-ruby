@@ -15,7 +15,7 @@ def example
     query.offset = 0
     query.limit = 10
 
-    response = client.merchant('merchantId').payouts().find(query)
+    response = client.merchant('merchantId').payouts.find(query)
   end
 end
 

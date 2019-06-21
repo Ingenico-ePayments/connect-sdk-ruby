@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Capture
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Capture::Capture>] captures
       class CapturesResponse < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Capture::Capture}
         attr_accessor :captures
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'captures', @captures)
+          hash['captures'] = @captures.collect{|val| val.to_h} unless @captures.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('captures')
-            if !(hash['captures'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['captures']]
-            end
+          if hash.has_key? 'captures'
+            raise TypeError, "value '%s' is not an Array" % [hash['captures']] unless hash['captures'].is_a? Array
             @captures = []
             hash['captures'].each do |e|
               @captures << Ingenico::Connect::SDK::Domain::Capture::Capture.new_from_hash(e)

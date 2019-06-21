@@ -4,18 +4,22 @@ module Ingenico::Connect::SDK
 
   # Base class of all Ingenico ePayments platform API resources.
   # Provides shared functionality to facilitate communication with the Ingenico ePayments platform.
+  #
+  # @attr_reader [Ingenico::Connect::SDK::Communicator] communicator Communicator instance that provides communication with the Ingenico ePayments platform.
+  # @attr_reader [String] client_meta_info JSON string containing client info specific to the current client.
   class ApiResource
 
     # Creates a new ApiResource.
-    # arg::               Parent class or {Ingenico::Connect::SDK::Communicator} instance.
-    #                     If a parent class is given its communicator will be used for communication.
-    # path_context::      Hash that contains substitutions for generic locations in the url path.
-    #                     This hash will be used to instantiate a concrete url used to access specific resources.
-    #                     For example in the url https://api-sandbox.globalcollect.com/!{version}/!{merchantId}/payments
-    #                     !{version} and !{merchantId} can be instantiated using the hash
-    #                     !{'version' => 'v1', 'merchantId' => '1234'}. The final url in this case will be
-    #                     https://api-sandbox.globalcollect.com/v1/1234/payments.
-    # client_meta_info::  JSON string containing the meta data for the client.
+    #
+    # @param arg              [Ingenico::Connect::SDK::ApiResource, Ingenico::Connect::SDK::Communicator] parent class or Communicator instance.
+    #                         If a parent class is given its communicator will be used for communication.
+    # @param path_context     [Hash] hash that contains substitutions for generic locations in the URL path.
+    #                         This hash will be used to instantiate a concrete URL used to access specific resources.
+    #                         For example in the URL https://api-sandbox.globalcollect.com/!{version}/!{merchantId}/payments
+    #                         !{version} and !{merchantId} can be instantiated using the hash
+    #                         !{'version' => 'v1', 'merchantId' => '1234'}. The final URL in this case will be
+    #                         https://api-sandbox.globalcollect.com/v1/1234/payments.
+    # @param client_meta_info [String] JSON string containing the meta data for the client.
     def initialize(arg, path_context, client_meta_info=false)
       if client_meta_info == false
         if arg.nil?
@@ -36,15 +40,12 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # {Ingenico::Connect::SDK::Communicator} instance that provides communication with the Ingenico ePayments platform.
     attr_reader :communicator
-
-    # JSON string containing client info specific to the current client.
     attr_reader :client_meta_info
 
     protected
 
-    # Returns the X-GCS-ClientMetaInfo header as a {Ingenico::Connect::SDK::RequestHeader}
+    # @return [String] the X-GCS-ClientMetaInfo header as an [Array<Ingenico::Connect::SDK::RequestHeader>]
     def client_headers
       if @client_meta_info.nil?
         nil

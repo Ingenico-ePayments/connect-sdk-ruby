@@ -15,7 +15,7 @@ def example
     query.amount = 1000
     query.is_recurring = true
 
-    response = client.merchant('merchantId').products().networks(320, query)
+    response = client.merchant('merchantId').products.networks(320, query)
   end
 end
 

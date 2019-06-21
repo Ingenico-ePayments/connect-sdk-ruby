@@ -13,7 +13,7 @@ def example
     query.country_code = 'NL'
     query.currency_code = 'EUR'
 
-    response = client.merchant('merchantId').products().directory(809, query)
+    response = client.merchant('merchantId').products.directory(809, query)
   end
 end
 

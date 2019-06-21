@@ -12,17 +12,17 @@ module Ingenico::Connect::SDK
 
       # Constructs and returns a log message based on the request data. The log message is a string.
       def get_message
-        msgTemplateWithoutBody = "Outgoing request (requestId='%s'):\n" +
+        msg_template_without_body = "Outgoing request (requestId='%s'):\n" +
             "  method:       '%s'\n" +
             "  uri:          '%s'\n" +
             "  headers:      '%s'"
-        msgTemplateWithBody = msgTemplateWithoutBody + "\n" +
+        msg_template_with_body = msg_template_without_body + "\n" +
             "  content-type: '%s'\n" +
             "  body:         '%s'"
 
-        return sprintf(msgTemplateWithoutBody, @request_id, empty_if_null(@method),
+        return sprintf(msg_template_without_body, @request_id, empty_if_null(@method),
                        format_uri, @headers) if @body.nil?
-        sprintf(msgTemplateWithBody, @request_id, empty_if_null(@method),
+        sprintf(msg_template_with_body, @request_id, empty_if_null(@method),
                 format_uri, @headers, empty_if_null(@content_type), @body)
       end
 
@@ -37,7 +37,6 @@ module Ingenico::Connect::SDK
         end
         # @uri.path + '?' + empty_if_null(@uri.query)
       end
-
     end
   end
 end

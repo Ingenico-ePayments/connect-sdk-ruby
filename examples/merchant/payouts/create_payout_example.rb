@@ -72,7 +72,7 @@ def example
     body.references = references
 
     begin
-      response = client.merchant('merchantId').payouts().create(body)
+      response = client.merchant('merchantId').payouts.create(body)
     rescue Ingenico::Connect::SDK::DeclinedPayoutException => e
       handle_declined_payout(e.payout_result)
     rescue Ingenico::Connect::SDK::ApiException => e
@@ -95,6 +95,6 @@ def handle_declined_payout(payout_result)
   # handle the result here
 end
 
-def  handle_api_errors(errors)
+def handle_api_errors(errors)
   # handle the errors here
 end

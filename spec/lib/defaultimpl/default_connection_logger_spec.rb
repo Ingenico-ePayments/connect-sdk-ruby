@@ -406,8 +406,6 @@ describe 'DefaultConnectionLogging' do
 
   # tests a read timeout
   it 'logs timeouts' do
-    response_body = IO.read(resource_prefix + 'notFound.html')
-
     stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
         .to_raise(HTTPClient::ReceiveTimeoutError)
 
@@ -464,8 +462,6 @@ describe 'DefaultConnectionLogging' do
   end
 
   it 'can log errors individually' do
-    response_body = IO.read(resource_prefix + 'notFound.html')
-
     stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
         .to_return{ |request| CLIENT.enable_logging(logger)
     raise HTTPClient::ReceiveTimeoutError.new}

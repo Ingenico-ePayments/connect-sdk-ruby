@@ -3,25 +3,26 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/param_request'
+require 'ingenico/connect/sdk/request_param'
 
 module Ingenico::Connect::SDK
   module Merchant
     module Products
 
       # Query parameters for {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/directory.html Get payment product directory}
+      # @attr [String] country_code
+      # @attr [String] currency_code
       class DirectoryParams < Ingenico::Connect::SDK::ParamRequest
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :currency_code
 
-        # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
+        # @return [Array<Ingenico::Connect::SDK::RequestParam>] representing the attributes of this class
         def to_request_parameters
           result = []
-          add_parameter(result, 'countryCode', @country_code)
-          add_parameter(result, 'currencyCode', @currency_code)
+          result << RequestParam.new('countryCode', @country_code) unless @country_code.nil?
+          result << RequestParam.new('currencyCode', @currency_code) unless @currency_code.nil?
           result
         end
       end

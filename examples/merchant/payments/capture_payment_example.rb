@@ -12,7 +12,7 @@ def example
     body = Payment::CapturePaymentRequest.new
     body.amount = 2980
 
-    response = client.merchant('merchantId').payments().capture('paymentId', body)
+    response = client.merchant('merchantId').payments.capture('paymentId', body)
   end
 end
 

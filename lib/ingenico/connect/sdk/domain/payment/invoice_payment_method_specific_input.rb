@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] additional_reference
       class InvoicePaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Definitions::AbstractPaymentMethodSpecificInput
 
-        # String
         attr_accessor :additional_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalReference', @additional_reference)
+          hash['additionalReference'] = @additional_reference unless @additional_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalReference')
+          if hash.has_key? 'additionalReference'
             @additional_reference = hash['additionalReference']
           end
         end

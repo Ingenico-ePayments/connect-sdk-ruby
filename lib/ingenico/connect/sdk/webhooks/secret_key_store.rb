@@ -6,8 +6,8 @@ module Ingenico::Connect::SDK
 
       # Retrieve secret key for given key id
       #
-      # key_id:: given key id
-      # Raises {Ingenico::Connect::SDK::Webhooks::SecretKeyNotAvailableException} if the secret key for the given key id is not available.
+      # @param key_id [String] key id of the secret key
+      # @raise [Ingenico::Connect::SDK::Webhooks::SecretKeyNotAvailableException] if the secret key for the given key id is not available.
       def get_secret_key(key_id)
         raise NotImplementedError
       end

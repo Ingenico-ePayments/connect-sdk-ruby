@@ -9,37 +9,36 @@ module Ingenico::Connect::SDK
   module Domain
     module Hostedcheckout
 
+      # @attr [String] displayed_data_type
+      # @attr [String] rendering_data
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair>] show_data
       class DisplayedData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :displayed_data_type
 
-        # String
         attr_accessor :rendering_data
 
-        # Array of {Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair}
         attr_accessor :show_data
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'displayedDataType', @displayed_data_type)
-          add_to_hash(hash, 'renderingData', @rendering_data)
-          add_to_hash(hash, 'showData', @show_data)
+          hash['displayedDataType'] = @displayed_data_type unless @displayed_data_type.nil?
+          hash['renderingData'] = @rendering_data unless @rendering_data.nil?
+          hash['showData'] = @show_data.collect{|val| val.to_h} unless @show_data.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('displayedDataType')
+          if hash.has_key? 'displayedDataType'
             @displayed_data_type = hash['displayedDataType']
           end
-          if hash.has_key?('renderingData')
+          if hash.has_key? 'renderingData'
             @rendering_data = hash['renderingData']
           end
-          if hash.has_key?('showData')
-            if !(hash['showData'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['showData']]
-            end
+          if hash.has_key? 'showData'
+            raise TypeError, "value '%s' is not an Array" % [hash['showData']] unless hash['showData'].is_a? Array
             @show_data = []
             hash['showData'].each do |e|
               @show_data << Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair.new_from_hash(e)

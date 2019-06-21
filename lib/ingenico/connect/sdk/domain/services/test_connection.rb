@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Services
 
+      # @attr [String] result
       class TestConnection < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :result
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'result', @result)
+          hash['result'] = @result unless @result.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('result')
+          if hash.has_key? 'result'
             @result = hash['result']
           end
         end

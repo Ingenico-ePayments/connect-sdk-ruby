@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] collector_callback
       class DeviceFingerprintRequest < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :collector_callback
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'collectorCallback', @collector_callback)
+          hash['collectorCallback'] = @collector_callback unless @collector_callback.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('collectorCallback')
+          if hash.has_key? 'collectorCallback'
             @collector_callback = hash['collectorCallback']
           end
         end

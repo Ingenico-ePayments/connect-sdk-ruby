@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] cardholder_name
+      # @attr [String] issue_number
       class CardWithoutCvv < Ingenico::Connect::SDK::Domain::Definitions::CardEssentials
 
-        # String
         attr_accessor :cardholder_name
 
-        # String
         attr_accessor :issue_number
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'cardholderName', @cardholder_name)
-          add_to_hash(hash, 'issueNumber', @issue_number)
+          hash['cardholderName'] = @cardholder_name unless @cardholder_name.nil?
+          hash['issueNumber'] = @issue_number unless @issue_number.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('cardholderName')
+          if hash.has_key? 'cardholderName'
             @cardholder_name = hash['cardholderName']
           end
-          if hash.has_key?('issueNumber')
+          if hash.has_key? 'issueNumber'
             @issue_number = hash['issueNumber']
           end
         end

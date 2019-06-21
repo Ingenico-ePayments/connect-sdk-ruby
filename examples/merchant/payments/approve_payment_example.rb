@@ -27,7 +27,7 @@ def example
     body.direct_debit_payment_method_specific_input = direct_debit_payment_method_specific_input
     body.order = order
 
-    response = client.merchant('merchantId').payments().approve('paymentId', body)
+    response = client.merchant('merchantId').payments.approve('paymentId', body)
   end
 end
 

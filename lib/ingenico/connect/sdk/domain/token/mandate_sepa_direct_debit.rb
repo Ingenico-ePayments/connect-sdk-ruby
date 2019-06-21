@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [Ingenico::Connect::SDK::Domain::Token::Creditor] creditor
       class MandateSepaDirectDebit < Ingenico::Connect::SDK::Domain::Token::MandateSepaDirectDebitWithMandateId
 
-        # {Ingenico::Connect::SDK::Domain::Token::Creditor}
         attr_accessor :creditor
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'creditor', @creditor)
+          hash['creditor'] = @creditor.to_h unless @creditor.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('creditor')
-            if !(hash['creditor'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['creditor']]
-            end
+          if hash.has_key? 'creditor'
+            raise TypeError, "value '%s' is not a Hash" % [hash['creditor']] unless hash['creditor'].is_a? Hash
             @creditor = Ingenico::Connect::SDK::Domain::Token::Creditor.new_from_hash(hash['creditor'])
           end
         end

@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] security_indicator
       class PaymentProduct836SpecificOutput < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :security_indicator
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'securityIndicator', @security_indicator)
+          hash['securityIndicator'] = @security_indicator unless @security_indicator.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('securityIndicator')
+          if hash.has_key? 'securityIndicator'
             @security_indicator = hash['securityIndicator']
           end
         end

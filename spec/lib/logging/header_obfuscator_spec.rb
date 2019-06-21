@@ -30,7 +30,7 @@ describe HeaderObfuscator do
       }.to raise_error(ArgumentError)
 
       expect {
-        b.with_fixed_length(123)
+        b.with_fixed_length(123, 123)
       }.to raise_error(ArgumentError)
     end
 

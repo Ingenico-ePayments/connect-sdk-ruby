@@ -10,33 +10,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Hostedmandatemanagement
 
+      # @attr [Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateInfo] create_mandate_info
+      # @attr [Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateManagementSpecificInput] hosted_mandate_management_specific_input
       class CreateHostedMandateManagementRequest < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateInfo}
         attr_accessor :create_mandate_info
 
-        # {Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateManagementSpecificInput}
         attr_accessor :hosted_mandate_management_specific_input
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'createMandateInfo', @create_mandate_info)
-          add_to_hash(hash, 'hostedMandateManagementSpecificInput', @hosted_mandate_management_specific_input)
+          hash['createMandateInfo'] = @create_mandate_info.to_h unless @create_mandate_info.nil?
+          hash['hostedMandateManagementSpecificInput'] = @hosted_mandate_management_specific_input.to_h unless @hosted_mandate_management_specific_input.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('createMandateInfo')
-            if !(hash['createMandateInfo'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['createMandateInfo']]
-            end
+          if hash.has_key? 'createMandateInfo'
+            raise TypeError, "value '%s' is not a Hash" % [hash['createMandateInfo']] unless hash['createMandateInfo'].is_a? Hash
             @create_mandate_info = Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateInfo.new_from_hash(hash['createMandateInfo'])
           end
-          if hash.has_key?('hostedMandateManagementSpecificInput')
-            if !(hash['hostedMandateManagementSpecificInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['hostedMandateManagementSpecificInput']]
-            end
+          if hash.has_key? 'hostedMandateManagementSpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['hostedMandateManagementSpecificInput']] unless hash['hostedMandateManagementSpecificInput'].is_a? Hash
             @hosted_mandate_management_specific_input = Ingenico::Connect::SDK::Domain::Hostedmandatemanagement::HostedMandateManagementSpecificInput.new_from_hash(hash['hostedMandateManagementSpecificInput'])
           end
         end

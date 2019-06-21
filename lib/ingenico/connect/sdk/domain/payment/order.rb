@@ -16,100 +16,85 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::AdditionalOrderInput] additional_input
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] amount_of_money
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Customer] customer
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Payment::LineItem>] items
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::OrderReferences] references
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Seller] seller
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Shipping] shipping
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ShoppingCart] shopping_cart
       class Order < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::AdditionalOrderInput}
         attr_accessor :additional_input
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney}
         attr_accessor :amount_of_money
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Customer}
         attr_accessor :customer
 
-        # Array of {Ingenico::Connect::SDK::Domain::Payment::LineItem}
         #
-        # Deprecated; Use shoppingCart.items instead
+        # @deprecated Use shoppingCart.items instead
         attr_accessor :items
 
-        # {Ingenico::Connect::SDK::Domain::Payment::OrderReferences}
         attr_accessor :references
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Seller}
         #
-        # Deprecated; Use Merchant.seller instead
+        # @deprecated Use Merchant.seller instead
         attr_accessor :seller
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Shipping}
         attr_accessor :shipping
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ShoppingCart}
         attr_accessor :shopping_cart
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalInput', @additional_input)
-          add_to_hash(hash, 'amountOfMoney', @amount_of_money)
-          add_to_hash(hash, 'customer', @customer)
-          add_to_hash(hash, 'items', @items)
-          add_to_hash(hash, 'references', @references)
-          add_to_hash(hash, 'seller', @seller)
-          add_to_hash(hash, 'shipping', @shipping)
-          add_to_hash(hash, 'shoppingCart', @shopping_cart)
+          hash['additionalInput'] = @additional_input.to_h unless @additional_input.nil?
+          hash['amountOfMoney'] = @amount_of_money.to_h unless @amount_of_money.nil?
+          hash['customer'] = @customer.to_h unless @customer.nil?
+          hash['items'] = @items.collect{|val| val.to_h} unless @items.nil?
+          hash['references'] = @references.to_h unless @references.nil?
+          hash['seller'] = @seller.to_h unless @seller.nil?
+          hash['shipping'] = @shipping.to_h unless @shipping.nil?
+          hash['shoppingCart'] = @shopping_cart.to_h unless @shopping_cart.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalInput')
-            if !(hash['additionalInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['additionalInput']]
-            end
+          if hash.has_key? 'additionalInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['additionalInput']] unless hash['additionalInput'].is_a? Hash
             @additional_input = Ingenico::Connect::SDK::Domain::Payment::AdditionalOrderInput.new_from_hash(hash['additionalInput'])
           end
-          if hash.has_key?('amountOfMoney')
-            if !(hash['amountOfMoney'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']]
-            end
+          if hash.has_key? 'amountOfMoney'
+            raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']] unless hash['amountOfMoney'].is_a? Hash
             @amount_of_money = Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney.new_from_hash(hash['amountOfMoney'])
           end
-          if hash.has_key?('customer')
-            if !(hash['customer'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customer']]
-            end
+          if hash.has_key? 'customer'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customer']] unless hash['customer'].is_a? Hash
             @customer = Ingenico::Connect::SDK::Domain::Payment::Customer.new_from_hash(hash['customer'])
           end
-          if hash.has_key?('items')
-            if !(hash['items'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['items']]
-            end
+          if hash.has_key? 'items'
+            raise TypeError, "value '%s' is not an Array" % [hash['items']] unless hash['items'].is_a? Array
             @items = []
             hash['items'].each do |e|
               @items << Ingenico::Connect::SDK::Domain::Payment::LineItem.new_from_hash(e)
             end
           end
-          if hash.has_key?('references')
-            if !(hash['references'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['references']]
-            end
+          if hash.has_key? 'references'
+            raise TypeError, "value '%s' is not a Hash" % [hash['references']] unless hash['references'].is_a? Hash
             @references = Ingenico::Connect::SDK::Domain::Payment::OrderReferences.new_from_hash(hash['references'])
           end
-          if hash.has_key?('seller')
-            if !(hash['seller'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['seller']]
-            end
+          if hash.has_key? 'seller'
+            raise TypeError, "value '%s' is not a Hash" % [hash['seller']] unless hash['seller'].is_a? Hash
             @seller = Ingenico::Connect::SDK::Domain::Payment::Seller.new_from_hash(hash['seller'])
           end
-          if hash.has_key?('shipping')
-            if !(hash['shipping'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['shipping']]
-            end
+          if hash.has_key? 'shipping'
+            raise TypeError, "value '%s' is not a Hash" % [hash['shipping']] unless hash['shipping'].is_a? Hash
             @shipping = Ingenico::Connect::SDK::Domain::Payment::Shipping.new_from_hash(hash['shipping'])
           end
-          if hash.has_key?('shoppingCart')
-            if !(hash['shoppingCart'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['shoppingCart']]
-            end
+          if hash.has_key? 'shoppingCart'
+            raise TypeError, "value '%s' is not a Hash" % [hash['shoppingCart']] unless hash['shoppingCart'].is_a? Hash
             @shopping_cart = Ingenico::Connect::SDK::Domain::Payment::ShoppingCart.new_from_hash(hash['shoppingCart'])
           end
         end

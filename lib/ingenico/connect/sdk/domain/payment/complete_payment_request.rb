@@ -11,43 +11,38 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::CompletePaymentCardPaymentMethodSpecificInput] card_payment_method_specific_input
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Merchant] merchant
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Order] order
       class CompletePaymentRequest < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::CompletePaymentCardPaymentMethodSpecificInput}
         attr_accessor :card_payment_method_specific_input
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Merchant}
         attr_accessor :merchant
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Order}
         attr_accessor :order
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'cardPaymentMethodSpecificInput', @card_payment_method_specific_input)
-          add_to_hash(hash, 'merchant', @merchant)
-          add_to_hash(hash, 'order', @order)
+          hash['cardPaymentMethodSpecificInput'] = @card_payment_method_specific_input.to_h unless @card_payment_method_specific_input.nil?
+          hash['merchant'] = @merchant.to_h unless @merchant.nil?
+          hash['order'] = @order.to_h unless @order.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('cardPaymentMethodSpecificInput')
-            if !(hash['cardPaymentMethodSpecificInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['cardPaymentMethodSpecificInput']]
-            end
+          if hash.has_key? 'cardPaymentMethodSpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['cardPaymentMethodSpecificInput']] unless hash['cardPaymentMethodSpecificInput'].is_a? Hash
             @card_payment_method_specific_input = Ingenico::Connect::SDK::Domain::Payment::CompletePaymentCardPaymentMethodSpecificInput.new_from_hash(hash['cardPaymentMethodSpecificInput'])
           end
-          if hash.has_key?('merchant')
-            if !(hash['merchant'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['merchant']]
-            end
+          if hash.has_key? 'merchant'
+            raise TypeError, "value '%s' is not a Hash" % [hash['merchant']] unless hash['merchant'].is_a? Hash
             @merchant = Ingenico::Connect::SDK::Domain::Payment::Merchant.new_from_hash(hash['merchant'])
           end
-          if hash.has_key?('order')
-            if !(hash['order'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['order']]
-            end
+          if hash.has_key? 'order'
+            raise TypeError, "value '%s' is not a Hash" % [hash['order']] unless hash['order'].is_a? Hash
             @order = Ingenico::Connect::SDK::Domain::Payment::Order.new_from_hash(hash['order'])
           end
         end

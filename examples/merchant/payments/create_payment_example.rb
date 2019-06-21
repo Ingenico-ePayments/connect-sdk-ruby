@@ -182,9 +182,9 @@ def example
     body.order = order
 
     begin
-      response = client.merchant('merchantId').payments().create(body)
+      response = client.merchant('merchantId').payments.create(body)
     rescue Ingenico::Connect::SDK::DeclinedPaymentException => e
-      handle_declined_payment(e.create_payment_result)
+      handle_declined_payment(e.payment_result)
     rescue Ingenico::Connect::SDK::ApiException => e
       handle_api_errors(e.errors)
     end
@@ -205,6 +205,6 @@ def handle_declined_payment(create_payment_result)
   # handle the result here
 end
 
-def  handle_api_errors(errors)
+def handle_api_errors(errors)
   # handle the errors here
 end

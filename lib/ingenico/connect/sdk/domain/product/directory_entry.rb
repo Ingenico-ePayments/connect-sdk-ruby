@@ -8,47 +8,46 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Array<String>] country_names
+      # @attr [String] issuer_id
+      # @attr [String] issuer_list
+      # @attr [String] issuer_name
       class DirectoryEntry < Ingenico::Connect::SDK::DataObject
 
-        # Array of String
         attr_accessor :country_names
 
-        # String
         attr_accessor :issuer_id
 
-        # String
         attr_accessor :issuer_list
 
-        # String
         attr_accessor :issuer_name
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'countryNames', @country_names)
-          add_to_hash(hash, 'issuerId', @issuer_id)
-          add_to_hash(hash, 'issuerList', @issuer_list)
-          add_to_hash(hash, 'issuerName', @issuer_name)
+          hash['countryNames'] = @country_names unless @country_names.nil?
+          hash['issuerId'] = @issuer_id unless @issuer_id.nil?
+          hash['issuerList'] = @issuer_list unless @issuer_list.nil?
+          hash['issuerName'] = @issuer_name unless @issuer_name.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('countryNames')
-            if !(hash['countryNames'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['countryNames']]
-            end
+          if hash.has_key? 'countryNames'
+            raise TypeError, "value '%s' is not an Array" % [hash['countryNames']] unless hash['countryNames'].is_a? Array
             @country_names = []
             hash['countryNames'].each do |e|
               @country_names << e
             end
           end
-          if hash.has_key?('issuerId')
+          if hash.has_key? 'issuerId'
             @issuer_id = hash['issuerId']
           end
-          if hash.has_key?('issuerList')
+          if hash.has_key? 'issuerList'
             @issuer_list = hash['issuerList']
           end
-          if hash.has_key?('issuerName')
+          if hash.has_key? 'issuerName'
             @issuer_name = hash['issuerName']
           end
         end

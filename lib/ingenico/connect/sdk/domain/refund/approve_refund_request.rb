@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [Integer] amount
       class ApproveRefundRequest < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :amount
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'amount', @amount)
+          hash['amount'] = @amount unless @amount.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('amount')
+          if hash.has_key? 'amount'
             @amount = hash['amount']
           end
         end

@@ -9,33 +9,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Sessions
 
+      # @attr [Ingenico::Connect::SDK::Domain::Sessions::PaymentProductFiltersClientSession] payment_product_filters
+      # @attr [Array<String>] tokens
       class SessionRequest < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Sessions::PaymentProductFiltersClientSession}
         attr_accessor :payment_product_filters
 
-        # Array of String
         attr_accessor :tokens
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProductFilters', @payment_product_filters)
-          add_to_hash(hash, 'tokens', @tokens)
+          hash['paymentProductFilters'] = @payment_product_filters.to_h unless @payment_product_filters.nil?
+          hash['tokens'] = @tokens unless @tokens.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProductFilters')
-            if !(hash['paymentProductFilters'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProductFilters']]
-            end
+          if hash.has_key? 'paymentProductFilters'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProductFilters']] unless hash['paymentProductFilters'].is_a? Hash
             @payment_product_filters = Ingenico::Connect::SDK::Domain::Sessions::PaymentProductFiltersClientSession.new_from_hash(hash['paymentProductFilters'])
           end
-          if hash.has_key?('tokens')
-            if !(hash['tokens'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['tokens']]
-            end
+          if hash.has_key? 'tokens'
+            raise TypeError, "value '%s' is not an Array" % [hash['tokens']] unless hash['tokens'].is_a? Array
             @tokens = []
             hash['tokens'].each do |e|
               @tokens << e

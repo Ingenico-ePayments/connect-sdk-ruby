@@ -12,7 +12,7 @@ def example
     body = Payout::ApprovePayoutRequest.new
     body.date_payout = '20150102'
 
-    response = client.merchant('merchantId').payouts().approve('payoutId', body)
+    response = client.merchant('merchantId').payouts.approve('payoutId', body)
   end
 end
 

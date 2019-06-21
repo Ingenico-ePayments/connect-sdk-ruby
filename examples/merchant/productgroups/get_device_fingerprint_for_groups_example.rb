@@ -11,7 +11,7 @@ def example
   get_client do |client|
     body = Product::DeviceFingerprintRequest.new
 
-    response = client.merchant('merchantId').productgroups().device_fingerprint('cards', body)
+    response = client.merchant('merchantId').productgroups.device_fingerprint('cards', body)
   end
 end
 

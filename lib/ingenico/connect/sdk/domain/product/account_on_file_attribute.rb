@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] must_write_reason
+      # @attr [String] status
       class AccountOnFileAttribute < Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair
 
-        # String
         attr_accessor :must_write_reason
 
-        # String
         attr_accessor :status
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'mustWriteReason', @must_write_reason)
-          add_to_hash(hash, 'status', @status)
+          hash['mustWriteReason'] = @must_write_reason unless @must_write_reason.nil?
+          hash['status'] = @status unless @status.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('mustWriteReason')
+          if hash.has_key? 'mustWriteReason'
             @must_write_reason = hash['mustWriteReason']
           end
-          if hash.has_key?('status')
+          if hash.has_key? 'status'
             @status = hash['status']
           end
         end

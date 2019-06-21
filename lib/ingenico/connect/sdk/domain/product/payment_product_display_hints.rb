@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Integer] display_order
+      # @attr [String] label
+      # @attr [String] logo
       class PaymentProductDisplayHints < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :display_order
 
-        # String
         attr_accessor :label
 
-        # String
         attr_accessor :logo
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'displayOrder', @display_order)
-          add_to_hash(hash, 'label', @label)
-          add_to_hash(hash, 'logo', @logo)
+          hash['displayOrder'] = @display_order unless @display_order.nil?
+          hash['label'] = @label unless @label.nil?
+          hash['logo'] = @logo unless @logo.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('displayOrder')
+          if hash.has_key? 'displayOrder'
             @display_order = hash['displayOrder']
           end
-          if hash.has_key?('label')
+          if hash.has_key? 'label'
             @label = hash['label']
           end
-          if hash.has_key?('logo')
+          if hash.has_key? 'logo'
             @logo = hash['logo']
           end
         end

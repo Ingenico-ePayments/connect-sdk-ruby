@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] merchant_reference
       class OrderReferencesApprovePayment < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :merchant_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'merchantReference', @merchant_reference)
+          hash['merchantReference'] = @merchant_reference unless @merchant_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('merchantReference')
+          if hash.has_key? 'merchantReference'
             @merchant_reference = hash['merchantReference']
           end
         end

@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] email_address
+      # @attr [String] email_message_type
       class ContactDetailsBase < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :email_address
 
-        # String
         attr_accessor :email_message_type
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'emailAddress', @email_address)
-          add_to_hash(hash, 'emailMessageType', @email_message_type)
+          hash['emailAddress'] = @email_address unless @email_address.nil?
+          hash['emailMessageType'] = @email_message_type unless @email_message_type.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('emailAddress')
+          if hash.has_key? 'emailAddress'
             @email_address = hash['emailAddress']
           end
-          if hash.has_key?('emailMessageType')
+          if hash.has_key? 'emailMessageType'
             @email_message_type = hash['emailMessageType']
           end
         end

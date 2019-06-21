@@ -8,29 +8,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] custom
+      # @attr [true/false] is_shortcut
       class RedirectPaymentProduct840SpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractRedirectPaymentProduct840SpecificInput
 
-        # String
         #
-        # Deprecated; Use Order.references.descriptor instead
+        # @deprecated Use Order.references.descriptor instead
         attr_accessor :custom
 
-        # true/false
         attr_accessor :is_shortcut
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'custom', @custom)
-          add_to_hash(hash, 'isShortcut', @is_shortcut)
+          hash['custom'] = @custom unless @custom.nil?
+          hash['isShortcut'] = @is_shortcut unless @is_shortcut.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('custom')
+          if hash.has_key? 'custom'
             @custom = hash['custom']
           end
-          if hash.has_key?('isShortcut')
+          if hash.has_key? 'isShortcut'
             @is_shortcut = hash['isShortcut']
           end
         end

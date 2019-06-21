@@ -57,7 +57,7 @@ def example
     body.refund_references = refund_references
 
     begin
-      response = client.merchant('merchantId').payments().refund('paymentId', body)
+      response = client.merchant('merchantId').payments.refund('paymentId', body)
     rescue Ingenico::Connect::SDK::DeclinedRefundException => e
       handle_declined_refund(e.refund_result)
     rescue Ingenico::Connect::SDK::ApiException => e
@@ -80,6 +80,6 @@ def handle_declined_refund(refund_result)
   # handle the result here
 end
 
-def  handle_api_errors(errors)
+def handle_api_errors(errors)
   # handle the errors here
 end

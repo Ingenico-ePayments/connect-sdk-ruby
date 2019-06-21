@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] id
       class AbstractOrderStatus < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'id', @id)
+          hash['id'] = @id unless @id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
         end

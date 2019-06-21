@@ -8,90 +8,91 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [String] additional_address_info
+      # @attr [String] city
+      # @attr [String] country_code
+      # @attr [String] first_name
+      # @attr [String] house_number
+      # @attr [String] state
+      # @attr [String] state_code
+      # @attr [String] street
+      # @attr [String] surname
+      # @attr [String] surname_prefix
+      # @attr [String] zip
       class Debtor < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :additional_address_info
 
-        # String
         attr_accessor :city
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :first_name
 
-        # String
         attr_accessor :house_number
 
-        # String
         attr_accessor :state
 
-        # String
         attr_accessor :state_code
 
-        # String
         attr_accessor :street
 
-        # String
         attr_accessor :surname
 
-        # String
         attr_accessor :surname_prefix
 
-        # String
         attr_accessor :zip
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalAddressInfo', @additional_address_info)
-          add_to_hash(hash, 'city', @city)
-          add_to_hash(hash, 'countryCode', @country_code)
-          add_to_hash(hash, 'firstName', @first_name)
-          add_to_hash(hash, 'houseNumber', @house_number)
-          add_to_hash(hash, 'state', @state)
-          add_to_hash(hash, 'stateCode', @state_code)
-          add_to_hash(hash, 'street', @street)
-          add_to_hash(hash, 'surname', @surname)
-          add_to_hash(hash, 'surnamePrefix', @surname_prefix)
-          add_to_hash(hash, 'zip', @zip)
+          hash['additionalAddressInfo'] = @additional_address_info unless @additional_address_info.nil?
+          hash['city'] = @city unless @city.nil?
+          hash['countryCode'] = @country_code unless @country_code.nil?
+          hash['firstName'] = @first_name unless @first_name.nil?
+          hash['houseNumber'] = @house_number unless @house_number.nil?
+          hash['state'] = @state unless @state.nil?
+          hash['stateCode'] = @state_code unless @state_code.nil?
+          hash['street'] = @street unless @street.nil?
+          hash['surname'] = @surname unless @surname.nil?
+          hash['surnamePrefix'] = @surname_prefix unless @surname_prefix.nil?
+          hash['zip'] = @zip unless @zip.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalAddressInfo')
+          if hash.has_key? 'additionalAddressInfo'
             @additional_address_info = hash['additionalAddressInfo']
           end
-          if hash.has_key?('city')
+          if hash.has_key? 'city'
             @city = hash['city']
           end
-          if hash.has_key?('countryCode')
+          if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
           end
-          if hash.has_key?('firstName')
+          if hash.has_key? 'firstName'
             @first_name = hash['firstName']
           end
-          if hash.has_key?('houseNumber')
+          if hash.has_key? 'houseNumber'
             @house_number = hash['houseNumber']
           end
-          if hash.has_key?('state')
+          if hash.has_key? 'state'
             @state = hash['state']
           end
-          if hash.has_key?('stateCode')
+          if hash.has_key? 'stateCode'
             @state_code = hash['stateCode']
           end
-          if hash.has_key?('street')
+          if hash.has_key? 'street'
             @street = hash['street']
           end
-          if hash.has_key?('surname')
+          if hash.has_key? 'surname'
             @surname = hash['surname']
           end
-          if hash.has_key?('surnamePrefix')
+          if hash.has_key? 'surnamePrefix'
             @surname_prefix = hash['surnamePrefix']
           end
-          if hash.has_key?('zip')
+          if hash.has_key? 'zip'
             @zip = hash['zip']
           end
         end

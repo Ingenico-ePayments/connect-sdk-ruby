@@ -10,40 +10,37 @@ module Ingenico::Connect::SDK
   module Domain
     module Capture
 
+      # @attr [Ingenico::Connect::SDK::Domain::Capture::CaptureOutput] capture_output
+      # @attr [String] status
+      # @attr [Ingenico::Connect::SDK::Domain::Capture::CaptureStatusOutput] status_output
       class Capture < Ingenico::Connect::SDK::Domain::Definitions::AbstractOrderStatus
 
-        # {Ingenico::Connect::SDK::Domain::Capture::CaptureOutput}
         attr_accessor :capture_output
 
-        # String
         attr_accessor :status
 
-        # {Ingenico::Connect::SDK::Domain::Capture::CaptureStatusOutput}
         attr_accessor :status_output
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'captureOutput', @capture_output)
-          add_to_hash(hash, 'status', @status)
-          add_to_hash(hash, 'statusOutput', @status_output)
+          hash['captureOutput'] = @capture_output.to_h unless @capture_output.nil?
+          hash['status'] = @status unless @status.nil?
+          hash['statusOutput'] = @status_output.to_h unless @status_output.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('captureOutput')
-            if !(hash['captureOutput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['captureOutput']]
-            end
+          if hash.has_key? 'captureOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['captureOutput']] unless hash['captureOutput'].is_a? Hash
             @capture_output = Ingenico::Connect::SDK::Domain::Capture::CaptureOutput.new_from_hash(hash['captureOutput'])
           end
-          if hash.has_key?('status')
+          if hash.has_key? 'status'
             @status = hash['status']
           end
-          if hash.has_key?('statusOutput')
-            if !(hash['statusOutput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['statusOutput']]
-            end
+          if hash.has_key? 'statusOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['statusOutput']] unless hash['statusOutput'].is_a? Hash
             @status_output = Ingenico::Connect::SDK::Domain::Capture::CaptureStatusOutput.new_from_hash(hash['statusOutput'])
           end
         end

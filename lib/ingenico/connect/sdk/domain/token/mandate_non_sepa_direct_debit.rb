@@ -10,33 +10,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct705SpecificData] payment_product705_specific_data
+      # @attr [Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct730SpecificData] payment_product730_specific_data
       class MandateNonSepaDirectDebit < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct705SpecificData}
         attr_accessor :payment_product705_specific_data
 
-        # {Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct730SpecificData}
         attr_accessor :payment_product730_specific_data
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProduct705SpecificData', @payment_product705_specific_data)
-          add_to_hash(hash, 'paymentProduct730SpecificData', @payment_product730_specific_data)
+          hash['paymentProduct705SpecificData'] = @payment_product705_specific_data.to_h unless @payment_product705_specific_data.nil?
+          hash['paymentProduct730SpecificData'] = @payment_product730_specific_data.to_h unless @payment_product730_specific_data.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProduct705SpecificData')
-            if !(hash['paymentProduct705SpecificData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct705SpecificData']]
-            end
+          if hash.has_key? 'paymentProduct705SpecificData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct705SpecificData']] unless hash['paymentProduct705SpecificData'].is_a? Hash
             @payment_product705_specific_data = Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct705SpecificData.new_from_hash(hash['paymentProduct705SpecificData'])
           end
-          if hash.has_key?('paymentProduct730SpecificData')
-            if !(hash['paymentProduct730SpecificData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct730SpecificData']]
-            end
+          if hash.has_key? 'paymentProduct730SpecificData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct730SpecificData']] unless hash['paymentProduct730SpecificData'].is_a? Hash
             @payment_product730_specific_data = Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebitPaymentProduct730SpecificData.new_from_hash(hash['paymentProduct730SpecificData'])
           end
         end

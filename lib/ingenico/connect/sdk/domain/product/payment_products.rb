@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProduct>] payment_products
       class PaymentProducts < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProduct}
         attr_accessor :payment_products
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProducts', @payment_products)
+          hash['paymentProducts'] = @payment_products.collect{|val| val.to_h} unless @payment_products.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProducts')
-            if !(hash['paymentProducts'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['paymentProducts']]
-            end
+          if hash.has_key? 'paymentProducts'
+            raise TypeError, "value '%s' is not an Array" % [hash['paymentProducts']] unless hash['paymentProducts'].is_a? Array
             @payment_products = []
             hash['paymentProducts'].each do |e|
               @payment_products << Ingenico::Connect::SDK::Domain::Product::PaymentProduct.new_from_hash(e)

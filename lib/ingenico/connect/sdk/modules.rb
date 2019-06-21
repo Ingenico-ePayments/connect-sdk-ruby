@@ -21,6 +21,11 @@ end
 module Ingenico::Connect::SDK::Domain
 end
 
+# Contains the client used to access the Files service.
+# @see https://epayments-api.developer-ingenico.com/fileserviceapi/v1/en_US/ruby/files/
+module Ingenico::Connect::SDK::Merchant::Files
+end
+
 # Contains data classes that are used in file handling.
 module Ingenico::Connect::SDK::Domain::File
 end
@@ -158,10 +163,6 @@ end
 # Contains data classes that are used in the tokenization service.
 # @see https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/tokens/
 module Ingenico::Connect::SDK::Domain::Token
-end
-
-# Contains data classes that are used for cryptography services.
-module Ingenico::Connect::SDK::Domain::Publickey
 end
 
 # Contains the general data classes that are used in multiple different types of requests.

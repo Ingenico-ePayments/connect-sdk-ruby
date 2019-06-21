@@ -10,43 +10,40 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [String] error_id
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Errors::APIError>] errors
+      # @attr [Ingenico::Connect::SDK::Domain::Refund::RefundResult] refund_result
       class RefundErrorResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :error_id
 
-        # Array of {Ingenico::Connect::SDK::Domain::Errors::APIError}
         attr_accessor :errors
 
-        # {Ingenico::Connect::SDK::Domain::Refund::RefundResult}
         attr_accessor :refund_result
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'errorId', @error_id)
-          add_to_hash(hash, 'errors', @errors)
-          add_to_hash(hash, 'refundResult', @refund_result)
+          hash['errorId'] = @error_id unless @error_id.nil?
+          hash['errors'] = @errors.collect{|val| val.to_h} unless @errors.nil?
+          hash['refundResult'] = @refund_result.to_h unless @refund_result.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('errorId')
+          if hash.has_key? 'errorId'
             @error_id = hash['errorId']
           end
-          if hash.has_key?('errors')
-            if !(hash['errors'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['errors']]
-            end
+          if hash.has_key? 'errors'
+            raise TypeError, "value '%s' is not an Array" % [hash['errors']] unless hash['errors'].is_a? Array
             @errors = []
             hash['errors'].each do |e|
               @errors << Ingenico::Connect::SDK::Domain::Errors::APIError.new_from_hash(e)
             end
           end
-          if hash.has_key?('refundResult')
-            if !(hash['refundResult'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['refundResult']]
-            end
+          if hash.has_key? 'refundResult'
+            raise TypeError, "value '%s' is not a Hash" % [hash['refundResult']] unless hash['refundResult'].is_a? Hash
             @refund_result = Ingenico::Connect::SDK::Domain::Refund::RefundResult.new_from_hash(hash['refundResult'])
           end
         end

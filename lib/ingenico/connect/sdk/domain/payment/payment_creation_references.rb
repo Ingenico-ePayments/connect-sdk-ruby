@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] additional_reference
+      # @attr [String] external_reference
       class PaymentCreationReferences < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :additional_reference
 
-        # String
         attr_accessor :external_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalReference', @additional_reference)
-          add_to_hash(hash, 'externalReference', @external_reference)
+          hash['additionalReference'] = @additional_reference unless @additional_reference.nil?
+          hash['externalReference'] = @external_reference unless @external_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalReference')
+          if hash.has_key? 'additionalReference'
             @additional_reference = hash['additionalReference']
           end
-          if hash.has_key?('externalReference')
+          if hash.has_key? 'externalReference'
             @external_reference = hash['externalReference']
           end
         end

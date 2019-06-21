@@ -11,43 +11,38 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData] additional_input
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::CustomerApprovePayment] customer
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::OrderReferencesApprovePayment] references
       class OrderApprovePayment < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData}
         attr_accessor :additional_input
 
-        # {Ingenico::Connect::SDK::Domain::Payment::CustomerApprovePayment}
         attr_accessor :customer
 
-        # {Ingenico::Connect::SDK::Domain::Payment::OrderReferencesApprovePayment}
         attr_accessor :references
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalInput', @additional_input)
-          add_to_hash(hash, 'customer', @customer)
-          add_to_hash(hash, 'references', @references)
+          hash['additionalInput'] = @additional_input.to_h unless @additional_input.nil?
+          hash['customer'] = @customer.to_h unless @customer.nil?
+          hash['references'] = @references.to_h unless @references.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalInput')
-            if !(hash['additionalInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['additionalInput']]
-            end
+          if hash.has_key? 'additionalInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['additionalInput']] unless hash['additionalInput'].is_a? Hash
             @additional_input = Ingenico::Connect::SDK::Domain::Definitions::AdditionalOrderInputAirlineData.new_from_hash(hash['additionalInput'])
           end
-          if hash.has_key?('customer')
-            if !(hash['customer'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customer']]
-            end
+          if hash.has_key? 'customer'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customer']] unless hash['customer'].is_a? Hash
             @customer = Ingenico::Connect::SDK::Domain::Payment::CustomerApprovePayment.new_from_hash(hash['customer'])
           end
-          if hash.has_key?('references')
-            if !(hash['references'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['references']]
-            end
+          if hash.has_key? 'references'
+            raise TypeError, "value '%s' is not a Hash" % [hash['references']] unless hash['references'].is_a? Hash
             @references = Ingenico::Connect::SDK::Domain::Payment::OrderReferencesApprovePayment.new_from_hash(hash['references'])
           end
         end

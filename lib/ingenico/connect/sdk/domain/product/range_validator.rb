@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Integer] max_value
+      # @attr [Integer] min_value
       class RangeValidator < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :max_value
 
-        # Integer
         attr_accessor :min_value
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'maxValue', @max_value)
-          add_to_hash(hash, 'minValue', @min_value)
+          hash['maxValue'] = @max_value unless @max_value.nil?
+          hash['minValue'] = @min_value unless @min_value.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('maxValue')
+          if hash.has_key? 'maxValue'
             @max_value = hash['maxValue']
           end
-          if hash.has_key?('minValue')
+          if hash.has_key? 'minValue'
             @min_value = hash['minValue']
           end
         end

@@ -11,66 +11,61 @@ module Ingenico::Connect::SDK
   module Domain
     module Hostedcheckout
 
+      # @attr [Ingenico::Connect::SDK::Domain::Hostedcheckout::DisplayedData] displayed_data
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Payment] payment
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentCreationReferences] payment_creation_references
+      # @attr [String] payment_status_category
+      # @attr [true/false] tokenization_succeeded
+      # @attr [String] tokens
       class CreatedPaymentOutput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Hostedcheckout::DisplayedData}
         attr_accessor :displayed_data
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Payment}
         attr_accessor :payment
 
-        # {Ingenico::Connect::SDK::Domain::Payment::PaymentCreationReferences}
         attr_accessor :payment_creation_references
 
-        # String
         #
-        # Deprecated; Use Payment.statusOutput.statusCategory instead
+        # @deprecated Use Payment.statusOutput.statusCategory instead
         attr_accessor :payment_status_category
 
-        # true/false
         attr_accessor :tokenization_succeeded
 
-        # String
         attr_accessor :tokens
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'displayedData', @displayed_data)
-          add_to_hash(hash, 'payment', @payment)
-          add_to_hash(hash, 'paymentCreationReferences', @payment_creation_references)
-          add_to_hash(hash, 'paymentStatusCategory', @payment_status_category)
-          add_to_hash(hash, 'tokenizationSucceeded', @tokenization_succeeded)
-          add_to_hash(hash, 'tokens', @tokens)
+          hash['displayedData'] = @displayed_data.to_h unless @displayed_data.nil?
+          hash['payment'] = @payment.to_h unless @payment.nil?
+          hash['paymentCreationReferences'] = @payment_creation_references.to_h unless @payment_creation_references.nil?
+          hash['paymentStatusCategory'] = @payment_status_category unless @payment_status_category.nil?
+          hash['tokenizationSucceeded'] = @tokenization_succeeded unless @tokenization_succeeded.nil?
+          hash['tokens'] = @tokens unless @tokens.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('displayedData')
-            if !(hash['displayedData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['displayedData']]
-            end
+          if hash.has_key? 'displayedData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['displayedData']] unless hash['displayedData'].is_a? Hash
             @displayed_data = Ingenico::Connect::SDK::Domain::Hostedcheckout::DisplayedData.new_from_hash(hash['displayedData'])
           end
-          if hash.has_key?('payment')
-            if !(hash['payment'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['payment']]
-            end
+          if hash.has_key? 'payment'
+            raise TypeError, "value '%s' is not a Hash" % [hash['payment']] unless hash['payment'].is_a? Hash
             @payment = Ingenico::Connect::SDK::Domain::Payment::Payment.new_from_hash(hash['payment'])
           end
-          if hash.has_key?('paymentCreationReferences')
-            if !(hash['paymentCreationReferences'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentCreationReferences']]
-            end
+          if hash.has_key? 'paymentCreationReferences'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentCreationReferences']] unless hash['paymentCreationReferences'].is_a? Hash
             @payment_creation_references = Ingenico::Connect::SDK::Domain::Payment::PaymentCreationReferences.new_from_hash(hash['paymentCreationReferences'])
           end
-          if hash.has_key?('paymentStatusCategory')
+          if hash.has_key? 'paymentStatusCategory'
             @payment_status_category = hash['paymentStatusCategory']
           end
-          if hash.has_key?('tokenizationSucceeded')
+          if hash.has_key? 'tokenizationSucceeded'
             @tokenization_succeeded = hash['tokenizationSucceeded']
           end
-          if hash.has_key?('tokens')
+          if hash.has_key? 'tokens'
             @tokens = hash['tokens']
           end
         end

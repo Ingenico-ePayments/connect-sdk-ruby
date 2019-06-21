@@ -16,12 +16,12 @@ module Ingenico::Connect::SDK
       end
 
       # Creates a new ValueObfuscator.
-      # fixed_length::      If greater than 0, all values that will be obfuscated
-      #                     will be replaced with that number of asterisks.
-      # keep_start_count::  The number of characters to not obfuscate at the end of any value.
-      #                     This parameter is only used if _fixed_length_ = 0.
-      # keep_end_count::    The number of characters to not obfuscate at the start of any value.
-      #                     This parameter is only used if _fixed_length_ = 0.
+      #
+      # @param fixed_length     [Integer] if greater than 0, all values that will be obfuscated will be replaced with that number of asterisks.
+      # @param keep_start_count [Integer] the number of characters to not obfuscate at the end of any value.
+      #                         This parameter is only used if _fixed_length_ = 0.
+      # @param keep_end_count   [Integer] the number of characters to not obfuscate at the start of any value.
+      #                         This parameter is only used if _fixed_length_ = 0.
       def initialize(fixed_length, keep_start_count, keep_end_count)
         @mask_character = '*'
         @fixed_length = fixed_length
@@ -171,9 +171,9 @@ module Ingenico::Connect::SDK
           super(name)
         end
 
-        def with_fixed_length(name, fixedLength)
+        def with_fixed_length(name, fixed_length)
           raise ArgumentError unless name.is_a? String
-          super(name, fixedLength)
+          super(name, fixed_length)
         end
 
         def build
@@ -187,7 +187,7 @@ module Ingenico::Connect::SDK
       def initialize(obfuscators)
         # case sensitive
         super(obfuscators, false)
-        @propertyPattern = build_property_pattern(obfuscators.keys)
+        @property_pattern = build_property_pattern(obfuscators.keys)
       end
 
       private
@@ -216,12 +216,12 @@ module Ingenico::Connect::SDK
         return nil if body.nil?
         return '' if body.empty?
 
-        body.gsub(@propertyPattern) do
+        body.gsub(@property_pattern) do
           m = Regexp.last_match
-          propertyName = m[2]
+          property_name = m[2]
           value = m[4] || m[5]
           # copy value 'cause it's part of m[0]
-          m[0].sub(value, obfuscate_value(propertyName, value.dup))
+          m[0].sub(value, obfuscate_value(property_name, value.dup))
         end
       end
 
@@ -239,9 +239,9 @@ module Ingenico::Connect::SDK
           super(property)
         end
 
-        def with_fixed_length(property, fixedLength)
+        def with_fixed_length(property, fixed_length)
           raise ArgumentError unless property.is_a? String
-          super(property, fixedLength)
+          super(property, fixed_length)
         end
 
         def with_keep_start_count(key, count)

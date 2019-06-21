@@ -9,37 +9,36 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] contact_website_url
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Seller] seller
+      # @attr [String] website_url
       class Merchant < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :contact_website_url
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Seller}
         attr_accessor :seller
 
-        # String
         attr_accessor :website_url
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'contactWebsiteUrl', @contact_website_url)
-          add_to_hash(hash, 'seller', @seller)
-          add_to_hash(hash, 'websiteUrl', @website_url)
+          hash['contactWebsiteUrl'] = @contact_website_url unless @contact_website_url.nil?
+          hash['seller'] = @seller.to_h unless @seller.nil?
+          hash['websiteUrl'] = @website_url unless @website_url.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('contactWebsiteUrl')
+          if hash.has_key? 'contactWebsiteUrl'
             @contact_website_url = hash['contactWebsiteUrl']
           end
-          if hash.has_key?('seller')
-            if !(hash['seller'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['seller']]
-            end
+          if hash.has_key? 'seller'
+            raise TypeError, "value '%s' is not a Hash" % [hash['seller']] unless hash['seller'].is_a? Hash
             @seller = Ingenico::Connect::SDK::Domain::Payment::Seller.new_from_hash(hash['seller'])
           end
-          if hash.has_key?('websiteUrl')
+          if hash.has_key? 'websiteUrl'
             @website_url = hash['websiteUrl']
           end
         end

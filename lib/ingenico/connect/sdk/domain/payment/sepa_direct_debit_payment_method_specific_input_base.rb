@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentProduct771SpecificInputBase] payment_product771_specific_input
       class SepaDirectDebitPaymentMethodSpecificInputBase < Ingenico::Connect::SDK::Domain::Payment::AbstractSepaDirectDebitPaymentMethodSpecificInput
 
-        # {Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentProduct771SpecificInputBase}
         attr_accessor :payment_product771_specific_input
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProduct771SpecificInput', @payment_product771_specific_input)
+          hash['paymentProduct771SpecificInput'] = @payment_product771_specific_input.to_h unless @payment_product771_specific_input.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProduct771SpecificInput')
-            if !(hash['paymentProduct771SpecificInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct771SpecificInput']]
-            end
+          if hash.has_key? 'paymentProduct771SpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct771SpecificInput']] unless hash['paymentProduct771SpecificInput'].is_a? Hash
             @payment_product771_specific_input = Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentProduct771SpecificInputBase.new_from_hash(hash['paymentProduct771SpecificInput'])
           end
         end

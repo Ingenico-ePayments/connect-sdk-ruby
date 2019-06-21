@@ -22,19 +22,20 @@ module Ingenico
       class Client < ApiResource
         include Logging::LoggingCapable
 
+        # @return [String]
         def self.API_VERSION
           'v1'
         end
 
-        # communicator::     Ingenico::Connect::SDK::Communicator
-        # client_meta_info:: String
+        # @param communicator     [Ingenico::Connect::SDK::Communicator]
+        # @param client_meta_info [String]
         def initialize(communicator, client_meta_info=nil)
-          super(communicator, {'apiVersion' => Client.API_VERSION}, client_meta_info)
+          super(communicator, nil, client_meta_info)
         end
 
-        # client_meta_info:: JSON string containing the meta data for the client
-        # Returns:: A Client which uses the passed meta data for the X-GCS-ClientMetaInfo header.
-        # Raises:: Ingenico::Connect::SDK::MarshallerSyntaxException if the given clientMetaInfo is not a valid JSON string
+        # @param client_meta_info [String] JSON string containing the meta data for the client
+        # @return [Ingenico::Connect::SDK::Client] a Client which uses the passed meta data for the X-GCS-ClientMetaInfo header.
+        # @raise [Ingenico::Connect::SDK::MarshallerSyntaxException] if the given clientMetaInfo is not a valid JSON string
         def with_client_meta_info(client_meta_info)
           if @client_meta_info.nil? && client_meta_info.nil?
             self
@@ -63,7 +64,7 @@ module Ingenico
         end
 
         # Turns on logging using the given communicator logger.
-        # communicator_logger:: Ingenico::Connect::SDK::Logging::CommunicatorLogger
+        # @param communicator_logger [Ingenico::Connect::SDK::Logging::CommunicatorLogger]
         def enable_logging(communicator_logger)
           @communicator.enable_logging(communicator_logger)
         end
@@ -78,12 +79,12 @@ module Ingenico
           @communicator.close
         end
 
-        # Resource /{{merchantId}}
-        # merchant_id:: String
-        # Returns:: {Ingenico::Connect::SDK::Merchant::MerchantClient}
+        # Resource /!{merchantId}
+        # @param merchant_id [String]
+        # @return [Ingenico::Connect::SDK::Merchant::MerchantClient]
         def merchant(merchant_id)
           Ingenico::Connect::SDK::Merchant::MerchantClient.new(self, {
-            'merchantId' => merchant_id,
+            'merchantId'.freeze => merchant_id,
           })
         end
       end

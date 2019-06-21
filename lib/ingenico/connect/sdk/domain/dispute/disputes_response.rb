@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Dispute
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Dispute::Dispute>] disputes
       class DisputesResponse < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Dispute::Dispute}
         attr_accessor :disputes
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'disputes', @disputes)
+          hash['disputes'] = @disputes.collect{|val| val.to_h} unless @disputes.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('disputes')
-            if !(hash['disputes'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['disputes']]
-            end
+          if hash.has_key? 'disputes'
+            raise TypeError, "value '%s' is not an Array" % [hash['disputes']] unless hash['disputes'].is_a? Array
             @disputes = []
             hash['disputes'].each do |e|
               @disputes << Ingenico::Connect::SDK::Domain::Dispute::Dispute.new_from_hash(e)

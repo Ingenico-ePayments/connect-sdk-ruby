@@ -18,7 +18,7 @@ module Ingenico::Connect::SDK
     end
 
     # The declined refund result as returned by the Ingenico ePayments platform.
-    # Given as a {Ingenico::Connect::SDK::Domain::Refund::RefundResult} object.
+    # @return [Ingenico::Connect::SDK::Domain::Refund::RefundResult]
     def refund_result
       if @errors.nil?
         nil

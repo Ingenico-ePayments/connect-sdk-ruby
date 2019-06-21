@@ -10,33 +10,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] amount_of_money
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentReferences] references
       class OrderOutput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney}
         attr_accessor :amount_of_money
 
-        # {Ingenico::Connect::SDK::Domain::Payment::PaymentReferences}
         attr_accessor :references
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'amountOfMoney', @amount_of_money)
-          add_to_hash(hash, 'references', @references)
+          hash['amountOfMoney'] = @amount_of_money.to_h unless @amount_of_money.nil?
+          hash['references'] = @references.to_h unless @references.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('amountOfMoney')
-            if !(hash['amountOfMoney'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']]
-            end
+          if hash.has_key? 'amountOfMoney'
+            raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']] unless hash['amountOfMoney'].is_a? Hash
             @amount_of_money = Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney.new_from_hash(hash['amountOfMoney'])
           end
-          if hash.has_key?('references')
-            if !(hash['references'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['references']]
-            end
+          if hash.has_key? 'references'
+            raise TypeError, "value '%s' is not a Hash" % [hash['references']] unless hash['references'].is_a? Hash
             @references = Ingenico::Connect::SDK::Domain::Payment::PaymentReferences.new_from_hash(hash['references'])
           end
         end

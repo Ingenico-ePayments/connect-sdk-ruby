@@ -10,175 +10,170 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [true/false] addresses_are_identical
+      # @attr [String] black_list_data
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::Address] card_owner_address
+      # @attr [String] customer_ip_address
+      # @attr [String] default_form_fill
+      # @attr [true/false] device_fingerprint_activated
+      # @attr [String] device_fingerprint_transaction_id
+      # @attr [String] gift_card_type
+      # @attr [String] gift_message
+      # @attr [true/false] has_forgotten_pwd
+      # @attr [true/false] has_password
+      # @attr [true/false] is_previous_customer
+      # @attr [String] order_timezone
+      # @attr [String] ship_comments
+      # @attr [String] shipment_tracking_number
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraudFieldsShippingDetails] shipping_details
+      # @attr [Array<String>] user_data
+      # @attr [String] website
       class FraudFields < Ingenico::Connect::SDK::DataObject
 
-        # true/false
         #
-        # Deprecated; For risk assessments there is no replacement. For other calls, use Order.shipping.addressIndicator instead
+        # @deprecated For risk assessments there is no replacement. For other calls, use Order.shipping.addressIndicator instead
         attr_accessor :addresses_are_identical
 
-        # String
         attr_accessor :black_list_data
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::Address}
         #
-        # Deprecated; This should be the same as Order.customer.billingAddress
+        # @deprecated This should be the same as Order.customer.billingAddress
         attr_accessor :card_owner_address
 
-        # String
         attr_accessor :customer_ip_address
 
-        # String
         #
-        # Deprecated; Use Order.customer.device.defaultFormFill instead
+        # @deprecated Use Order.customer.device.defaultFormFill instead
         attr_accessor :default_form_fill
 
-        # true/false
         #
-        # Deprecated; No replacement
+        # @deprecated No replacement
         attr_accessor :device_fingerprint_activated
 
-        # String
         #
-        # Deprecated; Use Order.customer.device.deviceFingerprintTransactionId instead
+        # @deprecated Use Order.customer.device.deviceFingerprintTransactionId instead
         attr_accessor :device_fingerprint_transaction_id
 
-        # String
         attr_accessor :gift_card_type
 
-        # String
         attr_accessor :gift_message
 
-        # true/false
         #
-        # Deprecated; Use Order.customer.account.hasForgottenPassword instead
+        # @deprecated Use Order.customer.account.hasForgottenPassword instead
         attr_accessor :has_forgotten_pwd
 
-        # true/false
         #
-        # Deprecated; Use Order.customer.account.hasPassword instead
+        # @deprecated Use Order.customer.account.hasPassword instead
         attr_accessor :has_password
 
-        # true/false
         #
-        # Deprecated; Use Order.customer.isPreviousCustomer instead
+        # @deprecated Use Order.customer.isPreviousCustomer instead
         attr_accessor :is_previous_customer
 
-        # String
         attr_accessor :order_timezone
 
-        # String
         #
-        # Deprecated; Use Order.shipping.comments instead
+        # @deprecated Use Order.shipping.comments instead
         attr_accessor :ship_comments
 
-        # String
         #
-        # Deprecated; Use Order.shipping.trackingNumber instead
+        # @deprecated Use Order.shipping.trackingNumber instead
         attr_accessor :shipment_tracking_number
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::FraudFieldsShippingDetails}
         #
-        # Deprecated; No replacement
+        # @deprecated No replacement
         attr_accessor :shipping_details
 
-        # Array of String
         attr_accessor :user_data
 
-        # String
         #
-        # Deprecated; Use Merchant.websiteUrl instead
+        # @deprecated Use Merchant.websiteUrl instead
         attr_accessor :website
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'addressesAreIdentical', @addresses_are_identical)
-          add_to_hash(hash, 'blackListData', @black_list_data)
-          add_to_hash(hash, 'cardOwnerAddress', @card_owner_address)
-          add_to_hash(hash, 'customerIpAddress', @customer_ip_address)
-          add_to_hash(hash, 'defaultFormFill', @default_form_fill)
-          add_to_hash(hash, 'deviceFingerprintActivated', @device_fingerprint_activated)
-          add_to_hash(hash, 'deviceFingerprintTransactionId', @device_fingerprint_transaction_id)
-          add_to_hash(hash, 'giftCardType', @gift_card_type)
-          add_to_hash(hash, 'giftMessage', @gift_message)
-          add_to_hash(hash, 'hasForgottenPwd', @has_forgotten_pwd)
-          add_to_hash(hash, 'hasPassword', @has_password)
-          add_to_hash(hash, 'isPreviousCustomer', @is_previous_customer)
-          add_to_hash(hash, 'orderTimezone', @order_timezone)
-          add_to_hash(hash, 'shipComments', @ship_comments)
-          add_to_hash(hash, 'shipmentTrackingNumber', @shipment_tracking_number)
-          add_to_hash(hash, 'shippingDetails', @shipping_details)
-          add_to_hash(hash, 'userData', @user_data)
-          add_to_hash(hash, 'website', @website)
+          hash['addressesAreIdentical'] = @addresses_are_identical unless @addresses_are_identical.nil?
+          hash['blackListData'] = @black_list_data unless @black_list_data.nil?
+          hash['cardOwnerAddress'] = @card_owner_address.to_h unless @card_owner_address.nil?
+          hash['customerIpAddress'] = @customer_ip_address unless @customer_ip_address.nil?
+          hash['defaultFormFill'] = @default_form_fill unless @default_form_fill.nil?
+          hash['deviceFingerprintActivated'] = @device_fingerprint_activated unless @device_fingerprint_activated.nil?
+          hash['deviceFingerprintTransactionId'] = @device_fingerprint_transaction_id unless @device_fingerprint_transaction_id.nil?
+          hash['giftCardType'] = @gift_card_type unless @gift_card_type.nil?
+          hash['giftMessage'] = @gift_message unless @gift_message.nil?
+          hash['hasForgottenPwd'] = @has_forgotten_pwd unless @has_forgotten_pwd.nil?
+          hash['hasPassword'] = @has_password unless @has_password.nil?
+          hash['isPreviousCustomer'] = @is_previous_customer unless @is_previous_customer.nil?
+          hash['orderTimezone'] = @order_timezone unless @order_timezone.nil?
+          hash['shipComments'] = @ship_comments unless @ship_comments.nil?
+          hash['shipmentTrackingNumber'] = @shipment_tracking_number unless @shipment_tracking_number.nil?
+          hash['shippingDetails'] = @shipping_details.to_h unless @shipping_details.nil?
+          hash['userData'] = @user_data unless @user_data.nil?
+          hash['website'] = @website unless @website.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('addressesAreIdentical')
+          if hash.has_key? 'addressesAreIdentical'
             @addresses_are_identical = hash['addressesAreIdentical']
           end
-          if hash.has_key?('blackListData')
+          if hash.has_key? 'blackListData'
             @black_list_data = hash['blackListData']
           end
-          if hash.has_key?('cardOwnerAddress')
-            if !(hash['cardOwnerAddress'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['cardOwnerAddress']]
-            end
+          if hash.has_key? 'cardOwnerAddress'
+            raise TypeError, "value '%s' is not a Hash" % [hash['cardOwnerAddress']] unless hash['cardOwnerAddress'].is_a? Hash
             @card_owner_address = Ingenico::Connect::SDK::Domain::Definitions::Address.new_from_hash(hash['cardOwnerAddress'])
           end
-          if hash.has_key?('customerIpAddress')
+          if hash.has_key? 'customerIpAddress'
             @customer_ip_address = hash['customerIpAddress']
           end
-          if hash.has_key?('defaultFormFill')
+          if hash.has_key? 'defaultFormFill'
             @default_form_fill = hash['defaultFormFill']
           end
-          if hash.has_key?('deviceFingerprintActivated')
+          if hash.has_key? 'deviceFingerprintActivated'
             @device_fingerprint_activated = hash['deviceFingerprintActivated']
           end
-          if hash.has_key?('deviceFingerprintTransactionId')
+          if hash.has_key? 'deviceFingerprintTransactionId'
             @device_fingerprint_transaction_id = hash['deviceFingerprintTransactionId']
           end
-          if hash.has_key?('giftCardType')
+          if hash.has_key? 'giftCardType'
             @gift_card_type = hash['giftCardType']
           end
-          if hash.has_key?('giftMessage')
+          if hash.has_key? 'giftMessage'
             @gift_message = hash['giftMessage']
           end
-          if hash.has_key?('hasForgottenPwd')
+          if hash.has_key? 'hasForgottenPwd'
             @has_forgotten_pwd = hash['hasForgottenPwd']
           end
-          if hash.has_key?('hasPassword')
+          if hash.has_key? 'hasPassword'
             @has_password = hash['hasPassword']
           end
-          if hash.has_key?('isPreviousCustomer')
+          if hash.has_key? 'isPreviousCustomer'
             @is_previous_customer = hash['isPreviousCustomer']
           end
-          if hash.has_key?('orderTimezone')
+          if hash.has_key? 'orderTimezone'
             @order_timezone = hash['orderTimezone']
           end
-          if hash.has_key?('shipComments')
+          if hash.has_key? 'shipComments'
             @ship_comments = hash['shipComments']
           end
-          if hash.has_key?('shipmentTrackingNumber')
+          if hash.has_key? 'shipmentTrackingNumber'
             @shipment_tracking_number = hash['shipmentTrackingNumber']
           end
-          if hash.has_key?('shippingDetails')
-            if !(hash['shippingDetails'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['shippingDetails']]
-            end
+          if hash.has_key? 'shippingDetails'
+            raise TypeError, "value '%s' is not a Hash" % [hash['shippingDetails']] unless hash['shippingDetails'].is_a? Hash
             @shipping_details = Ingenico::Connect::SDK::Domain::Definitions::FraudFieldsShippingDetails.new_from_hash(hash['shippingDetails'])
           end
-          if hash.has_key?('userData')
-            if !(hash['userData'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['userData']]
-            end
+          if hash.has_key? 'userData'
+            raise TypeError, "value '%s' is not an Array" % [hash['userData']] unless hash['userData'].is_a? Array
             @user_data = []
             hash['userData'].each do |e|
               @user_data << e
             end
           end
-          if hash.has_key?('website')
+          if hash.has_key? 'website'
             @website = hash['website']
           end
         end

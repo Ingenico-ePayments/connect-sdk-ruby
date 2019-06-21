@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Refund::RefundResult>] refunds
       class RefundsResponse < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Refund::RefundResult}
         attr_accessor :refunds
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'refunds', @refunds)
+          hash['refunds'] = @refunds.collect{|val| val.to_h} unless @refunds.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('refunds')
-            if !(hash['refunds'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['refunds']]
-            end
+          if hash.has_key? 'refunds'
+            raise TypeError, "value '%s' is not an Array" % [hash['refunds']] unless hash['refunds'].is_a? Array
             @refunds = []
             hash['refunds'].each do |e|
               @refunds << Ingenico::Connect::SDK::Domain::Refund::RefundResult.new_from_hash(e)

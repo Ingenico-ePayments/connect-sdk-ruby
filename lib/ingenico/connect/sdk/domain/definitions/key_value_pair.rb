@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] key
+      # @attr [String] value
       class KeyValuePair < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :key
 
-        # String
         attr_accessor :value
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'key', @key)
-          add_to_hash(hash, 'value', @value)
+          hash['key'] = @key unless @key.nil?
+          hash['value'] = @value unless @value.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('key')
+          if hash.has_key? 'key'
             @key = hash['key']
           end
-          if hash.has_key?('value')
+          if hash.has_key? 'value'
             @value = hash['value']
           end
         end

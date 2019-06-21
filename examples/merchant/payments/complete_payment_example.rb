@@ -23,7 +23,7 @@ def example
     body = Payment::CompletePaymentRequest.new
     body.card_payment_method_specific_input = card_payment_method_specific_input
 
-    response = client.merchant('merchantId').payments().complete('paymentId', body)
+    response = client.merchant('merchantId').payments.complete('paymentId', body)
   end
 end
 

@@ -9,37 +9,36 @@ module Ingenico::Connect::SDK
   module Domain
     module Payout
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::Card] card
+      # @attr [Integer] payment_product_id
+      # @attr [String] token
       class CardPayoutMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payout::AbstractPayoutMethodSpecificInput
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::Card}
         attr_accessor :card
 
-        # Integer
         attr_accessor :payment_product_id
 
-        # String
         attr_accessor :token
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'card', @card)
-          add_to_hash(hash, 'paymentProductId', @payment_product_id)
-          add_to_hash(hash, 'token', @token)
+          hash['card'] = @card.to_h unless @card.nil?
+          hash['paymentProductId'] = @payment_product_id unless @payment_product_id.nil?
+          hash['token'] = @token unless @token.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('card')
-            if !(hash['card'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['card']]
-            end
+          if hash.has_key? 'card'
+            raise TypeError, "value '%s' is not a Hash" % [hash['card']] unless hash['card'].is_a? Hash
             @card = Ingenico::Connect::SDK::Domain::Definitions::Card.new_from_hash(hash['card'])
           end
-          if hash.has_key?('paymentProductId')
+          if hash.has_key? 'paymentProductId'
             @payment_product_id = hash['paymentProductId']
           end
-          if hash.has_key?('token')
+          if hash.has_key? 'token'
             @token = hash['token']
           end
         end

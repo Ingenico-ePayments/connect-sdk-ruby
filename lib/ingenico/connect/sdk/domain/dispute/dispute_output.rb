@@ -12,91 +12,84 @@ module Ingenico::Connect::SDK
   module Domain
     module Dispute
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] amount_of_money
+      # @attr [String] contact_person
+      # @attr [Ingenico::Connect::SDK::Domain::Dispute::DisputeCreationDetail] creation_details
+      # @attr [String] email_address
+      # @attr [Array<Ingenico::Connect::SDK::Domain::File::HostedFile>] files
+      # @attr [Ingenico::Connect::SDK::Domain::Dispute::DisputeReference] reference
+      # @attr [String] reply_to
+      # @attr [String] request_message
+      # @attr [String] response_message
       class DisputeOutput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney}
         attr_accessor :amount_of_money
 
-        # String
         attr_accessor :contact_person
 
-        # {Ingenico::Connect::SDK::Domain::Dispute::DisputeCreationDetail}
         attr_accessor :creation_details
 
-        # String
         attr_accessor :email_address
 
-        # Array of {Ingenico::Connect::SDK::Domain::File::HostedFile}
         attr_accessor :files
 
-        # {Ingenico::Connect::SDK::Domain::Dispute::DisputeReference}
         attr_accessor :reference
 
-        # String
         attr_accessor :reply_to
 
-        # String
         attr_accessor :request_message
 
-        # String
         attr_accessor :response_message
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'amountOfMoney', @amount_of_money)
-          add_to_hash(hash, 'contactPerson', @contact_person)
-          add_to_hash(hash, 'creationDetails', @creation_details)
-          add_to_hash(hash, 'emailAddress', @email_address)
-          add_to_hash(hash, 'files', @files)
-          add_to_hash(hash, 'reference', @reference)
-          add_to_hash(hash, 'replyTo', @reply_to)
-          add_to_hash(hash, 'requestMessage', @request_message)
-          add_to_hash(hash, 'responseMessage', @response_message)
+          hash['amountOfMoney'] = @amount_of_money.to_h unless @amount_of_money.nil?
+          hash['contactPerson'] = @contact_person unless @contact_person.nil?
+          hash['creationDetails'] = @creation_details.to_h unless @creation_details.nil?
+          hash['emailAddress'] = @email_address unless @email_address.nil?
+          hash['files'] = @files.collect{|val| val.to_h} unless @files.nil?
+          hash['reference'] = @reference.to_h unless @reference.nil?
+          hash['replyTo'] = @reply_to unless @reply_to.nil?
+          hash['requestMessage'] = @request_message unless @request_message.nil?
+          hash['responseMessage'] = @response_message unless @response_message.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('amountOfMoney')
-            if !(hash['amountOfMoney'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']]
-            end
+          if hash.has_key? 'amountOfMoney'
+            raise TypeError, "value '%s' is not a Hash" % [hash['amountOfMoney']] unless hash['amountOfMoney'].is_a? Hash
             @amount_of_money = Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney.new_from_hash(hash['amountOfMoney'])
           end
-          if hash.has_key?('contactPerson')
+          if hash.has_key? 'contactPerson'
             @contact_person = hash['contactPerson']
           end
-          if hash.has_key?('creationDetails')
-            if !(hash['creationDetails'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['creationDetails']]
-            end
+          if hash.has_key? 'creationDetails'
+            raise TypeError, "value '%s' is not a Hash" % [hash['creationDetails']] unless hash['creationDetails'].is_a? Hash
             @creation_details = Ingenico::Connect::SDK::Domain::Dispute::DisputeCreationDetail.new_from_hash(hash['creationDetails'])
           end
-          if hash.has_key?('emailAddress')
+          if hash.has_key? 'emailAddress'
             @email_address = hash['emailAddress']
           end
-          if hash.has_key?('files')
-            if !(hash['files'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['files']]
-            end
+          if hash.has_key? 'files'
+            raise TypeError, "value '%s' is not an Array" % [hash['files']] unless hash['files'].is_a? Array
             @files = []
             hash['files'].each do |e|
               @files << Ingenico::Connect::SDK::Domain::File::HostedFile.new_from_hash(e)
             end
           end
-          if hash.has_key?('reference')
-            if !(hash['reference'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['reference']]
-            end
+          if hash.has_key? 'reference'
+            raise TypeError, "value '%s' is not a Hash" % [hash['reference']] unless hash['reference'].is_a? Hash
             @reference = Ingenico::Connect::SDK::Domain::Dispute::DisputeReference.new_from_hash(hash['reference'])
           end
-          if hash.has_key?('replyTo')
+          if hash.has_key? 'replyTo'
             @reply_to = hash['replyTo']
           end
-          if hash.has_key?('requestMessage')
+          if hash.has_key? 'requestMessage'
             @request_message = hash['requestMessage']
           end
-          if hash.has_key?('responseMessage')
+          if hash.has_key? 'responseMessage'
             @response_message = hash['responseMessage']
           end
         end

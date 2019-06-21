@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] name
+      # @attr [String] vat_number
       class CompanyInformation < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :name
 
-        # String
         attr_accessor :vat_number
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'name', @name)
-          add_to_hash(hash, 'vatNumber', @vat_number)
+          hash['name'] = @name unless @name.nil?
+          hash['vatNumber'] = @vat_number unless @vat_number.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('name')
+          if hash.has_key? 'name'
             @name = hash['name']
           end
-          if hash.has_key?('vatNumber')
+          if hash.has_key? 'vatNumber'
             @vat_number = hash['vatNumber']
           end
         end

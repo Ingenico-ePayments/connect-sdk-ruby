@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [Integer] amount
+      # @attr [String] currency_code
       class AmountOfMoney < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :amount
 
-        # String
         attr_accessor :currency_code
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'amount', @amount)
-          add_to_hash(hash, 'currencyCode', @currency_code)
+          hash['amount'] = @amount unless @amount.nil?
+          hash['currencyCode'] = @currency_code unless @currency_code.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('amount')
+          if hash.has_key? 'amount'
             @amount = hash['amount']
           end
-          if hash.has_key?('currencyCode')
+          if hash.has_key? 'currencyCode'
             @currency_code = hash['currencyCode']
           end
         end

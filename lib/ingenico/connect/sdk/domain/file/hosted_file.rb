@@ -8,41 +8,42 @@ module Ingenico::Connect::SDK
   module Domain
     module File
 
+      # @attr [String] file_name
+      # @attr [String] file_size
+      # @attr [String] file_type
+      # @attr [String] id
       class HostedFile < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :file_name
 
-        # String
         attr_accessor :file_size
 
-        # String
         attr_accessor :file_type
 
-        # String
         attr_accessor :id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'fileName', @file_name)
-          add_to_hash(hash, 'fileSize', @file_size)
-          add_to_hash(hash, 'fileType', @file_type)
-          add_to_hash(hash, 'id', @id)
+          hash['fileName'] = @file_name unless @file_name.nil?
+          hash['fileSize'] = @file_size unless @file_size.nil?
+          hash['fileType'] = @file_type unless @file_type.nil?
+          hash['id'] = @id unless @id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('fileName')
+          if hash.has_key? 'fileName'
             @file_name = hash['fileName']
           end
-          if hash.has_key?('fileSize')
+          if hash.has_key? 'fileSize'
             @file_size = hash['fileSize']
           end
-          if hash.has_key?('fileType')
+          if hash.has_key? 'fileType'
             @file_type = hash['fileType']
           end
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
         end

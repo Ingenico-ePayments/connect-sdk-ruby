@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [true/false] mobile_device
       class RedirectPaymentProduct861SpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # true/false
         attr_accessor :mobile_device
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'mobileDevice', @mobile_device)
+          hash['mobileDevice'] = @mobile_device unless @mobile_device.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('mobileDevice')
+          if hash.has_key? 'mobileDevice'
             @mobile_device = hash['mobileDevice']
           end
         end

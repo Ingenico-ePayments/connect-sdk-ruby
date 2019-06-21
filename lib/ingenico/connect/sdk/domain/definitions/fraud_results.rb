@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] fraud_service_result
       class FraudResults < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :fraud_service_result
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'fraudServiceResult', @fraud_service_result)
+          hash['fraudServiceResult'] = @fraud_service_result unless @fraud_service_result.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('fraudServiceResult')
+          if hash.has_key? 'fraudServiceResult'
             @fraud_service_result = hash['fraudServiceResult']
           end
         end

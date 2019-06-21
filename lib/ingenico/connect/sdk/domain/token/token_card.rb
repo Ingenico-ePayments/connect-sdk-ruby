@@ -10,33 +10,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [Ingenico::Connect::SDK::Domain::Token::CustomerToken] customer
+      # @attr [Ingenico::Connect::SDK::Domain::Token::TokenCardData] data
       class TokenCard < Ingenico::Connect::SDK::Domain::Token::AbstractToken
 
-        # {Ingenico::Connect::SDK::Domain::Token::CustomerToken}
         attr_accessor :customer
 
-        # {Ingenico::Connect::SDK::Domain::Token::TokenCardData}
         attr_accessor :data
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'customer', @customer)
-          add_to_hash(hash, 'data', @data)
+          hash['customer'] = @customer.to_h unless @customer.nil?
+          hash['data'] = @data.to_h unless @data.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('customer')
-            if !(hash['customer'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customer']]
-            end
+          if hash.has_key? 'customer'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customer']] unless hash['customer'].is_a? Hash
             @customer = Ingenico::Connect::SDK::Domain::Token::CustomerToken.new_from_hash(hash['customer'])
           end
-          if hash.has_key?('data')
-            if !(hash['data'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['data']]
-            end
+          if hash.has_key? 'data'
+            raise TypeError, "value '%s' is not a Hash" % [hash['data']] unless hash['data'].is_a? Hash
             @data = Ingenico::Connect::SDK::Domain::Token::TokenCardData.new_from_hash(hash['data'])
           end
         end

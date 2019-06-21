@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Integer] payment_product_id
       class AbstractPaymentMethodSpecificOutput < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :payment_product_id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProductId', @payment_product_id)
+          hash['paymentProductId'] = @payment_product_id unless @payment_product_id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProductId')
+          if hash.has_key? 'paymentProductId'
             @payment_product_id = hash['paymentProductId']
           end
         end

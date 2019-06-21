@@ -13,10 +13,10 @@ module Ingenico::Connect::SDK
         @secret_key_store = secret_key_store
       end
 
-      # Unmarshals the given body, while also validating it using the given
-      # request headers.
-      # body:: body of the request, a String
-      # request_headers:: headers of the request, as an Array of {Ingenico::Connect::SDK::RequestHeader}
+      # Unmarshals the given body, while also validating it using the given request headers.
+      #
+      # @param body            [String] body of the request
+      # @param request_headers [Array<Ingenico::Connect::SDK::RequestHeader>] headers of the request
       def unmarshal(body, request_headers)
         validate(body, request_headers)
         event = @marshaller.unmarshal(body, WebhooksEvent)
@@ -26,8 +26,8 @@ module Ingenico::Connect::SDK
 
       # Validates incoming request using request headers
       #
-      # body:: body of the request, a String
-      # request_headers:: headers of the request which is an Array of {Ingenico::Connect::SDK::RequestHeader}
+      # @param body            [String] body of the request
+      # @param request_headers [Array<Ingenico::Connect::SDK::RequestHeader>] headers of the request
       def validate(body, request_headers)
         validate_body(body, request_headers)
       end
@@ -42,8 +42,8 @@ module Ingenico::Connect::SDK
 
       # Validates the body using given request headers
       #
-      # body:: a String converted from byte array
-      # request_headers:: headers of the request, as an Array of SDK::RequestHeader
+      # @param body            [String] body of the request
+      # @param request_headers [Array<Ingenico::Connect::SDK::RequestHeader>] headers of the request
       def validate_body(body, request_headers)
         signature = get_header_value(request_headers, HEADER_SIGNATURE)
         key_id = get_header_value(request_headers, HEADER_KEY_ID)
@@ -59,8 +59,9 @@ module Ingenico::Connect::SDK
       end
 
       # Checks two signatures
-      # signature:: a String
-      # expected_signature:: a String
+      #
+      # @param signature          [String]
+      # @param expected_signature [String]
       def equal_signatures?(signature, expected_signature)
         # NOTE: copy the signatures to avoid runtime tampering via references
         signature = signature.dup.freeze

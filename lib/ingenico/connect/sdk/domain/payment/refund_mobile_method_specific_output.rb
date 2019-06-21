@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] network
       class RefundMobileMethodSpecificOutput < Ingenico::Connect::SDK::Domain::Payment::RefundMethodSpecificOutput
 
-        # String
         attr_accessor :network
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'network', @network)
+          hash['network'] = @network unless @network.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('network')
+          if hash.has_key? 'network'
             @network = hash['network']
           end
         end

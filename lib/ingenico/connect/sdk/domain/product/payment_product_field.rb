@@ -10,54 +10,51 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDataRestrictions] data_restrictions
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayHints] display_hints
+      # @attr [String] id
+      # @attr [String] type
+      # @attr [true/false] used_for_lookup
       class PaymentProductField < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDataRestrictions}
         attr_accessor :data_restrictions
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayHints}
         attr_accessor :display_hints
 
-        # String
         attr_accessor :id
 
-        # String
         attr_accessor :type
 
-        # true/false
         attr_accessor :used_for_lookup
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'dataRestrictions', @data_restrictions)
-          add_to_hash(hash, 'displayHints', @display_hints)
-          add_to_hash(hash, 'id', @id)
-          add_to_hash(hash, 'type', @type)
-          add_to_hash(hash, 'usedForLookup', @used_for_lookup)
+          hash['dataRestrictions'] = @data_restrictions.to_h unless @data_restrictions.nil?
+          hash['displayHints'] = @display_hints.to_h unless @display_hints.nil?
+          hash['id'] = @id unless @id.nil?
+          hash['type'] = @type unless @type.nil?
+          hash['usedForLookup'] = @used_for_lookup unless @used_for_lookup.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('dataRestrictions')
-            if !(hash['dataRestrictions'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['dataRestrictions']]
-            end
+          if hash.has_key? 'dataRestrictions'
+            raise TypeError, "value '%s' is not a Hash" % [hash['dataRestrictions']] unless hash['dataRestrictions'].is_a? Hash
             @data_restrictions = Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDataRestrictions.new_from_hash(hash['dataRestrictions'])
           end
-          if hash.has_key?('displayHints')
-            if !(hash['displayHints'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['displayHints']]
-            end
+          if hash.has_key? 'displayHints'
+            raise TypeError, "value '%s' is not a Hash" % [hash['displayHints']] unless hash['displayHints'].is_a? Hash
             @display_hints = Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayHints.new_from_hash(hash['displayHints'])
           end
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
-          if hash.has_key?('usedForLookup')
+          if hash.has_key? 'usedForLookup'
             @used_for_lookup = hash['usedForLookup']
           end
         end

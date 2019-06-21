@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [Ingenico::Connect::SDK::Domain::Token::ContactDetailsToken] contact_details
       class CustomerTokenWithContactDetails < Ingenico::Connect::SDK::Domain::Token::CustomerToken
 
-        # {Ingenico::Connect::SDK::Domain::Token::ContactDetailsToken}
         attr_accessor :contact_details
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'contactDetails', @contact_details)
+          hash['contactDetails'] = @contact_details.to_h unless @contact_details.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('contactDetails')
-            if !(hash['contactDetails'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['contactDetails']]
-            end
+          if hash.has_key? 'contactDetails'
+            raise TypeError, "value '%s' is not a Hash" % [hash['contactDetails']] unless hash['contactDetails'].is_a? Hash
             @contact_details = Ingenico::Connect::SDK::Domain::Token::ContactDetailsToken.new_from_hash(hash['contactDetails'])
           end
         end

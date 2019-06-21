@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] end_date
+      # @attr [Integer] min_frequency
+      # @attr [String] recurring_payment_sequence_indicator
       class CardRecurrenceDetails < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :end_date
 
-        # Integer
         attr_accessor :min_frequency
 
-        # String
         attr_accessor :recurring_payment_sequence_indicator
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'endDate', @end_date)
-          add_to_hash(hash, 'minFrequency', @min_frequency)
-          add_to_hash(hash, 'recurringPaymentSequenceIndicator', @recurring_payment_sequence_indicator)
+          hash['endDate'] = @end_date unless @end_date.nil?
+          hash['minFrequency'] = @min_frequency unless @min_frequency.nil?
+          hash['recurringPaymentSequenceIndicator'] = @recurring_payment_sequence_indicator unless @recurring_payment_sequence_indicator.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('endDate')
+          if hash.has_key? 'endDate'
             @end_date = hash['endDate']
           end
-          if hash.has_key?('minFrequency')
+          if hash.has_key? 'minFrequency'
             @min_frequency = hash['minFrequency']
           end
-          if hash.has_key?('recurringPaymentSequenceIndicator')
+          if hash.has_key? 'recurringPaymentSequenceIndicator'
             @recurring_payment_sequence_indicator = hash['recurringPaymentSequenceIndicator']
           end
         end

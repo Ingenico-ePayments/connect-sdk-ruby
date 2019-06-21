@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] code
+      # @attr [String] description
+      # @attr [String] result
       class ValidationBankAccountCheck < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :code
 
-        # String
         attr_accessor :description
 
-        # String
         attr_accessor :result
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'code', @code)
-          add_to_hash(hash, 'description', @description)
-          add_to_hash(hash, 'result', @result)
+          hash['code'] = @code unless @code.nil?
+          hash['description'] = @description unless @description.nil?
+          hash['result'] = @result unless @result.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('code')
+          if hash.has_key? 'code'
             @code = hash['code']
           end
-          if hash.has_key?('description')
+          if hash.has_key? 'description'
             @description = hash['description']
           end
-          if hash.has_key?('result')
+          if hash.has_key? 'result'
             @result = hash['result']
           end
         end

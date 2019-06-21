@@ -8,23 +8,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Array<String>] networks
       class PaymentProductNetworksResponse < Ingenico::Connect::SDK::DataObject
 
-        # Array of String
         attr_accessor :networks
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'networks', @networks)
+          hash['networks'] = @networks unless @networks.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('networks')
-            if !(hash['networks'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['networks']]
-            end
+          if hash.has_key? 'networks'
+            raise TypeError, "value '%s' is not an Array" % [hash['networks']] unless hash['networks'].is_a? Array
             @networks = []
             hash['networks'].each do |e|
               @networks << e

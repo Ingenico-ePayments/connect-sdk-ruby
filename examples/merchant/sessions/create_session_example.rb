@@ -19,7 +19,7 @@ def example
     body = Sessions::SessionRequest.new
     body.tokens = tokens
 
-    response = client.merchant('merchantId').sessions().create(body)
+    response = client.merchant('merchantId').sessions.create(body)
   end
 end
 

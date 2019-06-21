@@ -25,7 +25,7 @@ def example
     body.create_mandate_info = create_mandate_info
     body.hosted_mandate_management_specific_input = hosted_mandate_management_specific_input
 
-    response = client.merchant('merchantId').hostedmandatemanagements().create(body)
+    response = client.merchant('merchantId').hostedmandatemanagements.create(body)
   end
 end
 

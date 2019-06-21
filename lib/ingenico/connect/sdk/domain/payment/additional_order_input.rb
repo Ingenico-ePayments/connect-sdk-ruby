@@ -11,59 +11,54 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AirlineData] airline_data
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData] level3_summary_data
+      # @attr [Integer] number_of_installments
+      # @attr [String] order_date
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::OrderTypeInformation] type_information
       class AdditionalOrderInput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AirlineData}
         attr_accessor :airline_data
 
-        # {Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData}
         #
-        # Deprecated; Use Order.shoppingCart.amountBreakdown instead
+        # @deprecated Use Order.shoppingCart.amountBreakdown instead
         attr_accessor :level3_summary_data
 
-        # Integer
         attr_accessor :number_of_installments
 
-        # String
         attr_accessor :order_date
 
-        # {Ingenico::Connect::SDK::Domain::Payment::OrderTypeInformation}
         attr_accessor :type_information
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'airlineData', @airline_data)
-          add_to_hash(hash, 'level3SummaryData', @level3_summary_data)
-          add_to_hash(hash, 'numberOfInstallments', @number_of_installments)
-          add_to_hash(hash, 'orderDate', @order_date)
-          add_to_hash(hash, 'typeInformation', @type_information)
+          hash['airlineData'] = @airline_data.to_h unless @airline_data.nil?
+          hash['level3SummaryData'] = @level3_summary_data.to_h unless @level3_summary_data.nil?
+          hash['numberOfInstallments'] = @number_of_installments unless @number_of_installments.nil?
+          hash['orderDate'] = @order_date unless @order_date.nil?
+          hash['typeInformation'] = @type_information.to_h unless @type_information.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('airlineData')
-            if !(hash['airlineData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['airlineData']]
-            end
+          if hash.has_key? 'airlineData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['airlineData']] unless hash['airlineData'].is_a? Hash
             @airline_data = Ingenico::Connect::SDK::Domain::Definitions::AirlineData.new_from_hash(hash['airlineData'])
           end
-          if hash.has_key?('level3SummaryData')
-            if !(hash['level3SummaryData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['level3SummaryData']]
-            end
+          if hash.has_key? 'level3SummaryData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['level3SummaryData']] unless hash['level3SummaryData'].is_a? Hash
             @level3_summary_data = Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData.new_from_hash(hash['level3SummaryData'])
           end
-          if hash.has_key?('numberOfInstallments')
+          if hash.has_key? 'numberOfInstallments'
             @number_of_installments = hash['numberOfInstallments']
           end
-          if hash.has_key?('orderDate')
+          if hash.has_key? 'orderDate'
             @order_date = hash['orderDate']
           end
-          if hash.has_key?('typeInformation')
-            if !(hash['typeInformation'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['typeInformation']]
-            end
+          if hash.has_key? 'typeInformation'
+            raise TypeError, "value '%s' is not a Hash" % [hash['typeInformation']] unless hash['typeInformation'].is_a? Hash
             @type_information = Ingenico::Connect::SDK::Domain::Payment::OrderTypeInformation.new_from_hash(hash['typeInformation'])
           end
         end

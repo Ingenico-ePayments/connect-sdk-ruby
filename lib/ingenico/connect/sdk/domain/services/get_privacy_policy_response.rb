@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Services
 
+      # @attr [String] html_content
       class GetPrivacyPolicyResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :html_content
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'htmlContent', @html_content)
+          hash['htmlContent'] = @html_content unless @html_content.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('htmlContent')
+          if hash.has_key? 'htmlContent'
             @html_content = hash['htmlContent']
           end
         end

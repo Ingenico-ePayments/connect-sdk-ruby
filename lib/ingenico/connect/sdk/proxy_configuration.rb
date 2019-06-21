@@ -1,18 +1,25 @@
 module Ingenico::Connect::SDK
 
-  # Contains the url, username and password of a proxy.
+  # Contains the URL, username and password of a proxy.
+  #
+  # @attr [String] scheme   Proxy scheme (http or https)
+  # @attr [String] host     Proxy hostname
+  # @attr [Integer] port    Proxy port
+  # @attr [String] username Proxy authentication username
+  # @attr [String] password Proxy authentication password
   class ProxyConfiguration
 
     # Initialize a new ProxyConfiguration from the parameter hash.
     # In order to be complete either host, port and scheme, or an address is required.
-    # Arguments read from the hash are:
-    # host::      Host part of the url to the proxy.
-    # port::      Port the proxy will be accessed through.
-    # scheme::    HTTP scheme used to communicate with the proxy (HTTP or HTTPS).
-    # address::   Full uri to the proxy excluding username and password.
+    #
+    # @param args [Hash] the parameters to initialize the proxy configuration with
+    # @option args [String] :host host part of the URL to the proxy.
+    # @option args [Integer] :port port the proxy will be accessed through.
+    # @option args [String] :scheme HTTP scheme used to communicate with the proxy (http or https).
+    # @option args [String] :address full URI to the proxy excluding username and password.
     #             If given this uri takes precedence over individual host, port and scheme.
-    # username::  Username used in authentication to the proxy.
-    # password::  Password used to authenticate to the proxy.
+    # @option args [String] :username username used in authentication to the proxy.
+    # @option args [String] :password password used to authenticate to the proxy.
     def initialize(args)
 
       host = args[:host]
@@ -38,22 +45,14 @@ module Ingenico::Connect::SDK
       @scheme = scheme
     end
 
-    # proxy scheme (http or https)
     attr_accessor :scheme
-
-    # proxy hostname
     attr_accessor :host
-
-    # proxy port
     attr_accessor :port
 
-    # proxy authentication username
     attr_accessor :username
-
-    # proxy authentication password
     attr_accessor :password
 
-    # Returns a url string representation of the proxy, excluding authentication.
+    # @return [String] a URL string representation of the proxy, excluding authentication.
     def proxy_uri
        "#{scheme}://#{host}:#{port}"
     end

@@ -8,90 +8,91 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [String] additional_address_info
+      # @attr [String] city
+      # @attr [String] country_code
+      # @attr [String] house_number
+      # @attr [String] iban
+      # @attr [String] id
+      # @attr [String] name
+      # @attr [String] reference_party
+      # @attr [String] reference_party_id
+      # @attr [String] street
+      # @attr [String] zip
       class Creditor < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :additional_address_info
 
-        # String
         attr_accessor :city
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :house_number
 
-        # String
         attr_accessor :iban
 
-        # String
         attr_accessor :id
 
-        # String
         attr_accessor :name
 
-        # String
         attr_accessor :reference_party
 
-        # String
         attr_accessor :reference_party_id
 
-        # String
         attr_accessor :street
 
-        # String
         attr_accessor :zip
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalAddressInfo', @additional_address_info)
-          add_to_hash(hash, 'city', @city)
-          add_to_hash(hash, 'countryCode', @country_code)
-          add_to_hash(hash, 'houseNumber', @house_number)
-          add_to_hash(hash, 'iban', @iban)
-          add_to_hash(hash, 'id', @id)
-          add_to_hash(hash, 'name', @name)
-          add_to_hash(hash, 'referenceParty', @reference_party)
-          add_to_hash(hash, 'referencePartyId', @reference_party_id)
-          add_to_hash(hash, 'street', @street)
-          add_to_hash(hash, 'zip', @zip)
+          hash['additionalAddressInfo'] = @additional_address_info unless @additional_address_info.nil?
+          hash['city'] = @city unless @city.nil?
+          hash['countryCode'] = @country_code unless @country_code.nil?
+          hash['houseNumber'] = @house_number unless @house_number.nil?
+          hash['iban'] = @iban unless @iban.nil?
+          hash['id'] = @id unless @id.nil?
+          hash['name'] = @name unless @name.nil?
+          hash['referenceParty'] = @reference_party unless @reference_party.nil?
+          hash['referencePartyId'] = @reference_party_id unless @reference_party_id.nil?
+          hash['street'] = @street unless @street.nil?
+          hash['zip'] = @zip unless @zip.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalAddressInfo')
+          if hash.has_key? 'additionalAddressInfo'
             @additional_address_info = hash['additionalAddressInfo']
           end
-          if hash.has_key?('city')
+          if hash.has_key? 'city'
             @city = hash['city']
           end
-          if hash.has_key?('countryCode')
+          if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
           end
-          if hash.has_key?('houseNumber')
+          if hash.has_key? 'houseNumber'
             @house_number = hash['houseNumber']
           end
-          if hash.has_key?('iban')
+          if hash.has_key? 'iban'
             @iban = hash['iban']
           end
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
-          if hash.has_key?('name')
+          if hash.has_key? 'name'
             @name = hash['name']
           end
-          if hash.has_key?('referenceParty')
+          if hash.has_key? 'referenceParty'
             @reference_party = hash['referenceParty']
           end
-          if hash.has_key?('referencePartyId')
+          if hash.has_key? 'referencePartyId'
             @reference_party_id = hash['referencePartyId']
           end
-          if hash.has_key?('street')
+          if hash.has_key? 'street'
             @street = hash['street']
           end
-          if hash.has_key?('zip')
+          if hash.has_key? 'zip'
             @zip = hash['zip']
           end
         end

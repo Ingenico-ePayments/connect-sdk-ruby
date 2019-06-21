@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv] card
       class CompletePaymentCardPaymentMethodSpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv}
         attr_accessor :card
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'card', @card)
+          hash['card'] = @card.to_h unless @card.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('card')
-            if !(hash['card'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['card']]
-            end
+          if hash.has_key? 'card'
+            raise TypeError, "value '%s' is not a Hash" % [hash['card']] unless hash['card'].is_a? Hash
             @card = Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv.new_from_hash(hash['card'])
           end
         end

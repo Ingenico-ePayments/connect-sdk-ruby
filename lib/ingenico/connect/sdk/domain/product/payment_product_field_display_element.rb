@@ -8,41 +8,42 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] id
+      # @attr [String] label
+      # @attr [String] type
+      # @attr [String] value
       class PaymentProductFieldDisplayElement < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :id
 
-        # String
         attr_accessor :label
 
-        # String
         attr_accessor :type
 
-        # String
         attr_accessor :value
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'id', @id)
-          add_to_hash(hash, 'label', @label)
-          add_to_hash(hash, 'type', @type)
-          add_to_hash(hash, 'value', @value)
+          hash['id'] = @id unless @id.nil?
+          hash['label'] = @label unless @label.nil?
+          hash['type'] = @type unless @type.nil?
+          hash['value'] = @value unless @value.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
-          if hash.has_key?('label')
+          if hash.has_key? 'label'
             @label = hash['label']
           end
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
-          if hash.has_key?('value')
+          if hash.has_key? 'value'
             @value = hash['value']
           end
         end

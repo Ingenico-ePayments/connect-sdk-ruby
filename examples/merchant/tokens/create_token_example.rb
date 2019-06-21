@@ -67,7 +67,7 @@ def example
     body.non_sepa_direct_debit = non_sepa_direct_debit
     body.payment_product_id = 705
 
-    response = client.merchant('merchantId').tokens().create(body)
+    response = client.merchant('merchantId').tokens.create(body)
   end
 end
 

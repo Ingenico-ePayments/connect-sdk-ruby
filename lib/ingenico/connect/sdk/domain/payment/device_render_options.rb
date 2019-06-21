@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] sdk_interface
+      # @attr [String] sdk_ui_type
       class DeviceRenderOptions < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :sdk_interface
 
-        # String
         attr_accessor :sdk_ui_type
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'sdkInterface', @sdk_interface)
-          add_to_hash(hash, 'sdkUiType', @sdk_ui_type)
+          hash['sdkInterface'] = @sdk_interface unless @sdk_interface.nil?
+          hash['sdkUiType'] = @sdk_ui_type unless @sdk_ui_type.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('sdkInterface')
+          if hash.has_key? 'sdkInterface'
             @sdk_interface = hash['sdkInterface']
           end
-          if hash.has_key?('sdkUiType')
+          if hash.has_key? 'sdkUiType'
             @sdk_ui_type = hash['sdkUiType']
           end
         end

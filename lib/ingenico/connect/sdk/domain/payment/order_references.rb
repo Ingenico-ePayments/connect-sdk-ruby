@@ -9,44 +9,43 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] descriptor
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::OrderInvoiceData] invoice_data
+      # @attr [Integer] merchant_order_id
+      # @attr [String] merchant_reference
       class OrderReferences < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :descriptor
 
-        # {Ingenico::Connect::SDK::Domain::Payment::OrderInvoiceData}
         attr_accessor :invoice_data
 
-        # Integer
         attr_accessor :merchant_order_id
 
-        # String
         attr_accessor :merchant_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'descriptor', @descriptor)
-          add_to_hash(hash, 'invoiceData', @invoice_data)
-          add_to_hash(hash, 'merchantOrderId', @merchant_order_id)
-          add_to_hash(hash, 'merchantReference', @merchant_reference)
+          hash['descriptor'] = @descriptor unless @descriptor.nil?
+          hash['invoiceData'] = @invoice_data.to_h unless @invoice_data.nil?
+          hash['merchantOrderId'] = @merchant_order_id unless @merchant_order_id.nil?
+          hash['merchantReference'] = @merchant_reference unless @merchant_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('descriptor')
+          if hash.has_key? 'descriptor'
             @descriptor = hash['descriptor']
           end
-          if hash.has_key?('invoiceData')
-            if !(hash['invoiceData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['invoiceData']]
-            end
+          if hash.has_key? 'invoiceData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['invoiceData']] unless hash['invoiceData'].is_a? Hash
             @invoice_data = Ingenico::Connect::SDK::Domain::Payment::OrderInvoiceData.new_from_hash(hash['invoiceData'])
           end
-          if hash.has_key?('merchantOrderId')
+          if hash.has_key? 'merchantOrderId'
             @merchant_order_id = hash['merchantOrderId']
           end
-          if hash.has_key?('merchantReference')
+          if hash.has_key? 'merchantReference'
             @merchant_reference = hash['merchantReference']
           end
         end

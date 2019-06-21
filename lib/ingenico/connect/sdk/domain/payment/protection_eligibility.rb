@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] eligibility
+      # @attr [String] type
       class ProtectionEligibility < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :eligibility
 
-        # String
         attr_accessor :type
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'eligibility', @eligibility)
-          add_to_hash(hash, 'type', @type)
+          hash['eligibility'] = @eligibility unless @eligibility.nil?
+          hash['type'] = @type unless @type.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('eligibility')
+          if hash.has_key? 'eligibility'
             @eligibility = hash['eligibility']
           end
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
         end

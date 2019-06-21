@@ -99,7 +99,7 @@ def example
     body.card = card
     body.order = order
 
-    response = client.merchant('merchantId').riskassessments().cards(body)
+    response = client.merchant('merchantId').riskassessments.cards(body)
   end
 end
 

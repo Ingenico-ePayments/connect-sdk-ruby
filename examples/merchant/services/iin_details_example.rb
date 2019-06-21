@@ -12,7 +12,7 @@ def example
     body = Services::GetIINDetailsRequest.new
     body.bin = '4567350000427977'
 
-    response = client.merchant('merchantId').services().get_iin_details(body)
+    response = client.merchant('merchantId').services.get_iin_details(body)
   end
 end
 

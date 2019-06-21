@@ -8,9 +8,10 @@ module Ingenico::Connect::SDK
     class RubyCommunicatorLogger < CommunicatorLogger
 
       # Creates a new RubyCommunicatorLogger instance.
-      # logger::      The logger to log messages to. Messages to log will be provided using logger#log(message level, message)
-      # log_level::   Log level to use for non-error messages.
-      # error_level:: Error logging level to use.
+      #
+      # @param logger      [Logger] the logger to log messages to. Messages to log will be provided using logger#log(message level, message)
+      # @param log_level   [String] log level to use for non-error messages.
+      # @param error_level [String] error logging level to use.
       def initialize(logger, log_level, error_level=false)
         # implement the interface
         error_level ||= log_level
@@ -27,7 +28,7 @@ module Ingenico::Connect::SDK
       def log(msg, thrown=false)
         # use Ruby Logger
         if thrown 
-          @logger.log(@errorLevel) { msg + $RS + thrown.backtrace.join($RS) }
+          @logger.log(@errorLevel) { msg + $RS + thrown.to_s + $RS + thrown.backtrace.join($RS) }
         else 
           @logger.log(@logLevel, msg)
         end

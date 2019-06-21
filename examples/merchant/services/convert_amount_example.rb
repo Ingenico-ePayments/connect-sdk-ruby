@@ -14,7 +14,7 @@ def example
     query.target = 'USD'
     query.amount = 100
 
-    response = client.merchant('merchantId').services().convert_amount(query)
+    response = client.merchant('merchantId').services.convert_amount(query)
   end
 end
 

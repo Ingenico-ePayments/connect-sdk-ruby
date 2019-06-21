@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] image
+      # @attr [String] label
       class PaymentProductFieldTooltip < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :image
 
-        # String
         attr_accessor :label
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'image', @image)
-          add_to_hash(hash, 'label', @label)
+          hash['image'] = @image unless @image.nil?
+          hash['label'] = @label unless @label.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('image')
+          if hash.has_key? 'image'
             @image = hash['image']
           end
-          if hash.has_key?('label')
+          if hash.has_key? 'label'
             @label = hash['label']
           end
         end

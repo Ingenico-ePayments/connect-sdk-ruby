@@ -8,69 +8,70 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] additional_info
+      # @attr [String] city
+      # @attr [String] country_code
+      # @attr [String] house_number
+      # @attr [String] state
+      # @attr [String] state_code
+      # @attr [String] street
+      # @attr [String] zip
       class Address < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :additional_info
 
-        # String
         attr_accessor :city
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :house_number
 
-        # String
         attr_accessor :state
 
-        # String
         attr_accessor :state_code
 
-        # String
         attr_accessor :street
 
-        # String
         attr_accessor :zip
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'additionalInfo', @additional_info)
-          add_to_hash(hash, 'city', @city)
-          add_to_hash(hash, 'countryCode', @country_code)
-          add_to_hash(hash, 'houseNumber', @house_number)
-          add_to_hash(hash, 'state', @state)
-          add_to_hash(hash, 'stateCode', @state_code)
-          add_to_hash(hash, 'street', @street)
-          add_to_hash(hash, 'zip', @zip)
+          hash['additionalInfo'] = @additional_info unless @additional_info.nil?
+          hash['city'] = @city unless @city.nil?
+          hash['countryCode'] = @country_code unless @country_code.nil?
+          hash['houseNumber'] = @house_number unless @house_number.nil?
+          hash['state'] = @state unless @state.nil?
+          hash['stateCode'] = @state_code unless @state_code.nil?
+          hash['street'] = @street unless @street.nil?
+          hash['zip'] = @zip unless @zip.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('additionalInfo')
+          if hash.has_key? 'additionalInfo'
             @additional_info = hash['additionalInfo']
           end
-          if hash.has_key?('city')
+          if hash.has_key? 'city'
             @city = hash['city']
           end
-          if hash.has_key?('countryCode')
+          if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
           end
-          if hash.has_key?('houseNumber')
+          if hash.has_key? 'houseNumber'
             @house_number = hash['houseNumber']
           end
-          if hash.has_key?('state')
+          if hash.has_key? 'state'
             @state = hash['state']
           end
-          if hash.has_key?('stateCode')
+          if hash.has_key? 'stateCode'
             @state_code = hash['stateCode']
           end
-          if hash.has_key?('street')
+          if hash.has_key? 'street'
             @street = hash['street']
           end
-          if hash.has_key?('zip')
+          if hash.has_key? 'zip'
             @zip = hash['zip']
           end
         end

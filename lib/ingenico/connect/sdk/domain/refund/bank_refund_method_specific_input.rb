@@ -10,40 +10,37 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [Ingenico::Connect::SDK::Domain::Refund::BankAccountBbanRefund] bank_account_bban
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban] bank_account_iban
+      # @attr [String] country_code
       class BankRefundMethodSpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Refund::BankAccountBbanRefund}
         attr_accessor :bank_account_bban
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban}
         attr_accessor :bank_account_iban
 
-        # String
         attr_accessor :country_code
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'bankAccountBban', @bank_account_bban)
-          add_to_hash(hash, 'bankAccountIban', @bank_account_iban)
-          add_to_hash(hash, 'countryCode', @country_code)
+          hash['bankAccountBban'] = @bank_account_bban.to_h unless @bank_account_bban.nil?
+          hash['bankAccountIban'] = @bank_account_iban.to_h unless @bank_account_iban.nil?
+          hash['countryCode'] = @country_code unless @country_code.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('bankAccountBban')
-            if !(hash['bankAccountBban'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['bankAccountBban']]
-            end
+          if hash.has_key? 'bankAccountBban'
+            raise TypeError, "value '%s' is not a Hash" % [hash['bankAccountBban']] unless hash['bankAccountBban'].is_a? Hash
             @bank_account_bban = Ingenico::Connect::SDK::Domain::Refund::BankAccountBbanRefund.new_from_hash(hash['bankAccountBban'])
           end
-          if hash.has_key?('bankAccountIban')
-            if !(hash['bankAccountIban'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['bankAccountIban']]
-            end
+          if hash.has_key? 'bankAccountIban'
+            raise TypeError, "value '%s' is not a Hash" % [hash['bankAccountIban']] unless hash['bankAccountIban'].is_a? Hash
             @bank_account_iban = Ingenico::Connect::SDK::Domain::Definitions::BankAccountIban.new_from_hash(hash['bankAccountIban'])
           end
-          if hash.has_key?('countryCode')
+          if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
           end
         end

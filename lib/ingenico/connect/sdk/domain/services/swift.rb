@@ -8,83 +8,84 @@ module Ingenico::Connect::SDK
   module Domain
     module Services
 
+      # @attr [String] bic
+      # @attr [String] category
+      # @attr [String] chips_uid
+      # @attr [String] extra_info
+      # @attr [String] po_box_country
+      # @attr [String] po_box_location
+      # @attr [String] po_box_number
+      # @attr [String] po_box_zip
+      # @attr [String] routing_bic
+      # @attr [String] services
       class Swift < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :bic
 
-        # String
         attr_accessor :category
 
-        # String
         attr_accessor :chips_uid
 
-        # String
         attr_accessor :extra_info
 
-        # String
         attr_accessor :po_box_country
 
-        # String
         attr_accessor :po_box_location
 
-        # String
         attr_accessor :po_box_number
 
-        # String
         attr_accessor :po_box_zip
 
-        # String
         attr_accessor :routing_bic
 
-        # String
         attr_accessor :services
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'bic', @bic)
-          add_to_hash(hash, 'category', @category)
-          add_to_hash(hash, 'chipsUID', @chips_uid)
-          add_to_hash(hash, 'extraInfo', @extra_info)
-          add_to_hash(hash, 'poBoxCountry', @po_box_country)
-          add_to_hash(hash, 'poBoxLocation', @po_box_location)
-          add_to_hash(hash, 'poBoxNumber', @po_box_number)
-          add_to_hash(hash, 'poBoxZip', @po_box_zip)
-          add_to_hash(hash, 'routingBic', @routing_bic)
-          add_to_hash(hash, 'services', @services)
+          hash['bic'] = @bic unless @bic.nil?
+          hash['category'] = @category unless @category.nil?
+          hash['chipsUID'] = @chips_uid unless @chips_uid.nil?
+          hash['extraInfo'] = @extra_info unless @extra_info.nil?
+          hash['poBoxCountry'] = @po_box_country unless @po_box_country.nil?
+          hash['poBoxLocation'] = @po_box_location unless @po_box_location.nil?
+          hash['poBoxNumber'] = @po_box_number unless @po_box_number.nil?
+          hash['poBoxZip'] = @po_box_zip unless @po_box_zip.nil?
+          hash['routingBic'] = @routing_bic unless @routing_bic.nil?
+          hash['services'] = @services unless @services.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('bic')
+          if hash.has_key? 'bic'
             @bic = hash['bic']
           end
-          if hash.has_key?('category')
+          if hash.has_key? 'category'
             @category = hash['category']
           end
-          if hash.has_key?('chipsUID')
+          if hash.has_key? 'chipsUID'
             @chips_uid = hash['chipsUID']
           end
-          if hash.has_key?('extraInfo')
+          if hash.has_key? 'extraInfo'
             @extra_info = hash['extraInfo']
           end
-          if hash.has_key?('poBoxCountry')
+          if hash.has_key? 'poBoxCountry'
             @po_box_country = hash['poBoxCountry']
           end
-          if hash.has_key?('poBoxLocation')
+          if hash.has_key? 'poBoxLocation'
             @po_box_location = hash['poBoxLocation']
           end
-          if hash.has_key?('poBoxNumber')
+          if hash.has_key? 'poBoxNumber'
             @po_box_number = hash['poBoxNumber']
           end
-          if hash.has_key?('poBoxZip')
+          if hash.has_key? 'poBoxZip'
             @po_box_zip = hash['poBoxZip']
           end
-          if hash.has_key?('routingBic')
+          if hash.has_key? 'routingBic'
             @routing_bic = hash['routingBic']
           end
-          if hash.has_key?('services')
+          if hash.has_key? 'services'
             @services = hash['services']
           end
         end

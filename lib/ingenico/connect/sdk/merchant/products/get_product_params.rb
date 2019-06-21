@@ -3,36 +3,38 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/param_request'
+require 'ingenico/connect/sdk/request_param'
 
 module Ingenico::Connect::SDK
   module Merchant
     module Products
 
       # Query parameters for {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/get.html Get payment product}
+      # @attr [String] country_code
+      # @attr [String] currency_code
+      # @attr [String] locale
+      # @attr [Integer] amount
+      # @attr [true/false] is_recurring
+      # @attr [Array<String>] hide
+      # @attr [true/false] force_basic_flow
       class GetProductParams < Ingenico::Connect::SDK::ParamRequest
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :currency_code
 
-        # String
         attr_accessor :locale
 
-        # Integer
         attr_accessor :amount
 
-        # true/false
         attr_accessor :is_recurring
 
-        # Array of String
         attr_accessor :hide
 
-        # true/false
         attr_accessor :force_basic_flow
 
         # Adds the parameter _value_ to the _hide_ Array
+        # @param value [String]
         def add_hide(value)
           unless @hide
             @hide = []
@@ -40,16 +42,18 @@ module Ingenico::Connect::SDK
           @hide << value
         end
 
-        # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
+        # @return [Array<Ingenico::Connect::SDK::RequestParam>] representing the attributes of this class
         def to_request_parameters
           result = []
-          add_parameter(result, 'countryCode', @country_code)
-          add_parameter(result, 'currencyCode', @currency_code)
-          add_parameter(result, 'locale', @locale)
-          add_parameter(result, 'amount', @amount)
-          add_parameter(result, 'isRecurring', @is_recurring)
-          add_parameter(result, 'hide', @hide)
-          add_parameter(result, 'forceBasicFlow', @force_basic_flow)
+          result << RequestParam.new('countryCode', @country_code) unless @country_code.nil?
+          result << RequestParam.new('currencyCode', @currency_code) unless @currency_code.nil?
+          result << RequestParam.new('locale', @locale) unless @locale.nil?
+          result << RequestParam.new('amount', @amount.to_s) unless @amount.nil?
+          result << RequestParam.new('isRecurring', @is_recurring.to_s) unless @is_recurring.nil?
+          unless @hide.nil?
+            @hide.each {|e| result << RequestParam.new('hide', e)}
+          end
+          result << RequestParam.new('forceBasicFlow', @force_basic_flow.to_s) unless @force_basic_flow.nil?
           result
         end
       end

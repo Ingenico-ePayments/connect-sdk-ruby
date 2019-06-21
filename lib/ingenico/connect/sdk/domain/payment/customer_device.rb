@@ -9,72 +9,71 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] accept_header
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::BrowserData] browser_data
+      # @attr [String] default_form_fill
+      # @attr [String] device_fingerprint_transaction_id
+      # @attr [String] ip_address
+      # @attr [String] locale
+      # @attr [String] timezone_offset_utc_minutes
+      # @attr [String] user_agent
       class CustomerDevice < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :accept_header
 
-        # {Ingenico::Connect::SDK::Domain::Payment::BrowserData}
         attr_accessor :browser_data
 
-        # String
         attr_accessor :default_form_fill
 
-        # String
         attr_accessor :device_fingerprint_transaction_id
 
-        # String
         attr_accessor :ip_address
 
-        # String
         attr_accessor :locale
 
-        # String
         attr_accessor :timezone_offset_utc_minutes
 
-        # String
         attr_accessor :user_agent
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'acceptHeader', @accept_header)
-          add_to_hash(hash, 'browserData', @browser_data)
-          add_to_hash(hash, 'defaultFormFill', @default_form_fill)
-          add_to_hash(hash, 'deviceFingerprintTransactionId', @device_fingerprint_transaction_id)
-          add_to_hash(hash, 'ipAddress', @ip_address)
-          add_to_hash(hash, 'locale', @locale)
-          add_to_hash(hash, 'timezoneOffsetUtcMinutes', @timezone_offset_utc_minutes)
-          add_to_hash(hash, 'userAgent', @user_agent)
+          hash['acceptHeader'] = @accept_header unless @accept_header.nil?
+          hash['browserData'] = @browser_data.to_h unless @browser_data.nil?
+          hash['defaultFormFill'] = @default_form_fill unless @default_form_fill.nil?
+          hash['deviceFingerprintTransactionId'] = @device_fingerprint_transaction_id unless @device_fingerprint_transaction_id.nil?
+          hash['ipAddress'] = @ip_address unless @ip_address.nil?
+          hash['locale'] = @locale unless @locale.nil?
+          hash['timezoneOffsetUtcMinutes'] = @timezone_offset_utc_minutes unless @timezone_offset_utc_minutes.nil?
+          hash['userAgent'] = @user_agent unless @user_agent.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('acceptHeader')
+          if hash.has_key? 'acceptHeader'
             @accept_header = hash['acceptHeader']
           end
-          if hash.has_key?('browserData')
-            if !(hash['browserData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['browserData']]
-            end
+          if hash.has_key? 'browserData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['browserData']] unless hash['browserData'].is_a? Hash
             @browser_data = Ingenico::Connect::SDK::Domain::Payment::BrowserData.new_from_hash(hash['browserData'])
           end
-          if hash.has_key?('defaultFormFill')
+          if hash.has_key? 'defaultFormFill'
             @default_form_fill = hash['defaultFormFill']
           end
-          if hash.has_key?('deviceFingerprintTransactionId')
+          if hash.has_key? 'deviceFingerprintTransactionId'
             @device_fingerprint_transaction_id = hash['deviceFingerprintTransactionId']
           end
-          if hash.has_key?('ipAddress')
+          if hash.has_key? 'ipAddress'
             @ip_address = hash['ipAddress']
           end
-          if hash.has_key?('locale')
+          if hash.has_key? 'locale'
             @locale = hash['locale']
           end
-          if hash.has_key?('timezoneOffsetUtcMinutes')
+          if hash.has_key? 'timezoneOffsetUtcMinutes'
             @timezone_offset_utc_minutes = hash['timezoneOffsetUtcMinutes']
           end
-          if hash.has_key?('userAgent')
+          if hash.has_key? 'userAgent'
             @user_agent = hash['userAgent']
           end
         end

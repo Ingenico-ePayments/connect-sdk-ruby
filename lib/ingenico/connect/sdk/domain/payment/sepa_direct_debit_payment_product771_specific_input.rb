@@ -9,30 +9,29 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] existing_unique_mandate_reference
+      # @attr [Ingenico::Connect::SDK::Domain::Mandates::CreateMandateWithReturnUrl] mandate
       class SepaDirectDebitPaymentProduct771SpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractSepaDirectDebitPaymentProduct771SpecificInput
 
-        # String
         attr_accessor :existing_unique_mandate_reference
 
-        # {Ingenico::Connect::SDK::Domain::Mandates::CreateMandateWithReturnUrl}
         attr_accessor :mandate
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'existingUniqueMandateReference', @existing_unique_mandate_reference)
-          add_to_hash(hash, 'mandate', @mandate)
+          hash['existingUniqueMandateReference'] = @existing_unique_mandate_reference unless @existing_unique_mandate_reference.nil?
+          hash['mandate'] = @mandate.to_h unless @mandate.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('existingUniqueMandateReference')
+          if hash.has_key? 'existingUniqueMandateReference'
             @existing_unique_mandate_reference = hash['existingUniqueMandateReference']
           end
-          if hash.has_key?('mandate')
-            if !(hash['mandate'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['mandate']]
-            end
+          if hash.has_key? 'mandate'
+            raise TypeError, "value '%s' is not a Hash" % [hash['mandate']] unless hash['mandate'].is_a? Hash
             @mandate = Ingenico::Connect::SDK::Domain::Mandates::CreateMandateWithReturnUrl.new_from_hash(hash['mandate'])
           end
         end

@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Integer] amount
+      # @attr [String] type
       class AmountBreakdown < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :amount
 
-        # String
         attr_accessor :type
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'amount', @amount)
-          add_to_hash(hash, 'type', @type)
+          hash['amount'] = @amount unless @amount.nil?
+          hash['type'] = @type unless @type.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('amount')
+          if hash.has_key? 'amount'
             @amount = hash['amount']
           end
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
         end

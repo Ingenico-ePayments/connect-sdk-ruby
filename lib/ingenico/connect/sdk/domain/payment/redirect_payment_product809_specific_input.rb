@@ -8,29 +8,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] expiration_period
+      # @attr [String] issuer_id
       class RedirectPaymentProduct809SpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # String
         #
-        # Deprecated; Use RedirectPaymentMethodSpecificInput.expirationPeriod instead
+        # @deprecated Use RedirectPaymentMethodSpecificInput.expirationPeriod instead
         attr_accessor :expiration_period
 
-        # String
         attr_accessor :issuer_id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'expirationPeriod', @expiration_period)
-          add_to_hash(hash, 'issuerId', @issuer_id)
+          hash['expirationPeriod'] = @expiration_period unless @expiration_period.nil?
+          hash['issuerId'] = @issuer_id unless @issuer_id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('expirationPeriod')
+          if hash.has_key? 'expirationPeriod'
             @expiration_period = hash['expirationPeriod']
           end
-          if hash.has_key?('issuerId')
+          if hash.has_key? 'issuerId'
             @issuer_id = hash['issuerId']
           end
         end

@@ -9,37 +9,36 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv] card_without_cvv
+      # @attr [String] first_transaction_date
+      # @attr [String] provider_reference
       class TokenCardData < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv}
         attr_accessor :card_without_cvv
 
-        # String
         attr_accessor :first_transaction_date
 
-        # String
         attr_accessor :provider_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'cardWithoutCvv', @card_without_cvv)
-          add_to_hash(hash, 'firstTransactionDate', @first_transaction_date)
-          add_to_hash(hash, 'providerReference', @provider_reference)
+          hash['cardWithoutCvv'] = @card_without_cvv.to_h unless @card_without_cvv.nil?
+          hash['firstTransactionDate'] = @first_transaction_date unless @first_transaction_date.nil?
+          hash['providerReference'] = @provider_reference unless @provider_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('cardWithoutCvv')
-            if !(hash['cardWithoutCvv'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['cardWithoutCvv']]
-            end
+          if hash.has_key? 'cardWithoutCvv'
+            raise TypeError, "value '%s' is not a Hash" % [hash['cardWithoutCvv']] unless hash['cardWithoutCvv'].is_a? Hash
             @card_without_cvv = Ingenico::Connect::SDK::Domain::Definitions::CardWithoutCvv.new_from_hash(hash['cardWithoutCvv'])
           end
-          if hash.has_key?('firstTransactionDate')
+          if hash.has_key? 'firstTransactionDate'
             @first_transaction_date = hash['firstTransactionDate']
           end
-          if hash.has_key?('providerReference')
+          if hash.has_key? 'providerReference'
             @provider_reference = hash['providerReference']
           end
         end

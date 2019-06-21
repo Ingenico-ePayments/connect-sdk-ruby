@@ -11,57 +11,52 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] authorisation_code
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::CardEssentials] card
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::CardFraudResults] fraud_results
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureResults] three_d_secure_results
+      # @attr [String] token
       class CardPaymentMethodSpecificOutput < Ingenico::Connect::SDK::Domain::Payment::AbstractPaymentMethodSpecificOutput
 
-        # String
         attr_accessor :authorisation_code
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::CardEssentials}
         attr_accessor :card
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::CardFraudResults}
         attr_accessor :fraud_results
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureResults}
         attr_accessor :three_d_secure_results
 
-        # String
         attr_accessor :token
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'authorisationCode', @authorisation_code)
-          add_to_hash(hash, 'card', @card)
-          add_to_hash(hash, 'fraudResults', @fraud_results)
-          add_to_hash(hash, 'threeDSecureResults', @three_d_secure_results)
-          add_to_hash(hash, 'token', @token)
+          hash['authorisationCode'] = @authorisation_code unless @authorisation_code.nil?
+          hash['card'] = @card.to_h unless @card.nil?
+          hash['fraudResults'] = @fraud_results.to_h unless @fraud_results.nil?
+          hash['threeDSecureResults'] = @three_d_secure_results.to_h unless @three_d_secure_results.nil?
+          hash['token'] = @token unless @token.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('authorisationCode')
+          if hash.has_key? 'authorisationCode'
             @authorisation_code = hash['authorisationCode']
           end
-          if hash.has_key?('card')
-            if !(hash['card'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['card']]
-            end
+          if hash.has_key? 'card'
+            raise TypeError, "value '%s' is not a Hash" % [hash['card']] unless hash['card'].is_a? Hash
             @card = Ingenico::Connect::SDK::Domain::Definitions::CardEssentials.new_from_hash(hash['card'])
           end
-          if hash.has_key?('fraudResults')
-            if !(hash['fraudResults'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['fraudResults']]
-            end
+          if hash.has_key? 'fraudResults'
+            raise TypeError, "value '%s' is not a Hash" % [hash['fraudResults']] unless hash['fraudResults'].is_a? Hash
             @fraud_results = Ingenico::Connect::SDK::Domain::Definitions::CardFraudResults.new_from_hash(hash['fraudResults'])
           end
-          if hash.has_key?('threeDSecureResults')
-            if !(hash['threeDSecureResults'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['threeDSecureResults']]
-            end
+          if hash.has_key? 'threeDSecureResults'
+            raise TypeError, "value '%s' is not a Hash" % [hash['threeDSecureResults']] unless hash['threeDSecureResults'].is_a? Hash
             @three_d_secure_results = Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureResults.new_from_hash(hash['threeDSecureResults'])
           end
-          if hash.has_key?('token')
+          if hash.has_key? 'token'
             @token = hash['token']
           end
         end

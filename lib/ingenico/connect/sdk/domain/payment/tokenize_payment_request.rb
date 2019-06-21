@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] alias
       class TokenizePaymentRequest < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :alias
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'alias', @alias)
+          hash['alias'] = @alias unless @alias.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('alias')
+          if hash.has_key? 'alias'
             @alias = hash['alias']
           end
         end

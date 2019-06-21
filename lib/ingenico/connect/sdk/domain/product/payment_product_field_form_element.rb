@@ -9,30 +9,29 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] type
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::ValueMappingElement>] value_mapping
       class PaymentProductFieldFormElement < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :type
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::ValueMappingElement}
         attr_accessor :value_mapping
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'type', @type)
-          add_to_hash(hash, 'valueMapping', @value_mapping)
+          hash['type'] = @type unless @type.nil?
+          hash['valueMapping'] = @value_mapping.collect{|val| val.to_h} unless @value_mapping.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('type')
+          if hash.has_key? 'type'
             @type = hash['type']
           end
-          if hash.has_key?('valueMapping')
-            if !(hash['valueMapping'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['valueMapping']]
-            end
+          if hash.has_key? 'valueMapping'
+            raise TypeError, "value '%s' is not an Array" % [hash['valueMapping']] unless hash['valueMapping'].is_a? Array
             @value_mapping = []
             hash['valueMapping'].each do |e|
               @value_mapping << Ingenico::Connect::SDK::Domain::Product::ValueMappingElement.new_from_hash(e)

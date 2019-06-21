@@ -13,83 +13,74 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] action_type
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProductField>] form_fields
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::MobileThreeDSecureChallengeParameters] mobile_three_d_secure_challenge_parameters
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectData] redirect_data
+      # @attr [String] rendering_data
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair>] show_data
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ThirdPartyData] third_party_data
       class MerchantAction < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :action_type
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductField}
         attr_accessor :form_fields
 
-        # {Ingenico::Connect::SDK::Domain::Payment::MobileThreeDSecureChallengeParameters}
         attr_accessor :mobile_three_d_secure_challenge_parameters
 
-        # {Ingenico::Connect::SDK::Domain::Payment::RedirectData}
         attr_accessor :redirect_data
 
-        # String
         attr_accessor :rendering_data
 
-        # Array of {Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair}
         attr_accessor :show_data
 
-        # {Ingenico::Connect::SDK::Domain::Payment::ThirdPartyData}
         attr_accessor :third_party_data
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'actionType', @action_type)
-          add_to_hash(hash, 'formFields', @form_fields)
-          add_to_hash(hash, 'mobileThreeDSecureChallengeParameters', @mobile_three_d_secure_challenge_parameters)
-          add_to_hash(hash, 'redirectData', @redirect_data)
-          add_to_hash(hash, 'renderingData', @rendering_data)
-          add_to_hash(hash, 'showData', @show_data)
-          add_to_hash(hash, 'thirdPartyData', @third_party_data)
+          hash['actionType'] = @action_type unless @action_type.nil?
+          hash['formFields'] = @form_fields.collect{|val| val.to_h} unless @form_fields.nil?
+          hash['mobileThreeDSecureChallengeParameters'] = @mobile_three_d_secure_challenge_parameters.to_h unless @mobile_three_d_secure_challenge_parameters.nil?
+          hash['redirectData'] = @redirect_data.to_h unless @redirect_data.nil?
+          hash['renderingData'] = @rendering_data unless @rendering_data.nil?
+          hash['showData'] = @show_data.collect{|val| val.to_h} unless @show_data.nil?
+          hash['thirdPartyData'] = @third_party_data.to_h unless @third_party_data.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('actionType')
+          if hash.has_key? 'actionType'
             @action_type = hash['actionType']
           end
-          if hash.has_key?('formFields')
-            if !(hash['formFields'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['formFields']]
-            end
+          if hash.has_key? 'formFields'
+            raise TypeError, "value '%s' is not an Array" % [hash['formFields']] unless hash['formFields'].is_a? Array
             @form_fields = []
             hash['formFields'].each do |e|
               @form_fields << Ingenico::Connect::SDK::Domain::Product::PaymentProductField.new_from_hash(e)
             end
           end
-          if hash.has_key?('mobileThreeDSecureChallengeParameters')
-            if !(hash['mobileThreeDSecureChallengeParameters'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['mobileThreeDSecureChallengeParameters']]
-            end
+          if hash.has_key? 'mobileThreeDSecureChallengeParameters'
+            raise TypeError, "value '%s' is not a Hash" % [hash['mobileThreeDSecureChallengeParameters']] unless hash['mobileThreeDSecureChallengeParameters'].is_a? Hash
             @mobile_three_d_secure_challenge_parameters = Ingenico::Connect::SDK::Domain::Payment::MobileThreeDSecureChallengeParameters.new_from_hash(hash['mobileThreeDSecureChallengeParameters'])
           end
-          if hash.has_key?('redirectData')
-            if !(hash['redirectData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['redirectData']]
-            end
+          if hash.has_key? 'redirectData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['redirectData']] unless hash['redirectData'].is_a? Hash
             @redirect_data = Ingenico::Connect::SDK::Domain::Payment::RedirectData.new_from_hash(hash['redirectData'])
           end
-          if hash.has_key?('renderingData')
+          if hash.has_key? 'renderingData'
             @rendering_data = hash['renderingData']
           end
-          if hash.has_key?('showData')
-            if !(hash['showData'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['showData']]
-            end
+          if hash.has_key? 'showData'
+            raise TypeError, "value '%s' is not an Array" % [hash['showData']] unless hash['showData'].is_a? Array
             @show_data = []
             hash['showData'].each do |e|
               @show_data << Ingenico::Connect::SDK::Domain::Definitions::KeyValuePair.new_from_hash(e)
             end
           end
-          if hash.has_key?('thirdPartyData')
-            if !(hash['thirdPartyData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['thirdPartyData']]
-            end
+          if hash.has_key? 'thirdPartyData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['thirdPartyData']] unless hash['thirdPartyData'].is_a? Hash
             @third_party_data = Ingenico::Connect::SDK::Domain::Payment::ThirdPartyData.new_from_hash(hash['thirdPartyData'])
           end
         end

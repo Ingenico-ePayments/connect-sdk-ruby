@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] attribute_key
+      # @attr [String] mask
       class LabelTemplateElement < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :attribute_key
 
-        # String
         attr_accessor :mask
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'attributeKey', @attribute_key)
-          add_to_hash(hash, 'mask', @mask)
+          hash['attributeKey'] = @attribute_key unless @attribute_key.nil?
+          hash['mask'] = @mask unless @mask.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('attributeKey')
+          if hash.has_key? 'attributeKey'
             @attribute_key = hash['attributeKey']
           end
-          if hash.has_key?('mask')
+          if hash.has_key? 'mask'
             @mask = hash['mask']
           end
         end

@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentProduct863ThirdPartyData] payment_product863
       class ThirdPartyData < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::PaymentProduct863ThirdPartyData}
         attr_accessor :payment_product863
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'paymentProduct863', @payment_product863)
+          hash['paymentProduct863'] = @payment_product863.to_h unless @payment_product863.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('paymentProduct863')
-            if !(hash['paymentProduct863'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863']]
-            end
+          if hash.has_key? 'paymentProduct863'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863']] unless hash['paymentProduct863'].is_a? Hash
             @payment_product863 = Ingenico::Connect::SDK::Domain::Payment::PaymentProduct863ThirdPartyData.new_from_hash(hash['paymentProduct863'])
           end
         end

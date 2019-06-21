@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] title
       class PersonalName < Ingenico::Connect::SDK::Domain::Definitions::PersonalNameBase
 
-        # String
         attr_accessor :title
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'title', @title)
+          hash['title'] = @title unless @title.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('title')
+          if hash.has_key? 'title'
             @title = hash['title']
           end
         end

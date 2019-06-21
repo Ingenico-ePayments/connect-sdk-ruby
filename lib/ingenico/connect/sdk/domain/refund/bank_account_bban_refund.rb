@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [String] bank_city
+      # @attr [String] patronymic_name
+      # @attr [String] swift_code
       class BankAccountBbanRefund < Ingenico::Connect::SDK::Domain::Definitions::BankAccountBban
 
-        # String
         attr_accessor :bank_city
 
-        # String
         attr_accessor :patronymic_name
 
-        # String
         attr_accessor :swift_code
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'bankCity', @bank_city)
-          add_to_hash(hash, 'patronymicName', @patronymic_name)
-          add_to_hash(hash, 'swiftCode', @swift_code)
+          hash['bankCity'] = @bank_city unless @bank_city.nil?
+          hash['patronymicName'] = @patronymic_name unless @patronymic_name.nil?
+          hash['swiftCode'] = @swift_code unless @swift_code.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('bankCity')
+          if hash.has_key? 'bankCity'
             @bank_city = hash['bankCity']
           end
-          if hash.has_key?('patronymicName')
+          if hash.has_key? 'patronymicName'
             @patronymic_name = hash['patronymicName']
           end
-          if hash.has_key?('swiftCode')
+          if hash.has_key? 'swiftCode'
             @swift_code = hash['swiftCode']
           end
         end

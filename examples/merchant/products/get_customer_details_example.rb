@@ -23,7 +23,7 @@ def example
     body.country_code = 'SE'
     body.values = values
 
-    response = client.merchant('merchantId').products().customer_details(9000, body)
+    response = client.merchant('merchantId').products.customer_details(9000, body)
   end
 end
 

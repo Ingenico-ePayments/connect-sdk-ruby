@@ -9,54 +9,53 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Definitions::ValidationBankAccountCheck>] checks
+      # @attr [String] new_bank_name
+      # @attr [String] reformatted_account_number
+      # @attr [String] reformatted_bank_code
+      # @attr [String] reformatted_branch_code
       class ValidationBankAccountOutput < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Definitions::ValidationBankAccountCheck}
         attr_accessor :checks
 
-        # String
         attr_accessor :new_bank_name
 
-        # String
         attr_accessor :reformatted_account_number
 
-        # String
         attr_accessor :reformatted_bank_code
 
-        # String
         attr_accessor :reformatted_branch_code
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'checks', @checks)
-          add_to_hash(hash, 'newBankName', @new_bank_name)
-          add_to_hash(hash, 'reformattedAccountNumber', @reformatted_account_number)
-          add_to_hash(hash, 'reformattedBankCode', @reformatted_bank_code)
-          add_to_hash(hash, 'reformattedBranchCode', @reformatted_branch_code)
+          hash['checks'] = @checks.collect{|val| val.to_h} unless @checks.nil?
+          hash['newBankName'] = @new_bank_name unless @new_bank_name.nil?
+          hash['reformattedAccountNumber'] = @reformatted_account_number unless @reformatted_account_number.nil?
+          hash['reformattedBankCode'] = @reformatted_bank_code unless @reformatted_bank_code.nil?
+          hash['reformattedBranchCode'] = @reformatted_branch_code unless @reformatted_branch_code.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('checks')
-            if !(hash['checks'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['checks']]
-            end
+          if hash.has_key? 'checks'
+            raise TypeError, "value '%s' is not an Array" % [hash['checks']] unless hash['checks'].is_a? Array
             @checks = []
             hash['checks'].each do |e|
               @checks << Ingenico::Connect::SDK::Domain::Definitions::ValidationBankAccountCheck.new_from_hash(e)
             end
           end
-          if hash.has_key?('newBankName')
+          if hash.has_key? 'newBankName'
             @new_bank_name = hash['newBankName']
           end
-          if hash.has_key?('reformattedAccountNumber')
+          if hash.has_key? 'reformattedAccountNumber'
             @reformatted_account_number = hash['reformattedAccountNumber']
           end
-          if hash.has_key?('reformattedBankCode')
+          if hash.has_key? 'reformattedBankCode'
             @reformatted_bank_code = hash['reformattedBankCode']
           end
-          if hash.has_key?('reformattedBranchCode')
+          if hash.has_key? 'reformattedBranchCode'
             @reformatted_branch_code = hash['reformattedBranchCode']
           end
         end

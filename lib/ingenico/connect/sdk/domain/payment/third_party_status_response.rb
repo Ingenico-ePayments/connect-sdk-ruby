@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] third_party_status
       class ThirdPartyStatusResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :third_party_status
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'thirdPartyStatus', @third_party_status)
+          hash['thirdPartyStatus'] = @third_party_status unless @third_party_status.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('thirdPartyStatus')
+          if hash.has_key? 'thirdPartyStatus'
             @third_party_status = hash['thirdPartyStatus']
           end
         end

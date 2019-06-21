@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Integer] max_length
+      # @attr [Integer] min_length
       class LengthValidator < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :max_length
 
-        # Integer
         attr_accessor :min_length
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'maxLength', @max_length)
-          add_to_hash(hash, 'minLength', @min_length)
+          hash['maxLength'] = @max_length unless @max_length.nil?
+          hash['minLength'] = @min_length unless @min_length.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('maxLength')
+          if hash.has_key? 'maxLength'
             @max_length = hash['maxLength']
           end
-          if hash.has_key?('minLength')
+          if hash.has_key? 'minLength'
             @min_length = hash['minLength']
           end
         end

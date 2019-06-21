@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] card_number
+      # @attr [String] expiry_date
       class CardEssentials < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :card_number
 
-        # String
         attr_accessor :expiry_date
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'cardNumber', @card_number)
-          add_to_hash(hash, 'expiryDate', @expiry_date)
+          hash['cardNumber'] = @card_number unless @card_number.nil?
+          hash['expiryDate'] = @expiry_date unless @expiry_date.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('cardNumber')
+          if hash.has_key? 'cardNumber'
             @card_number = hash['cardNumber']
           end
-          if hash.has_key?('expiryDate')
+          if hash.has_key? 'expiryDate'
             @expiry_date = hash['expiryDate']
           end
         end

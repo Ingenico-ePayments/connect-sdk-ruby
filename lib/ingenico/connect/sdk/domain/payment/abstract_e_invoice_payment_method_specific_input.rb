@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [true/false] requires_approval
       class AbstractEInvoicePaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Definitions::AbstractPaymentMethodSpecificInput
 
-        # true/false
         attr_accessor :requires_approval
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'requiresApproval', @requires_approval)
+          hash['requiresApproval'] = @requires_approval unless @requires_approval.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('requiresApproval')
+          if hash.has_key? 'requiresApproval'
             @requires_approval = hash['requiresApproval']
           end
         end

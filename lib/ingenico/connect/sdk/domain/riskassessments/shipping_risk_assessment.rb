@@ -9,37 +9,36 @@ module Ingenico::Connect::SDK
   module Domain
     module Riskassessments
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::AddressPersonal] address
+      # @attr [String] comments
+      # @attr [String] tracking_number
       class ShippingRiskAssessment < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Payment::AddressPersonal}
         attr_accessor :address
 
-        # String
         attr_accessor :comments
 
-        # String
         attr_accessor :tracking_number
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'address', @address)
-          add_to_hash(hash, 'comments', @comments)
-          add_to_hash(hash, 'trackingNumber', @tracking_number)
+          hash['address'] = @address.to_h unless @address.nil?
+          hash['comments'] = @comments unless @comments.nil?
+          hash['trackingNumber'] = @tracking_number unless @tracking_number.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('address')
-            if !(hash['address'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['address']]
-            end
+          if hash.has_key? 'address'
+            raise TypeError, "value '%s' is not a Hash" % [hash['address']] unless hash['address'].is_a? Hash
             @address = Ingenico::Connect::SDK::Domain::Payment::AddressPersonal.new_from_hash(hash['address'])
           end
-          if hash.has_key?('comments')
+          if hash.has_key? 'comments'
             @comments = hash['comments']
           end
-          if hash.has_key?('trackingNumber')
+          if hash.has_key? 'trackingNumber'
             @tracking_number = hash['trackingNumber']
           end
         end

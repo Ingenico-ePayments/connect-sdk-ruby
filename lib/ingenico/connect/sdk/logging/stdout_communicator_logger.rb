@@ -19,7 +19,8 @@ module Ingenico::Connect::SDK
 
       # Logs a single error or non-error message to $stdout.
       def log(msg, thrown=false)
-        $stdout.puts (get_date_prefix + msg)
+        $stdout.puts get_date_prefix + msg
+        $stdout.puts thrown.to_s if thrown
         $stdout.puts thrown.backtrace.join($RS) if thrown
       end
 

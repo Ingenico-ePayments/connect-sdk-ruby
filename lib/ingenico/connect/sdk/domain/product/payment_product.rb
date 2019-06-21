@@ -15,187 +15,174 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::AccountOnFile>] accounts_on_file
+      # @attr [true/false] allows_recurring
+      # @attr [true/false] allows_tokenization
+      # @attr [Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator] authentication_indicator
+      # @attr [true/false] auto_tokenized
+      # @attr [true/false] can_be_iframed
+      # @attr [true/false] device_fingerprint_enabled
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints] display_hints
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProductField>] fields
+      # @attr [String] fields_warning
+      # @attr [Integer] id
+      # @attr [true/false] is_java_script_required
+      # @attr [Integer] max_amount
+      # @attr [Integer] min_amount
+      # @attr [String] mobile_integration_level
+      # @attr [String] payment_method
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProduct302SpecificData] payment_product302_specific_data
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData] payment_product320_specific_data
+      # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData] payment_product863_specific_data
+      # @attr [String] payment_product_group
+      # @attr [true/false] uses_redirection_to3rd_party
       class PaymentProduct < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::AccountOnFile}
         attr_accessor :accounts_on_file
 
-        # true/false
         attr_accessor :allows_recurring
 
-        # true/false
         attr_accessor :allows_tokenization
 
-        # {Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator}
         attr_accessor :authentication_indicator
 
-        # true/false
         attr_accessor :auto_tokenized
 
-        # true/false
         attr_accessor :can_be_iframed
 
-        # true/false
         attr_accessor :device_fingerprint_enabled
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints}
         attr_accessor :display_hints
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductField}
         attr_accessor :fields
 
-        # String
         attr_accessor :fields_warning
 
-        # Integer
         attr_accessor :id
 
-        # true/false
         attr_accessor :is_java_script_required
 
-        # Integer
         attr_accessor :max_amount
 
-        # Integer
         attr_accessor :min_amount
 
-        # String
         attr_accessor :mobile_integration_level
 
-        # String
         attr_accessor :payment_method
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct302SpecificData}
         attr_accessor :payment_product302_specific_data
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData}
         attr_accessor :payment_product320_specific_data
 
-        # {Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData}
         attr_accessor :payment_product863_specific_data
 
-        # String
         attr_accessor :payment_product_group
 
-        # true/false
         attr_accessor :uses_redirection_to3rd_party
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'accountsOnFile', @accounts_on_file)
-          add_to_hash(hash, 'allowsRecurring', @allows_recurring)
-          add_to_hash(hash, 'allowsTokenization', @allows_tokenization)
-          add_to_hash(hash, 'authenticationIndicator', @authentication_indicator)
-          add_to_hash(hash, 'autoTokenized', @auto_tokenized)
-          add_to_hash(hash, 'canBeIframed', @can_be_iframed)
-          add_to_hash(hash, 'deviceFingerprintEnabled', @device_fingerprint_enabled)
-          add_to_hash(hash, 'displayHints', @display_hints)
-          add_to_hash(hash, 'fields', @fields)
-          add_to_hash(hash, 'fieldsWarning', @fields_warning)
-          add_to_hash(hash, 'id', @id)
-          add_to_hash(hash, 'isJavaScriptRequired', @is_java_script_required)
-          add_to_hash(hash, 'maxAmount', @max_amount)
-          add_to_hash(hash, 'minAmount', @min_amount)
-          add_to_hash(hash, 'mobileIntegrationLevel', @mobile_integration_level)
-          add_to_hash(hash, 'paymentMethod', @payment_method)
-          add_to_hash(hash, 'paymentProduct302SpecificData', @payment_product302_specific_data)
-          add_to_hash(hash, 'paymentProduct320SpecificData', @payment_product320_specific_data)
-          add_to_hash(hash, 'paymentProduct863SpecificData', @payment_product863_specific_data)
-          add_to_hash(hash, 'paymentProductGroup', @payment_product_group)
-          add_to_hash(hash, 'usesRedirectionTo3rdParty', @uses_redirection_to3rd_party)
+          hash['accountsOnFile'] = @accounts_on_file.collect{|val| val.to_h} unless @accounts_on_file.nil?
+          hash['allowsRecurring'] = @allows_recurring unless @allows_recurring.nil?
+          hash['allowsTokenization'] = @allows_tokenization unless @allows_tokenization.nil?
+          hash['authenticationIndicator'] = @authentication_indicator.to_h unless @authentication_indicator.nil?
+          hash['autoTokenized'] = @auto_tokenized unless @auto_tokenized.nil?
+          hash['canBeIframed'] = @can_be_iframed unless @can_be_iframed.nil?
+          hash['deviceFingerprintEnabled'] = @device_fingerprint_enabled unless @device_fingerprint_enabled.nil?
+          hash['displayHints'] = @display_hints.to_h unless @display_hints.nil?
+          hash['fields'] = @fields.collect{|val| val.to_h} unless @fields.nil?
+          hash['fieldsWarning'] = @fields_warning unless @fields_warning.nil?
+          hash['id'] = @id unless @id.nil?
+          hash['isJavaScriptRequired'] = @is_java_script_required unless @is_java_script_required.nil?
+          hash['maxAmount'] = @max_amount unless @max_amount.nil?
+          hash['minAmount'] = @min_amount unless @min_amount.nil?
+          hash['mobileIntegrationLevel'] = @mobile_integration_level unless @mobile_integration_level.nil?
+          hash['paymentMethod'] = @payment_method unless @payment_method.nil?
+          hash['paymentProduct302SpecificData'] = @payment_product302_specific_data.to_h unless @payment_product302_specific_data.nil?
+          hash['paymentProduct320SpecificData'] = @payment_product320_specific_data.to_h unless @payment_product320_specific_data.nil?
+          hash['paymentProduct863SpecificData'] = @payment_product863_specific_data.to_h unless @payment_product863_specific_data.nil?
+          hash['paymentProductGroup'] = @payment_product_group unless @payment_product_group.nil?
+          hash['usesRedirectionTo3rdParty'] = @uses_redirection_to3rd_party unless @uses_redirection_to3rd_party.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('accountsOnFile')
-            if !(hash['accountsOnFile'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['accountsOnFile']]
-            end
+          if hash.has_key? 'accountsOnFile'
+            raise TypeError, "value '%s' is not an Array" % [hash['accountsOnFile']] unless hash['accountsOnFile'].is_a? Array
             @accounts_on_file = []
             hash['accountsOnFile'].each do |e|
               @accounts_on_file << Ingenico::Connect::SDK::Domain::Product::AccountOnFile.new_from_hash(e)
             end
           end
-          if hash.has_key?('allowsRecurring')
+          if hash.has_key? 'allowsRecurring'
             @allows_recurring = hash['allowsRecurring']
           end
-          if hash.has_key?('allowsTokenization')
+          if hash.has_key? 'allowsTokenization'
             @allows_tokenization = hash['allowsTokenization']
           end
-          if hash.has_key?('authenticationIndicator')
-            if !(hash['authenticationIndicator'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['authenticationIndicator']]
-            end
+          if hash.has_key? 'authenticationIndicator'
+            raise TypeError, "value '%s' is not a Hash" % [hash['authenticationIndicator']] unless hash['authenticationIndicator'].is_a? Hash
             @authentication_indicator = Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator.new_from_hash(hash['authenticationIndicator'])
           end
-          if hash.has_key?('autoTokenized')
+          if hash.has_key? 'autoTokenized'
             @auto_tokenized = hash['autoTokenized']
           end
-          if hash.has_key?('canBeIframed')
+          if hash.has_key? 'canBeIframed'
             @can_be_iframed = hash['canBeIframed']
           end
-          if hash.has_key?('deviceFingerprintEnabled')
+          if hash.has_key? 'deviceFingerprintEnabled'
             @device_fingerprint_enabled = hash['deviceFingerprintEnabled']
           end
-          if hash.has_key?('displayHints')
-            if !(hash['displayHints'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['displayHints']]
-            end
+          if hash.has_key? 'displayHints'
+            raise TypeError, "value '%s' is not a Hash" % [hash['displayHints']] unless hash['displayHints'].is_a? Hash
             @display_hints = Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints.new_from_hash(hash['displayHints'])
           end
-          if hash.has_key?('fields')
-            if !(hash['fields'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['fields']]
-            end
+          if hash.has_key? 'fields'
+            raise TypeError, "value '%s' is not an Array" % [hash['fields']] unless hash['fields'].is_a? Array
             @fields = []
             hash['fields'].each do |e|
               @fields << Ingenico::Connect::SDK::Domain::Product::PaymentProductField.new_from_hash(e)
             end
           end
-          if hash.has_key?('fieldsWarning')
+          if hash.has_key? 'fieldsWarning'
             @fields_warning = hash['fieldsWarning']
           end
-          if hash.has_key?('id')
+          if hash.has_key? 'id'
             @id = hash['id']
           end
-          if hash.has_key?('isJavaScriptRequired')
+          if hash.has_key? 'isJavaScriptRequired'
             @is_java_script_required = hash['isJavaScriptRequired']
           end
-          if hash.has_key?('maxAmount')
+          if hash.has_key? 'maxAmount'
             @max_amount = hash['maxAmount']
           end
-          if hash.has_key?('minAmount')
+          if hash.has_key? 'minAmount'
             @min_amount = hash['minAmount']
           end
-          if hash.has_key?('mobileIntegrationLevel')
+          if hash.has_key? 'mobileIntegrationLevel'
             @mobile_integration_level = hash['mobileIntegrationLevel']
           end
-          if hash.has_key?('paymentMethod')
+          if hash.has_key? 'paymentMethod'
             @payment_method = hash['paymentMethod']
           end
-          if hash.has_key?('paymentProduct302SpecificData')
-            if !(hash['paymentProduct302SpecificData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct302SpecificData']]
-            end
+          if hash.has_key? 'paymentProduct302SpecificData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct302SpecificData']] unless hash['paymentProduct302SpecificData'].is_a? Hash
             @payment_product302_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct302SpecificData.new_from_hash(hash['paymentProduct302SpecificData'])
           end
-          if hash.has_key?('paymentProduct320SpecificData')
-            if !(hash['paymentProduct320SpecificData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct320SpecificData']]
-            end
+          if hash.has_key? 'paymentProduct320SpecificData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct320SpecificData']] unless hash['paymentProduct320SpecificData'].is_a? Hash
             @payment_product320_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData.new_from_hash(hash['paymentProduct320SpecificData'])
           end
-          if hash.has_key?('paymentProduct863SpecificData')
-            if !(hash['paymentProduct863SpecificData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863SpecificData']]
-            end
+          if hash.has_key? 'paymentProduct863SpecificData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863SpecificData']] unless hash['paymentProduct863SpecificData'].is_a? Hash
             @payment_product863_specific_data = Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData.new_from_hash(hash['paymentProduct863SpecificData'])
           end
-          if hash.has_key?('paymentProductGroup')
+          if hash.has_key? 'paymentProductGroup'
             @payment_product_group = hash['paymentProductGroup']
           end
-          if hash.has_key?('usesRedirectionTo3rdParty')
+          if hash.has_key? 'usesRedirectionTo3rdParty'
             @uses_redirection_to3rd_party = hash['usesRedirectionTo3rdParty']
           end
         end

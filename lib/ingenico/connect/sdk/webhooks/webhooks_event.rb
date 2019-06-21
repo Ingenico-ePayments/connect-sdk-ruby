@@ -1,46 +1,40 @@
 module Ingenico::Connect::SDK
   module Webhooks
 
+    # @attr [String] api_version
+    # @attr [String] id
+    # @attr [String] created
+    # @attr [String] merchant_id
+    # @attr [String] type
+    # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentResponse] payment
+    # @attr [Ingenico::Connect::SDK::Domain::Payout::PayoutResponse] refund
+    # @attr [Ingenico::Connect::SDK::Domain::Refund::RefundResponse] payout
+    # @attr [Ingenico::Connect::SDK::Domain::Token::TokenResponse] token
     class WebhooksEvent < Ingenico::Connect::SDK::DataObject
 
-      # String
       attr_accessor :api_version
-
-      # String
       attr_accessor :id
-
-      # String
       attr_accessor :created
-
-      # String
       attr_accessor :merchant_id
-
-      # String
       attr_accessor :type
 
-      # {Ingenico::Connect::SDK::Domain::Payment::PaymentResponse}
       attr_accessor :payment
-
-      # {Ingenico::Connect::SDK::Domain::Payout::PayoutResponse}
       attr_accessor :refund
-
-      # {Ingenico::Connect::SDK::Domain::Refund::RefundResponse}
       attr_accessor :payout
-
-      # {Ingenico::Connect::SDK::Domain::Token::TokenResponse}
       attr_accessor :token
 
+      # @return [Hash]
       def to_h
         hash = super
-        add_to_hash(hash, 'apiVersion', @api_version)
-        add_to_hash(hash, 'id', @id)
-        add_to_hash(hash, 'created', @created)
-        add_to_hash(hash, 'merchantId', @merchant_id)
-        add_to_hash(hash, 'type', @type)
-        add_to_hash(hash, 'payment', @payment)
-        add_to_hash(hash, 'refund', @refund)
-        add_to_hash(hash, 'payout', @payout)
-        add_to_hash(hash, 'token', @token)
+        hash['apiVersion'] = @api_version unless @api_version.nil?
+        hash['id'] = @id unless @id.nil?
+        hash['created'] = @created unless @created.nil?
+        hash['merchantId'] = @merchant_id unless @merchant_id.nil?
+        hash['type'] = @type unless @type.nil?
+        hash['payment'] = @payment.to_h unless @payment.nil?
+        hash['refund'] = @refund.to_h unless @refund.nil?
+        hash['payout'] = @payout.to_h unless @payout.nil?
+        hash['token'] = @token.to_h unless @token.nil?
         hash
       end
 

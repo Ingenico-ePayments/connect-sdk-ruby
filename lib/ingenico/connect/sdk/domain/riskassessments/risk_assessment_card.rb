@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Riskassessments
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::Card] card
       class RiskAssessmentCard < Ingenico::Connect::SDK::Domain::Riskassessments::RiskAssessment
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::Card}
         attr_accessor :card
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'card', @card)
+          hash['card'] = @card.to_h unless @card.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('card')
-            if !(hash['card'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['card']]
-            end
+          if hash.has_key? 'card'
+            raise TypeError, "value '%s' is not a Hash" % [hash['card']] unless hash['card'].is_a? Hash
             @card = Ingenico::Connect::SDK::Domain::Definitions::Card.new_from_hash(hash['card'])
           end
         end

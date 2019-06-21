@@ -4,8 +4,10 @@ require 'base64'
 module Ingenico::Connect::SDK
 
   # Manages metadata about the server using the SDK
+  #
+  # @attr_reader [Array<Ingenico::Connect::SDK::RequestHeader>] meta_data_headers List of headers that should be used in all requests.
   class MetaDataProvider
-    @@SDK_VERSION = '1.36.0'
+    @@SDK_VERSION = '2.0.0'
     @@SERVER_META_INFO_HEADER = 'X-GCS-ServerMetaInfo'
     @@PROHIBITED_HEADERS = [@@SERVER_META_INFO_HEADER, 'X-GCS-Idempotence-Key',
                             'Date', 'Content-Type', 'Authorization'].sort!.freeze
@@ -34,35 +36,32 @@ module Ingenico::Connect::SDK
       # Returns the values of all attributes as a hash.
       def to_h
         hash = super
-        add_to_hash(hash, 'platformIdentifier', platform_identifier)
-        add_to_hash(hash, 'sdkIdentifier', sdk_identifier)
-        add_to_hash(hash, 'sdkCreator', sdk_creator)
-        add_to_hash(hash, 'integrator', integrator)
-        add_to_hash(hash, 'shoppingCartExtension', shopping_cart_extension)
+        hash['platformIdentifier'] = @platform_identifier unless @platform_identifier.nil?
+        hash['sdkIdentifier'] = @sdk_identifier unless @sdk_identifier.nil?
+        hash['sdkCreator'] = @sdk_creator unless @sdk_creator.nil?
+        hash['integrator'] = @integrator unless @integrator.nil?
+        hash['shoppingCartExtension'] = @shopping_cart_extension.to_h unless @shopping_cart_extension.nil?
         hash
       end
 
       # Initializes the ServerMetaInfo object with properties stored in the parameter hash
       def from_hash(hash)
         super
-        @platform_identifier = hash['platformIdentifier'] if hash.has_key?('platformIdentifier')
-        @sdk_identifier = hash['sdkIdentifier'] if hash.has_key?('sdkIdentifier')
-        @sdk_creator = hash['sdkCreator'] if hash.has_key?('sdkCreator')
-        @integrator = hash['integrator'] if hash.has_key?('integrator')
-        if hash.has_key?('shoppingCartExtension')
-          @shopping_cart_extension = Domain::Metadata::ShoppingCartExtension.new_from_hash(hash['shoppingCartExtension'])
-        end
+        @platform_identifier = hash['platformIdentifier'] if hash.has_key? 'platformIdentifier'
+        @sdk_identifier = hash['sdkIdentifier'] if hash.has_key? 'sdkIdentifier'
+        @sdk_creator = hash['sdkCreator'] if hash.has_key? 'sdkCreator'
+        @integrator = hash['integrator'] if hash.has_key? 'integrator'
+        @shopping_cart_extension = Domain::Metadata::ShoppingCartExtension.new_from_hash(hash['shoppingCartExtension']) if hash.has_key? 'shoppingCartExtension'
       end
     end
 
     # Create a new MetaDataProvider instance that can be used to access platform-related information
     #
-    # integrator::                  String
-    # shopping_cart_extension::     String
-    # additional_request_headers::  {Ingenico::Connect::SDK::RequestHeader} list of additional headers to include in all requests made.
-    #                               The following headers are not allowed due to conflicts with already added headers:
-    #                               'X-GCS-Idempotence-Key', 'Date', 'Content-Type', 'Authorization'
-    #                               and 'X-GCS-ServerMetaInfo'
+    # @param integrator                 [String] Name of the integrator
+    # @param shopping_cart_extension    [Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension] shopping cart-related metadata.
+    # @param additional_request_headers [Array<Ingenico::Connect::SDK::RequestHeader>] list of additional headers to include in all requests made.
+    #                                   The following headers are not allowed due to conflicts with already added headers:
+    #                                   'X-GCS-Idempotence-Key', 'Date', 'Content-Type', 'Authorization' and 'X-GCS-ServerMetaInfo'
     def initialize(integrator, shopping_cart_extension: nil, additional_request_headers: [].freeze)
 
       MetaDataProvider.validate_additional_request_headers(additional_request_headers)
@@ -121,6 +120,7 @@ module Ingenico::Connect::SDK
         s = 'Mac OS X'
       end
       s += '/' + RUBY_DESCRIPTION
+      s
     end
 
     # String describing the version of the SDK being used
@@ -146,7 +146,6 @@ module Ingenico::Connect::SDK
       @@PROHIBITED_HEADERS
     end
 
-    # A {Ingenico::Connect::SDK::RequestHeader} list of headers that should be used in all requests.
     attr_reader :meta_data_headers
   end
 end

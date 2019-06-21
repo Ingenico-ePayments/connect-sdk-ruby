@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Hostedcheckout
 
+      # @attr [String] merchant_name
+      # @attr [String] merchant_origin
       class MobilePaymentProduct320SpecificInputHostedCheckout < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :merchant_name
 
-        # String
         attr_accessor :merchant_origin
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'merchantName', @merchant_name)
-          add_to_hash(hash, 'merchantOrigin', @merchant_origin)
+          hash['merchantName'] = @merchant_name unless @merchant_name.nil?
+          hash['merchantOrigin'] = @merchant_origin unless @merchant_origin.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('merchantName')
+          if hash.has_key? 'merchantName'
             @merchant_name = hash['merchantName']
           end
-          if hash.has_key?('merchantOrigin')
+          if hash.has_key? 'merchantOrigin'
             @merchant_origin = hash['merchantOrigin']
           end
         end

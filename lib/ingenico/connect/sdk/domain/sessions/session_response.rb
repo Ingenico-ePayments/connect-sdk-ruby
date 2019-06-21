@@ -8,61 +8,60 @@ module Ingenico::Connect::SDK
   module Domain
     module Sessions
 
+      # @attr [String] asset_url
+      # @attr [String] client_api_url
+      # @attr [String] client_session_id
+      # @attr [String] customer_id
+      # @attr [Array<String>] invalid_tokens
+      # @attr [String] region
       class SessionResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :asset_url
 
-        # String
         attr_accessor :client_api_url
 
-        # String
         attr_accessor :client_session_id
 
-        # String
         attr_accessor :customer_id
 
-        # Array of String
         attr_accessor :invalid_tokens
 
-        # String
         attr_accessor :region
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'assetUrl', @asset_url)
-          add_to_hash(hash, 'clientApiUrl', @client_api_url)
-          add_to_hash(hash, 'clientSessionId', @client_session_id)
-          add_to_hash(hash, 'customerId', @customer_id)
-          add_to_hash(hash, 'invalidTokens', @invalid_tokens)
-          add_to_hash(hash, 'region', @region)
+          hash['assetUrl'] = @asset_url unless @asset_url.nil?
+          hash['clientApiUrl'] = @client_api_url unless @client_api_url.nil?
+          hash['clientSessionId'] = @client_session_id unless @client_session_id.nil?
+          hash['customerId'] = @customer_id unless @customer_id.nil?
+          hash['invalidTokens'] = @invalid_tokens unless @invalid_tokens.nil?
+          hash['region'] = @region unless @region.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('assetUrl')
+          if hash.has_key? 'assetUrl'
             @asset_url = hash['assetUrl']
           end
-          if hash.has_key?('clientApiUrl')
+          if hash.has_key? 'clientApiUrl'
             @client_api_url = hash['clientApiUrl']
           end
-          if hash.has_key?('clientSessionId')
+          if hash.has_key? 'clientSessionId'
             @client_session_id = hash['clientSessionId']
           end
-          if hash.has_key?('customerId')
+          if hash.has_key? 'customerId'
             @customer_id = hash['customerId']
           end
-          if hash.has_key?('invalidTokens')
-            if !(hash['invalidTokens'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['invalidTokens']]
-            end
+          if hash.has_key? 'invalidTokens'
+            raise TypeError, "value '%s' is not an Array" % [hash['invalidTokens']] unless hash['invalidTokens'].is_a? Array
             @invalid_tokens = []
             hash['invalidTokens'].each do |e|
               @invalid_tokens << e
             end
           end
-          if hash.has_key?('region')
+          if hash.has_key? 'region'
             @region = hash['region']
           end
         end

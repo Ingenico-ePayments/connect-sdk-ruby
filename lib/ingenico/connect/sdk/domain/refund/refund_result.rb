@@ -10,40 +10,37 @@ module Ingenico::Connect::SDK
   module Domain
     module Refund
 
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundOutput] refund_output
+      # @attr [String] status
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::OrderStatusOutput] status_output
       class RefundResult < Ingenico::Connect::SDK::Domain::Definitions::AbstractOrderStatus
 
-        # {Ingenico::Connect::SDK::Domain::Payment::RefundOutput}
         attr_accessor :refund_output
 
-        # String
         attr_accessor :status
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::OrderStatusOutput}
         attr_accessor :status_output
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'refundOutput', @refund_output)
-          add_to_hash(hash, 'status', @status)
-          add_to_hash(hash, 'statusOutput', @status_output)
+          hash['refundOutput'] = @refund_output.to_h unless @refund_output.nil?
+          hash['status'] = @status unless @status.nil?
+          hash['statusOutput'] = @status_output.to_h unless @status_output.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('refundOutput')
-            if !(hash['refundOutput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['refundOutput']]
-            end
+          if hash.has_key? 'refundOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['refundOutput']] unless hash['refundOutput'].is_a? Hash
             @refund_output = Ingenico::Connect::SDK::Domain::Payment::RefundOutput.new_from_hash(hash['refundOutput'])
           end
-          if hash.has_key?('status')
+          if hash.has_key? 'status'
             @status = hash['status']
           end
-          if hash.has_key?('statusOutput')
-            if !(hash['statusOutput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['statusOutput']]
-            end
+          if hash.has_key? 'statusOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['statusOutput']] unless hash['statusOutput'].is_a? Hash
             @status_output = Ingenico::Connect::SDK::Domain::Definitions::OrderStatusOutput.new_from_hash(hash['statusOutput'])
           end
         end

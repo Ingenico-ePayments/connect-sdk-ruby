@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] acs_transaction_id
+      # @attr [String] method
+      # @attr [String] utc_timestamp
       class ThreeDSecureData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :acs_transaction_id
 
-        # String
         attr_accessor :method
 
-        # String
         attr_accessor :utc_timestamp
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'acsTransactionId', @acs_transaction_id)
-          add_to_hash(hash, 'method', @method)
-          add_to_hash(hash, 'utcTimestamp', @utc_timestamp)
+          hash['acsTransactionId'] = @acs_transaction_id unless @acs_transaction_id.nil?
+          hash['method'] = @method unless @method.nil?
+          hash['utcTimestamp'] = @utc_timestamp unless @utc_timestamp.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('acsTransactionId')
+          if hash.has_key? 'acsTransactionId'
             @acs_transaction_id = hash['acsTransactionId']
           end
-          if hash.has_key?('method')
+          if hash.has_key? 'method'
             @method = hash['method']
           end
-          if hash.has_key?('utcTimestamp')
+          if hash.has_key? 'utcTimestamp'
             @utc_timestamp = hash['utcTimestamp']
           end
         end

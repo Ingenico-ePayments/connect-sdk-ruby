@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] iban
       class BankAccountIban < Ingenico::Connect::SDK::Domain::Definitions::BankAccount
 
-        # String
         attr_accessor :iban
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'iban', @iban)
+          hash['iban'] = @iban unless @iban.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('iban')
+          if hash.has_key? 'iban'
             @iban = hash['iban']
           end
         end

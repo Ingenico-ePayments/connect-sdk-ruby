@@ -8,62 +8,63 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] app_id
+      # @attr [String] nonce_str
+      # @attr [String] package_sign
+      # @attr [String] pay_sign
+      # @attr [String] prepay_id
+      # @attr [String] sign_type
+      # @attr [String] time_stamp
       class PaymentProduct863ThirdPartyData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :app_id
 
-        # String
         attr_accessor :nonce_str
 
-        # String
         attr_accessor :package_sign
 
-        # String
         attr_accessor :pay_sign
 
-        # String
         attr_accessor :prepay_id
 
-        # String
         attr_accessor :sign_type
 
-        # String
         attr_accessor :time_stamp
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'appId', @app_id)
-          add_to_hash(hash, 'nonceStr', @nonce_str)
-          add_to_hash(hash, 'packageSign', @package_sign)
-          add_to_hash(hash, 'paySign', @pay_sign)
-          add_to_hash(hash, 'prepayId', @prepay_id)
-          add_to_hash(hash, 'signType', @sign_type)
-          add_to_hash(hash, 'timeStamp', @time_stamp)
+          hash['appId'] = @app_id unless @app_id.nil?
+          hash['nonceStr'] = @nonce_str unless @nonce_str.nil?
+          hash['packageSign'] = @package_sign unless @package_sign.nil?
+          hash['paySign'] = @pay_sign unless @pay_sign.nil?
+          hash['prepayId'] = @prepay_id unless @prepay_id.nil?
+          hash['signType'] = @sign_type unless @sign_type.nil?
+          hash['timeStamp'] = @time_stamp unless @time_stamp.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('appId')
+          if hash.has_key? 'appId'
             @app_id = hash['appId']
           end
-          if hash.has_key?('nonceStr')
+          if hash.has_key? 'nonceStr'
             @nonce_str = hash['nonceStr']
           end
-          if hash.has_key?('packageSign')
+          if hash.has_key? 'packageSign'
             @package_sign = hash['packageSign']
           end
-          if hash.has_key?('paySign')
+          if hash.has_key? 'paySign'
             @pay_sign = hash['paySign']
           end
-          if hash.has_key?('prepayId')
+          if hash.has_key? 'prepayId'
             @prepay_id = hash['prepayId']
           end
-          if hash.has_key?('signType')
+          if hash.has_key? 'signType'
             @sign_type = hash['signType']
           end
-          if hash.has_key?('timeStamp')
+          if hash.has_key? 'timeStamp'
             @time_stamp = hash['timeStamp']
           end
         end

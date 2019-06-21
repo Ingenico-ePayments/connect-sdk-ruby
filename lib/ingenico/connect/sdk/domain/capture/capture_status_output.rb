@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Capture
 
+      # @attr [Integer] status_code
       class CaptureStatusOutput < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :status_code
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'statusCode', @status_code)
+          hash['statusCode'] = @status_code unless @status_code.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('statusCode')
+          if hash.has_key? 'statusCode'
             @status_code = hash['statusCode']
           end
         end

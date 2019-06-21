@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] name
+      # @attr [String] value
       class AbstractIndicator < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :name
 
-        # String
         attr_accessor :value
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'name', @name)
-          add_to_hash(hash, 'value', @value)
+          hash['name'] = @name unless @name.nil?
+          hash['value'] = @value unless @value.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('name')
+          if hash.has_key? 'name'
             @name = hash['name']
           end
-          if hash.has_key?('value')
+          if hash.has_key? 'value'
             @value = hash['value']
           end
         end

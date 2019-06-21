@@ -9,33 +9,30 @@ module Ingenico::Connect::SDK
   module Domain
     module Sessions
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter] exclude
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter] restrict_to
       class PaymentProductFiltersClientSession < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter}
         attr_accessor :exclude
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter}
         attr_accessor :restrict_to
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'exclude', @exclude)
-          add_to_hash(hash, 'restrictTo', @restrict_to)
+          hash['exclude'] = @exclude.to_h unless @exclude.nil?
+          hash['restrictTo'] = @restrict_to.to_h unless @restrict_to.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('exclude')
-            if !(hash['exclude'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['exclude']]
-            end
+          if hash.has_key? 'exclude'
+            raise TypeError, "value '%s' is not a Hash" % [hash['exclude']] unless hash['exclude'].is_a? Hash
             @exclude = Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter.new_from_hash(hash['exclude'])
           end
-          if hash.has_key?('restrictTo')
-            if !(hash['restrictTo'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['restrictTo']]
-            end
+          if hash.has_key? 'restrictTo'
+            raise TypeError, "value '%s' is not a Hash" % [hash['restrictTo']] unless hash['restrictTo'].is_a? Hash
             @restrict_to = Ingenico::Connect::SDK::Domain::Definitions::PaymentProductFilter.new_from_hash(hash['restrictTo'])
           end
         end

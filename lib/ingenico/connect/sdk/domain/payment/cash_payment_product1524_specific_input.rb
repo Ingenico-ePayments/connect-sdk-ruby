@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] return_url
       class CashPaymentProduct1524SpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :return_url
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'returnUrl', @return_url)
+          hash['returnUrl'] = @return_url unless @return_url.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('returnUrl')
+          if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']
           end
         end

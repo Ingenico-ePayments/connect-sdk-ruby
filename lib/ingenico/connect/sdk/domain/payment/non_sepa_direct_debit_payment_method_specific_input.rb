@@ -10,75 +10,72 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] date_collect
+      # @attr [String] direct_debit_text
+      # @attr [true/false] is_recurring
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct705SpecificInput] payment_product705_specific_input
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct730SpecificInput] payment_product730_specific_input
+      # @attr [String] recurring_payment_sequence_indicator
+      # @attr [String] token
+      # @attr [true/false] tokenize
       class NonSepaDirectDebitPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Definitions::AbstractPaymentMethodSpecificInput
 
-        # String
         attr_accessor :date_collect
 
-        # String
         attr_accessor :direct_debit_text
 
-        # true/false
         attr_accessor :is_recurring
 
-        # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct705SpecificInput}
         attr_accessor :payment_product705_specific_input
 
-        # {Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct730SpecificInput}
         attr_accessor :payment_product730_specific_input
 
-        # String
         attr_accessor :recurring_payment_sequence_indicator
 
-        # String
         attr_accessor :token
 
-        # true/false
         attr_accessor :tokenize
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'dateCollect', @date_collect)
-          add_to_hash(hash, 'directDebitText', @direct_debit_text)
-          add_to_hash(hash, 'isRecurring', @is_recurring)
-          add_to_hash(hash, 'paymentProduct705SpecificInput', @payment_product705_specific_input)
-          add_to_hash(hash, 'paymentProduct730SpecificInput', @payment_product730_specific_input)
-          add_to_hash(hash, 'recurringPaymentSequenceIndicator', @recurring_payment_sequence_indicator)
-          add_to_hash(hash, 'token', @token)
-          add_to_hash(hash, 'tokenize', @tokenize)
+          hash['dateCollect'] = @date_collect unless @date_collect.nil?
+          hash['directDebitText'] = @direct_debit_text unless @direct_debit_text.nil?
+          hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
+          hash['paymentProduct705SpecificInput'] = @payment_product705_specific_input.to_h unless @payment_product705_specific_input.nil?
+          hash['paymentProduct730SpecificInput'] = @payment_product730_specific_input.to_h unless @payment_product730_specific_input.nil?
+          hash['recurringPaymentSequenceIndicator'] = @recurring_payment_sequence_indicator unless @recurring_payment_sequence_indicator.nil?
+          hash['token'] = @token unless @token.nil?
+          hash['tokenize'] = @tokenize unless @tokenize.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('dateCollect')
+          if hash.has_key? 'dateCollect'
             @date_collect = hash['dateCollect']
           end
-          if hash.has_key?('directDebitText')
+          if hash.has_key? 'directDebitText'
             @direct_debit_text = hash['directDebitText']
           end
-          if hash.has_key?('isRecurring')
+          if hash.has_key? 'isRecurring'
             @is_recurring = hash['isRecurring']
           end
-          if hash.has_key?('paymentProduct705SpecificInput')
-            if !(hash['paymentProduct705SpecificInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct705SpecificInput']]
-            end
+          if hash.has_key? 'paymentProduct705SpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct705SpecificInput']] unless hash['paymentProduct705SpecificInput'].is_a? Hash
             @payment_product705_specific_input = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct705SpecificInput.new_from_hash(hash['paymentProduct705SpecificInput'])
           end
-          if hash.has_key?('paymentProduct730SpecificInput')
-            if !(hash['paymentProduct730SpecificInput'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct730SpecificInput']]
-            end
+          if hash.has_key? 'paymentProduct730SpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct730SpecificInput']] unless hash['paymentProduct730SpecificInput'].is_a? Hash
             @payment_product730_specific_input = Ingenico::Connect::SDK::Domain::Payment::NonSepaDirectDebitPaymentProduct730SpecificInput.new_from_hash(hash['paymentProduct730SpecificInput'])
           end
-          if hash.has_key?('recurringPaymentSequenceIndicator')
+          if hash.has_key? 'recurringPaymentSequenceIndicator'
             @recurring_payment_sequence_indicator = hash['recurringPaymentSequenceIndicator']
           end
-          if hash.has_key?('token')
+          if hash.has_key? 'token'
             @token = hash['token']
           end
-          if hash.has_key?('tokenize')
+          if hash.has_key? 'tokenize'
             @tokenize = hash['tokenize']
           end
         end

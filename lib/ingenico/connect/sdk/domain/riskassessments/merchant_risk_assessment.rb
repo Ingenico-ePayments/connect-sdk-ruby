@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Riskassessments
 
+      # @attr [String] website_url
       class MerchantRiskAssessment < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :website_url
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'websiteUrl', @website_url)
+          hash['websiteUrl'] = @website_url unless @website_url.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('websiteUrl')
+          if hash.has_key? 'websiteUrl'
             @website_url = hash['websiteUrl']
           end
         end

@@ -8,69 +8,70 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Integer] discount_amount
+      # @attr [Integer] line_amount_total
+      # @attr [String] product_code
+      # @attr [Integer] product_price
+      # @attr [String] product_type
+      # @attr [Integer] quantity
+      # @attr [Integer] tax_amount
+      # @attr [String] unit
       class LineItemLevel3InterchangeInformation < Ingenico::Connect::SDK::DataObject
 
-        # Integer
         attr_accessor :discount_amount
 
-        # Integer
         attr_accessor :line_amount_total
 
-        # String
         attr_accessor :product_code
 
-        # Integer
         attr_accessor :product_price
 
-        # String
         attr_accessor :product_type
 
-        # Integer
         attr_accessor :quantity
 
-        # Integer
         attr_accessor :tax_amount
 
-        # String
         attr_accessor :unit
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'discountAmount', @discount_amount)
-          add_to_hash(hash, 'lineAmountTotal', @line_amount_total)
-          add_to_hash(hash, 'productCode', @product_code)
-          add_to_hash(hash, 'productPrice', @product_price)
-          add_to_hash(hash, 'productType', @product_type)
-          add_to_hash(hash, 'quantity', @quantity)
-          add_to_hash(hash, 'taxAmount', @tax_amount)
-          add_to_hash(hash, 'unit', @unit)
+          hash['discountAmount'] = @discount_amount unless @discount_amount.nil?
+          hash['lineAmountTotal'] = @line_amount_total unless @line_amount_total.nil?
+          hash['productCode'] = @product_code unless @product_code.nil?
+          hash['productPrice'] = @product_price unless @product_price.nil?
+          hash['productType'] = @product_type unless @product_type.nil?
+          hash['quantity'] = @quantity unless @quantity.nil?
+          hash['taxAmount'] = @tax_amount unless @tax_amount.nil?
+          hash['unit'] = @unit unless @unit.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('discountAmount')
+          if hash.has_key? 'discountAmount'
             @discount_amount = hash['discountAmount']
           end
-          if hash.has_key?('lineAmountTotal')
+          if hash.has_key? 'lineAmountTotal'
             @line_amount_total = hash['lineAmountTotal']
           end
-          if hash.has_key?('productCode')
+          if hash.has_key? 'productCode'
             @product_code = hash['productCode']
           end
-          if hash.has_key?('productPrice')
+          if hash.has_key? 'productPrice'
             @product_price = hash['productPrice']
           end
-          if hash.has_key?('productType')
+          if hash.has_key? 'productType'
             @product_type = hash['productType']
           end
-          if hash.has_key?('quantity')
+          if hash.has_key? 'quantity'
             @quantity = hash['quantity']
           end
-          if hash.has_key?('taxAmount')
+          if hash.has_key? 'taxAmount'
             @tax_amount = hash['taxAmount']
           end
-          if hash.has_key?('unit')
+          if hash.has_key? 'unit'
             @unit = hash['unit']
           end
         end

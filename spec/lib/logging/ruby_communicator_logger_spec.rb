@@ -10,11 +10,11 @@ describe RubyCommunicatorLogger do
   let(:filename) { "testing-#{(0...8).map { (65 + rand(26)).chr }.join}.log" }
   let(:logger) { Logger.new(RubyCommunicatorLogger.create_logfile(filename)) }
   let(:regex) { Regexp.new("#{tag}, .* -- : (.*)#{$RS}", Regexp::MULTILINE) }
-  subject(:sample) { RubyCommunicatorLogger.new(logger, logLevel, errorLevel) }
+  subject(:sample) { RubyCommunicatorLogger.new(logger, log_level, error_level) }
 
   def expected_msg(msg, thrown=false)
     return msg unless thrown
-    msg + $RS + thrown.backtrace.join($RS)
+    msg + $RS + thrown.to_s + $RS + thrown.backtrace.join($RS)
   end
 
   after do
@@ -26,11 +26,11 @@ describe RubyCommunicatorLogger do
 
   context 'logging without error' do
 
-    let(:errorLevel) { Logger::WARN }
+    let(:error_level) { Logger::WARN }
     let(:msg) { 'Hello World' }
 
     context "with level 'INFO'" do
-      let(:logLevel) { Logger::INFO }
+      let(:log_level) { Logger::INFO }
       let(:tag) { 'I' }
 
       it 'should not throw an exception when logging unicode strings' do
@@ -38,7 +38,7 @@ describe RubyCommunicatorLogger do
         body = "Schröder"
         content = "JSON"
         message.set_body(body, content)
-        sample.log(message.get_message())
+        sample.log(message.get_message)
       end
       it 'logs with the correct logLevel and message' do
         sample.log(msg)
@@ -52,7 +52,7 @@ describe RubyCommunicatorLogger do
     end
 
     context "with level 'WARN'" do
-      let(:logLevel) { Logger::WARN }
+      let(:log_level) { Logger::WARN }
       let(:tag) { 'W' }
 
       it 'logs with the correct logLevel and message' do
@@ -68,8 +68,8 @@ describe RubyCommunicatorLogger do
   end
 
   context 'logging with error' do
-    let(:errorLevel) { Logger::WARN }
-    let(:logLevel) { Logger::INFO }
+    let(:error_level) { Logger::WARN }
+    let(:log_level) { Logger::INFO }
     let(:msg) { 'Some error message' }
     let(:tag) { 'W' }
 

@@ -7,7 +7,7 @@ require 'ingenico/connect/sdk/factory'
 
 def example
   get_client do |client|
-    response = client.merchant('merchantId').payments().third_party_status('paymentId')
+    response = client.merchant('merchantId').payments.third_party_status('paymentId')
   end
 end
 

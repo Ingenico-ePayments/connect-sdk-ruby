@@ -9,58 +9,57 @@ module Ingenico::Connect::SDK
   module Domain
     module Hostedmandatemanagement
 
+      # @attr [String] alias
+      # @attr [Ingenico::Connect::SDK::Domain::Mandates::MandateCustomer] customer
+      # @attr [String] customer_reference
+      # @attr [String] recurrence_type
+      # @attr [String] signature_type
+      # @attr [String] unique_mandate_reference
       class HostedMandateInfo < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :alias
 
-        # {Ingenico::Connect::SDK::Domain::Mandates::MandateCustomer}
         attr_accessor :customer
 
-        # String
         attr_accessor :customer_reference
 
-        # String
         attr_accessor :recurrence_type
 
-        # String
         attr_accessor :signature_type
 
-        # String
         attr_accessor :unique_mandate_reference
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'alias', @alias)
-          add_to_hash(hash, 'customer', @customer)
-          add_to_hash(hash, 'customerReference', @customer_reference)
-          add_to_hash(hash, 'recurrenceType', @recurrence_type)
-          add_to_hash(hash, 'signatureType', @signature_type)
-          add_to_hash(hash, 'uniqueMandateReference', @unique_mandate_reference)
+          hash['alias'] = @alias unless @alias.nil?
+          hash['customer'] = @customer.to_h unless @customer.nil?
+          hash['customerReference'] = @customer_reference unless @customer_reference.nil?
+          hash['recurrenceType'] = @recurrence_type unless @recurrence_type.nil?
+          hash['signatureType'] = @signature_type unless @signature_type.nil?
+          hash['uniqueMandateReference'] = @unique_mandate_reference unless @unique_mandate_reference.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('alias')
+          if hash.has_key? 'alias'
             @alias = hash['alias']
           end
-          if hash.has_key?('customer')
-            if !(hash['customer'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['customer']]
-            end
+          if hash.has_key? 'customer'
+            raise TypeError, "value '%s' is not a Hash" % [hash['customer']] unless hash['customer'].is_a? Hash
             @customer = Ingenico::Connect::SDK::Domain::Mandates::MandateCustomer.new_from_hash(hash['customer'])
           end
-          if hash.has_key?('customerReference')
+          if hash.has_key? 'customerReference'
             @customer_reference = hash['customerReference']
           end
-          if hash.has_key?('recurrenceType')
+          if hash.has_key? 'recurrenceType'
             @recurrence_type = hash['recurrenceType']
           end
-          if hash.has_key?('signatureType')
+          if hash.has_key? 'signatureType'
             @signature_type = hash['signatureType']
           end
-          if hash.has_key?('uniqueMandateReference')
+          if hash.has_key? 'uniqueMandateReference'
             @unique_mandate_reference = hash['uniqueMandateReference']
           end
         end

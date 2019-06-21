@@ -67,8 +67,8 @@ describe 'DefaultConnectionIdempotence' do
 
     expect{response = CLIENT.merchant('20000').payments.create(request, call_context)}.
         to raise_error(Ingenico::Connect::SDK::DeclinedPaymentException){ |err|
-      expect(err.status_code).to be(402)
-      expect(err.response_body).to be(response_body)
+      expect(err.status_code).to eq(402)
+      expect(err.response_body).to eq(response_body)
       expect(call_context.idempotence_key).to eq(idempotence_key)
       expect(call_context.idempotence_request_timestamp).to be_nil
     }
@@ -89,8 +89,8 @@ describe 'DefaultConnectionIdempotence' do
 
     expect{response = CLIENT.merchant('20000').payments.create(request, call_context)}.
         to raise_error(Ingenico::Connect::SDK::DeclinedPaymentException){ |err|
-      expect(err.status_code).to be(402)
-      expect(err.response_body).to be(response_body)
+      expect(err.status_code).to eq(402)
+      expect(err.response_body).to eq(response_body)
       expect(call_context.idempotence_key).to eq(idempotence_key)
       expect(call_context.idempotence_request_timestamp.to_s).to eq(idempotence_timestamp.to_s)
     }
@@ -111,8 +111,8 @@ describe 'DefaultConnectionIdempotence' do
 
     expect{response = CLIENT.merchant('20000').payments.create(request, call_context)}.
         to raise_error(Ingenico::Connect::SDK::IdempotenceException){ |err|
-      expect(err.status_code).to be(409)
-      expect(err.response_body).to be(response_body)
+      expect(err.status_code).to eq(409)
+      expect(err.response_body).to eq(response_body)
       expect(call_context.idempotence_key).to eq(idempotence_key)
       expect(call_context.idempotence_request_timestamp.to_s).to eq(idempotence_timestamp.to_s)
     }
@@ -130,7 +130,7 @@ def create_payment_request
   order = Payments::Order.new
   order.customer = customer
   card = Definitions::Card.new
-  card.ccv = '123'
+  card.cvv = '123'
   card.card_number = '4567350000427977'
   card.expiry_date = '1220'
   card_payment_method_specific_input = Payments::CardPaymentMethodSpecificInput.new

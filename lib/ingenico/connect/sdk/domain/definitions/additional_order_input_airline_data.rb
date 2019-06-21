@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AirlineData] airline_data
       class AdditionalOrderInputAirlineData < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::AirlineData}
         attr_accessor :airline_data
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'airlineData', @airline_data)
+          hash['airlineData'] = @airline_data.to_h unless @airline_data.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('airlineData')
-            if !(hash['airlineData'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['airlineData']]
-            end
+          if hash.has_key? 'airlineData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['airlineData']] unless hash['airlineData'].is_a? Hash
             @airline_data = Ingenico::Connect::SDK::Domain::Definitions::AirlineData.new_from_hash(hash['airlineData'])
           end
         end

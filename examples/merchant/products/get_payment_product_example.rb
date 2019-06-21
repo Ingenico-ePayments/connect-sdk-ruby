@@ -18,7 +18,7 @@ def example
     query.force_basic_flow = false
     query.add_hide('fields')
 
-    response = client.merchant('merchantId').products().get(1, query)
+    response = client.merchant('merchantId').products.get(1, query)
   end
 end
 

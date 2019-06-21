@@ -13,12 +13,12 @@ module Ingenico::Connect::SDK
         alias_method :INSTANCE, :instance
       end
 
-      # marshals the _request_object_ to a JSON string using request_object#to_h
+      # Marshals the _request_object_ to a JSON string using request_object#to_h
       def marshal(request_object)
           JSON.pretty_generate(request_object.to_h)
       end
 
-      # unmarshals a JSON string into an object of type _klass_ using klass.new_from_hash
+      # Unmarshals a JSON string into an object of type _klass_ using klass.new_from_hash
       def unmarshal(json_string, klass)
         if json_string.nil?
           return nil

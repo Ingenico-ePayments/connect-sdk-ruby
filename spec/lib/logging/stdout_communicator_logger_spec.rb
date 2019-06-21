@@ -21,7 +21,7 @@ describe StdoutCommunicatorLogger do
 
   def expected_msg(msg, thrown=false)
     return msg unless thrown
-    msg + $RS + thrown.backtrace.join($RS)
+    msg + $RS + thrown.to_s + $RS + thrown.backtrace.join($RS)
   end
 
   context 'test log' do

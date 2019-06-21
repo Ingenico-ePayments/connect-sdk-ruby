@@ -8,34 +8,35 @@ module Ingenico::Connect::SDK
   module Domain
     module Dispute
 
+      # @attr [String] dispute_creation_date
+      # @attr [String] dispute_originator
+      # @attr [String] user_name
       class DisputeCreationDetail < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :dispute_creation_date
 
-        # String
         attr_accessor :dispute_originator
 
-        # String
         attr_accessor :user_name
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'disputeCreationDate', @dispute_creation_date)
-          add_to_hash(hash, 'disputeOriginator', @dispute_originator)
-          add_to_hash(hash, 'userName', @user_name)
+          hash['disputeCreationDate'] = @dispute_creation_date unless @dispute_creation_date.nil?
+          hash['disputeOriginator'] = @dispute_originator unless @dispute_originator.nil?
+          hash['userName'] = @user_name unless @user_name.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('disputeCreationDate')
+          if hash.has_key? 'disputeCreationDate'
             @dispute_creation_date = hash['disputeCreationDate']
           end
-          if hash.has_key?('disputeOriginator')
+          if hash.has_key? 'disputeOriginator'
             @dispute_originator = hash['disputeOriginator']
           end
-          if hash.has_key?('userName')
+          if hash.has_key? 'userName'
             @user_name = hash['userName']
           end
         end

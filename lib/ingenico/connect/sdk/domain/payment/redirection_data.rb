@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] return_url
+      # @attr [String] variant
       class RedirectionData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :return_url
 
-        # String
         attr_accessor :variant
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'returnUrl', @return_url)
-          add_to_hash(hash, 'variant', @variant)
+          hash['returnUrl'] = @return_url unless @return_url.nil?
+          hash['variant'] = @variant unless @variant.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('returnUrl')
+          if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']
           end
-          if hash.has_key?('variant')
+          if hash.has_key? 'variant'
             @variant = hash['variant']
           end
         end

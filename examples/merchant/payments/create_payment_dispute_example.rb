@@ -22,7 +22,7 @@ def example
     body.reply_to = 'r.runner@acmelabs.com'
     body.request_message = 'This is the message from the merchant to GlobalCollect. It is a a freeform text field.'
 
-    response = client.merchant('merchantId').payments().dispute('paymentId', body)
+    response = client.merchant('merchantId').payments.dispute('paymentId', body)
   end
 end
 

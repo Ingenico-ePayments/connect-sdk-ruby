@@ -3,13 +3,15 @@ require 'uri'
 module Ingenico::Connect::SDK
 
   # Base class for configuration classes in the SDK.
-  # This class stores the following:
   #
-  # _api_endpoint_::        Base URL to the Ingenico ePayments platform, stored as a string.
-  # _connect_timeout_::     Timeout in seconds before a connection attempt times out.
-  # _socket_timeout_::      Timeout in seconds that occurs after not receiving transmitted data for _socket_timeout_ seconds.
-  # _max_connections_::     The number of connections in the connection pool that will be kept alive.
-  # _proxy_configuration_:: {Ingenico::Connect::SDK::ProxyConfiguration} containing proxy settings.
+  # @attr [String] api_endpoint     The base URL to the Ingenico ePayments platform.
+  # @attr [Integer] connect_timeout The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
+  # @attr [Integer] socket_timeout  The number of seconds before a timeout occurs when transmitting data to or from the Ingenico ePayments platform.
+  # @attr [Integer] max_connections The number of connections with the Ingenico ePayments platform that are kept alive in the connection pool.
+  #       These connections will be reused when possible.
+  # @attr [Ingenico::Connect::SDK::ProxyConfiguration] proxy_configuration Proxy settings.
+  # @attr [String] integrator       Name of the integrator
+  # @attr [Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension] shopping_cart_extension Shopping cart-related metadata.
   class EndpointConfiguration
     @@DEFAULT_MAX_CONNECTIONS = 10
 
@@ -21,7 +23,7 @@ module Ingenico::Connect::SDK
 
     # Initializes a new EndpointConfiguration.
     #
-    # The given _properties_ is searched for settings using properties.[prefix + '.setting_name']
+    # The given _properties_ is searched for settings using properties[prefix + '.setting_name']
     # The following settings are searched:
     #
     # endpoint::                This property is searched for *endpoint.host*, *endpoint.scheme* and *endpoint.port*.
@@ -34,7 +36,7 @@ module Ingenico::Connect::SDK
     # proxy::                   This property is searched for *proxy.uri*, *proxy.username* and *proxy.password*.
     #                           The found URI, username and password are used
     #                           for connecting to the Ingenico ePayments platform using a proxy.
-    # integrator::              String
+    # integrator::              Name of the integrator
     # shoppingCartExtension::   Will be used to initialize a {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension}.
     def initialize(properties=nil, prefix=nil)
       unless properties.nil?
@@ -116,25 +118,15 @@ module Ingenico::Connect::SDK
 
     public
 
-    # The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
+    attr_reader :api_endpoint
+
     attr_accessor :connect_timeout
-
-    # The number of seconds before a timeout occurs when transmitting data to or from the Ingenico ePayments platform.
     attr_accessor :socket_timeout
-
-    # The number of connections with the Ingenico ePayments platform that are kept alive in the connection pool.
-    # These connections will be reused when possible.
     attr_accessor :max_connections
 
-    # {Ingenico::Connect::SDK::ProxyConfiguration} containing proxy settings.
     attr_accessor :proxy_configuration
 
     attr_accessor :integrator
-
-    # {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension} containing shopping cart-related metadata.
     attr_accessor :shopping_cart_extension
-
-    # The base URL to the Ingenico ePayments platform.
-    attr_reader :api_endpoint
   end
 end

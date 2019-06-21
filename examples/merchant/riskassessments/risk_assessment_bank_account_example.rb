@@ -39,7 +39,7 @@ def example
     body.bank_account_bban = bank_account_bban
     body.order = order
 
-    response = client.merchant('merchantId').riskassessments().bankaccounts(body)
+    response = client.merchant('merchantId').riskassessments.bankaccounts(body)
   end
 end
 

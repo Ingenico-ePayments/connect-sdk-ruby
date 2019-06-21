@@ -8,6 +8,8 @@ module Ingenico::Connect::SDK
     # Returns a hash representation of the DataObject.
     # The hash contains camelCase representations of the variables, and their values.
     # Should be overridden to add all instance variables of the object.
+    #
+    # @return [Hash]
     def to_h
       {}
     end
@@ -25,19 +27,6 @@ module Ingenico::Connect::SDK
     # Should be overridden by descendants in order to properly restore their attributes from the hash.
     # Note that the hash contains Strings as keys instead of more commonly used tokens.
     def from_hash(hash)
-    end
-
-    private
-
-    # Adds a serializable hash or array representation of _value_ to _hash_ keyed under _key_
-    def add_to_hash(hash, key, value)
-      if value.is_a?(Array)  # For arrays, convert the elements to hash representations
-        hash[key] = value.collect{|val| if val.is_a?(DataObject); val.to_h else val end}
-      elsif value.is_a?(DataObject)
-        hash[key] = value.to_h
-      elsif !value.nil?
-        hash[key] = value
-      end
     end
   end
 end

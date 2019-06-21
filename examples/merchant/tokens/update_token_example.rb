@@ -61,7 +61,7 @@ def example
     body.card = card
     body.payment_product_id = 1
 
-    client.merchant('merchantId').tokens().update('tokenId', body)
+    client.merchant('merchantId').tokens.update('tokenId', body)
   end
 end
 

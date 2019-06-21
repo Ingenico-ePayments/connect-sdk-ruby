@@ -14,7 +14,7 @@ def example
     body.mandate_signature_place = 'Monument Valley'
     body.mandate_signed = true
 
-    client.merchant('merchantId').tokens().approvesepadirectdebit('tokenId', body)
+    client.merchant('merchantId').tokens.approvesepadirectdebit('tokenId', body)
   end
 end
 

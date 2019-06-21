@@ -8,41 +8,42 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] acs_reference_number
+      # @attr [String] acs_signed_content
+      # @attr [String] acs_transaction_id
+      # @attr [String] three_d_server_transaction_id
       class MobileThreeDSecureChallengeParameters < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :acs_reference_number
 
-        # String
         attr_accessor :acs_signed_content
 
-        # String
         attr_accessor :acs_transaction_id
 
-        # String
         attr_accessor :three_d_server_transaction_id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'acsReferenceNumber', @acs_reference_number)
-          add_to_hash(hash, 'acsSignedContent', @acs_signed_content)
-          add_to_hash(hash, 'acsTransactionId', @acs_transaction_id)
-          add_to_hash(hash, 'threeDServerTransactionId', @three_d_server_transaction_id)
+          hash['acsReferenceNumber'] = @acs_reference_number unless @acs_reference_number.nil?
+          hash['acsSignedContent'] = @acs_signed_content unless @acs_signed_content.nil?
+          hash['acsTransactionId'] = @acs_transaction_id unless @acs_transaction_id.nil?
+          hash['threeDServerTransactionId'] = @three_d_server_transaction_id unless @three_d_server_transaction_id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('acsReferenceNumber')
+          if hash.has_key? 'acsReferenceNumber'
             @acs_reference_number = hash['acsReferenceNumber']
           end
-          if hash.has_key?('acsSignedContent')
+          if hash.has_key? 'acsSignedContent'
             @acs_signed_content = hash['acsSignedContent']
           end
-          if hash.has_key?('acsTransactionId')
+          if hash.has_key? 'acsTransactionId'
             @acs_transaction_id = hash['acsTransactionId']
           end
-          if hash.has_key?('threeDServerTransactionId')
+          if hash.has_key? 'threeDServerTransactionId'
             @three_d_server_transaction_id = hash['threeDServerTransactionId']
           end
         end

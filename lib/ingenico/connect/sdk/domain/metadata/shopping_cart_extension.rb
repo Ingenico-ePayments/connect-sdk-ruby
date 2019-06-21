@@ -31,20 +31,20 @@ module Ingenico::Connect::SDK::Domain::Metadata
     # Converts the shopping cart metadata to a hash
     def to_h
       hash = super
-      add_to_hash(hash, 'creator', @creator)
-      add_to_hash(hash, 'name', @name)
-      add_to_hash(hash, 'version', @version)
-      add_to_hash(hash, 'extensionId', @extension_id)
+      hash['creator'] = @creator unless @creator.nil?
+      hash['name'] = @name unless @name.nil?
+      hash['version'] = @version unless @version.nil?
+      hash['extensionId'] = @extension_id unless @extension_id.nil?
       hash
     end
 
     # loads shopping cart metadata from a parameter hash
     def from_hash(hash)
       super
-      @creator = hash['creator'] if hash.has_key?('creator')
-      @name = hash['name'] if hash.has_key?('name')
-      @version = hash['version'] if hash.has_key?('version')
-      @extension_id = hash['extensionId'] if hash.has_key?('extensionId')
+      @creator = hash['creator'] if hash.has_key? 'creator'
+      @name = hash['name'] if hash.has_key? 'name'
+      @version = hash['version'] if hash.has_key? 'version'
+      @extension_id = hash['extensionId'] if hash.has_key? 'extensionId'
     end
 
     attr_reader :creator, :name, :version, :extension_id

@@ -9,39 +9,38 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::CompanyInformation] company_information
+      # @attr [String] merchant_customer_id
+      # @attr [String] vat_number
       class CustomerBase < Ingenico::Connect::SDK::DataObject
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::CompanyInformation}
         attr_accessor :company_information
 
-        # String
         attr_accessor :merchant_customer_id
 
-        # String
         #
-        # Deprecated; Use companyInformation.vatNumber instead
+        # @deprecated Use companyInformation.vatNumber instead
         attr_accessor :vat_number
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'companyInformation', @company_information)
-          add_to_hash(hash, 'merchantCustomerId', @merchant_customer_id)
-          add_to_hash(hash, 'vatNumber', @vat_number)
+          hash['companyInformation'] = @company_information.to_h unless @company_information.nil?
+          hash['merchantCustomerId'] = @merchant_customer_id unless @merchant_customer_id.nil?
+          hash['vatNumber'] = @vat_number unless @vat_number.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('companyInformation')
-            if !(hash['companyInformation'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['companyInformation']]
-            end
+          if hash.has_key? 'companyInformation'
+            raise TypeError, "value '%s' is not a Hash" % [hash['companyInformation']] unless hash['companyInformation'].is_a? Hash
             @company_information = Ingenico::Connect::SDK::Domain::Definitions::CompanyInformation.new_from_hash(hash['companyInformation'])
           end
-          if hash.has_key?('merchantCustomerId')
+          if hash.has_key? 'merchantCustomerId'
             @merchant_customer_id = hash['merchantCustomerId']
           end
-          if hash.has_key?('vatNumber')
+          if hash.has_key? 'vatNumber'
             @vat_number = hash['vatNumber']
           end
         end

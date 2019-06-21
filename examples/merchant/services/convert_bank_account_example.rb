@@ -19,7 +19,7 @@ def example
     body = Services::BankDetailsRequest.new
     body.bank_account_bban = bank_account_bban
 
-    response = client.merchant('merchantId').services().bankaccount(body)
+    response = client.merchant('merchantId').services.bankaccount(body)
   end
 end
 

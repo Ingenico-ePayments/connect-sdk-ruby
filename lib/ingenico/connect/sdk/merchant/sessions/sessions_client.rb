@@ -14,27 +14,27 @@ module Ingenico::Connect::SDK
       # Sessions client. Thread-safe.
       class SessionsClient < Ingenico::Connect::SDK::ApiResource
 
-        # parent::       {Ingenico::Connect::SDK::ApiResource}
-        # path_context:: Hash of String to String
+        # @param parent        [Ingenico::Connect::SDK::ApiResource]
+        # @param path_context  [Hash]
         def initialize(parent, path_context)
           super(parent, path_context)
         end
 
-        # Resource /{{merchantId}}/sessions - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/sessions/create.html Create session}
-        # body::    {Ingenico::Connect::SDK::Domain::Sessions::SessionRequest}
-        # context:: {Ingenico::Connect::SDK::CallContext}
-        # Returns:: {Ingenico::Connect::SDK::Domain::Sessions::SessionResponse}
-        # Raises:: {Ingenico::Connect::SDK::ValidationException} if the request was not correct and couldn't be processed (HTTP status code 400)
-        # Raises:: {Ingenico::Connect::SDK::AuthorizationException} if the request was not allowed (HTTP status code 403)
-        # Raises:: {Ingenico::Connect::SDK::IdempotenceException} if an idempotent request caused a conflict (HTTP status code 409)
-        # Raises:: {Ingenico::Connect::SDK::ReferenceException} if an object was attempted to be referenced that doesn't exist or has been removed,  
-        #          or there was a conflict (HTTP status code 404, 409 or 410)
-        # Raises:: {Ingenico::Connect::SDK::GlobalCollectException} if something went wrong at the Ingenico ePayments platform,  
-        #          the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,  
-        #          or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        # Raises:: {Ingenico::Connect::SDK::ApiException} if the Ingenico ePayments platform returned any other error
+        # Resource /!{merchantId}/sessions - {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/sessions/create.html Create session}
+        # @param body    [Ingenico::Connect::SDK::Domain::Sessions::SessionRequest]
+        # @param context [Ingenico::Connect::SDK::CallContext]
+        # @return [Ingenico::Connect::SDK::Domain::Sessions::SessionResponse]
+        # @raise [Ingenico::Connect::SDK::ValidationException] if the request was not correct and couldn't be processed (HTTP status code 400)
+        # @raise [Ingenico::Connect::SDK::AuthorizationException] if the request was not allowed (HTTP status code 403)
+        # @raise [Ingenico::Connect::SDK::IdempotenceException] if an idempotent request caused a conflict (HTTP status code 409)
+        # @raise [Ingenico::Connect::SDK::ReferenceException] if an object was attempted to be referenced that doesn't exist or has been removed,
+        #        or there was a conflict (HTTP status code 404, 409 or 410)
+        # @raise [Ingenico::Connect::SDK::GlobalCollectException] if something went wrong at the Ingenico ePayments platform,
+        #        the Ingenico ePayments platform was unable to process a message from a downstream partner/acquirer,
+        #        or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        # @raise [Ingenico::Connect::SDK::ApiException]if the Ingenico ePayments platform returned any other error
         def create(body, context=nil)
-          uri = instantiate_uri('/{apiVersion}/{merchantId}/sessions', nil)
+          uri = instantiate_uri('/v1/{merchantId}/sessions', nil)
           return @communicator.post(
             uri,
             client_headers,

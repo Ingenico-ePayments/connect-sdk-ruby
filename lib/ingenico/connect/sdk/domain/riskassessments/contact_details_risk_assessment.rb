@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Riskassessments
 
+      # @attr [String] email_address
       class ContactDetailsRiskAssessment < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :email_address
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'emailAddress', @email_address)
+          hash['emailAddress'] = @email_address unless @email_address.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('emailAddress')
+          if hash.has_key? 'emailAddress'
             @email_address = hash['emailAddress']
           end
         end

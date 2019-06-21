@@ -16,7 +16,7 @@ def example
     query.offset = 0
     query.limit = 10
 
-    response = client.merchant('merchantId').refunds().find(query)
+    response = client.merchant('merchantId').refunds.find(query)
   end
 end
 

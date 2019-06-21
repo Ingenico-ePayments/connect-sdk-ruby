@@ -2,10 +2,10 @@ require 'spec_helper'
 
 LoggingUtil = Ingenico::Connect::SDK::Logging::LoggingUtil
 
-def test_obfuscate_body_with_matches(originalResource, obfuscatedResource)
+def test_obfuscate_body_with_matches(original_resource, obfuscated_resource)
   prefix = 'spec/fixtures/resources/logging/'
-  body = IO.read(prefix + originalResource)
-  expected = IO.read(prefix + obfuscatedResource)
+  body = IO.read(prefix + original_resource)
+  expected = IO.read(prefix + obfuscated_resource)
   expected == LoggingUtil.obfuscate_body(body)
 end
 
@@ -15,12 +15,12 @@ def test_obfuscate_body_with_no_matches(resource)
   body == LoggingUtil.obfuscate_body(body)
 end
 
-def test_obfuscate_header_with_match(name, originalValue, expectedValue)
-  expectedValue == LoggingUtil.obfuscate_header(name, originalValue)
+def test_obfuscate_header_with_match(name, original_value, expected_value)
+  expected_value == LoggingUtil.obfuscate_header(name, original_value)
 end
 
-def test_obfuscate_header_with_no_match(name, originalValue)
-  originalValue == LoggingUtil.obfuscate_header(name, originalValue)
+def test_obfuscate_header_with_no_match(name, original_value)
+  original_value == LoggingUtil.obfuscate_header(name, original_value)
 end
 
 describe LoggingUtil do

@@ -72,7 +72,7 @@ describe ValueObfuscator do
     end
 
     it 'returns empty string if value has length 0' do
-      expect(sample.obfuscate_value('')).to eq ('')
+      expect(sample.obfuscate_value('')).to eq('')
     end
 
     it 'calls repeak_mask(@fixed_length) if @fixed_length is not 0' do

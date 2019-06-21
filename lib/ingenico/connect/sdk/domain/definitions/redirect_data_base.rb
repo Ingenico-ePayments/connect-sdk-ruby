@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] returnmac
+      # @attr [String] redirect_url
       class RedirectDataBase < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :returnmac
 
-        # String
         attr_accessor :redirect_url
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'RETURNMAC', @returnmac)
-          add_to_hash(hash, 'redirectURL', @redirect_url)
+          hash['RETURNMAC'] = @returnmac unless @returnmac.nil?
+          hash['redirectURL'] = @redirect_url unless @redirect_url.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('RETURNMAC')
+          if hash.has_key? 'RETURNMAC'
             @returnmac = hash['RETURNMAC']
           end
-          if hash.has_key?('redirectURL')
+          if hash.has_key? 'redirectURL'
             @redirect_url = hash['redirectURL']
           end
         end

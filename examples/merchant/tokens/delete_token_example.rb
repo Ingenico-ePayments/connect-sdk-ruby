@@ -12,7 +12,7 @@ def example
     query = Tokens::DeleteTokenParams.new
     query.mandate_cancel_date = '20150102'
 
-    client.merchant('merchantId').tokens().delete('tokenId', query)
+    client.merchant('merchantId').tokens.delete('tokenId', query)
   end
 end
 

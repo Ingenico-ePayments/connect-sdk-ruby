@@ -9,30 +9,29 @@ module Ingenico::Connect::SDK
   module Domain
     module Errors
 
+      # @attr [String] error_id
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Errors::APIError>] errors
       class ErrorResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :error_id
 
-        # Array of {Ingenico::Connect::SDK::Domain::Errors::APIError}
         attr_accessor :errors
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'errorId', @error_id)
-          add_to_hash(hash, 'errors', @errors)
+          hash['errorId'] = @error_id unless @error_id.nil?
+          hash['errors'] = @errors.collect{|val| val.to_h} unless @errors.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('errorId')
+          if hash.has_key? 'errorId'
             @error_id = hash['errorId']
           end
-          if hash.has_key?('errors')
-            if !(hash['errors'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['errors']]
-            end
+          if hash.has_key? 'errors'
+            raise TypeError, "value '%s' is not an Array" % [hash['errors']] unless hash['errors'].is_a? Array
             @errors = []
             hash['errors'].each do |e|
               @errors << Ingenico::Connect::SDK::Domain::Errors::APIError.new_from_hash(e)

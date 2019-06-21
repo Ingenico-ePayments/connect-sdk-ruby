@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] date_collect
+      # @attr [String] token
       class ApprovePaymentPaymentMethodSpecificInput < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :date_collect
 
-        # String
         attr_accessor :token
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'dateCollect', @date_collect)
-          add_to_hash(hash, 'token', @token)
+          hash['dateCollect'] = @date_collect unless @date_collect.nil?
+          hash['token'] = @token unless @token.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('dateCollect')
+          if hash.has_key? 'dateCollect'
             @date_collect = hash['dateCollect']
           end
-          if hash.has_key?('token')
+          if hash.has_key? 'token'
             @token = hash['token']
           end
         end

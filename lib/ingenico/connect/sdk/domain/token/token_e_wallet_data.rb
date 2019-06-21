@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [String] billing_agreement_id
       class TokenEWalletData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :billing_agreement_id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'billingAgreementId', @billing_agreement_id)
+          hash['billingAgreementId'] = @billing_agreement_id unless @billing_agreement_id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('billingAgreementId')
+          if hash.has_key? 'billingAgreementId'
             @billing_agreement_id = hash['billingAgreementId']
           end
         end

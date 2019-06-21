@@ -3,33 +3,34 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/param_request'
+require 'ingenico/connect/sdk/request_param'
 
 module Ingenico::Connect::SDK
   module Merchant
     module Products
 
       # Query parameters for {https://epayments-api.developer-ingenico.com/s2sapi/v1/en_US/ruby/products/networks.html Get payment product networks}
+      # @attr [String] country_code
+      # @attr [String] currency_code
+      # @attr [Integer] amount
+      # @attr [true/false] is_recurring
       class NetworksParams < Ingenico::Connect::SDK::ParamRequest
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :currency_code
 
-        # Integer
         attr_accessor :amount
 
-        # true/false
         attr_accessor :is_recurring
 
-        # Returns an Array of {Ingenico::Connect::SDK::RequestParam} objects representing the attributes of this class
+        # @return [Array<Ingenico::Connect::SDK::RequestParam>] representing the attributes of this class
         def to_request_parameters
           result = []
-          add_parameter(result, 'countryCode', @country_code)
-          add_parameter(result, 'currencyCode', @currency_code)
-          add_parameter(result, 'amount', @amount)
-          add_parameter(result, 'isRecurring', @is_recurring)
+          result << RequestParam.new('countryCode', @country_code) unless @country_code.nil?
+          result << RequestParam.new('currencyCode', @currency_code) unless @currency_code.nil?
+          result << RequestParam.new('amount', @amount.to_s) unless @amount.nil?
+          result << RequestParam.new('isRecurring', @is_recurring.to_s) unless @is_recurring.nil?
           result
         end
       end

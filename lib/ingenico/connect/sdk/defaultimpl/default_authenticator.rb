@@ -15,9 +15,10 @@ module Ingenico::Connect::SDK
 
       # Construct a new DefaultAuthenticator instance that can sign requests
       # with the provided _api_key_id_ and _secret_api_key_.
-      # authorization_type::  The authorization protocol to use for authentication.
-      # api_key_id::          Identifier for the secret key used in authentication.
-      # secret_api_key::      The secret key that is used to generate the authentication signature.
+      #
+      # @param authorization_type [String] the authorization protocol to use for authentication.
+      # @param api_key_id         [String] identifier for the secret key used in authentication.
+      # @param secret_api_key     [String] the secret key that is used to generate the authentication signature.
       def initialize(authorization_type, api_key_id, secret_api_key)
         raise ArgumentError unless authorization_type
         raise ArgumentError unless api_key_id and not api_key_id.strip.empty?
@@ -29,10 +30,11 @@ module Ingenico::Connect::SDK
       end
 
       # Creates a signature to authenticate a request.
-      # Uses the following parameters:
-      # http_method::     'GET', 'PUT', 'POST' or 'DELETE' indicating which HTTP method will be used with the request
-      # resource_uri::    URI object that includes #path and #query of the url that will be used, #query may be *nil*
-      # request_headers:: {Ingenico::Connect::SDK::RequestHeader} list that contains all headers used by the request
+      #
+      # @param http_method  [String] 'GET', 'PUT', 'POST' or 'DELETE' indicating which HTTP method will be used with the request
+      # @param resource_uri [URI::HTTP] URI object that includes #path and #query of the URL that will be used, #query may be *nil*
+      # @param http_headers [Array<Ingenico::Connect::SDK::RequestHeader>] list that contains all headers used by the request
+      # @return [String] the created signature
       def create_simple_authentication_signature(http_method, resource_uri, http_headers)
         raise ArgumentError unless http_method and not http_method.strip.empty?
         raise ArgumentError unless resource_uri

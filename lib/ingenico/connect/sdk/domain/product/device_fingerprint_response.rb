@@ -8,27 +8,28 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [String] device_fingerprint_transaction_id
+      # @attr [String] html
       class DeviceFingerprintResponse < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :device_fingerprint_transaction_id
 
-        # String
         attr_accessor :html
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'deviceFingerprintTransactionId', @device_fingerprint_transaction_id)
-          add_to_hash(hash, 'html', @html)
+          hash['deviceFingerprintTransactionId'] = @device_fingerprint_transaction_id unless @device_fingerprint_transaction_id.nil?
+          hash['html'] = @html unless @html.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('deviceFingerprintTransactionId')
+          if hash.has_key? 'deviceFingerprintTransactionId'
             @device_fingerprint_transaction_id = hash['deviceFingerprintTransactionId']
           end
-          if hash.has_key?('html')
+          if hash.has_key? 'html'
             @html = hash['html']
           end
         end

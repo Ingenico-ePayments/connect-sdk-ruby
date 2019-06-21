@@ -13,7 +13,7 @@ def example
     query.locale = 'en_US'
     query.payment_product_id = 771
 
-    response = client.merchant('merchantId').services().privacypolicy(query)
+    response = client.merchant('merchantId').services.privacypolicy(query)
   end
 end
 

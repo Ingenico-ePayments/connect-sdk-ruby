@@ -8,69 +8,70 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] cavv
+      # @attr [String] cavv_algorithm
+      # @attr [String] directory_server_transaction_id
+      # @attr [Integer] eci
+      # @attr [String] three_d_secure_version
+      # @attr [String] three_d_server_transaction_id
+      # @attr [String] validation_result
+      # @attr [String] xid
       class ExternalCardholderAuthenticationData < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :cavv
 
-        # String
         attr_accessor :cavv_algorithm
 
-        # String
         attr_accessor :directory_server_transaction_id
 
-        # Integer
         attr_accessor :eci
 
-        # String
         attr_accessor :three_d_secure_version
 
-        # String
         attr_accessor :three_d_server_transaction_id
 
-        # String
         attr_accessor :validation_result
 
-        # String
         attr_accessor :xid
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'cavv', @cavv)
-          add_to_hash(hash, 'cavvAlgorithm', @cavv_algorithm)
-          add_to_hash(hash, 'directoryServerTransactionId', @directory_server_transaction_id)
-          add_to_hash(hash, 'eci', @eci)
-          add_to_hash(hash, 'threeDSecureVersion', @three_d_secure_version)
-          add_to_hash(hash, 'threeDServerTransactionId', @three_d_server_transaction_id)
-          add_to_hash(hash, 'validationResult', @validation_result)
-          add_to_hash(hash, 'xid', @xid)
+          hash['cavv'] = @cavv unless @cavv.nil?
+          hash['cavvAlgorithm'] = @cavv_algorithm unless @cavv_algorithm.nil?
+          hash['directoryServerTransactionId'] = @directory_server_transaction_id unless @directory_server_transaction_id.nil?
+          hash['eci'] = @eci unless @eci.nil?
+          hash['threeDSecureVersion'] = @three_d_secure_version unless @three_d_secure_version.nil?
+          hash['threeDServerTransactionId'] = @three_d_server_transaction_id unless @three_d_server_transaction_id.nil?
+          hash['validationResult'] = @validation_result unless @validation_result.nil?
+          hash['xid'] = @xid unless @xid.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('cavv')
+          if hash.has_key? 'cavv'
             @cavv = hash['cavv']
           end
-          if hash.has_key?('cavvAlgorithm')
+          if hash.has_key? 'cavvAlgorithm'
             @cavv_algorithm = hash['cavvAlgorithm']
           end
-          if hash.has_key?('directoryServerTransactionId')
+          if hash.has_key? 'directoryServerTransactionId'
             @directory_server_transaction_id = hash['directoryServerTransactionId']
           end
-          if hash.has_key?('eci')
+          if hash.has_key? 'eci'
             @eci = hash['eci']
           end
-          if hash.has_key?('threeDSecureVersion')
+          if hash.has_key? 'threeDSecureVersion'
             @three_d_secure_version = hash['threeDSecureVersion']
           end
-          if hash.has_key?('threeDServerTransactionId')
+          if hash.has_key? 'threeDServerTransactionId'
             @three_d_server_transaction_id = hash['threeDServerTransactionId']
           end
-          if hash.has_key?('validationResult')
+          if hash.has_key? 'validationResult'
             @validation_result = hash['validationResult']
           end
-          if hash.has_key?('xid')
+          if hash.has_key? 'xid'
             @xid = hash['xid']
           end
         end

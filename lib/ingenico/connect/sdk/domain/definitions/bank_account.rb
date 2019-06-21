@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Definitions
 
+      # @attr [String] account_holder_name
       class BankAccount < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :account_holder_name
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'accountHolderName', @account_holder_name)
+          hash['accountHolderName'] = @account_holder_name unless @account_holder_name.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('accountHolderName')
+          if hash.has_key? 'accountHolderName'
             @account_holder_name = hash['accountHolderName']
           end
         end

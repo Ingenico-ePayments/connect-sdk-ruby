@@ -12,7 +12,7 @@ def example
     body = Refund::ApproveRefundRequest.new
     body.amount = 199
 
-    client.merchant('merchantId').refunds().approve('refundId', body)
+    client.merchant('merchantId').refunds.approve('refundId', body)
   end
 end
 

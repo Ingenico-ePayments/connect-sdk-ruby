@@ -12,7 +12,7 @@ def example
     body = Payment::TokenizePaymentRequest.new
     body.alias = 'Some alias'
 
-    response = client.merchant('merchantId').payments().tokenize('paymentId', body)
+    response = client.merchant('merchantId').payments.tokenize('paymentId', body)
   end
 end
 

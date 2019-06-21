@@ -16,7 +16,7 @@ module Ingenico::Connect::SDK
     end
 
     # The declined payout result as returned by the Ingenico ePayments platform.
-    # Given as a {Ingenico::Connect::SDK::Domain::Payout::PayoutResult} object.
+    # @return [Ingenico::Connect::SDK::Domain::Payout::PayoutResult]
     def payout_result
       if @errors.nil?
         nil

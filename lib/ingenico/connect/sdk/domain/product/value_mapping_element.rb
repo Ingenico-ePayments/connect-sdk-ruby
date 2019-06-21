@@ -9,42 +9,41 @@ module Ingenico::Connect::SDK
   module Domain
     module Product
 
+      # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayElement>] display_elements
+      # @attr [String] display_name
+      # @attr [String] value
       class ValueMappingElement < Ingenico::Connect::SDK::DataObject
 
-        # Array of {Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayElement}
         attr_accessor :display_elements
 
-        # String
         #
-        # Deprecated; Use displayElements instead with ID 'displayName'
+        # @deprecated Use displayElements instead with ID 'displayName'
         attr_accessor :display_name
 
-        # String
         attr_accessor :value
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'displayElements', @display_elements)
-          add_to_hash(hash, 'displayName', @display_name)
-          add_to_hash(hash, 'value', @value)
+          hash['displayElements'] = @display_elements.collect{|val| val.to_h} unless @display_elements.nil?
+          hash['displayName'] = @display_name unless @display_name.nil?
+          hash['value'] = @value unless @value.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('displayElements')
-            if !(hash['displayElements'].is_a? Array)
-              raise TypeError, "value '%s' is not an Array" % [hash['displayElements']]
-            end
+          if hash.has_key? 'displayElements'
+            raise TypeError, "value '%s' is not an Array" % [hash['displayElements']] unless hash['displayElements'].is_a? Array
             @display_elements = []
             hash['displayElements'].each do |e|
               @display_elements << Ingenico::Connect::SDK::Domain::Product::PaymentProductFieldDisplayElement.new_from_hash(e)
             end
           end
-          if hash.has_key?('displayName')
+          if hash.has_key? 'displayName'
             @display_name = hash['displayName']
           end
-          if hash.has_key?('value')
+          if hash.has_key? 'value'
             @value = hash['value']
           end
         end

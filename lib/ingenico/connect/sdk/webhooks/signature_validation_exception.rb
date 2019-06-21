@@ -7,7 +7,7 @@ module Ingenico::Connect::SDK
       # Creates a new SignatureValidationException
       #
       # @param [Hash] args the options to create the Exception with
-      # @option args [String]  :message the error message
+      # @option args [String] :message the error message
       # @option args [RuntimeError] :cause an Error object that causes the Exception
       def initialize(args)
         super(args[:message]) # NOTE: can be nil

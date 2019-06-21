@@ -8,83 +8,84 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] account_id
+      # @attr [String] billing_agreement_id
+      # @attr [String] company_name
+      # @attr [String] contact_phone
+      # @attr [String] country_code
+      # @attr [String] customer_account_status
+      # @attr [String] customer_address_status
+      # @attr [String] first_name
+      # @attr [String] payer_id
+      # @attr [String] surname
       class PaymentProduct840CustomerAccount < Ingenico::Connect::SDK::DataObject
 
-        # String
         attr_accessor :account_id
 
-        # String
         attr_accessor :billing_agreement_id
 
-        # String
         attr_accessor :company_name
 
-        # String
         attr_accessor :contact_phone
 
-        # String
         attr_accessor :country_code
 
-        # String
         attr_accessor :customer_account_status
 
-        # String
         attr_accessor :customer_address_status
 
-        # String
         attr_accessor :first_name
 
-        # String
         attr_accessor :payer_id
 
-        # String
         attr_accessor :surname
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'accountId', @account_id)
-          add_to_hash(hash, 'billingAgreementId', @billing_agreement_id)
-          add_to_hash(hash, 'companyName', @company_name)
-          add_to_hash(hash, 'contactPhone', @contact_phone)
-          add_to_hash(hash, 'countryCode', @country_code)
-          add_to_hash(hash, 'customerAccountStatus', @customer_account_status)
-          add_to_hash(hash, 'customerAddressStatus', @customer_address_status)
-          add_to_hash(hash, 'firstName', @first_name)
-          add_to_hash(hash, 'payerId', @payer_id)
-          add_to_hash(hash, 'surname', @surname)
+          hash['accountId'] = @account_id unless @account_id.nil?
+          hash['billingAgreementId'] = @billing_agreement_id unless @billing_agreement_id.nil?
+          hash['companyName'] = @company_name unless @company_name.nil?
+          hash['contactPhone'] = @contact_phone unless @contact_phone.nil?
+          hash['countryCode'] = @country_code unless @country_code.nil?
+          hash['customerAccountStatus'] = @customer_account_status unless @customer_account_status.nil?
+          hash['customerAddressStatus'] = @customer_address_status unless @customer_address_status.nil?
+          hash['firstName'] = @first_name unless @first_name.nil?
+          hash['payerId'] = @payer_id unless @payer_id.nil?
+          hash['surname'] = @surname unless @surname.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('accountId')
+          if hash.has_key? 'accountId'
             @account_id = hash['accountId']
           end
-          if hash.has_key?('billingAgreementId')
+          if hash.has_key? 'billingAgreementId'
             @billing_agreement_id = hash['billingAgreementId']
           end
-          if hash.has_key?('companyName')
+          if hash.has_key? 'companyName'
             @company_name = hash['companyName']
           end
-          if hash.has_key?('contactPhone')
+          if hash.has_key? 'contactPhone'
             @contact_phone = hash['contactPhone']
           end
-          if hash.has_key?('countryCode')
+          if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
           end
-          if hash.has_key?('customerAccountStatus')
+          if hash.has_key? 'customerAccountStatus'
             @customer_account_status = hash['customerAccountStatus']
           end
-          if hash.has_key?('customerAddressStatus')
+          if hash.has_key? 'customerAddressStatus'
             @customer_address_status = hash['customerAddressStatus']
           end
-          if hash.has_key?('firstName')
+          if hash.has_key? 'firstName'
             @first_name = hash['firstName']
           end
-          if hash.has_key?('payerId')
+          if hash.has_key? 'payerId'
             @payer_id = hash['payerId']
           end
-          if hash.has_key?('surname')
+          if hash.has_key? 'surname'
             @surname = hash['surname']
           end
         end

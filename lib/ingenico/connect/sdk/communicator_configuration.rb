@@ -1,44 +1,33 @@
 module Ingenico::Connect::SDK
 
-  # A CommunicatorConfiguration stores all data used to initialize an {Ingenico::Connect::SDK::Communicator}. It stores the following:
+  # A CommunicatorConfiguration stores all data used to initialize an {Ingenico::Connect::SDK::Communicator}.
   #
-  # api_endpoint::            The base url to the Ingenico ePayments platform.
-  # api_key_id::              The identifier of the _secret_api_key_ used to authenticate requests.
-  # secret_api_key::          The key used to authenticate requests sent to the Ingenico ePayments platform.
-  # authorization_type::      String describing the authorization protocol to follow.
-  # connect_timeout::         The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
-  # socket_timeout::          The number of seconds before a timeout occurs
-  #                           when transmitting data to or from the Ingenico ePayments platform.
-  # max_connections::         The number of connections with the Ingenico ePayments platform
-  #                           that are kept alive in the connection pool. These connections will be reused when possible.
-  # proxy_configuration::     {Ingenico::Connect::SDK::ProxyConfiguration} instance that stores the url to a proxy to be used in all communication,
-  #                           or nil if no proxy should be used.
-  # integrator::              String
-  # shopping_cart_extension:: {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension} that stores shopping cart-related metadata.
+  # @attr [String] api_endpoint       Base URL to the Ingenico ePayments platform
+  # @attr [String] api_key_id         Identifier of the _secret_api_key_ used in authentication.
+  # @attr [String] secret_api_key     Secret key used in authentication
+  # @attr [String] authorization_type String representing the authentication algorithm used
   class CommunicatorConfiguration < EndpointConfiguration
 
-    # Creates a new CommunicatorConfiguration instance, it accepts the following arguments:
-    #
-    # properties::              A hash that may contain any of the other parameters.
-    #                           If a parameter is given in both the _properties_ and separately,
-    #                           the separate value takes precedence.
-    # api_endpoint::            The base url to the Ingenico ePayments platform.
-    # api_key_id::              The identifier of the _secret_api_key_ used to authenticate requests.
-    # secret_api_key::          The key used to authenticate requests sent to the Ingenico ePayments platform.
-    # authorization_type::      String describing the authorization protocol to follow.
-    # connect_timeout::         The number of seconds before a connection attempt with the Ingenico ePayments platform times out.
-    # socket_timeout::          The number of seconds before a timeout occurs
-    #                           when transmitting data to or from the Ingenico ePayments platform.
-    # max_connections::         The number of connections with the Ingenico ePayments platform
-    #                           that are kept alive in the connection pool. These connections will be reused when possible.
-    # proxy_configuration::     {Ingenico::Connect::SDK::ProxyConfiguration} instance that stores the url to a proxy to be used in all communication,
-    #                           or nil if no proxy should be used.
-    # integrator::              String
-    # shopping_cart_extension:: {Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension} that stores shopping cart-related metadata.
+    # Creates a new CommunicatorConfiguration instance.
     #
     # If a _properties_ object is given, it will be parsed like a hash in order to read these attributes.
     # If a value is given in both the _properties_ hash and as a separate parameter,
     # the separate parameter will take precedence over the value in the properties.
+    #
+    # @param properties              [Hash] hash that may contain any of the other parameters.
+    # @param api_endpoint            [String] the base URL to the Ingenico ePayments platform.
+    # @param api_key_id              [String] the identifier of the _secret_api_key_ used to authenticate requests.
+    # @param secret_api_key          [String] the key used to authenticate requests sent to the Ingenico ePayments platform.
+    # @param authorization_type      [String] string describing the authorization protocol to follow.
+    # @param connect_timeout         [Integer] the number of seconds before a connection attempt with the Ingenico ePayments platform times out.
+    # @param socket_timeout          [Integer] the number of seconds before a timeout occurs when transmitting data to or from the Ingenico ePayments platform.
+    # @param max_connections         [Integer] the number of connections with the Ingenico ePayments platform that are kept alive in the connection pool.
+    #                                These connections will be reused when possible.
+    # @param proxy_configuration     [Ingenico::Connect::SDK::ProxyConfiguration] stores the URL to a proxy to be used in all communication,
+    #                                or nil if no proxy should be used.
+    # @param integrator              [String] name of the integrator
+    # @param shopping_cart_extension [Ingenico::Connect::SDK::Domain::Metadata::ShoppingCartExtension] stores shopping cart-related metadata.
+    # @see EndpointConfiguration#initialize
     def initialize(properties: nil, api_endpoint: nil, api_key_id: nil,
                    secret_api_key: nil, authorization_type: nil,
                    connect_timeout: nil, socket_timeout: nil,
@@ -83,16 +72,9 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # Base URL to the Ingenico ePayments platform
     attr_accessor :api_endpoint
-
-    # Identifier of the _secret_api_key_ used in authentication.
     attr_accessor :api_key_id
-
-    # Secret key used in authentication
     attr_accessor :secret_api_key
-
-    # String representing the authentication algorithm used
     attr_accessor :authorization_type
   end
 end

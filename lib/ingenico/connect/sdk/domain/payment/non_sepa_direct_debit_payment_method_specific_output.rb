@@ -9,23 +9,22 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraudResults] fraud_results
       class NonSepaDirectDebitPaymentMethodSpecificOutput < Ingenico::Connect::SDK::Domain::Payment::AbstractPaymentMethodSpecificOutput
 
-        # {Ingenico::Connect::SDK::Domain::Definitions::FraudResults}
         attr_accessor :fraud_results
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'fraudResults', @fraud_results)
+          hash['fraudResults'] = @fraud_results.to_h unless @fraud_results.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('fraudResults')
-            if !(hash['fraudResults'].is_a? Hash)
-              raise TypeError, "value '%s' is not a Hash" % [hash['fraudResults']]
-            end
+          if hash.has_key? 'fraudResults'
+            raise TypeError, "value '%s' is not a Hash" % [hash['fraudResults']] unless hash['fraudResults'].is_a? Hash
             @fraud_results = Ingenico::Connect::SDK::Domain::Definitions::FraudResults.new_from_hash(hash['fraudResults'])
           end
         end

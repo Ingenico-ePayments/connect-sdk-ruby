@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'uri'
+require 'stringio'
 require 'sinatra'
 
 DefaultConnection ||= Ingenico::Connect::SDK::DefaultImpl::DefaultConnection
@@ -99,9 +100,18 @@ describe DefaultConnection do
   context 'sending and receiving' do
 
     class DummyResponse
-      def status
+      def pop
+        self
+      end
+
+      def status_code
         200
       end
+
+      def content
+        StringIO.new(body || '')
+      end
+
       attr_accessor :headers, :body, :content_type, :uri
     end
 
@@ -110,21 +120,21 @@ describe DefaultConnection do
         # mock the HTTPClient obj inside DefaultConnection
         # for each type of requests so no real requests will be made
         client = connection.instance_variable_get(:@http_client)
-          allow(client).to receive(:get) do |uri, hash|
+        allow(client).to receive(:get_async) do |uri, hash|
           dummy_response = DummyResponse.new
           dummy_response.headers = hash[:header]
           dummy_response.uri = uri
           dummy_response
         end
 
-        allow(client).to receive(:delete) do |uri, hash|
+        allow(client).to receive(:delete_async) do |uri, hash|
           dummy_response = DummyResponse.new
           dummy_response.headers = hash[:header]
           dummy_response.uri = uri
           dummy_response
         end
 
-        allow(client).to receive(:post) do |uri, hash|
+        allow(client).to receive(:post_async) do |uri, hash|
           dummy_response = DummyResponse.new
           dummy_response.headers = hash[:header]
           dummy_response.uri = uri
@@ -132,7 +142,15 @@ describe DefaultConnection do
           dummy_response
         end
 
-        allow(client).to receive(:put) do |uri, hash|
+        allow(client).to receive(:put_async) do |uri, hash|
+          dummy_response = DummyResponse.new
+          dummy_response.headers = hash[:header]
+          dummy_response.uri = uri
+          dummy_response.body = hash[:body]
+          dummy_response
+        end
+
+        allow(client).to receive(:request_async) do |_method, uri, hash|
           dummy_response = DummyResponse.new
           dummy_response.headers = hash[:header]
           dummy_response.uri = uri
@@ -141,7 +159,7 @@ describe DefaultConnection do
         end
       end
 
-      let(:headers) { { 'header1' => 'dummy', 'header2' => 'yammy' } }
+      let(:headers) { { 'Content-Type' => 'application/json', 'header1' => 'dummy', 'header2' => 'yammy' } }
       let(:sdk_headers) { headers.map {|k, v| Ingenico::Connect::SDK::ResponseHeader.new(k, v) } }
       let(:uri) { URI('http://foobar.com/v1/1234/services/convert/amount?source=EUR&amount=1000&target=USD') }
 
@@ -154,28 +172,34 @@ describe DefaultConnection do
       end
 
       it 'sends the correct get request' do
-        res = connection.get(uri, sdk_headers)
-        expect(sdk_headers_to_s(res.headers)).to eq(sdk_headers_to_s(sdk_headers))
+        response_headers = nil
+        connection.get(uri, sdk_headers) { |s, h, c| response_headers = h }
+        expect(sdk_headers_to_s(response_headers)).to eq(sdk_headers_to_s(sdk_headers))
       end
 
       it 'sends the correct delete request' do
-        res = connection.delete(uri, sdk_headers)
-        expect(sdk_headers_to_s(res.headers)).to eq(sdk_headers_to_s(sdk_headers))
+        response_headers = nil
+        connection.delete(uri, sdk_headers) { |s, h, c| response_headers = h }
+        expect(sdk_headers_to_s(response_headers)).to eq(sdk_headers_to_s(sdk_headers))
       end
 
       context 'with body' do
         let(:body) { 'dummy body' }
 
         it 'sends the correct post request' do
-          res = connection.post(uri, sdk_headers, body)
-          expect(res.get_header_value('Content-Type')).to eq('application/json')
-          expect(res.body).to eq(body)
+          response_headers = nil
+          response_body = ''
+          connection.post(uri, sdk_headers, body) { |s, h, c| response_headers, response_body = h, c.read.force_encoding('UTF-8') }
+          expect(ResponseHeader.get_header_value(response_headers, 'Content-Type')).to eq('application/json')
+          expect(response_body).to eq(body)
         end
 
         it 'sends the correct put request' do
-          res = connection.put(uri, sdk_headers, body)
-          expect(res.get_header_value('Content-Type')).to eq('application/json')
-          expect(res.body).to eq(body)
+          response_headers = nil
+          response_body = ''
+          connection.put(uri, sdk_headers, body) { |s, h, c| response_headers, response_body = h, c.read.force_encoding('UTF-8') }
+          expect(ResponseHeader.get_header_value(response_headers, 'Content-Type')).to eq('application/json')
+          expect(response_body).to eq(body)
         end
       end
 
@@ -241,7 +265,7 @@ describe DefaultConnection do
 
         # TODO: DELETE is basically the same, do we need to test it?
         it 'logs the correct get request' do
-          connection.get(uri, sdk_headers)
+          connection.get(uri, sdk_headers) { |s, h, c| }
           expect($stdout.string).to match(regex)
           match_info = $stdout.string.match(regex)
           expect(match_info[2]).to eq('GET')
@@ -253,7 +277,7 @@ describe DefaultConnection do
         context 'with body' do
           let(:body) { 'dummy body' }
           it 'logs the correct post request' do
-            connection.post(uri, sdk_headers, body)
+            connection.post(uri, sdk_headers, body) { |s, h, c| }
             expect($stdout.string).to match(with_body_regex)
             match_info = $stdout.string.match(with_body_regex)
             expect(match_info[2]).to eq('POST')
@@ -304,25 +328,24 @@ describe DefaultConnection do
     let(:sdk_headers) { [] }
 
     it 'uses persistent connection if HTTP 1.1 is supported' do
-      100.times { connection.get(uri, sdk_headers) }
+      100.times { connection.get(uri, sdk_headers) { |x, y| } }
       expect(connection.session_count).to eq(1)
     end
 
     it 'retrieves the correct json file' do
-      res = connection.get(uri, sdk_headers)
+      response_body = ''
+      connection.get(uri, sdk_headers) { |status, headers, body| response_body = body.read.force_encoding('UTF-8') }
       prefix = 'spec/fixtures/resources/defaultimpl/'
-      expect(res.body).to eq(IO.read(prefix + 'convertAmount.json'))
+      expect(response_body).to eq(IO.read(prefix + 'convertAmount.json'))
     end
 
     it 'can explicitly close connections' do
-      connection.get(uri, sdk_headers)
-      expect(connection.session_count).to eq(1)
+      connection.get(uri, sdk_headers) { |x, y| }
 
       connection.close
       expect(connection.session_count).to eq(0)
 
-      connection.get(uri, sdk_headers)
-      expect(connection.session_count).to eq(1)
+      connection.get(uri, sdk_headers) { |x, y| }
     end
   end
 end

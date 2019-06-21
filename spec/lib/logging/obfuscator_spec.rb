@@ -4,13 +4,13 @@ Obfuscator ||= Ingenico::Connect::SDK::Logging::Obfuscator
 ValueObfuscator ||= Ingenico::Connect::SDK::Logging::ValueObfuscator
 
 describe Obfuscator do
-  subject(:sample) { Obfuscator.new(obsfs, caseInsensitive) }
+  subject(:sample) { Obfuscator.new(obsfs, case_insensitive) }
   context 'initialize' do
     let(:obsfs) { { 'k1' => ValueObfuscator.fixed_length(5),
                     'k2' => ValueObfuscator.keep_start_count(2) } }
 
     context 'case sensitive' do
-      let(:caseInsensitive) { false }
+      let(:case_insensitive) { false }
       it 'deep-copies obfuscators' do
         obsfs_copy = sample.instance_variable_get(:@obfuscators)
         obsfs['k2'] = nil
@@ -19,7 +19,7 @@ describe Obfuscator do
     end
 
     context 'case insensitive' do
-      let(:caseInsensitive) { true }
+      let(:case_insensitive) { true }
       it 'deep-copies obfuscators' do
         obsfs_copy = sample.instance_variable_get(:@obfuscators)
         expect(obsfs_copy['K2']).to equal(obsfs_copy['k2'])
@@ -32,7 +32,7 @@ describe Obfuscator do
   context '.obfuscate_value' do
     let(:obsfs) { { 'k1' => ValueObfuscator.fixed_length(10),
                     'k2' => ValueObfuscator.keep_start_count(1) } }
-    let(:caseInsensitive) { false }
+    let(:case_insensitive) { false }
     it 'uses the correct obfuscator' do
       str = 'str'
 

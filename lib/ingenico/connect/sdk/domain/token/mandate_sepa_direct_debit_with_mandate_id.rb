@@ -8,20 +8,21 @@ module Ingenico::Connect::SDK
   module Domain
     module Token
 
+      # @attr [String] mandate_id
       class MandateSepaDirectDebitWithMandateId < Ingenico::Connect::SDK::Domain::Token::MandateSepaDirectDebitWithoutCreditor
 
-        # String
         attr_accessor :mandate_id
 
+        # @return (Hash)
         def to_h
           hash = super
-          add_to_hash(hash, 'mandateId', @mandate_id)
+          hash['mandateId'] = @mandate_id unless @mandate_id.nil?
           hash
         end
 
         def from_hash(hash)
           super
-          if hash.has_key?('mandateId')
+          if hash.has_key? 'mandateId'
             @mandate_id = hash['mandateId']
           end
         end

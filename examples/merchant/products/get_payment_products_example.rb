@@ -17,7 +17,7 @@ def example
     query.is_recurring = true
     query.add_hide('fields')
 
-    response = client.merchant('merchantId').products().find(query)
+    response = client.merchant('merchantId').products.find(query)
   end
 end
 
