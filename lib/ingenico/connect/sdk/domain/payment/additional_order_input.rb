@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/airline_data'
 require 'ingenico/connect/sdk/domain/payment/level3_summary_data'
+require 'ingenico/connect/sdk/domain/payment/loan_recipient'
 require 'ingenico/connect/sdk/domain/payment/order_type_information'
 
 module Ingenico::Connect::SDK
@@ -13,6 +14,7 @@ module Ingenico::Connect::SDK
 
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::AirlineData] airline_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData] level3_summary_data
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::LoanRecipient] loan_recipient
       # @attr [Integer] number_of_installments
       # @attr [String] order_date
       # @attr [Ingenico::Connect::SDK::Domain::Payment::OrderTypeInformation] type_information
@@ -23,6 +25,8 @@ module Ingenico::Connect::SDK
         #
         # @deprecated Use Order.shoppingCart.amountBreakdown instead
         attr_accessor :level3_summary_data
+
+        attr_accessor :loan_recipient
 
         attr_accessor :number_of_installments
 
@@ -35,6 +39,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['airlineData'] = @airline_data.to_h unless @airline_data.nil?
           hash['level3SummaryData'] = @level3_summary_data.to_h unless @level3_summary_data.nil?
+          hash['loanRecipient'] = @loan_recipient.to_h unless @loan_recipient.nil?
           hash['numberOfInstallments'] = @number_of_installments unless @number_of_installments.nil?
           hash['orderDate'] = @order_date unless @order_date.nil?
           hash['typeInformation'] = @type_information.to_h unless @type_information.nil?
@@ -50,6 +55,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'level3SummaryData'
             raise TypeError, "value '%s' is not a Hash" % [hash['level3SummaryData']] unless hash['level3SummaryData'].is_a? Hash
             @level3_summary_data = Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData.new_from_hash(hash['level3SummaryData'])
+          end
+          if hash.has_key? 'loanRecipient'
+            raise TypeError, "value '%s' is not a Hash" % [hash['loanRecipient']] unless hash['loanRecipient'].is_a? Hash
+            @loan_recipient = Ingenico::Connect::SDK::Domain::Payment::LoanRecipient.new_from_hash(hash['loanRecipient'])
           end
           if hash.has_key? 'numberOfInstallments'
             @number_of_installments = hash['numberOfInstallments']
