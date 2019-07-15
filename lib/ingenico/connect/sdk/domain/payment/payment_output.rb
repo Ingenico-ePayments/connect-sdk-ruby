@@ -18,6 +18,7 @@ module Ingenico::Connect::SDK
     module Payment
 
       # @attr [Integer] amount_paid
+      # @attr [Integer] amount_reversed
       # @attr [Ingenico::Connect::SDK::Domain::Payment::BankTransferPaymentMethodSpecificOutput] bank_transfer_payment_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::CardPaymentMethodSpecificOutput] card_payment_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::CashPaymentMethodSpecificOutput] cash_payment_method_specific_output
@@ -31,6 +32,8 @@ module Ingenico::Connect::SDK
       class PaymentOutput < Ingenico::Connect::SDK::Domain::Payment::OrderOutput
 
         attr_accessor :amount_paid
+
+        attr_accessor :amount_reversed
 
         attr_accessor :bank_transfer_payment_method_specific_output
 
@@ -56,6 +59,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['amountPaid'] = @amount_paid unless @amount_paid.nil?
+          hash['amountReversed'] = @amount_reversed unless @amount_reversed.nil?
           hash['bankTransferPaymentMethodSpecificOutput'] = @bank_transfer_payment_method_specific_output.to_h unless @bank_transfer_payment_method_specific_output.nil?
           hash['cardPaymentMethodSpecificOutput'] = @card_payment_method_specific_output.to_h unless @card_payment_method_specific_output.nil?
           hash['cashPaymentMethodSpecificOutput'] = @cash_payment_method_specific_output.to_h unless @cash_payment_method_specific_output.nil?
@@ -73,6 +77,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key? 'amountPaid'
             @amount_paid = hash['amountPaid']
+          end
+          if hash.has_key? 'amountReversed'
+            @amount_reversed = hash['amountReversed']
           end
           if hash.has_key? 'bankTransferPaymentMethodSpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['bankTransferPaymentMethodSpecificOutput']] unless hash['bankTransferPaymentMethodSpecificOutput'].is_a? Hash

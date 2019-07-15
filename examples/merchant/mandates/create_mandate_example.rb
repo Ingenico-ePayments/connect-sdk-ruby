@@ -17,7 +17,7 @@ Mandates = Ingenico::Connect::SDK::Domain::Mandates
 def example
   get_client do |client|
     bank_account_iban = Definitions::BankAccountIban.new
-    bank_account_iban.iban = 'DE46940594210000012345'
+    bank_account_iban.iban = 'DE46720200700359736690'
 
     contact_details = Mandates::MandateContactDetails.new
     contact_details.email_address = 'wile.e.coyote@acmelabs.com'

@@ -10,11 +10,12 @@ require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
 require 'ingenico/connect/sdk/domain/definitions/card'
 require 'ingenico/connect/sdk/domain/definitions/company_information'
 require 'ingenico/connect/sdk/domain/payment/address_personal'
+require 'ingenico/connect/sdk/domain/payment/browser_data'
 require 'ingenico/connect/sdk/domain/payment/card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/contact_details'
 require 'ingenico/connect/sdk/domain/payment/create_payment_request'
 require 'ingenico/connect/sdk/domain/payment/customer'
-require 'ingenico/connect/sdk/domain/payment/external_cardholder_authentication_data'
+require 'ingenico/connect/sdk/domain/payment/customer_device'
 require 'ingenico/connect/sdk/domain/payment/line_item'
 require 'ingenico/connect/sdk/domain/payment/line_item_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order'
@@ -22,10 +23,10 @@ require 'ingenico/connect/sdk/domain/payment/order_invoice_data'
 require 'ingenico/connect/sdk/domain/payment/order_references'
 require 'ingenico/connect/sdk/domain/payment/personal_information'
 require 'ingenico/connect/sdk/domain/payment/personal_name'
+require 'ingenico/connect/sdk/domain/payment/redirection_data'
 require 'ingenico/connect/sdk/domain/payment/shipping'
 require 'ingenico/connect/sdk/domain/payment/shopping_cart'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure'
-require 'ingenico/connect/sdk/domain/payment/three_d_secure_data'
 
 Definitions = Ingenico::Connect::SDK::Domain::Definitions
 Payment = Ingenico::Connect::SDK::Domain::Payment
@@ -38,32 +39,22 @@ def example
     card.cvv = '123'
     card.expiry_date = '1220'
 
-    external_cardholder_authentication_data = Payment::ExternalCardholderAuthenticationData.new
-    external_cardholder_authentication_data.cavv = 'AgAAAAAABk4DWZ4C28yUQAAAAAA='
-    external_cardholder_authentication_data.cavv_algorithm = '1'
-    external_cardholder_authentication_data.eci = 8
-    external_cardholder_authentication_data.three_d_secure_version = 'v2'
-    external_cardholder_authentication_data.three_d_server_transaction_id = '3DSTID1234'
-    external_cardholder_authentication_data.validation_result = 'Y'
-    external_cardholder_authentication_data.xid = 'n3h2uOQPUgnmqhCkXNfxl8pOZJA='
-
-    prior_three_d_secure_data = Payment::ThreeDSecureData.new
-    prior_three_d_secure_data.acs_transaction_id = 'empty'
-    prior_three_d_secure_data.method = 'challenged'
-    prior_three_d_secure_data.utc_timestamp = '201901311530'
+    redirection_data = Payment::RedirectionData.new
+    redirection_data.return_url = 'https://hostname.myownwebsite.url'
 
     three_d_secure = Payment::ThreeDSecure.new
     three_d_secure.authentication_flow = 'browser'
     three_d_secure.challenge_canvas_size = '600x400'
     three_d_secure.challenge_indicator = 'challenge-requested'
-    three_d_secure.external_cardholder_authentication_data = external_cardholder_authentication_data
-    three_d_secure.prior_three_d_secure_data = prior_three_d_secure_data
+    three_d_secure.redirection_data = redirection_data
     three_d_secure.skip_authentication = false
 
     card_payment_method_specific_input = Payment::CardPaymentMethodSpecificInput.new
     card_payment_method_specific_input.card = card
+    card_payment_method_specific_input.is_recurring = false
     card_payment_method_specific_input.payment_product_id = 1
     card_payment_method_specific_input.three_d_secure = three_d_secure
+    card_payment_method_specific_input.transaction_channel = 'ECOMMERCE'
 
     amount_of_money = Definitions::AmountOfMoney.new
     amount_of_money.amount = 2980
@@ -84,9 +75,22 @@ def example
 
     contact_details = Payment::ContactDetails.new
     contact_details.email_address = 'wile.e.coyote@acmelabs.com'
-    contact_details.email_message_type = 'html'
     contact_details.fax_number = '+1234567891'
     contact_details.phone_number = '+1234567890'
+
+    browser_data = Payment::BrowserData.new
+    browser_data.color_depth = 24
+    browser_data.java_enabled = false
+    browser_data.screen_height = '1200'
+    browser_data.screen_width = '1920'
+
+    device = Payment::CustomerDevice.new
+    device.accept_header = 'texthtml,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    device.browser_data = browser_data
+    device.ip_address = '123.123.123.123'
+    device.locale = 'en-US'
+    device.timezone_offset_utc_minutes = '420'
+    device.user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Safari/605.1.15'
 
     name = Payment::PersonalName.new
     name.first_name = 'Wile'
@@ -100,9 +104,11 @@ def example
     personal_information.name = name
 
     customer = Payment::Customer.new
+    customer.account_type = 'none'
     customer.billing_address = billing_address
     customer.company_information = company_information
     customer.contact_details = contact_details
+    customer.device = device
     customer.locale = 'en_US'
     customer.merchant_customer_id = '1234'
     customer.personal_information = personal_information
