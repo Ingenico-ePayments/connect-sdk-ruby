@@ -13,6 +13,7 @@ module Ingenico::Connect::SDK
       # @attr [String] authentication_flow
       # @attr [String] challenge_canvas_size
       # @attr [String] challenge_indicator
+      # @attr [String] exemption_request
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureData] prior_three_d_secure_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SdkDataInput] sdk_data
       # @attr [true/false] skip_authentication
@@ -23,6 +24,8 @@ module Ingenico::Connect::SDK
         attr_accessor :challenge_canvas_size
 
         attr_accessor :challenge_indicator
+
+        attr_accessor :exemption_request
 
         attr_accessor :prior_three_d_secure_data
 
@@ -36,6 +39,7 @@ module Ingenico::Connect::SDK
           hash['authenticationFlow'] = @authentication_flow unless @authentication_flow.nil?
           hash['challengeCanvasSize'] = @challenge_canvas_size unless @challenge_canvas_size.nil?
           hash['challengeIndicator'] = @challenge_indicator unless @challenge_indicator.nil?
+          hash['exemptionRequest'] = @exemption_request unless @exemption_request.nil?
           hash['priorThreeDSecureData'] = @prior_three_d_secure_data.to_h unless @prior_three_d_secure_data.nil?
           hash['sdkData'] = @sdk_data.to_h unless @sdk_data.nil?
           hash['skipAuthentication'] = @skip_authentication unless @skip_authentication.nil?
@@ -52,6 +56,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'challengeIndicator'
             @challenge_indicator = hash['challengeIndicator']
+          end
+          if hash.has_key? 'exemptionRequest'
+            @exemption_request = hash['exemptionRequest']
           end
           if hash.has_key? 'priorThreeDSecureData'
             raise TypeError, "value '%s' is not a Hash" % [hash['priorThreeDSecureData']] unless hash['priorThreeDSecureData'].is_a? Hash

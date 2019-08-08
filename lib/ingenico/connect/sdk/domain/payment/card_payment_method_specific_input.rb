@@ -14,6 +14,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::Card] card
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ExternalCardholderAuthenticationData] external_cardholder_authentication_data
       # @attr [true/false] is_recurring
+      # @attr [String] merchant_initiated_reason_indicator
       # @attr [String] return_url
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecure] three_d_secure
       class CardPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractCardPaymentMethodSpecificInput
@@ -25,6 +26,8 @@ module Ingenico::Connect::SDK
         attr_accessor :external_cardholder_authentication_data
 
         attr_accessor :is_recurring
+
+        attr_accessor :merchant_initiated_reason_indicator
 
         #
         # @deprecated Use threeDSecure.redirectionData.returnUrl instead
@@ -38,6 +41,7 @@ module Ingenico::Connect::SDK
           hash['card'] = @card.to_h unless @card.nil?
           hash['externalCardholderAuthenticationData'] = @external_cardholder_authentication_data.to_h unless @external_cardholder_authentication_data.nil?
           hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
+          hash['merchantInitiatedReasonIndicator'] = @merchant_initiated_reason_indicator unless @merchant_initiated_reason_indicator.nil?
           hash['returnUrl'] = @return_url unless @return_url.nil?
           hash['threeDSecure'] = @three_d_secure.to_h unless @three_d_secure.nil?
           hash
@@ -55,6 +59,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'isRecurring'
             @is_recurring = hash['isRecurring']
+          end
+          if hash.has_key? 'merchantInitiatedReasonIndicator'
+            @merchant_initiated_reason_indicator = hash['merchantInitiatedReasonIndicator']
           end
           if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']

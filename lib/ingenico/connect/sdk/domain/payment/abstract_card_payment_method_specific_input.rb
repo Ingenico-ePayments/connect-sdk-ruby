@@ -11,6 +11,7 @@ module Ingenico::Connect::SDK
 
       # @attr [String] authorization_mode
       # @attr [String] customer_reference
+      # @attr [String] initial_scheme_transaction_id
       # @attr [Ingenico::Connect::SDK::Domain::Payment::CardRecurrenceDetails] recurring
       # @attr [String] recurring_payment_sequence_indicator
       # @attr [true/false] requires_approval
@@ -27,6 +28,8 @@ module Ingenico::Connect::SDK
         attr_accessor :authorization_mode
 
         attr_accessor :customer_reference
+
+        attr_accessor :initial_scheme_transaction_id
 
         attr_accessor :recurring
 
@@ -61,6 +64,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['authorizationMode'] = @authorization_mode unless @authorization_mode.nil?
           hash['customerReference'] = @customer_reference unless @customer_reference.nil?
+          hash['initialSchemeTransactionId'] = @initial_scheme_transaction_id unless @initial_scheme_transaction_id.nil?
           hash['recurring'] = @recurring.to_h unless @recurring.nil?
           hash['recurringPaymentSequenceIndicator'] = @recurring_payment_sequence_indicator unless @recurring_payment_sequence_indicator.nil?
           hash['requiresApproval'] = @requires_approval unless @requires_approval.nil?
@@ -82,6 +86,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'customerReference'
             @customer_reference = hash['customerReference']
+          end
+          if hash.has_key? 'initialSchemeTransactionId'
+            @initial_scheme_transaction_id = hash['initialSchemeTransactionId']
           end
           if hash.has_key? 'recurring'
             raise TypeError, "value '%s' is not a Hash" % [hash['recurring']] unless hash['recurring'].is_a? Hash

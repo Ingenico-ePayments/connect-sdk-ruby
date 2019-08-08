@@ -10,6 +10,7 @@ module Ingenico::Connect::SDK
     # @attr [Ingenico::Connect::SDK::Domain::Payout::PayoutResponse] refund
     # @attr [Ingenico::Connect::SDK::Domain::Refund::RefundResponse] payout
     # @attr [Ingenico::Connect::SDK::Domain::Token::TokenResponse] token
+    # @attr [Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse] dispute
     class WebhooksEvent < Ingenico::Connect::SDK::DataObject
 
       attr_accessor :api_version
@@ -22,6 +23,7 @@ module Ingenico::Connect::SDK
       attr_accessor :refund
       attr_accessor :payout
       attr_accessor :token
+      attr_accessor :dispute
 
       # @return [Hash]
       def to_h
@@ -35,6 +37,7 @@ module Ingenico::Connect::SDK
         hash['refund'] = @refund.to_h unless @refund.nil?
         hash['payout'] = @payout.to_h unless @payout.nil?
         hash['token'] = @token.to_h unless @token.nil?
+        hash['dispute'] = @dispute.to_h unless @dispute.nil?
         hash
       end
 
@@ -49,6 +52,7 @@ module Ingenico::Connect::SDK
         @refund = Ingenico::Connect::SDK::Domain::Refund::RefundResponse.new_from_hash(hash['refund']) if hash.has_key? 'refund'
         @payout = Ingenico::Connect::SDK::Domain::Payout::PayoutResponse.new_from_hash(hash['payout']) if hash.has_key? 'payout'
         @token = Ingenico::Connect::SDK::Domain::Token::TokenResponse.new_from_hash(hash['token']) if hash.has_key? 'token'
+        @dispute = Ingenico::Connect::SDK::Domain::Dispute::DisputeResponse.new_from_hash(hash['dispute']) if hash.has_key? 'dispute'
       end
     end
   end
