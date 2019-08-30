@@ -12,17 +12,21 @@ module Ingenico::Connect::SDK
 
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraudResults] fraud_results
       # @attr [Ingenico::Connect::SDK::Domain::Payment::PaymentProduct771SpecificOutput] payment_product771_specific_output
+      # @attr [String] token
       class SepaDirectDebitPaymentMethodSpecificOutput < Ingenico::Connect::SDK::Domain::Payment::AbstractPaymentMethodSpecificOutput
 
         attr_accessor :fraud_results
 
         attr_accessor :payment_product771_specific_output
 
+        attr_accessor :token
+
         # @return (Hash)
         def to_h
           hash = super
           hash['fraudResults'] = @fraud_results.to_h unless @fraud_results.nil?
           hash['paymentProduct771SpecificOutput'] = @payment_product771_specific_output.to_h unless @payment_product771_specific_output.nil?
+          hash['token'] = @token unless @token.nil?
           hash
         end
 
@@ -35,6 +39,9 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'paymentProduct771SpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct771SpecificOutput']] unless hash['paymentProduct771SpecificOutput'].is_a? Hash
             @payment_product771_specific_output = Ingenico::Connect::SDK::Domain::Payment::PaymentProduct771SpecificOutput.new_from_hash(hash['paymentProduct771SpecificOutput'])
+          end
+          if hash.has_key? 'token'
+            @token = hash['token']
           end
         end
       end
