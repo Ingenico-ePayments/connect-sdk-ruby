@@ -9,10 +9,13 @@ module Ingenico::Connect::SDK
     module Token
 
       # @attr [true/false] is_new_token
+      # @attr [String] original_payment_id
       # @attr [String] token
       class CreateTokenResponse < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :is_new_token
+
+        attr_accessor :original_payment_id
 
         attr_accessor :token
 
@@ -20,6 +23,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['isNewToken'] = @is_new_token unless @is_new_token.nil?
+          hash['originalPaymentId'] = @original_payment_id unless @original_payment_id.nil?
           hash['token'] = @token unless @token.nil?
           hash
         end
@@ -28,6 +32,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key? 'isNewToken'
             @is_new_token = hash['isNewToken']
+          end
+          if hash.has_key? 'originalPaymentId'
+            @original_payment_id = hash['originalPaymentId']
           end
           if hash.has_key? 'token'
             @token = hash['token']

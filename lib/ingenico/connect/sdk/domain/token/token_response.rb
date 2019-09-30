@@ -16,6 +16,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenEWallet] e_wallet
       # @attr [String] id
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebit] non_sepa_direct_debit
+      # @attr [String] original_payment_id
       # @attr [Integer] payment_product_id
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenSepaDirectDebit] sepa_direct_debit
       class TokenResponse < Ingenico::Connect::SDK::DataObject
@@ -28,6 +29,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :non_sepa_direct_debit
 
+        attr_accessor :original_payment_id
+
         attr_accessor :payment_product_id
 
         attr_accessor :sepa_direct_debit
@@ -39,6 +42,7 @@ module Ingenico::Connect::SDK
           hash['eWallet'] = @e_wallet.to_h unless @e_wallet.nil?
           hash['id'] = @id unless @id.nil?
           hash['nonSepaDirectDebit'] = @non_sepa_direct_debit.to_h unless @non_sepa_direct_debit.nil?
+          hash['originalPaymentId'] = @original_payment_id unless @original_payment_id.nil?
           hash['paymentProductId'] = @payment_product_id unless @payment_product_id.nil?
           hash['sepaDirectDebit'] = @sepa_direct_debit.to_h unless @sepa_direct_debit.nil?
           hash
@@ -60,6 +64,9 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'nonSepaDirectDebit'
             raise TypeError, "value '%s' is not a Hash" % [hash['nonSepaDirectDebit']] unless hash['nonSepaDirectDebit'].is_a? Hash
             @non_sepa_direct_debit = Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebit.new_from_hash(hash['nonSepaDirectDebit'])
+          end
+          if hash.has_key? 'originalPaymentId'
+            @original_payment_id = hash['originalPaymentId']
           end
           if hash.has_key? 'paymentProductId'
             @payment_product_id = hash['paymentProductId']
