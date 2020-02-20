@@ -46,7 +46,7 @@ describe LoggingUtil do
 
     it 'works with card' do
       expect(
-        test_obfuscate_body_with_matches("bodyWithCardOriginal.json", 
+        test_obfuscate_body_with_matches("bodyWithCardOriginal.json",
                                          "bodyWithCardObfuscated.json")
       ).to be(true)
     end
@@ -60,7 +60,7 @@ describe LoggingUtil do
 
     it 'works with bin' do
       expect(
-        test_obfuscate_body_with_matches("bodyWithBinOriginal.json", 
+        test_obfuscate_body_with_matches("bodyWithBinOriginal.json",
                                          "bodyWithBinObfuscated.json")
       ).to be(true)
     end
@@ -68,6 +68,13 @@ describe LoggingUtil do
     it 'works when there is no match' do
       expect(
         test_obfuscate_body_with_no_matches("bodyNoObfuscation.json")
+      ).to be(true)
+    end
+
+    it 'works with object' do
+      expect(
+        test_obfuscate_body_with_matches("bodyWithObjectOriginal.json",
+                                         "bodyWithObjectObfuscated.json")
       ).to be(true)
     end
   end
@@ -82,7 +89,7 @@ describe LoggingUtil do
 
       expect(
         test_obfuscate_header_with_match("authorization",
-                                         "Basic QWxhZGRpbjpPcGVuU2VzYW1l", 
+                                         "Basic QWxhZGRpbjpPcGVuU2VzYW1l",
                                          "********")
       ).to be(true)
 
@@ -91,7 +98,7 @@ describe LoggingUtil do
                                          "Basic QWxhZGRpbjpPcGVuU2VzYW1l",
                                          "********")
       ).to be(true)
-      
+
       expect(
         test_obfuscate_header_with_match("X-GCS-Authentication-Token",
                                          "foobar", "********")
@@ -108,12 +115,12 @@ describe LoggingUtil do
       ).to be(true)
 
       expect(
-        test_obfuscate_header_with_match("X-GCS-CallerPassword", "foobar", 
+        test_obfuscate_header_with_match("X-GCS-CallerPassword", "foobar",
                                          "********")
       ).to be(true)
 
       expect(
-        test_obfuscate_header_with_match("x-gcs-callerpassword", "foobar", 
+        test_obfuscate_header_with_match("x-gcs-callerpassword", "foobar",
                                      "********")
       ).to be(true)
 

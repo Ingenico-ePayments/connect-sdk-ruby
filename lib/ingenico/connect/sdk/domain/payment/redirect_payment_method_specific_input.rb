@@ -8,6 +8,7 @@ require 'ingenico/connect/sdk/domain/payment/redirect_payment_product816_specifi
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product840_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product861_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product863_specific_input'
+require 'ingenico/connect/sdk/domain/payment/redirect_payment_product869_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product882_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirection_data'
 
@@ -21,6 +22,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct840SpecificInput] payment_product840_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct861SpecificInput] payment_product861_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct863SpecificInput] payment_product863_specific_input
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct869SpecificInput] payment_product869_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct882SpecificInput] payment_product882_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectionData] redirection_data
       # @attr [String] return_url
@@ -37,6 +39,8 @@ module Ingenico::Connect::SDK
         attr_accessor :payment_product861_specific_input
 
         attr_accessor :payment_product863_specific_input
+
+        attr_accessor :payment_product869_specific_input
 
         attr_accessor :payment_product882_specific_input
 
@@ -55,6 +59,7 @@ module Ingenico::Connect::SDK
           hash['paymentProduct840SpecificInput'] = @payment_product840_specific_input.to_h unless @payment_product840_specific_input.nil?
           hash['paymentProduct861SpecificInput'] = @payment_product861_specific_input.to_h unless @payment_product861_specific_input.nil?
           hash['paymentProduct863SpecificInput'] = @payment_product863_specific_input.to_h unless @payment_product863_specific_input.nil?
+          hash['paymentProduct869SpecificInput'] = @payment_product869_specific_input.to_h unless @payment_product869_specific_input.nil?
           hash['paymentProduct882SpecificInput'] = @payment_product882_specific_input.to_h unless @payment_product882_specific_input.nil?
           hash['redirectionData'] = @redirection_data.to_h unless @redirection_data.nil?
           hash['returnUrl'] = @return_url unless @return_url.nil?
@@ -85,6 +90,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'paymentProduct863SpecificInput'
             raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct863SpecificInput']] unless hash['paymentProduct863SpecificInput'].is_a? Hash
             @payment_product863_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct863SpecificInput.new_from_hash(hash['paymentProduct863SpecificInput'])
+          end
+          if hash.has_key? 'paymentProduct869SpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct869SpecificInput']] unless hash['paymentProduct869SpecificInput'].is_a? Hash
+            @payment_product869_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct869SpecificInput.new_from_hash(hash['paymentProduct869SpecificInput'])
           end
           if hash.has_key? 'paymentProduct882SpecificInput'
             raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct882SpecificInput']] unless hash['paymentProduct882SpecificInput'].is_a? Hash
