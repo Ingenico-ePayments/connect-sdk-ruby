@@ -14,6 +14,7 @@ module Ingenico::Connect::SDK
 
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenCard] card
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenEWallet] e_wallet
+      # @attr [String] encrypted_customer_input
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenNonSepaDirectDebit] non_sepa_direct_debit
       # @attr [Integer] payment_product_id
       # @attr [Ingenico::Connect::SDK::Domain::Token::TokenSepaDirectDebitWithoutCreditor] sepa_direct_debit
@@ -22,6 +23,8 @@ module Ingenico::Connect::SDK
         attr_accessor :card
 
         attr_accessor :e_wallet
+
+        attr_accessor :encrypted_customer_input
 
         attr_accessor :non_sepa_direct_debit
 
@@ -34,6 +37,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['card'] = @card.to_h unless @card.nil?
           hash['eWallet'] = @e_wallet.to_h unless @e_wallet.nil?
+          hash['encryptedCustomerInput'] = @encrypted_customer_input unless @encrypted_customer_input.nil?
           hash['nonSepaDirectDebit'] = @non_sepa_direct_debit.to_h unless @non_sepa_direct_debit.nil?
           hash['paymentProductId'] = @payment_product_id unless @payment_product_id.nil?
           hash['sepaDirectDebit'] = @sepa_direct_debit.to_h unless @sepa_direct_debit.nil?
@@ -49,6 +53,9 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'eWallet'
             raise TypeError, "value '%s' is not a Hash" % [hash['eWallet']] unless hash['eWallet'].is_a? Hash
             @e_wallet = Ingenico::Connect::SDK::Domain::Token::TokenEWallet.new_from_hash(hash['eWallet'])
+          end
+          if hash.has_key? 'encryptedCustomerInput'
+            @encrypted_customer_input = hash['encryptedCustomerInput']
           end
           if hash.has_key? 'nonSepaDirectDebit'
             raise TypeError, "value '%s' is not a Hash" % [hash['nonSepaDirectDebit']] unless hash['nonSepaDirectDebit'].is_a? Hash

@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/domain/payment/order_output'
 require 'ingenico/connect/sdk/domain/payment/refund_bank_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_card_method_specific_output'
+require 'ingenico/connect/sdk/domain/payment/refund_cash_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_e_invoice_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_e_wallet_method_specific_output'
 require 'ingenico/connect/sdk/domain/payment/refund_mobile_method_specific_output'
@@ -16,6 +17,7 @@ module Ingenico::Connect::SDK
       # @attr [Integer] amount_paid
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundBankMethodSpecificOutput] bank_refund_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundCardMethodSpecificOutput] card_refund_method_specific_output
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundCashMethodSpecificOutput] cash_refund_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundEInvoiceMethodSpecificOutput] e_invoice_refund_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundEWalletMethodSpecificOutput] e_wallet_refund_method_specific_output
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RefundMobileMethodSpecificOutput] mobile_refund_method_specific_output
@@ -27,6 +29,8 @@ module Ingenico::Connect::SDK
         attr_accessor :bank_refund_method_specific_output
 
         attr_accessor :card_refund_method_specific_output
+
+        attr_accessor :cash_refund_method_specific_output
 
         attr_accessor :e_invoice_refund_method_specific_output
 
@@ -42,6 +46,7 @@ module Ingenico::Connect::SDK
           hash['amountPaid'] = @amount_paid unless @amount_paid.nil?
           hash['bankRefundMethodSpecificOutput'] = @bank_refund_method_specific_output.to_h unless @bank_refund_method_specific_output.nil?
           hash['cardRefundMethodSpecificOutput'] = @card_refund_method_specific_output.to_h unless @card_refund_method_specific_output.nil?
+          hash['cashRefundMethodSpecificOutput'] = @cash_refund_method_specific_output.to_h unless @cash_refund_method_specific_output.nil?
           hash['eInvoiceRefundMethodSpecificOutput'] = @e_invoice_refund_method_specific_output.to_h unless @e_invoice_refund_method_specific_output.nil?
           hash['eWalletRefundMethodSpecificOutput'] = @e_wallet_refund_method_specific_output.to_h unless @e_wallet_refund_method_specific_output.nil?
           hash['mobileRefundMethodSpecificOutput'] = @mobile_refund_method_specific_output.to_h unless @mobile_refund_method_specific_output.nil?
@@ -61,6 +66,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'cardRefundMethodSpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['cardRefundMethodSpecificOutput']] unless hash['cardRefundMethodSpecificOutput'].is_a? Hash
             @card_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundCardMethodSpecificOutput.new_from_hash(hash['cardRefundMethodSpecificOutput'])
+          end
+          if hash.has_key? 'cashRefundMethodSpecificOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['cashRefundMethodSpecificOutput']] unless hash['cashRefundMethodSpecificOutput'].is_a? Hash
+            @cash_refund_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RefundCashMethodSpecificOutput.new_from_hash(hash['cashRefundMethodSpecificOutput'])
           end
           if hash.has_key? 'eInvoiceRefundMethodSpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['eInvoiceRefundMethodSpecificOutput']] unless hash['eInvoiceRefundMethodSpecificOutput'].is_a? Hash

@@ -23,6 +23,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Product::EmptyValidator] luhn
       # @attr [Ingenico::Connect::SDK::Domain::Product::RangeValidator] range
       # @attr [Ingenico::Connect::SDK::Domain::Product::RegularExpressionValidator] regular_expression
+      # @attr [Ingenico::Connect::SDK::Domain::Product::EmptyValidator] resident_id_number
       # @attr [Ingenico::Connect::SDK::Domain::Product::EmptyValidator] terms_and_conditions
       class PaymentProductFieldValidators < Ingenico::Connect::SDK::DataObject
 
@@ -44,6 +45,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :regular_expression
 
+        attr_accessor :resident_id_number
+
         attr_accessor :terms_and_conditions
 
         # @return (Hash)
@@ -58,6 +61,7 @@ module Ingenico::Connect::SDK
           hash['luhn'] = @luhn.to_h unless @luhn.nil?
           hash['range'] = @range.to_h unless @range.nil?
           hash['regularExpression'] = @regular_expression.to_h unless @regular_expression.nil?
+          hash['residentIdNumber'] = @resident_id_number.to_h unless @resident_id_number.nil?
           hash['termsAndConditions'] = @terms_and_conditions.to_h unless @terms_and_conditions.nil?
           hash
         end
@@ -99,6 +103,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'regularExpression'
             raise TypeError, "value '%s' is not a Hash" % [hash['regularExpression']] unless hash['regularExpression'].is_a? Hash
             @regular_expression = Ingenico::Connect::SDK::Domain::Product::RegularExpressionValidator.new_from_hash(hash['regularExpression'])
+          end
+          if hash.has_key? 'residentIdNumber'
+            raise TypeError, "value '%s' is not a Hash" % [hash['residentIdNumber']] unless hash['residentIdNumber'].is_a? Hash
+            @resident_id_number = Ingenico::Connect::SDK::Domain::Product::EmptyValidator.new_from_hash(hash['residentIdNumber'])
           end
           if hash.has_key? 'termsAndConditions'
             raise TypeError, "value '%s' is not a Hash" % [hash['termsAndConditions']] unless hash['termsAndConditions'].is_a? Hash
