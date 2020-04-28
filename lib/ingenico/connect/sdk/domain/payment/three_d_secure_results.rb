@@ -10,9 +10,12 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] acs_transaction_id
+      # @attr [String] applied_exemption
       # @attr [String] cavv
       # @attr [String] directory_server_transaction_id
       # @attr [String] eci
+      # @attr [Integer] scheme_risk_score
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SdkDataOutput] sdk_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureData] three_d_secure_data
       # @attr [String] three_d_secure_version
@@ -20,11 +23,17 @@ module Ingenico::Connect::SDK
       # @attr [String] xid
       class ThreeDSecureResults < Ingenico::Connect::SDK::DataObject
 
+        attr_accessor :acs_transaction_id
+
+        attr_accessor :applied_exemption
+
         attr_accessor :cavv
 
         attr_accessor :directory_server_transaction_id
 
         attr_accessor :eci
+
+        attr_accessor :scheme_risk_score
 
         attr_accessor :sdk_data
 
@@ -39,9 +48,12 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
+          hash['acsTransactionId'] = @acs_transaction_id unless @acs_transaction_id.nil?
+          hash['appliedExemption'] = @applied_exemption unless @applied_exemption.nil?
           hash['cavv'] = @cavv unless @cavv.nil?
           hash['directoryServerTransactionId'] = @directory_server_transaction_id unless @directory_server_transaction_id.nil?
           hash['eci'] = @eci unless @eci.nil?
+          hash['schemeRiskScore'] = @scheme_risk_score unless @scheme_risk_score.nil?
           hash['sdkData'] = @sdk_data.to_h unless @sdk_data.nil?
           hash['threeDSecureData'] = @three_d_secure_data.to_h unless @three_d_secure_data.nil?
           hash['threeDSecureVersion'] = @three_d_secure_version unless @three_d_secure_version.nil?
@@ -52,6 +64,12 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key? 'acsTransactionId'
+            @acs_transaction_id = hash['acsTransactionId']
+          end
+          if hash.has_key? 'appliedExemption'
+            @applied_exemption = hash['appliedExemption']
+          end
           if hash.has_key? 'cavv'
             @cavv = hash['cavv']
           end
@@ -60,6 +78,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'eci'
             @eci = hash['eci']
+          end
+          if hash.has_key? 'schemeRiskScore'
+            @scheme_risk_score = hash['schemeRiskScore']
           end
           if hash.has_key? 'sdkData'
             raise TypeError, "value '%s' is not a Hash" % [hash['sdkData']] unless hash['sdkData'].is_a? Hash
