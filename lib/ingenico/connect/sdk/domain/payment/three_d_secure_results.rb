@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/data_object'
+require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
 require 'ingenico/connect/sdk/domain/payment/sdk_data_output'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure_data'
 
@@ -12,6 +13,7 @@ module Ingenico::Connect::SDK
 
       # @attr [String] acs_transaction_id
       # @attr [String] applied_exemption
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] authentication_amount
       # @attr [String] cavv
       # @attr [String] directory_server_transaction_id
       # @attr [String] eci
@@ -26,6 +28,8 @@ module Ingenico::Connect::SDK
         attr_accessor :acs_transaction_id
 
         attr_accessor :applied_exemption
+
+        attr_accessor :authentication_amount
 
         attr_accessor :cavv
 
@@ -50,6 +54,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['acsTransactionId'] = @acs_transaction_id unless @acs_transaction_id.nil?
           hash['appliedExemption'] = @applied_exemption unless @applied_exemption.nil?
+          hash['authenticationAmount'] = @authentication_amount.to_h unless @authentication_amount.nil?
           hash['cavv'] = @cavv unless @cavv.nil?
           hash['directoryServerTransactionId'] = @directory_server_transaction_id unless @directory_server_transaction_id.nil?
           hash['eci'] = @eci unless @eci.nil?
@@ -69,6 +74,10 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'appliedExemption'
             @applied_exemption = hash['appliedExemption']
+          end
+          if hash.has_key? 'authenticationAmount'
+            raise TypeError, "value '%s' is not a Hash" % [hash['authenticationAmount']] unless hash['authenticationAmount'].is_a? Hash
+            @authentication_amount = Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney.new_from_hash(hash['authenticationAmount'])
           end
           if hash.has_key? 'cavv'
             @cavv = hash['cavv']

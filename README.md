@@ -91,7 +91,7 @@ In addition, to run the proxy integration tests, the proxy URI, username and pas
 
 In order to run the unit and integration tests, some additional dependencies are required:
 
-* [rake](https://ruby.github.io/rake/) 10.4 or higher
+* [rake](https://ruby.github.io/rake/) 12.3.3 or higher
 * [rspec](https://github.com/rspec/rspec) 3.5 or higher
 * [webmock](https://github.com/bblimke/webmock) 2.1 or higher
 * [sinatra](https://github.com/sinatra/sinatra) 1.4 or higher
@@ -126,7 +126,7 @@ The following commands can now be executed from the root directory of the SDK fo
 
 Documentation can be generated with YARD. YARD can be installed as a gem. The gems required to generate documentation are:
 
-* [rake](https://ruby.github.io/rake/) 10.4 or higher
+* [rake](https://ruby.github.io/rake/) 12.3.3 or higher
 * [yard](https://github.com/lsegal/yard) 0.9.5 or higher
 
 They can be installed using the following command:

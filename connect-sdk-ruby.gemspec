@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name           = 'connect-sdk-ruby'
-  spec.version        = '2.9.0'
+  spec.version        = '2.10.0'
   spec.authors        = ['Ingenico ePayments']
   spec.email          = ['github@epay.ingenico.com']
   spec.summary        = %q{SDK to communicate with the Ingenico ePayments platform using the Ingenico Connect Server API}
@@ -24,6 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.5'
   spec.add_development_dependency 'webmock', '~> 2.1'
   spec.add_development_dependency 'sinatra', '~> 1.4'
-  spec.add_development_dependency 'rake', '~> 10.4'
+  spec.add_development_dependency 'rake', '~> 12.3', '>= 12.3.3'
   # spec.metadata['yard.run'] = 'yri'  # compiles yard doc on install
 end

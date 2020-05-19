@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/data_object'
+require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
 require 'ingenico/connect/sdk/domain/payment/sdk_data_input'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure_data'
 
@@ -10,6 +11,7 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] authentication_amount
       # @attr [String] authentication_flow
       # @attr [String] challenge_canvas_size
       # @attr [String] challenge_indicator
@@ -18,6 +20,8 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SdkDataInput] sdk_data
       # @attr [true/false] skip_authentication
       class AbstractThreeDSecure < Ingenico::Connect::SDK::DataObject
+
+        attr_accessor :authentication_amount
 
         attr_accessor :authentication_flow
 
@@ -36,6 +40,7 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
+          hash['authenticationAmount'] = @authentication_amount.to_h unless @authentication_amount.nil?
           hash['authenticationFlow'] = @authentication_flow unless @authentication_flow.nil?
           hash['challengeCanvasSize'] = @challenge_canvas_size unless @challenge_canvas_size.nil?
           hash['challengeIndicator'] = @challenge_indicator unless @challenge_indicator.nil?
@@ -48,6 +53,10 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key? 'authenticationAmount'
+            raise TypeError, "value '%s' is not a Hash" % [hash['authenticationAmount']] unless hash['authenticationAmount'].is_a? Hash
+            @authentication_amount = Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney.new_from_hash(hash['authenticationAmount'])
+          end
           if hash.has_key? 'authenticationFlow'
             @authentication_flow = hash['authenticationFlow']
           end

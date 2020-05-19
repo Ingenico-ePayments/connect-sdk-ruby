@@ -206,7 +206,7 @@ module Ingenico::Connect::SDK
         # the value. What this does not allow currently is having values end
         # with a \ (which would be escaped to \\).
         regex = pn.inject("([\"'])(") { |r, p| "#{r}#{Regexp.quote(p)}|"}.chop <<
-          ")\\1\\s*:\\s*(?:([\"'])(.*?)(?<!\\\\)\\3|([^\"'\\s\\[\\{]\\S*))"
+          ")\\1\\s*:\\s*(?:([\"'])(.*?)(?<!\\\\)\\3|([^\"'\\s\\[\\{]((?!,)\\S)*))"
         /#{regex}/m # dotall mode
       end
 
