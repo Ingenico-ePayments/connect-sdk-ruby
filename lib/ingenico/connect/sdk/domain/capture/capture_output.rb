@@ -28,6 +28,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::MobilePaymentMethodSpecificOutput] mobile_payment_method_specific_output
       # @attr [String] payment_method
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentMethodSpecificOutput] redirect_payment_method_specific_output
+      # @attr [String] reversal_reason
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentMethodSpecificOutput] sepa_direct_debit_payment_method_specific_output
       class CaptureOutput < Ingenico::Connect::SDK::Domain::Payment::OrderOutput
 
@@ -53,6 +54,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :redirect_payment_method_specific_output
 
+        attr_accessor :reversal_reason
+
         attr_accessor :sepa_direct_debit_payment_method_specific_output
 
         # @return (Hash)
@@ -69,6 +72,7 @@ module Ingenico::Connect::SDK
           hash['mobilePaymentMethodSpecificOutput'] = @mobile_payment_method_specific_output.to_h unless @mobile_payment_method_specific_output.nil?
           hash['paymentMethod'] = @payment_method unless @payment_method.nil?
           hash['redirectPaymentMethodSpecificOutput'] = @redirect_payment_method_specific_output.to_h unless @redirect_payment_method_specific_output.nil?
+          hash['reversalReason'] = @reversal_reason unless @reversal_reason.nil?
           hash['sepaDirectDebitPaymentMethodSpecificOutput'] = @sepa_direct_debit_payment_method_specific_output.to_h unless @sepa_direct_debit_payment_method_specific_output.nil?
           hash
         end
@@ -115,6 +119,9 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'redirectPaymentMethodSpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['redirectPaymentMethodSpecificOutput']] unless hash['redirectPaymentMethodSpecificOutput'].is_a? Hash
             @redirect_payment_method_specific_output = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentMethodSpecificOutput.new_from_hash(hash['redirectPaymentMethodSpecificOutput'])
+          end
+          if hash.has_key? 'reversalReason'
+            @reversal_reason = hash['reversalReason']
           end
           if hash.has_key? 'sepaDirectDebitPaymentMethodSpecificOutput'
             raise TypeError, "value '%s' is not a Hash" % [hash['sepaDirectDebitPaymentMethodSpecificOutput']] unless hash['sepaDirectDebitPaymentMethodSpecificOutput'].is_a? Hash
