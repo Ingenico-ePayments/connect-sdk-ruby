@@ -16,6 +16,7 @@ module Ingenico::Connect::SDK
     module Product
 
       # @attr [Array<Ingenico::Connect::SDK::Domain::Product::AccountOnFile>] accounts_on_file
+      # @attr [true/false] allows_installments
       # @attr [true/false] allows_recurring
       # @attr [true/false] allows_tokenization
       # @attr [Ingenico::Connect::SDK::Domain::Product::AuthenticationIndicator] authentication_indicator
@@ -39,6 +40,8 @@ module Ingenico::Connect::SDK
       class PaymentProduct < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :accounts_on_file
+
+        attr_accessor :allows_installments
 
         attr_accessor :allows_recurring
 
@@ -84,6 +87,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['accountsOnFile'] = @accounts_on_file.collect{|val| val.to_h} unless @accounts_on_file.nil?
+          hash['allowsInstallments'] = @allows_installments unless @allows_installments.nil?
           hash['allowsRecurring'] = @allows_recurring unless @allows_recurring.nil?
           hash['allowsTokenization'] = @allows_tokenization unless @allows_tokenization.nil?
           hash['authenticationIndicator'] = @authentication_indicator.to_h unless @authentication_indicator.nil?
@@ -115,6 +119,9 @@ module Ingenico::Connect::SDK
             hash['accountsOnFile'].each do |e|
               @accounts_on_file << Ingenico::Connect::SDK::Domain::Product::AccountOnFile.new_from_hash(e)
             end
+          end
+          if hash.has_key? 'allowsInstallments'
+            @allows_installments = hash['allowsInstallments']
           end
           if hash.has_key? 'allowsRecurring'
             @allows_recurring = hash['allowsRecurring']

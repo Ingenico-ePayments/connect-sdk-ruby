@@ -7,7 +7,7 @@ module Ingenico::Connect::SDK
   #
   # @attr_reader [Array<Ingenico::Connect::SDK::RequestHeader>] meta_data_headers List of headers that should be used in all requests.
   class MetaDataProvider
-    @@SDK_VERSION = '2.11.0'
+    @@SDK_VERSION = '2.12.0'
     @@SERVER_META_INFO_HEADER = 'X-GCS-ServerMetaInfo'
     @@PROHIBITED_HEADERS = [@@SERVER_META_INFO_HEADER, 'X-GCS-Idempotence-Key',
                             'Date', 'Content-Type', 'Authorization'].sort!.freeze
