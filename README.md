@@ -27,9 +27,9 @@ Note that the source code of the unit tests, integration tests and the examples 
 
 ## Requirements
 
-Ruby 2.2 or higher is required. Ruby 2.1.10 is also supported but is not suggested because official support has ended and security maintenance will end soon.
+Ruby 2.3 or higher is required.
 As for JRuby, version 9.0.0.0 and higher are supported.
-In addition, the following package is required:
+In addition, the following packages are required:
 
 * [httpclient](https://github.com/nahi/httpclient) 2.8 or higher
 * [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby) 1.0 or higher
