@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/airline_data'
+require 'ingenico/connect/sdk/domain/payment/installments'
 require 'ingenico/connect/sdk/domain/payment/level3_summary_data'
 require 'ingenico/connect/sdk/domain/payment/loan_recipient'
 require 'ingenico/connect/sdk/domain/payment/order_type_information'
@@ -13,6 +14,7 @@ module Ingenico::Connect::SDK
     module Payment
 
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::AirlineData] airline_data
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::Installments] installments
       # @attr [Ingenico::Connect::SDK::Domain::Payment::Level3SummaryData] level3_summary_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::LoanRecipient] loan_recipient
       # @attr [Integer] number_of_installments
@@ -22,12 +24,16 @@ module Ingenico::Connect::SDK
 
         attr_accessor :airline_data
 
+        attr_accessor :installments
+
         #
         # @deprecated Use Order.shoppingCart.amountBreakdown instead
         attr_accessor :level3_summary_data
 
         attr_accessor :loan_recipient
 
+        #
+        # @deprecated Use installments.numberOfInstallments instead
         attr_accessor :number_of_installments
 
         attr_accessor :order_date
@@ -38,6 +44,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['airlineData'] = @airline_data.to_h unless @airline_data.nil?
+          hash['installments'] = @installments.to_h unless @installments.nil?
           hash['level3SummaryData'] = @level3_summary_data.to_h unless @level3_summary_data.nil?
           hash['loanRecipient'] = @loan_recipient.to_h unless @loan_recipient.nil?
           hash['numberOfInstallments'] = @number_of_installments unless @number_of_installments.nil?
@@ -51,6 +58,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'airlineData'
             raise TypeError, "value '%s' is not a Hash" % [hash['airlineData']] unless hash['airlineData'].is_a? Hash
             @airline_data = Ingenico::Connect::SDK::Domain::Definitions::AirlineData.new_from_hash(hash['airlineData'])
+          end
+          if hash.has_key? 'installments'
+            raise TypeError, "value '%s' is not a Hash" % [hash['installments']] unless hash['installments'].is_a? Hash
+            @installments = Ingenico::Connect::SDK::Domain::Payment::Installments.new_from_hash(hash['installments'])
           end
           if hash.has_key? 'level3SummaryData'
             raise TypeError, "value '%s' is not a Hash" % [hash['level3SummaryData']] unless hash['level3SummaryData'].is_a? Hash

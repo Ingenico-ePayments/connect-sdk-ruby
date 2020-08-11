@@ -182,6 +182,10 @@ module Ingenico::Connect::SDK
       elsif !request_body.nil?
         request_headers.push(RequestHeader.new('Content-Type', 'application/json'))
         body = @marshaller.marshal(request_body)
+      else
+        # Set the content-type, even though there is no body, to prevent the httpClient from
+        # adding a content-type header after authentication has been generated.
+        request_headers.push(RequestHeader.new('Content-Type', 'text/plain'))
       end
 
       add_generic_headers('POST', uri, request_headers, context)
@@ -227,6 +231,10 @@ module Ingenico::Connect::SDK
       elsif !request_body.nil?
         request_headers.push(RequestHeader.new('Content-Type', 'application/json'))
         body = @marshaller.marshal(request_body)
+      else
+        # Set the content-type, even though there is no body, to prevent the httpClient from
+        # adding a content-type header after authentication has been generated.
+        request_headers.push(RequestHeader.new('Content-Type', 'text/plain'))
       end
       add_generic_headers('POST', uri, request_headers, context)
 
@@ -274,6 +282,10 @@ module Ingenico::Connect::SDK
       elsif !request_body.nil?
         request_headers.push(RequestHeader.new('Content-Type', 'application/json'))
         body = @marshaller.marshal(request_body)
+      else
+        # Set the content-type, even though there is no body, to prevent the httpClient from
+        # adding a content-type header after authentication has been generated.
+        request_headers.push(RequestHeader.new('Content-Type', 'text/plain'))
       end
       add_generic_headers('PUT', uri, request_headers, context)
 
@@ -318,6 +330,10 @@ module Ingenico::Connect::SDK
       elsif !request_body.nil?
         request_headers.push(RequestHeader.new('Content-Type', 'application/json'))
         body = @marshaller.marshal(request_body)
+      else
+        # Set the content-type, even though there is no body, to prevent the httpClient from
+        # adding a content-type header after authentication has been generated.
+        request_headers.push(RequestHeader.new('Content-Type', 'text/plain'))
       end
       add_generic_headers('PUT', uri, request_headers, context)
 

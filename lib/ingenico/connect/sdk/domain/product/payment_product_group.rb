@@ -12,6 +12,7 @@ module Ingenico::Connect::SDK
     module Product
 
       # @attr [Array<Ingenico::Connect::SDK::Domain::Product::AccountOnFile>] accounts_on_file
+      # @attr [true/false] allows_installments
       # @attr [true/false] device_fingerprint_enabled
       # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProductDisplayHints] display_hints
       # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProductField>] fields
@@ -19,6 +20,8 @@ module Ingenico::Connect::SDK
       class PaymentProductGroup < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :accounts_on_file
+
+        attr_accessor :allows_installments
 
         attr_accessor :device_fingerprint_enabled
 
@@ -32,6 +35,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['accountsOnFile'] = @accounts_on_file.collect{|val| val.to_h} unless @accounts_on_file.nil?
+          hash['allowsInstallments'] = @allows_installments unless @allows_installments.nil?
           hash['deviceFingerprintEnabled'] = @device_fingerprint_enabled unless @device_fingerprint_enabled.nil?
           hash['displayHints'] = @display_hints.to_h unless @display_hints.nil?
           hash['fields'] = @fields.collect{|val| val.to_h} unless @fields.nil?
@@ -47,6 +51,9 @@ module Ingenico::Connect::SDK
             hash['accountsOnFile'].each do |e|
               @accounts_on_file << Ingenico::Connect::SDK::Domain::Product::AccountOnFile.new_from_hash(e)
             end
+          end
+          if hash.has_key? 'allowsInstallments'
+            @allows_installments = hash['allowsInstallments']
           end
           if hash.has_key? 'deviceFingerprintEnabled'
             @device_fingerprint_enabled = hash['deviceFingerprintEnabled']
