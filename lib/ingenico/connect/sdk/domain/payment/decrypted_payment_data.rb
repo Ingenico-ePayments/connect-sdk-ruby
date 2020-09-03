@@ -8,6 +8,7 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] auth_method
       # @attr [String] cardholder_name
       # @attr [String] cryptogram
       # @attr [String] dpan
@@ -16,6 +17,8 @@ module Ingenico::Connect::SDK
       # @attr [String] pan
       # @attr [String] payment_method
       class DecryptedPaymentData < Ingenico::Connect::SDK::DataObject
+
+        attr_accessor :auth_method
 
         attr_accessor :cardholder_name
 
@@ -34,6 +37,7 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
+          hash['authMethod'] = @auth_method unless @auth_method.nil?
           hash['cardholderName'] = @cardholder_name unless @cardholder_name.nil?
           hash['cryptogram'] = @cryptogram unless @cryptogram.nil?
           hash['dpan'] = @dpan unless @dpan.nil?
@@ -46,6 +50,9 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key? 'authMethod'
+            @auth_method = hash['authMethod']
+          end
           if hash.has_key? 'cardholderName'
             @cardholder_name = hash['cardholderName']
           end
