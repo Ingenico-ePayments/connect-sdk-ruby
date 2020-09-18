@@ -23,7 +23,7 @@ describe 'token' do
     card_without_ccv.cardholder_name = 'Jan'
     card_without_ccv.issue_number = '12'
     card_without_ccv.card_number = '4567350000427977'
-    card_without_ccv.expiry_date = '0820'
+    card_without_ccv.expiry_date = '1225'
     card_data = Ingenico::Connect::SDK::Domain::Token::TokenCardData.new
     card_data.card_without_cvv = card_without_ccv
     card = Ingenico::Connect::SDK::Domain::Token::TokenCard.new
