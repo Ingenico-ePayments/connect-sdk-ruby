@@ -4,6 +4,7 @@
 #
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/domain/definitions/amount_of_money'
+require 'ingenico/connect/sdk/domain/payment/exemption_output'
 require 'ingenico/connect/sdk/domain/payment/sdk_data_output'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure_data'
 
@@ -17,6 +18,7 @@ module Ingenico::Connect::SDK
       # @attr [String] cavv
       # @attr [String] directory_server_transaction_id
       # @attr [String] eci
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::ExemptionOutput] exemption_output
       # @attr [Integer] scheme_risk_score
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SdkDataOutput] sdk_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureData] three_d_secure_data
@@ -36,6 +38,8 @@ module Ingenico::Connect::SDK
         attr_accessor :directory_server_transaction_id
 
         attr_accessor :eci
+
+        attr_accessor :exemption_output
 
         attr_accessor :scheme_risk_score
 
@@ -58,6 +62,7 @@ module Ingenico::Connect::SDK
           hash['cavv'] = @cavv unless @cavv.nil?
           hash['directoryServerTransactionId'] = @directory_server_transaction_id unless @directory_server_transaction_id.nil?
           hash['eci'] = @eci unless @eci.nil?
+          hash['exemptionOutput'] = @exemption_output.to_h unless @exemption_output.nil?
           hash['schemeRiskScore'] = @scheme_risk_score unless @scheme_risk_score.nil?
           hash['sdkData'] = @sdk_data.to_h unless @sdk_data.nil?
           hash['threeDSecureData'] = @three_d_secure_data.to_h unless @three_d_secure_data.nil?
@@ -87,6 +92,10 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'eci'
             @eci = hash['eci']
+          end
+          if hash.has_key? 'exemptionOutput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['exemptionOutput']] unless hash['exemptionOutput'].is_a? Hash
+            @exemption_output = Ingenico::Connect::SDK::Domain::Payment::ExemptionOutput.new_from_hash(hash['exemptionOutput'])
           end
           if hash.has_key? 'schemeRiskScore'
             @scheme_risk_score = hash['schemeRiskScore']
