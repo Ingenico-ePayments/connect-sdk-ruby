@@ -18,6 +18,8 @@ module Ingenico::Connect::SDK
       # @attr [String] payment_method
       class DecryptedPaymentData < Ingenico::Connect::SDK::DataObject
 
+        #
+        # @deprecated Use decryptedPaymentData.paymentMethod instead
         attr_accessor :auth_method
 
         attr_accessor :cardholder_name
