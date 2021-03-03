@@ -37,7 +37,7 @@ def example
     card.card_number = '4567350000427977'
     card.cardholder_name = 'Wile E. Coyote'
     card.cvv = '123'
-    card.expiry_date = '1220'
+    card.expiry_date = '1299'
 
     authentication_amount = Definitions::AmountOfMoney.new
     authentication_amount.amount = 2980

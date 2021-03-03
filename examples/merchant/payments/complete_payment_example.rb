@@ -15,7 +15,7 @@ def example
     card = Definitions::CardWithoutCvv.new
     card.card_number = '67030000000000003'
     card.cardholder_name = 'Wile E. Coyote'
-    card.expiry_date = '1220'
+    card.expiry_date = '1299'
 
     card_payment_method_specific_input = Payment::CompletePaymentCardPaymentMethodSpecificInput.new
     card_payment_method_specific_input.card = card

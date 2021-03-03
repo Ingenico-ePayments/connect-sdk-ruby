@@ -47,7 +47,7 @@ def example
     card_without_cvv = Definitions::CardWithoutCvv.new
     card_without_cvv.card_number = '4567350000427977'
     card_without_cvv.cardholder_name = 'Wile E. Coyote'
-    card_without_cvv.expiry_date = '0820'
+    card_without_cvv.expiry_date = '1299'
     card_without_cvv.issue_number = '12'
 
     data = Token::TokenCardData.new

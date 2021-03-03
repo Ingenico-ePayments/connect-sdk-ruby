@@ -21,7 +21,7 @@ def example
     card = Definitions::Card.new
     card.card_number = '4567350000427977'
     card.cvv = '123'
-    card.expiry_date = '0820'
+    card.expiry_date = '1299'
 
     flight_legs = []
 

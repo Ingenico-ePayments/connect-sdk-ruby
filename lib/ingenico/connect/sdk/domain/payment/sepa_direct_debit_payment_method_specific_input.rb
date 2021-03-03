@@ -14,6 +14,7 @@ module Ingenico::Connect::SDK
       # @attr [true/false] is_recurring
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SepaDirectDebitPaymentProduct771SpecificInput] payment_product771_specific_input
       # @attr [String] recurring_payment_sequence_indicator
+      # @attr [true/false] requires_approval
       # @attr [String] token
       # @attr [true/false] tokenize
       class SepaDirectDebitPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractSepaDirectDebitPaymentMethodSpecificInput
@@ -28,6 +29,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :recurring_payment_sequence_indicator
 
+        attr_accessor :requires_approval
+
         attr_accessor :token
 
         attr_accessor :tokenize
@@ -40,6 +43,7 @@ module Ingenico::Connect::SDK
           hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
           hash['paymentProduct771SpecificInput'] = @payment_product771_specific_input.to_h unless @payment_product771_specific_input.nil?
           hash['recurringPaymentSequenceIndicator'] = @recurring_payment_sequence_indicator unless @recurring_payment_sequence_indicator.nil?
+          hash['requiresApproval'] = @requires_approval unless @requires_approval.nil?
           hash['token'] = @token unless @token.nil?
           hash['tokenize'] = @tokenize unless @tokenize.nil?
           hash
@@ -62,6 +66,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'recurringPaymentSequenceIndicator'
             @recurring_payment_sequence_indicator = hash['recurringPaymentSequenceIndicator']
+          end
+          if hash.has_key? 'requiresApproval'
+            @requires_approval = hash['requiresApproval']
           end
           if hash.has_key? 'token'
             @token = hash['token']
