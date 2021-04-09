@@ -11,12 +11,15 @@ module Ingenico::Connect::SDK
 
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] amount_of_money
       # @attr [String] country_code
+      # @attr [true/false] is_installments
       # @attr [true/false] is_recurring
       class PaymentContext < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :amount_of_money
 
         attr_accessor :country_code
+
+        attr_accessor :is_installments
 
         attr_accessor :is_recurring
 
@@ -25,6 +28,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['amountOfMoney'] = @amount_of_money.to_h unless @amount_of_money.nil?
           hash['countryCode'] = @country_code unless @country_code.nil?
+          hash['isInstallments'] = @is_installments unless @is_installments.nil?
           hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
           hash
         end
@@ -37,6 +41,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'countryCode'
             @country_code = hash['countryCode']
+          end
+          if hash.has_key? 'isInstallments'
+            @is_installments = hash['isInstallments']
           end
           if hash.has_key? 'isRecurring'
             @is_recurring = hash['isRecurring']
