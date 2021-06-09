@@ -7,7 +7,7 @@ describe 'CommunicatorConfiguration' do
 
   it 'can be constructed without a proxy' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10'
@@ -15,7 +15,7 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(communicator_config.authorization_type).to eq('v1HMAC')
     expect(communicator_config.connect_timeout).to eq(20)
     expect(communicator_config.socket_timeout).to eq(10)
@@ -29,7 +29,7 @@ describe 'CommunicatorConfiguration' do
 
   it 'can be constructed with a proxy, without authentication' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -39,7 +39,7 @@ describe 'CommunicatorConfiguration' do
     communicator_config = CommunicatorConfiguration.new(properties: config)
     proxy_config = communicator_config.proxy_configuration
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(communicator_config.authorization_type).to eq('v1HMAC')
     expect(communicator_config.connect_timeout).to eq(20)
     expect(communicator_config.socket_timeout).to eq(10)
@@ -56,19 +56,19 @@ describe 'CommunicatorConfiguration' do
 
   it 'can be constructed to authenticate to a proxy' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
             connect.api.proxy.uri: http://proxy.example.org:3128
-            connect.api.proxy.username: global-collect-username
-            connect.api.proxy.password: global-collect-password'
+            connect.api.proxy.username: test-username
+            connect.api.proxy.password: test-password'
     config = YAML.load(yaml)
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
     proxy_config = communicator_config.proxy_configuration
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(communicator_config.authorization_type).to eq('v1HMAC')
     expect(communicator_config.connect_timeout).to eq(20)
     expect(communicator_config.socket_timeout).to eq(10)
@@ -79,13 +79,13 @@ describe 'CommunicatorConfiguration' do
     expect(proxy_config.scheme).to eq('http')
     expect(proxy_config.host).to eq('proxy.example.org')
     expect(proxy_config.port).to eq(3128)
-    expect(proxy_config.username).to eq('global-collect-username')
-    expect(proxy_config.password).to eq('global-collect-password')
+    expect(proxy_config.username).to eq('test-username')
+    expect(proxy_config.password).to eq('test-password')
   end
 
   it 'accepts a different number of maximum connections' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -94,7 +94,7 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(communicator_config.authorization_type).to eq('v1HMAC')
     expect(communicator_config.connect_timeout).to eq(20)
     expect(communicator_config.socket_timeout).to eq(10)
@@ -107,7 +107,7 @@ describe 'CommunicatorConfiguration' do
 
   it 'uses specific scheme to override default' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -116,12 +116,12 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('http://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('http://eu.sandbox.api-ingenico.com')
   end
 
   it 'uses specific port to override default' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -130,12 +130,12 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com:8080')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com:8080')
   end
 
   it 'uses specific scheme and port to override default' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -145,12 +145,12 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('http://api-sandbox.globalcollect.com:8080')
+    expect(communicator_config.api_endpoint).to eq('http://eu.sandbox.api-ingenico.com:8080')
   end
 
   it 'stores shoppingCartExtension data' do
     yaml = '---
-            connect.api.endpoint.host: api-sandbox.globalcollect.com
+            connect.api.endpoint.host: eu.sandbox.api-ingenico.com
             connect.api.authorizationType: v1HMAC
             connect.api.connectTimeout: 20
             connect.api.socketTimeout: 10
@@ -163,7 +163,7 @@ describe 'CommunicatorConfiguration' do
 
     communicator_config = CommunicatorConfiguration.new(properties: config)
 
-    expect(communicator_config.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(communicator_config.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(communicator_config.authorization_type).to eq('v1HMAC')
     expect(communicator_config.connect_timeout).to eq(20)
     expect(communicator_config.socket_timeout).to eq(10)

@@ -15,10 +15,10 @@ module Ingenico::Connect::SDK
     #                         If a parent class is given its communicator will be used for communication.
     # @param path_context     [Hash] hash that contains substitutions for generic locations in the URL path.
     #                         This hash will be used to instantiate a concrete URL used to access specific resources.
-    #                         For example in the URL https://api-sandbox.globalcollect.com/!{version}/!{merchantId}/payments
+    #                         For example in the URL https://eu.sandbox.api-ingenico.com/!{version}/!{merchantId}/payments
     #                         !{version} and !{merchantId} can be instantiated using the hash
     #                         !{'version' => 'v1', 'merchantId' => '1234'}. The final URL in this case will be
-    #                         https://api-sandbox.globalcollect.com/v1/1234/payments.
+    #                         https://eu.sandbox.api-ingenico.com/v1/1234/payments.
     # @param client_meta_info [String] JSON string containing the meta data for the client.
     def initialize(arg, path_context, client_meta_info=false)
       if client_meta_info == false

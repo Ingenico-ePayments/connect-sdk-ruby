@@ -22,7 +22,7 @@ module Integration
   def self.init_communicator_configuration(properties_url: PROPERTIES_URI, max_connections: nil)
     yaml = YAML.load_file(properties_url)
     configuration = Ingenico::Connect::SDK::CommunicatorConfiguration.new(properties: yaml,
-                                                       api_endpoint: 'https://api-sandbox.globalcollect.com',
+                                                       api_endpoint: 'https://eu.sandbox.api-ingenico.com',
                                                        authorization_type: 'v1HMAC',
                                                        api_key_id: API_KEY_ID,
                                                        secret_api_key: SECRET_API_KEY,

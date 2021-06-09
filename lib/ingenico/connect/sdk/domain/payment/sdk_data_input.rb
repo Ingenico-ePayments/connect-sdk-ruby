@@ -19,6 +19,8 @@ module Ingenico::Connect::SDK
       # @attr [String] sdk_transaction_id
       class SdkDataInput < Ingenico::Connect::SDK::DataObject
 
+        #
+        # @deprecated No replacement
         attr_accessor :device_info
 
         attr_accessor :device_render_options

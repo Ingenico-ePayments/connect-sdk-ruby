@@ -3,6 +3,7 @@
 # https://epayments-api.developer-ingenico.com/s2sapi/v1/
 #
 require 'ingenico/connect/sdk/domain/payment/abstract_redirect_payment_method_specific_input'
+require 'ingenico/connect/sdk/domain/payment/redirect_payment_product4101_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product809_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product816_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product840_specific_input'
@@ -17,6 +18,7 @@ module Ingenico::Connect::SDK
     module Payment
 
       # @attr [true/false] is_recurring
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct4101SpecificInput] payment_product4101_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct809SpecificInput] payment_product809_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct816SpecificInput] payment_product816_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct840SpecificInput] payment_product840_specific_input
@@ -29,6 +31,8 @@ module Ingenico::Connect::SDK
       class RedirectPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractRedirectPaymentMethodSpecificInput
 
         attr_accessor :is_recurring
+
+        attr_accessor :payment_product4101_specific_input
 
         attr_accessor :payment_product809_specific_input
 
@@ -54,6 +58,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
+          hash['paymentProduct4101SpecificInput'] = @payment_product4101_specific_input.to_h unless @payment_product4101_specific_input.nil?
           hash['paymentProduct809SpecificInput'] = @payment_product809_specific_input.to_h unless @payment_product809_specific_input.nil?
           hash['paymentProduct816SpecificInput'] = @payment_product816_specific_input.to_h unless @payment_product816_specific_input.nil?
           hash['paymentProduct840SpecificInput'] = @payment_product840_specific_input.to_h unless @payment_product840_specific_input.nil?
@@ -70,6 +75,10 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key? 'isRecurring'
             @is_recurring = hash['isRecurring']
+          end
+          if hash.has_key? 'paymentProduct4101SpecificInput'
+            raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct4101SpecificInput']] unless hash['paymentProduct4101SpecificInput'].is_a? Hash
+            @payment_product4101_specific_input = Ingenico::Connect::SDK::Domain::Payment::RedirectPaymentProduct4101SpecificInput.new_from_hash(hash['paymentProduct4101SpecificInput'])
           end
           if hash.has_key? 'paymentProduct809SpecificInput'
             raise TypeError, "value '%s' is not a Hash" % [hash['paymentProduct809SpecificInput']] unless hash['paymentProduct809SpecificInput'].is_a? Hash

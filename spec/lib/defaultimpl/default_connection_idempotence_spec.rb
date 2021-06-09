@@ -17,10 +17,10 @@ describe 'DefaultConnectionIdempotence' do
     call_context = CallContext.new(idempotence_key)
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/20000/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/20000/payments')
         .with(headers: {'X-GCS-Idempotence-Key' => idempotence_key})
         .to_return(status: 201, body: response_body,
-                   headers: base_headers.merge({'Content-Type' => 'application/json', 'Location' => 'api-sandbox.globalcollect.com/v1/20000/payments/000002000020142549460000100001'}))
+                   headers: base_headers.merge({'Content-Type' => 'application/json', 'Location' => 'eu.sandbox.api-ingenico.com/v1/20000/payments/000002000020142549460000100001'}))
 
     response = CLIENT.merchant('20000').payments.create(request, call_context)
 
@@ -37,12 +37,11 @@ describe 'DefaultConnectionIdempotence' do
     call_context = CallContext.new(idempotence_key)
     request = create_payment_request
 
-
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/20000/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/20000/payments')
         .with(headers: {'X-GCS-Idempotence-Key' => idempotence_key})
         .to_return(status: 201, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json',
-                                                'Location' => 'api-sandbox.globalcollect.com/v1/20000/payments/000002000020142549460000100001',
+                                                'Location' => 'eu.sandbox.api-ingenico.com/v1/20000/payments/000002000020142549460000100001',
                                                 'X-GCS-Idempotence-Request-Timestamp' => idempotence_timestamp}))
 
     response = CLIENT.merchant('20000').payments.create(request, call_context)
@@ -60,7 +59,7 @@ describe 'DefaultConnectionIdempotence' do
     call_context = CallContext.new(idempotence_key)
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/20000/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/20000/payments')
         .with(headers: {'X-GCS-Idempotence-Key' => idempotence_key})
         .to_return(status: 402, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
@@ -81,7 +80,7 @@ describe 'DefaultConnectionIdempotence' do
     call_context = CallContext.new(idempotence_key)
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/20000/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/20000/payments')
         .with(headers: {'X-GCS-Idempotence-Key' => idempotence_key})
         .to_return(status: 402, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json',
@@ -103,7 +102,7 @@ describe 'DefaultConnectionIdempotence' do
     call_context = CallContext.new(idempotence_key)
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/20000/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/20000/payments')
         .with(headers: {'X-GCS-Idempotence-Key' => idempotence_key})
         .to_return(status: 409, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json',

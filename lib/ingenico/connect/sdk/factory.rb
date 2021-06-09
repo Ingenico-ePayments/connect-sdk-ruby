@@ -11,8 +11,8 @@ module Ingenico::Connect::SDK
     # located at _configuration_file_name_.
     #
     # @param configuration_file_name [String] Path to the configuration file to use, should be in YAML format.
-    # @param api_key_id              [String] Key id for the GlobalCollect service.
-    # @param secret_api_key          [String] Secret key used for authentication to the GlobalCollect service.
+    # @param api_key_id              [String] Key id for the Ingenico ePayments platform.
+    # @param secret_api_key          [String] Secret key used for authentication to the Ingenico ePayments platform.
     # @return [Ingenico::Connect::SDK::CommunicatorConfiguration] The created communicator configuration
     def self.create_configuration(configuration_file_name, api_key_id, secret_api_key)
         properties = YAML::load_file(configuration_file_name)
@@ -56,8 +56,8 @@ module Ingenico::Connect::SDK
     # using the _api_key_id_ and _secret_api_key_ in the CommunicatorConfiguration.
     #
     # @param configuration_file_name [String] Path to the configuration file to use, should be in YAML format.
-    # @param api_key_id              [String] Key id for the GlobalCollect service.
-    # @param secret_api_key          [String] Secret key used for authentication to the GlobalCollect service.
+    # @param api_key_id              [String] Key id for the Ingenico ePayments platform.
+    # @param secret_api_key          [String] Secret key used for authentication to the Ingenico ePayments platform.
     # @param meta_data_provider      [Ingenico::Connect::SDK::MetaDataProvider] stores the metadata for the communicating client.
     # @param connection              [Ingenico::Connect::SDK::Connection] connection that can be used to communicate with the Ingenico ePayments platform.
     # @param authenticator           [Ingenico::Connect::SDK::Authenticator] authenticator that can authenticate messages sent to the Ingenico ePayments platform.
@@ -69,7 +69,7 @@ module Ingenico::Connect::SDK
                                         authenticator: authenticator)
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that is used for communication with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that is used for communication with the Ingenico ePayments platform.
     #
     # @param session [Ingenico::Connect::SDK::Session] session that the communicator will utilize for communication.
     # @return [Ingenico::Connect::SDK::Communicator] The created communicator
@@ -77,7 +77,7 @@ module Ingenico::Connect::SDK
       Communicator.new(session, DefaultImpl::DefaultMarshaller.INSTANCE)
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that can be used for communication with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that can be used for communication with the Ingenico ePayments platform.
     #
     # @param configuration [Ingenico::Connect::SDK::CommunicatorConfiguration] contains configuration settings to be used by the client.
     # @return [Ingenico::Connect::SDK::Communicator] The created communicator
@@ -86,11 +86,11 @@ module Ingenico::Connect::SDK
       Communicator.new(session, DefaultImpl::DefaultMarshaller.INSTANCE)
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that is used for communication with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Communicator} that is used for communication with the Ingenico ePayments platform.
     #
     # @param configuration_file_name [String] Path to the configuration file to use, should be in YAML format.
-    # @param api_key_id              [String] Key id for the GlobalCollect service.
-    # @param secret_api_key          [String] Secret key used for authentication to the GlobalCollect service.
+    # @param api_key_id              [String] Key id for the Ingenico ePayments platform.
+    # @param secret_api_key          [String] Secret key used for authentication to the Ingenico ePayments platform.
     # @return [Ingenico::Connect::SDK::Communicator] The created communicator
     def self.create_communicator_from_file(configuration_file_name, api_key_id, secret_api_key)
       configuration = create_configuration(configuration_file_name, api_key_id, secret_api_key)
@@ -98,7 +98,7 @@ module Ingenico::Connect::SDK
       Communicator.new(session, DefaultImpl::DefaultMarshaller.INSTANCE)
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the Ingenico ePayments platform.
     # If a code block is given, the created client is returned to the code block and closed afterwards.
     #
     # @example Providing a code block
@@ -123,7 +123,7 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the Ingenico ePayments platform.
     # If a code block is given, the created client is returned to the code block and closed afterwards.
     #
     # @example Providing a code block
@@ -147,7 +147,7 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the Ingenico ePayments platform.
     # If a code block is given, the created client is returned to the code block and closed afterwards.
     #
     # @example Providing a code block
@@ -172,7 +172,7 @@ module Ingenico::Connect::SDK
       end
     end
 
-    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the GlobalCollect service.
+    # Creates and returns an {Ingenico::Connect::SDK::Client} that provides the a high-level interface with the Ingenico ePayments platform.
     # If a code block is given, the created client is returned to the code block and closed afterwards.
     #
     # @example Providing a code block
@@ -182,8 +182,8 @@ module Ingenico::Connect::SDK
     #           # client is closed here
     #
     # @param configuration_file_name [String] Path to the configuration file to use, should be in YAML format.
-    # @param api_key_id              [String] Key id for the GlobalCollect service.
-    # @param secret_api_key          [String] Secret key used for authentication to the GlobalCollect service.
+    # @param api_key_id              [String] Key id for the Ingenico ePayments platform.
+    # @param secret_api_key          [String] Secret key used for authentication to the Ingenico ePayments platform.
     # @return [Ingenico::Connect::SDK::Client] The created client
     def self.create_client_from_file(configuration_file_name, api_key_id, secret_api_key)
       communicator = create_communicator_from_file(configuration_file_name, api_key_id, secret_api_key)

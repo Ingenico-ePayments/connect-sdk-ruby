@@ -7,7 +7,7 @@ describe 'Factory' do
   it 'can initialize configurations' do
     configuration = Factory.create_configuration(PROPERTIES_URI, API_KEY_ID, SECRET_API_KEY)
 
-    expect(configuration.api_endpoint).to eq('https://api-sandbox.globalcollect.com')
+    expect(configuration.api_endpoint).to eq('https://eu.sandbox.api-ingenico.com')
     expect(configuration.authorization_type).to eq('v1HMAC')
     expect(configuration.connect_timeout).to eq(-1)
     expect(configuration.socket_timeout).to eq(-1)

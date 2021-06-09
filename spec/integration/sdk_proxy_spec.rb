@@ -24,7 +24,8 @@ describe 'proxies' do
       proxy_server = Thread.new do
         config = { Realm: 'testing' }
         htpasswd = WEBrick::HTTPAuth::Htpasswd.new(password_filename) # create new Apache password file
-        htpasswd.set_passwd config[:Realm], 'global-collect', 'global-collect' # same as properties.proxy.yml
+        proxy_configuration = Integration.init_communicator_configuration(Integration::PROPERTIES_URI_PROXY).proxy_configuration
+        htpasswd.set_passwd config[:Realm], proxy_configuration.username, proxy_configuration.password
         config[:UserDB] = htpasswd
         basic_auth = WEBrick::HTTPAuth::ProxyBasicAuth.new(config)
 
@@ -51,7 +52,7 @@ describe 'proxies' do
     end
 
     # NOTE: if this test is running for a long time with no response
-    # check https://api-sandbox.globalcollect.com coz this is where merchant
+    # check https://eu.sandbox.api-ingenico.com because this is where merchant
     # connects to.
     it 'can be connected to' do
       request = Ingenico::Connect::SDK::Merchant::Services::ConvertAmountParams.new

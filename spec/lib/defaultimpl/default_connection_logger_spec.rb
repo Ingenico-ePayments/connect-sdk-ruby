@@ -135,7 +135,7 @@ module ValidationDict
     message =~ RESPONSE_START
     id = $1  # capture id from the regular expression above
     expect(message).to match(STATUS_201)
-    expect(message).to match(%r(Location="api-sandbox\.globalcollect\.com/v1/1234/payments/000000123410000595980000100001"))
+    expect(message).to match(%r(Location="eu\.sandbox\.api-ingenico\.com/v1/1234/payments/000000123410000595980000100001"))
     expect(message).to match(DATA_JSON_HEADER)
     # expect(message).to match(DUMMY_HEADER)
     expect(message).to match(DATEHEADER)
@@ -163,7 +163,7 @@ module ValidationDict
     message =~ RESPONSE_START
     id = $1  # capture id from the regular expression above
     expect(message).to match(STATUS_201)
-    expect(message).to match(%r(Location="api-sandbox\.globalcollect\.com/v1/1234/payments/000000123410000595980000100001"))
+    expect(message).to match(%r(Location="eu\.sandbox\.api-ingenico\.com/v1/1234/payments/000000123410000595980000100001"))
     expect(message).to match(DATA_JSON_HEADER)
     # expect(message).to match(DUMMY_HEADER)
     expect(message).to match(DATEHEADER)
@@ -260,7 +260,7 @@ describe 'DefaultConnectionLogging' do
   it 'should be able to log a simple request' do
     response_body = IO.read(resource_prefix + 'testConnection.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return(status: 200, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 
@@ -277,7 +277,7 @@ describe 'DefaultConnectionLogging' do
   it 'can log a GET request with parameters' do
     response_body = IO.read(resource_prefix + 'convertAmount.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/convert/amount?source=EUR&target=USD&amount=1000')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/convert/amount?source=EUR&target=USD&amount=1000')
         .to_return(status: 200, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 
@@ -297,7 +297,7 @@ describe 'DefaultConnectionLogging' do
 
   # tests delete token
   it 'can log DELETE requests' do
-    stub_request(:delete, 'https://api-sandbox.globalcollect.com/v1/1234/tokens/5678')
+    stub_request(:delete, 'https://eu.sandbox.api-ingenico.com/v1/1234/tokens/5678')
         .to_return(status: 204, headers: base_headers)
 
     CLIENT.enable_logging(logger)
@@ -313,10 +313,10 @@ describe 'DefaultConnectionLogging' do
     response_body = IO.read(resource_prefix + 'createPayment.json')
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/1234/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/1234/payments')
         .to_return(status: 201, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json',
-                                                'Location' => 'api-sandbox.globalcollect.com/v1/1234/payments/000000123410000595980000100001'}))
+                                                'Location' => 'eu.sandbox.api-ingenico.com/v1/1234/payments/000000123410000595980000100001'}))
 
     CLIENT.enable_logging(logger)
     response = CLIENT.merchant('1234').payments.create(request)
@@ -331,10 +331,10 @@ describe 'DefaultConnectionLogging' do
       response_body = IO.read(resource_prefix + 'createPayment.unicode.json')
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/1234/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/1234/payments')
         .to_return(status: 201, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json',
-                                                'Location' => 'api-sandbox.globalcollect.com/v1/1234/payments/000000123410000595980000100001'}))
+                                                'Location' => 'eu.sandbox.api-ingenico.com/v1/1234/payments/000000123410000595980000100001'}))
 
     CLIENT.enable_logging(logger)
     response = CLIENT.merchant('1234').payments.create(request)
@@ -351,7 +351,7 @@ describe 'DefaultConnectionLogging' do
     response_body = IO.read(resource_prefix + 'createPayment.failure.invalidCardNumber.json')
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/1234/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/1234/payments')
         .to_return(status: 400, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 
@@ -366,7 +366,7 @@ describe 'DefaultConnectionLogging' do
     response_body = IO.read(resource_prefix + 'createPayment.failure.rejected.json')
     request = create_payment_request
 
-    stub_request(:post, 'https://api-sandbox.globalcollect.com/v1/1234/payments')
+    stub_request(:post, 'https://eu.sandbox.api-ingenico.com/v1/1234/payments')
         .to_return(status: 402, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 
@@ -380,7 +380,7 @@ describe 'DefaultConnectionLogging' do
   it 'logs general HTTP errors' do
     response_body = IO.read(resource_prefix + 'unknownServerError.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return(status: 500, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'application/json'}))
 
@@ -394,7 +394,7 @@ describe 'DefaultConnectionLogging' do
   it 'logs non-json' do
     response_body = IO.read(resource_prefix + 'notFound.html')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return(status: 404, body: response_body,
                    headers: base_headers.merge({'Content-Type' => 'text/html'}))
 
@@ -406,7 +406,7 @@ describe 'DefaultConnectionLogging' do
 
   # tests a read timeout
   it 'logs timeouts' do
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_raise(HTTPClient::ReceiveTimeoutError)
 
     CLIENT.enable_logging(logger)
@@ -427,7 +427,7 @@ describe 'DefaultConnectionLogging' do
   it 'can log requests individually' do
     response_body = IO.read(resource_prefix + 'testConnection.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return{ |request| CLIENT.disable_logging
                     {body: response_body, status: 200, headers: base_headers.merge({'Content-type' => 'application/json'})}}
 
@@ -446,7 +446,7 @@ describe 'DefaultConnectionLogging' do
   it 'can log responses individually' do
     response_body = IO.read(resource_prefix + 'testConnection.json')
 
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return{ |request| CLIENT.enable_logging(logger)
     {body: response_body, status: 200, headers: base_headers.merge({'Content-type' => 'application/json'})}}
 
@@ -462,7 +462,7 @@ describe 'DefaultConnectionLogging' do
   end
 
   it 'can log errors individually' do
-    stub_request(:get, 'https://api-sandbox.globalcollect.com/v1/1234/services/testconnection')
+    stub_request(:get, 'https://eu.sandbox.api-ingenico.com/v1/1234/services/testconnection')
         .to_return{ |request| CLIENT.enable_logging(logger)
     raise HTTPClient::ReceiveTimeoutError.new}
 

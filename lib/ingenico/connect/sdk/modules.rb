@@ -11,7 +11,7 @@ end
 module Ingenico::Connect::SDK::Logging
 end
 
-# Contains interfaces to all GlobalCollect services. These services are accessed through a *Ingenico::Connect::SDK::Client* instance.
+# Contains interfaces to all Ingenico ePayments services. These services are accessed through a *Ingenico::Connect::SDK::Client* instance.
 module Ingenico::Connect::SDK::Merchant
 end
 
