@@ -23,6 +23,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :bank_account_iban
 
+        #
+        # @deprecated Moved to PayoutDetails
         attr_accessor :customer
 
         attr_accessor :payout_date

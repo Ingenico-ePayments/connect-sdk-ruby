@@ -9,6 +9,7 @@ require 'ingenico/connect/sdk/domain/definitions/bank_account_iban'
 require 'ingenico/connect/sdk/domain/payout/bank_transfer_payout_method_specific_input'
 require 'ingenico/connect/sdk/domain/payout/card_payout_method_specific_input'
 require 'ingenico/connect/sdk/domain/payout/payout_customer'
+require 'ingenico/connect/sdk/domain/payout/payout_details'
 require 'ingenico/connect/sdk/domain/payout/payout_references'
 
 module Ingenico::Connect::SDK
@@ -22,11 +23,14 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payout::CardPayoutMethodSpecificInput] card_payout_method_specific_input
       # @attr [Ingenico::Connect::SDK::Domain::Payout::PayoutCustomer] customer
       # @attr [String] payout_date
+      # @attr [Ingenico::Connect::SDK::Domain::Payout::PayoutDetails] payout_details
       # @attr [String] payout_text
       # @attr [Ingenico::Connect::SDK::Domain::Payout::PayoutReferences] references
       # @attr [String] swift_code
       class CreatePayoutRequest < Ingenico::Connect::SDK::DataObject
 
+        #
+        # @deprecated Moved to PayoutDetails
         attr_accessor :amount_of_money
 
         #
@@ -42,17 +46,21 @@ module Ingenico::Connect::SDK
         attr_accessor :card_payout_method_specific_input
 
         #
-        # @deprecated Moved to BankTransferPayoutMethodSpecificInput
+        # @deprecated Moved to PayoutDetails
         attr_accessor :customer
 
         #
         # @deprecated Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :payout_date
 
+        attr_accessor :payout_details
+
         #
         # @deprecated Moved to BankTransferPayoutMethodSpecificInput
         attr_accessor :payout_text
 
+        #
+        # @deprecated Moved to PayoutDetails
         attr_accessor :references
 
         #
@@ -69,6 +77,7 @@ module Ingenico::Connect::SDK
           hash['cardPayoutMethodSpecificInput'] = @card_payout_method_specific_input.to_h unless @card_payout_method_specific_input.nil?
           hash['customer'] = @customer.to_h unless @customer.nil?
           hash['payoutDate'] = @payout_date unless @payout_date.nil?
+          hash['payoutDetails'] = @payout_details.to_h unless @payout_details.nil?
           hash['payoutText'] = @payout_text unless @payout_text.nil?
           hash['references'] = @references.to_h unless @references.nil?
           hash['swiftCode'] = @swift_code unless @swift_code.nil?
@@ -103,6 +112,10 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'payoutDate'
             @payout_date = hash['payoutDate']
+          end
+          if hash.has_key? 'payoutDetails'
+            raise TypeError, "value '%s' is not a Hash" % [hash['payoutDetails']] unless hash['payoutDetails'].is_a? Hash
+            @payout_details = Ingenico::Connect::SDK::Domain::Payout::PayoutDetails.new_from_hash(hash['payoutDetails'])
           end
           if hash.has_key? 'payoutText'
             @payout_text = hash['payoutText']
