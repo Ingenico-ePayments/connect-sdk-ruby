@@ -19,6 +19,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecureData] prior_three_d_secure_data
       # @attr [Ingenico::Connect::SDK::Domain::Payment::SdkDataInput] sdk_data
       # @attr [true/false] skip_authentication
+      # @attr [String] transaction_risk_level
       class AbstractThreeDSecure < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :authentication_amount
@@ -37,6 +38,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :skip_authentication
 
+        attr_accessor :transaction_risk_level
+
         # @return (Hash)
         def to_h
           hash = super
@@ -48,6 +51,7 @@ module Ingenico::Connect::SDK
           hash['priorThreeDSecureData'] = @prior_three_d_secure_data.to_h unless @prior_three_d_secure_data.nil?
           hash['sdkData'] = @sdk_data.to_h unless @sdk_data.nil?
           hash['skipAuthentication'] = @skip_authentication unless @skip_authentication.nil?
+          hash['transactionRiskLevel'] = @transaction_risk_level unless @transaction_risk_level.nil?
           hash
         end
 
@@ -79,6 +83,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'skipAuthentication'
             @skip_authentication = hash['skipAuthentication']
+          end
+          if hash.has_key? 'transactionRiskLevel'
+            @transaction_risk_level = hash['transactionRiskLevel']
           end
         end
       end
