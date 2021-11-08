@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/domain/definitions/fraud_results'
 require 'ingenico/connect/sdk/domain/definitions/fraud_results_retail_decisions'
 require 'ingenico/connect/sdk/domain/definitions/fraugster_results'
+require 'ingenico/connect/sdk/domain/definitions/microsoft_fraud_results'
 
 module Ingenico::Connect::SDK
   module Domain
@@ -13,6 +14,7 @@ module Ingenico::Connect::SDK
       # @attr [String] avs_result
       # @attr [String] cvv_result
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraugsterResults] fraugster
+      # @attr [Ingenico::Connect::SDK::Domain::Definitions::MicrosoftFraudResults] microsoft_fraud_protection
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::FraudResultsRetailDecisions] retail_decisions
       class CardFraudResults < Ingenico::Connect::SDK::Domain::Definitions::FraudResults
 
@@ -22,6 +24,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :fraugster
 
+        attr_accessor :microsoft_fraud_protection
+
         attr_accessor :retail_decisions
 
         # @return (Hash)
@@ -30,6 +34,7 @@ module Ingenico::Connect::SDK
           hash['avsResult'] = @avs_result unless @avs_result.nil?
           hash['cvvResult'] = @cvv_result unless @cvv_result.nil?
           hash['fraugster'] = @fraugster.to_h unless @fraugster.nil?
+          hash['microsoftFraudProtection'] = @microsoft_fraud_protection.to_h unless @microsoft_fraud_protection.nil?
           hash['retailDecisions'] = @retail_decisions.to_h unless @retail_decisions.nil?
           hash
         end
@@ -45,6 +50,10 @@ module Ingenico::Connect::SDK
           if hash.has_key? 'fraugster'
             raise TypeError, "value '%s' is not a Hash" % [hash['fraugster']] unless hash['fraugster'].is_a? Hash
             @fraugster = Ingenico::Connect::SDK::Domain::Definitions::FraugsterResults.new_from_hash(hash['fraugster'])
+          end
+          if hash.has_key? 'microsoftFraudProtection'
+            raise TypeError, "value '%s' is not a Hash" % [hash['microsoftFraudProtection']] unless hash['microsoftFraudProtection'].is_a? Hash
+            @microsoft_fraud_protection = Ingenico::Connect::SDK::Domain::Definitions::MicrosoftFraudResults.new_from_hash(hash['microsoftFraudProtection'])
           end
           if hash.has_key? 'retailDecisions'
             raise TypeError, "value '%s' is not a Hash" % [hash['retailDecisions']] unless hash['retailDecisions'].is_a? Hash
