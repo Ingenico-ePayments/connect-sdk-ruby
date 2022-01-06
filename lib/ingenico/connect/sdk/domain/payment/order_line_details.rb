@@ -15,6 +15,7 @@ module Ingenico::Connect::SDK
       # @attr [String] product_code
       # @attr [String] product_name
       # @attr [Integer] product_price
+      # @attr [String] product_sku
       # @attr [String] product_type
       # @attr [Integer] quantity
       # @attr [Integer] tax_amount
@@ -35,6 +36,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :product_price
 
+        attr_accessor :product_sku
+
         attr_accessor :product_type
 
         attr_accessor :quantity
@@ -53,6 +56,7 @@ module Ingenico::Connect::SDK
           hash['productCode'] = @product_code unless @product_code.nil?
           hash['productName'] = @product_name unless @product_name.nil?
           hash['productPrice'] = @product_price unless @product_price.nil?
+          hash['productSku'] = @product_sku unless @product_sku.nil?
           hash['productType'] = @product_type unless @product_type.nil?
           hash['quantity'] = @quantity unless @quantity.nil?
           hash['taxAmount'] = @tax_amount unless @tax_amount.nil?
@@ -82,6 +86,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'productPrice'
             @product_price = hash['productPrice']
+          end
+          if hash.has_key? 'productSku'
+            @product_sku = hash['productSku']
           end
           if hash.has_key? 'productType'
             @product_type = hash['productType']
