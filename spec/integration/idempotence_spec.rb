@@ -10,6 +10,7 @@ require 'ingenico/connect/sdk/domain/payment/order'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_product809_specific_input'
 require 'ingenico/connect/sdk/domain/payment/redirect_payment_method_specific_input'
 require 'ingenico/connect/sdk/call_context'
+require 'ingenico/connect/sdk/declined_payment_exception'
 
 describe 'Idempotence with the server' do
 
@@ -41,17 +42,31 @@ describe 'Idempotence with the server' do
     context = Ingenico::Connect::SDK::CallContext.new(idempotence_key)
 
     Integration.init_client(false) do |client|
-      response = client.merchant(Integration::MERCHANT_ID).payments.create(body, context)
-      payment_id = response.payment.id
+      def do_create_payment(client, body, context)
+        # For this test it doesn't matter if the response is successful or declined,
+        # as long as idempotence is handled correctly
+        begin
+          client.merchant(Integration::MERCHANT_ID).payments.create(body, context)
+        rescue Ingenico::Connect::SDK::DeclinedPaymentException => ex
+          ex.payment_result
+        end
+      end
+
+      result = do_create_payment(client, body, context)
+      payment_id = result.payment.id
+      status = result.payment.status
 
       expect(payment_id).to_not be_nil
+      expect(status).to_not be_nil
       expect(context.idempotence_key).to eq(idempotence_key)
       expect(context.idempotence_request_timestamp).to be_nil
 
-      response_2 = client.merchant(Integration::MERCHANT_ID).payments.create(body, context)
-      payment_id2 = response_2.payment.id
+      result_2 = do_create_payment(client, body, context)
+      payment_id2 = result_2.payment.id
+      status2 = result_2.payment.status
 
-      expect(payment_id).to eq(payment_id2)
+      expect(payment_id2).to eq(payment_id)
+      expect(status2).to eq(status)
       expect(context.idempotence_key).to eq(idempotence_key)
       expect(context.idempotence_request_timestamp).to_not be_nil
     end
