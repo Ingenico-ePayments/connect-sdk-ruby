@@ -9,7 +9,7 @@ module Ingenico::Connect::SDK
     module Payment
 
       # @attr [String] return_url
-      class CashPaymentProduct1506SpecificInput < Ingenico::Connect::SDK::DataObject
+      class CashPaymentProductWithRedirectSpecificInputBase < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :return_url
 

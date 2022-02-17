@@ -11,6 +11,7 @@ module Ingenico::Connect::SDK
 
       # @attr [Ingenico::Connect::SDK::Domain::Definitions::AmountOfMoney] amount_of_money_per_installment
       # @attr [String] frequency_of_installments
+      # @attr [Integer] installment_plan_code
       # @attr [String] interest_rate
       # @attr [Integer] number_of_installments
       class Installments < Ingenico::Connect::SDK::DataObject
@@ -18,6 +19,8 @@ module Ingenico::Connect::SDK
         attr_accessor :amount_of_money_per_installment
 
         attr_accessor :frequency_of_installments
+
+        attr_accessor :installment_plan_code
 
         attr_accessor :interest_rate
 
@@ -28,6 +31,7 @@ module Ingenico::Connect::SDK
           hash = super
           hash['amountOfMoneyPerInstallment'] = @amount_of_money_per_installment.to_h unless @amount_of_money_per_installment.nil?
           hash['frequencyOfInstallments'] = @frequency_of_installments unless @frequency_of_installments.nil?
+          hash['installmentPlanCode'] = @installment_plan_code unless @installment_plan_code.nil?
           hash['interestRate'] = @interest_rate unless @interest_rate.nil?
           hash['numberOfInstallments'] = @number_of_installments unless @number_of_installments.nil?
           hash
@@ -41,6 +45,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'frequencyOfInstallments'
             @frequency_of_installments = hash['frequencyOfInstallments']
+          end
+          if hash.has_key? 'installmentPlanCode'
+            @installment_plan_code = hash['installmentPlanCode']
           end
           if hash.has_key? 'interestRate'
             @interest_rate = hash['interestRate']
