@@ -4,8 +4,10 @@ module Ingenico::Connect::SDK
     # Class that converts data about a request into a properly formatted log message.
     # Formats request id, http method, uri, headers and body into a helpful message.
     class RequestLogMessageBuilder < Ingenico::Connect::SDK::Logging::LogMessageBuilder
-      def initialize(request_id, method, uri)
-        super(request_id)
+      def initialize(request_id, method, uri,
+                     body_obfuscator = Obfuscation::BodyObfuscator.default_obfuscator,
+                     header_obfuscator = Obfuscation::HeaderObfuscator.default_obfuscator)
+        super(request_id, body_obfuscator, header_obfuscator)
         @method = method
         @uri = uri
       end
@@ -31,9 +33,9 @@ module Ingenico::Connect::SDK
       def format_uri
         '' unless @uri && @uri.path
         if @uri.query.nil?
-          return @uri.path
+          @uri.path
         else
-          return "#{@uri.path}?#{@uri.query}" unless @uri.query.nil?
+          "#{@uri.path}?#{@uri.query}" unless @uri.query.nil?
         end
         # @uri.path + '?' + empty_if_null(@uri.query)
       end

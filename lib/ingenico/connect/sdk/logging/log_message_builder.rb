@@ -13,19 +13,27 @@ module Ingenico::Connect::SDK
       attr_reader :headers
       attr_reader :body
       attr_reader :content_type
+      attr_reader :body_obfuscator
+      attr_reader :header_obfuscator
 
       # Create a new LogMessageBuilder
-      def initialize(request_id)
+      def initialize(request_id,
+                     body_obfuscator = Obfuscation::BodyObfuscator.default_obfuscator,
+                     header_obfuscator = Obfuscation::HeaderObfuscator.default_obfuscator)
         raise ArgumentError if request_id.nil? or request_id.empty?
+        raise ArgumentError if body_obfuscator.nil?
+        raise ArgumentError if header_obfuscator.nil?
         @request_id = request_id
         @headers = ''
+        @body_obfuscator = body_obfuscator
+        @header_obfuscator = header_obfuscator
       end
 
       # Adds a single header to the #headers string
       def add_headers(name, value)
         @headers += ', ' if @headers.length > 0
         @headers += name + '="'
-        @headers += LoggingUtil.obfuscate_header(name, value) unless value.nil?
+        @headers += @header_obfuscator.obfuscate_header(name, value) unless value.nil?
         @headers += '"'
       end
 
@@ -37,7 +45,7 @@ module Ingenico::Connect::SDK
         if is_binary(content_type)
           @body = "<binary content>"
         else
-          @body = LoggingUtil.obfuscate_body(body)
+          @body = @body_obfuscator.obfuscate_body(body)
         end
         @content_type = content_type
       end
@@ -49,9 +57,9 @@ module Ingenico::Connect::SDK
 
       def to_s
         if self.class == LogMessageBuilder
-          return super.to_s
+          super.to_s
         else
-          return get_message
+          get_message
         end
       end
 
@@ -63,10 +71,10 @@ module Ingenico::Connect::SDK
       # Returns whether or not the content type is binary
       def is_binary(content_type)
         if content_type.nil?
-          return false
+          false
         else
           content_type = content_type.downcase
-          return !(content_type.start_with?("text/") || content_type.include?("json") || content_type.include?("xml"))
+          !(content_type.start_with?("text/") || content_type.include?("json") || content_type.include?("xml"))
         end
       end
     end

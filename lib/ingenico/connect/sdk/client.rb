@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/logging/logging_capable'
+require 'ingenico/connect/sdk/logging/obfuscation/obfuscation_capable'
 require 'ingenico/connect/sdk/merchant/merchant_client'
 require 'base64'
 
@@ -21,6 +22,7 @@ module Ingenico
       # Thread safe.
       class Client < ApiResource
         include Logging::LoggingCapable
+        include Logging::Obfuscation::ObfuscationCapable
 
         # @return [String]
         def self.API_VERSION
@@ -61,6 +63,18 @@ module Ingenico
         # Utility method that delegates the call to this client's communicator.
         def close_expired_connections
           @communicator.close_expired_connections
+        end
+
+        # Sets the current body obfuscator to use.
+        # @param body_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::BodyObfuscator]
+        def set_body_obfuscator(body_obfuscator)
+          @communicator.set_body_obfuscator(body_obfuscator)
+        end
+
+        # Sets the current header obfuscator to use.
+        # @param header_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::HeaderObfuscator]
+        def set_header_obfuscator(header_obfuscator)
+          @communicator.set_header_obfuscator(header_obfuscator)
         end
 
         # Turns on logging using the given communicator logger.

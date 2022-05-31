@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-HeaderObfuscator ||= Ingenico::Connect::SDK::Logging::HeaderObfuscator
+LegacyHeaderObfuscator ||= Ingenico::Connect::SDK::Logging::HeaderObfuscator
 ValueObfuscator ||= Ingenico::Connect::SDK::Logging::ValueObfuscator
 
-describe HeaderObfuscator do
-  subject(:sample) { HeaderObfuscator.new(obsfs) }
+describe LegacyHeaderObfuscator do
+  subject(:sample) { LegacyHeaderObfuscator.new(obsfs) }
   context 'initialize' do
     let(:obsfs) { { 'k1' => ValueObfuscator.fixed_length(5),
                     'k2' => ValueObfuscator.keep_start_count(2) } }
@@ -18,13 +18,13 @@ describe HeaderObfuscator do
 
   it '.builder returns new Builder obj' do
     expect(
-      HeaderObfuscator.builder.is_a? HeaderObfuscator::Builder
+      LegacyHeaderObfuscator.builder.is_a? LegacyHeaderObfuscator::Builder
     ).to be(true)
   end
 
   context 'Builder' do
     it 'checks argument type' do
-      b = HeaderObfuscator.builder
+      b = LegacyHeaderObfuscator.builder
       expect {
         b.with_all(123)
       }.to raise_error(ArgumentError)
@@ -35,7 +35,7 @@ describe HeaderObfuscator do
     end
 
     it 'inherits parent methods' do
-      b = HeaderObfuscator.builder
+      b = LegacyHeaderObfuscator.builder
       expect {
         b.with_keep_start_count('k1', 123)
         b.with_keep_end_count('k2', 123)
@@ -44,7 +44,7 @@ describe HeaderObfuscator do
 
     it 'implements build method' do
       expect(
-        HeaderObfuscator.builder.build.is_a? HeaderObfuscator
+        LegacyHeaderObfuscator.builder.build.is_a? LegacyHeaderObfuscator
       ).to be(true)
     end
   end

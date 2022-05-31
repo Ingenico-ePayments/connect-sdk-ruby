@@ -75,13 +75,13 @@ describe ValueObfuscator do
       expect(sample.obfuscate_value('')).to eq('')
     end
 
-    it 'calls repeak_mask(@fixed_length) if @fixed_length is not 0' do
+    it 'calls repeat_mask(@fixed_length) if @fixed_length is not 0' do
       expect(
         sample.obfuscate_value('str')
       ).to eq(sample.send(:repeat_mask, fixed_length))
     end
 
-    it 'calls repeak_mask(value.length) if using ALL' do
+    it 'calls repeat_mask(value.length) if using ALL' do
       expect(
         ValueObfuscator.ALL.obfuscate_value(value)
       ).to eq(sample.send(:repeat_mask, value.length))
@@ -90,7 +90,7 @@ describe ValueObfuscator do
     context '.keep_start_count or .keep_end_count' do
       subject(:sample) { ValueObfuscator.keep_start_count(5) }
 
-      it 'returns orignal value if value is too short' do
+      it 'returns original value if value is too short' do
         expect(
           sample.obfuscate_value('str')
         ).to eq('str')

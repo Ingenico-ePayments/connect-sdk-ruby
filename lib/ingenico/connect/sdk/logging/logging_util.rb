@@ -1,7 +1,12 @@
+require 'ingenico/connect/sdk/logging/obfuscation/body_obfuscator'
+require 'ingenico/connect/sdk/logging/obfuscation/header_obfuscator'
+
 module Ingenico::Connect::SDK
   module Logging
 
     # Class responsible for obfuscating sensitive data in a message body.
+    #
+    # @deprecated This class shouldn't have been exposed
     class ValueObfuscator
 
       class << self
@@ -71,8 +76,10 @@ module Ingenico::Connect::SDK
       def repeat_mask(count)
         @mask_character * count
       end
-    end # end of ValueObfuscator
+    end
 
+    #
+    # @deprecated This class shouldn't have been exposed
     class Obfuscator
       def initialize(obfuscators, case_insensitive)
         raise ArgumentError unless obfuscators.is_a? Hash
@@ -102,7 +109,7 @@ module Ingenico::Connect::SDK
         def _insensitive(key)
           key.respond_to?(:upcase) ? key.upcase : key
         end
-      end # end of HashClod
+      end
 
       def copy(obfuscators, case_insensitive)
         cp = case_insensitive ? HashClod.new(obfuscators) : obfuscators
@@ -117,6 +124,8 @@ module Ingenico::Connect::SDK
       end
 
       # A convenient wrapper to build obfuscators
+      #
+      # @deprecated This class shouldn't have been exposed
       class Builder
         attr_accessor :obfuscators
 
@@ -151,16 +160,26 @@ module Ingenico::Connect::SDK
     end # Obfuscator
 
     # Class that obfuscates headers of a message
+    #
+    # @deprecated This class shouldn't have been exposed
     class HeaderObfuscator < Obfuscator
       def initialize(obfuscators)
         # case insensitive
         super(obfuscators, true)
+        obfuscation_rules = obfuscators.map { |key, value| [key, ->(v) { value.obfuscate_value(v) }]}
+        @obfuscator = Obfuscation::HeaderObfuscator.new(obfuscation_rules)
+      end
+
+      def obfuscate_value(key, value)
+        @obfuscator.obfuscate_header(key, value)
       end
 
       def self.builder
         Builder.new
       end
 
+      #
+      # @deprecated This class shouldn't have been exposed
       class Builder < Obfuscator::Builder
         def initialize
           @obfuscators = {}
@@ -180,55 +199,39 @@ module Ingenico::Connect::SDK
           HeaderObfuscator.new(obfuscators)
         end
       end
-    end # end of HeadObfuscator
+    end
 
     # Class that obfuscates properties in the JSON body of a message
+    #
+    # @deprecated This class shouldn't have been exposed
     class PropertyObfuscator < Obfuscator
       def initialize(obfuscators)
         # case sensitive
         super(obfuscators, false)
-        @property_pattern = build_property_pattern(obfuscators.keys)
+        @obfuscation_rules = obfuscators.map { |key, value| [key, ->(v) { value.obfuscate_value(v) }]}
+        @obfuscator = Obfuscation::BodyObfuscator.new(@obfuscation_rules)
       end
 
       private
 
-      def build_property_pattern(pn)
-        return /$^/ if pn.empty? # no possible match
-        # Regex to create:
-        # (["'])(X|Y|Z)\1\s*:\s*(?:(["'])(.*?)(?<!\\)\3|([^"'\s\[\{]\S*))
-        # Groups:
-        # 1: opening " or ' for the property name
-        # 2: property name
-        # 3: opening " or ' for the value
-        # 4: quoted value
-        # 5: non-quoted-value
-        # The negative lookbehind is to allow escaped quotes to be part of
-        # the value. What this does not allow currently is having values end
-        # with a \ (which would be escaped to \\).
-        regex = pn.inject("([\"'])(") { |r, p| "#{r}#{Regexp.quote(p)}|"}.chop <<
-          ")\\1\\s*:\\s*(?:([\"'])(.*?)(?<!\\\\)\\3|([^\"'\\s\\[\\{]((?!,)\\S)*))"
-        /#{regex}/m # dotall mode
-      end
-
       public
 
-      def obfuscate(body)
-        return nil if body.nil?
-        return '' if body.empty?
+      def obfuscate_value(key, value)
+        obfuscation_rule = @obfuscation_rules[property_name]
+        return obfuscation_rule.call(value) if obfuscation_rule
+        value
+      end
 
-        body.gsub(@property_pattern) do
-          m = Regexp.last_match
-          property_name = m[2]
-          value = m[4] || m[5]
-          # copy value 'cause it's part of m[0]
-          m[0].sub(value, obfuscate_value(property_name, value.dup))
-        end
+      def obfuscate(body)
+        @obfuscator.obfuscate_body(body)
       end
 
       def self.builder
         Builder.new
       end
 
+      #
+      # @deprecated This class shouldn't have been exposed
       class Builder < Obfuscator::Builder
         def initialize
           @obfuscators = {}
@@ -258,9 +261,11 @@ module Ingenico::Connect::SDK
           PropertyObfuscator.new(obfuscators)
         end
       end
-    end # end of property obfuscator
+    end
 
     module LoggingUtil
+      #
+      # @deprecated This constant shouldn't have been exposed
       @@PROPERTY_OBFUSCATOR = PropertyObfuscator.builder
         .with_keep_end_count("cardNumber", 4)
         .with_keep_end_count("expiryDate", 2)
@@ -279,6 +284,8 @@ module Ingenico::Connect::SDK
         .with_fixed_length("encryptedCustomerInput", 8)
         .build
 
+      #
+      # @deprecated This constant shouldn't have been exposed
       @@HEADER_OBFUSCATOR = HeaderObfuscator.builder
         .with_fixed_length("Authorization", 8)
         .with_fixed_length("WWW-Authenticate", 8)
@@ -288,13 +295,19 @@ module Ingenico::Connect::SDK
         .with_fixed_length("X-GCS-CallerPassword", 8)
         .build
 
+      #
+      # @deprecated This doesn't support custom obfuscation. Use BodyObfuscator instead
+      # @see Obfuscation::BodyObfuscator
       def self.obfuscate_body(body)
-        @@PROPERTY_OBFUSCATOR.obfuscate(body)
+        return Obfuscation::BodyObfuscator.default_obfuscator.obfuscate_body(body)
       end
 
+      #
+      # @deprecated This doesn't support custom obfuscation. Use HeaderObfuscator instead
+      # @see Obfuscation::HeaderObfuscator
       def self.obfuscate_header(name, value)
-        @@HEADER_OBFUSCATOR.obfuscate_value(name, value)
+        return Obfuscation::HeaderObfuscator.default_obfuscator.obfuscate_header(name, value)
       end
-    end # end of LoggingUtil
+    end
   end
 end

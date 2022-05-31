@@ -94,7 +94,8 @@ In order to run the unit and integration tests, some additional dependencies are
 * [rake](https://ruby.github.io/rake/) 12.3.3 or higher
 * [rspec](https://github.com/rspec/rspec) 3.5 or higher
 * [webmock](https://github.com/bblimke/webmock) 2.1 or higher
-* [sinatra](https://github.com/sinatra/sinatra) 1.4 or higher
+* [sinatra](https://github.com/sinatra/sinatra) 2.1 or higher
+* [webrick](https://github.com/ruby/webrick) 1.7 or higher
 
 They can be installed using the following command:
 

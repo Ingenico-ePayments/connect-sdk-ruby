@@ -9,8 +9,10 @@ module Ingenico::Connect::SDK
       # @param request_id  [String] identifier of the request corresponding to this response.
       # @param status_code [Integer] HTTP status code of the response.
       # @param duration    [Float] time elapsed between request and response.
-      def initialize(request_id, status_code, duration=-1)
-        super(request_id)
+      def initialize(request_id, status_code, duration=-1,
+                     body_obfuscator = Obfuscation::BodyObfuscator.default_obfuscator,
+                     header_obfuscator = Obfuscation::HeaderObfuscator.default_obfuscator)
+        super(request_id, body_obfuscator, header_obfuscator)
         @status_code = status_code
         @duration = duration
       end

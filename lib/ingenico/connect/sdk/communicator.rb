@@ -11,6 +11,7 @@ module Ingenico::Connect::SDK
   #
   class Communicator
     include Logging::LoggingCapable
+    include Logging::Obfuscation::ObfuscationCapable
 
     # Creates a new Communicator based on a session and marshaller.
     #
@@ -361,6 +362,20 @@ module Ingenico::Connect::SDK
     def close_expired_connections
       connection = @session.connection
       connection.close_expired_connections if connection.is_a? PooledConnection
+    end
+
+    # Sets the current body obfuscator to use.
+    # @param body_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::BodyObfuscator]
+    def set_body_obfuscator(body_obfuscator)
+      connection = @session.connection
+      connection.set_body_obfuscator(body_obfuscator) if connection.is_a? Logging::Obfuscation::ObfuscationCapable
+    end
+
+    # Sets the current header obfuscator to use.
+    # @param header_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::HeaderObfuscator]
+    def set_header_obfuscator(header_obfuscator)
+      connection = @session.connection
+      connection.set_header_obfuscator(header_obfuscator) if connection.is_a? Logging::Obfuscation::ObfuscationCapable
     end
 
     # Enables logging outgoing requests and incoming responses by registering the _communicator_logger_.

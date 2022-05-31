@@ -16,6 +16,7 @@ end
 module Ingenico::Connect::SDK
   module DefaultImpl
     class DefaultConnection < PooledConnection
+      include Ingenico::Connect::SDK::Logging::Obfuscation::ObfuscationCapable
       using RefineHTTPClient
 
       CONTENT_TYPE = 'Content-Type'.freeze
@@ -50,6 +51,9 @@ module Ingenico::Connect::SDK
         @http_client.connect_timeout = @connect_timeout
         @http_client.send_timeout = @socket_timeout
         @http_client.receive_timeout = @socket_timeout
+
+        @body_obfuscator = Ingenico::Connect::SDK::Logging::Obfuscation::BodyObfuscator.default_obfuscator
+        @header_obfuscator = Ingenico::Connect::SDK::Logging::Obfuscation::HeaderObfuscator.default_obfuscator
       end
 
       private
@@ -202,13 +206,29 @@ module Ingenico::Connect::SDK
 
       # logging code
 
+      # Sets the current body obfuscator to use.
+      # @param body_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::BodyObfuscator]
+      def set_body_obfuscator(body_obfuscator)
+        raise ArgumentError, 'body_obfuscator is required' unless body_obfuscator
+
+        @body_obfuscator = body_obfuscator
+      end
+
+      # Sets the current header obfuscator to use.
+      # @param header_obfuscator [Ingenico::Connect::SDK::Logging::Obfuscation::HeaderObfuscator]
+      def set_header_obfuscator(header_obfuscator)
+        raise ArgumentError, 'header_obfuscator is required' unless header_obfuscator
+
+        @header_obfuscator = header_obfuscator
+      end
+
       # Enables logging outgoing requests and incoming responses by registering the _communicator_logger_.
       # Note that only one logger can be registered at a time and calling _enable_logging_
       # a second time will override the old logger instance with the new one.
       #
       # @param communicator_logger [Ingenico::Connect::SDK::Logging::CommunicatorLogger] the communicator logger the requests and responses are logged to
       def enable_logging(communicator_logger)
-        raise ArgumentError, 'communicatorLogger is required' unless communicator_logger
+        raise ArgumentError, 'communicator_logger is required' unless communicator_logger
 
         @communicator_logger = communicator_logger
       end
@@ -238,7 +258,9 @@ module Ingenico::Connect::SDK
         headers = args[:headers]
         body = args[:body]
         content_type = args[:content_type]
-        log_msg_builder = Ingenico::Connect::SDK::Logging::RequestLogMessageBuilder.new(request_id, method, uri)
+        log_msg_builder = Ingenico::Connect::SDK::Logging::RequestLogMessageBuilder.new(request_id, method, uri,
+                                                                                        @body_obfuscator,
+                                                                                        @header_obfuscator)
         headers.each { |k, v| log_msg_builder.add_headers(k, v) } if headers
 
         if binary?(headers)
@@ -264,7 +286,9 @@ module Ingenico::Connect::SDK
         body          = args[:body] unless args[:body].nil?
         content_type  = args[:content_type]
 
-        log_msg_builder = Ingenico::Connect::SDK::Logging::ResponseLogMessageBuilder.new(request_id, status_code, duration)
+        log_msg_builder = Ingenico::Connect::SDK::Logging::ResponseLogMessageBuilder.new(request_id, status_code, duration,
+                                                                                         @body_obfuscator,
+                                                                                         @header_obfuscator)
         unless headers.nil?
           headers = convert_from_sdk_headers(headers)
           headers.each do |key, value|

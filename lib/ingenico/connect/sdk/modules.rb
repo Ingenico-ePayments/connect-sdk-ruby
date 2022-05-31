@@ -7,6 +7,10 @@ end
 module Ingenico::Connect::SDK::DefaultImpl
 end
 
+# Contains all obfuscation-related classes.
+module Ingenico::Connect::SDK::Logging::Obfuscation
+end
+
 # Contains all logging-related classes.
 module Ingenico::Connect::SDK::Logging
 end
