@@ -37,6 +37,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProduct320SpecificData] payment_product320_specific_data
       # @attr [Ingenico::Connect::SDK::Domain::Product::PaymentProduct863SpecificData] payment_product863_specific_data
       # @attr [String] payment_product_group
+      # @attr [true/false] supports_mandates
       # @attr [true/false] uses_redirection_to3rd_party
       class PaymentProduct < Ingenico::Connect::SDK::DataObject
 
@@ -84,6 +85,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :payment_product_group
 
+        attr_accessor :supports_mandates
+
         attr_accessor :uses_redirection_to3rd_party
 
         # @return (Hash)
@@ -111,6 +114,7 @@ module Ingenico::Connect::SDK
           hash['paymentProduct320SpecificData'] = @payment_product320_specific_data.to_h unless @payment_product320_specific_data.nil?
           hash['paymentProduct863SpecificData'] = @payment_product863_specific_data.to_h unless @payment_product863_specific_data.nil?
           hash['paymentProductGroup'] = @payment_product_group unless @payment_product_group.nil?
+          hash['supportsMandates'] = @supports_mandates unless @supports_mandates.nil?
           hash['usesRedirectionTo3rdParty'] = @uses_redirection_to3rd_party unless @uses_redirection_to3rd_party.nil?
           hash
         end
@@ -195,6 +199,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'paymentProductGroup'
             @payment_product_group = hash['paymentProductGroup']
+          end
+          if hash.has_key? 'supportsMandates'
+            @supports_mandates = hash['supportsMandates']
           end
           if hash.has_key? 'usesRedirectionTo3rdParty'
             @uses_redirection_to3rd_party = hash['usesRedirectionTo3rdParty']
