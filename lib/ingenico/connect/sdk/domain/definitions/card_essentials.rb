@@ -9,10 +9,13 @@ module Ingenico::Connect::SDK
     module Definitions
 
       # @attr [String] card_number
+      # @attr [String] cardholder_name
       # @attr [String] expiry_date
       class CardEssentials < Ingenico::Connect::SDK::DataObject
 
         attr_accessor :card_number
+
+        attr_accessor :cardholder_name
 
         attr_accessor :expiry_date
 
@@ -20,6 +23,7 @@ module Ingenico::Connect::SDK
         def to_h
           hash = super
           hash['cardNumber'] = @card_number unless @card_number.nil?
+          hash['cardholderName'] = @cardholder_name unless @cardholder_name.nil?
           hash['expiryDate'] = @expiry_date unless @expiry_date.nil?
           hash
         end
@@ -28,6 +32,9 @@ module Ingenico::Connect::SDK
           super
           if hash.has_key? 'cardNumber'
             @card_number = hash['cardNumber']
+          end
+          if hash.has_key? 'cardholderName'
+            @cardholder_name = hash['cardholderName']
           end
           if hash.has_key? 'expiryDate'
             @expiry_date = hash['expiryDate']

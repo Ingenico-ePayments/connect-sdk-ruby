@@ -9,10 +9,13 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] configuration_id
       # @attr [String] contact_website_url
       # @attr [Ingenico::Connect::SDK::Domain::Payment::Seller] seller
       # @attr [String] website_url
       class Merchant < Ingenico::Connect::SDK::DataObject
+
+        attr_accessor :configuration_id
 
         attr_accessor :contact_website_url
 
@@ -23,6 +26,7 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
+          hash['configurationId'] = @configuration_id unless @configuration_id.nil?
           hash['contactWebsiteUrl'] = @contact_website_url unless @contact_website_url.nil?
           hash['seller'] = @seller.to_h unless @seller.nil?
           hash['websiteUrl'] = @website_url unless @website_url.nil?
@@ -31,6 +35,9 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key? 'configurationId'
+            @configuration_id = hash['configurationId']
+          end
           if hash.has_key? 'contactWebsiteUrl'
             @contact_website_url = hash['contactWebsiteUrl']
           end
