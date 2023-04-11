@@ -16,6 +16,7 @@ module Ingenico::Connect::SDK
       # @attr [String] geocode
       # @attr [String] id
       # @attr [String] invoice_number
+      # @attr [true/false] is_foreign_retailer
       # @attr [String] mcc
       # @attr [String] name
       # @attr [String] phone_number
@@ -36,6 +37,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :invoice_number
 
+        attr_accessor :is_foreign_retailer
+
         attr_accessor :mcc
 
         attr_accessor :name
@@ -54,6 +57,7 @@ module Ingenico::Connect::SDK
           hash['geocode'] = @geocode unless @geocode.nil?
           hash['id'] = @id unless @id.nil?
           hash['invoiceNumber'] = @invoice_number unless @invoice_number.nil?
+          hash['isForeignRetailer'] = @is_foreign_retailer unless @is_foreign_retailer.nil?
           hash['mcc'] = @mcc unless @mcc.nil?
           hash['name'] = @name unless @name.nil?
           hash['phoneNumber'] = @phone_number unless @phone_number.nil?
@@ -84,6 +88,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'invoiceNumber'
             @invoice_number = hash['invoiceNumber']
+          end
+          if hash.has_key? 'isForeignRetailer'
+            @is_foreign_retailer = hash['isForeignRetailer']
           end
           if hash.has_key? 'mcc'
             @mcc = hash['mcc']
