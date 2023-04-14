@@ -5,6 +5,7 @@
 require 'ingenico/connect/sdk/domain/definitions/card'
 require 'ingenico/connect/sdk/domain/payment/abstract_card_payment_method_specific_input'
 require 'ingenico/connect/sdk/domain/payment/external_cardholder_authentication_data'
+require 'ingenico/connect/sdk/domain/payment/scheme_token_data'
 require 'ingenico/connect/sdk/domain/payment/three_d_secure'
 
 module Ingenico::Connect::SDK
@@ -15,6 +16,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ExternalCardholderAuthenticationData] external_cardholder_authentication_data
       # @attr [true/false] is_recurring
       # @attr [String] merchant_initiated_reason_indicator
+      # @attr [Ingenico::Connect::SDK::Domain::Payment::SchemeTokenData] network_token_data
       # @attr [String] return_url
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ThreeDSecure] three_d_secure
       class CardPaymentMethodSpecificInput < Ingenico::Connect::SDK::Domain::Payment::AbstractCardPaymentMethodSpecificInput
@@ -29,6 +31,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :merchant_initiated_reason_indicator
 
+        attr_accessor :network_token_data
+
         #
         # @deprecated Use threeDSecure.redirectionData.returnUrl instead
         attr_accessor :return_url
@@ -42,6 +46,7 @@ module Ingenico::Connect::SDK
           hash['externalCardholderAuthenticationData'] = @external_cardholder_authentication_data.to_h unless @external_cardholder_authentication_data.nil?
           hash['isRecurring'] = @is_recurring unless @is_recurring.nil?
           hash['merchantInitiatedReasonIndicator'] = @merchant_initiated_reason_indicator unless @merchant_initiated_reason_indicator.nil?
+          hash['networkTokenData'] = @network_token_data.to_h unless @network_token_data.nil?
           hash['returnUrl'] = @return_url unless @return_url.nil?
           hash['threeDSecure'] = @three_d_secure.to_h unless @three_d_secure.nil?
           hash
@@ -62,6 +67,10 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'merchantInitiatedReasonIndicator'
             @merchant_initiated_reason_indicator = hash['merchantInitiatedReasonIndicator']
+          end
+          if hash.has_key? 'networkTokenData'
+            raise TypeError, "value '%s' is not a Hash" % [hash['networkTokenData']] unless hash['networkTokenData'].is_a? Hash
+            @network_token_data = Ingenico::Connect::SDK::Domain::Payment::SchemeTokenData.new_from_hash(hash['networkTokenData'])
           end
           if hash.has_key? 'returnUrl'
             @return_url = hash['returnUrl']
