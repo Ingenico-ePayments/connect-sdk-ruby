@@ -22,6 +22,7 @@ module Ingenico::Connect::SDK
       # @attr [String] issue_date
       # @attr [String] merchant_customer_id
       # @attr [String] name
+      # @attr [Integer] number_in_party
       # @attr [String] passenger_name
       # @attr [Array<Ingenico::Connect::SDK::Domain::Definitions::AirlinePassenger>] passengers
       # @attr [String] place_of_issue
@@ -62,6 +63,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :name
 
+        attr_accessor :number_in_party
+
         attr_accessor :passenger_name
 
         attr_accessor :passengers
@@ -101,6 +104,7 @@ module Ingenico::Connect::SDK
           hash['issueDate'] = @issue_date unless @issue_date.nil?
           hash['merchantCustomerId'] = @merchant_customer_id unless @merchant_customer_id.nil?
           hash['name'] = @name unless @name.nil?
+          hash['numberInParty'] = @number_in_party unless @number_in_party.nil?
           hash['passengerName'] = @passenger_name unless @passenger_name.nil?
           hash['passengers'] = @passengers.collect{|val| val.to_h} unless @passengers.nil?
           hash['placeOfIssue'] = @place_of_issue unless @place_of_issue.nil?
@@ -157,6 +161,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'name'
             @name = hash['name']
+          end
+          if hash.has_key? 'numberInParty'
+            @number_in_party = hash['numberInParty']
           end
           if hash.has_key? 'passengerName'
             @passenger_name = hash['passengerName']

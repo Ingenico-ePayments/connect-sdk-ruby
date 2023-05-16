@@ -9,12 +9,14 @@ require 'ingenico/connect/sdk/multipart_form_data_request'
 require 'ingenico/connect/sdk/uploadable_file'
 
 describe 'multipart/form-data support' do
+  HTTPBIN_URL = ENV['httpbin_url'] || 'http://httpbin.org'
+
   before(:context) { WebMock.allow_net_connect! }
   after(:context) { WebMock.disable_net_connect! }
 
   it 'Can send a Multipart Form Data Object POST upload with a response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -34,7 +36,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Request POST upload with a response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -54,7 +56,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Object POST upload with a binary response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -77,7 +79,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Request POST upload with a binary response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -100,7 +102,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Object PUT upload with a response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -120,7 +122,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Request PUT upload with a response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -140,7 +142,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Object PUT upload with a binary response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
@@ -163,7 +165,7 @@ describe 'multipart/form-data support' do
 
   it 'Can send a Multipart Form Data Request PUT upload with a binary response' do
     configuration = Integration.init_communicator_configuration
-    configuration.api_endpoint = 'http://httpbin.org'
+    configuration.api_endpoint = HTTPBIN_URL
 
     multipart = Ingenico::Connect::SDK::MultipartFormDataObject.new
     multipart.add_file 'file', Ingenico::Connect::SDK::UploadableFile.new(
