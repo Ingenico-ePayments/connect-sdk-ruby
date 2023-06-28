@@ -12,6 +12,7 @@ module Ingenico::Connect::SDK
       # @attr [String] merchant_reference
       # @attr [String] payment_reference
       # @attr [String] provider_id
+      # @attr [String] provider_merchant_id
       # @attr [String] provider_reference
       # @attr [String] reference_orig_payment
       class PaymentReferences < Ingenico::Connect::SDK::DataObject
@@ -24,6 +25,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :provider_id
 
+        attr_accessor :provider_merchant_id
+
         attr_accessor :provider_reference
 
         attr_accessor :reference_orig_payment
@@ -35,6 +38,7 @@ module Ingenico::Connect::SDK
           hash['merchantReference'] = @merchant_reference unless @merchant_reference.nil?
           hash['paymentReference'] = @payment_reference unless @payment_reference.nil?
           hash['providerId'] = @provider_id unless @provider_id.nil?
+          hash['providerMerchantId'] = @provider_merchant_id unless @provider_merchant_id.nil?
           hash['providerReference'] = @provider_reference unless @provider_reference.nil?
           hash['referenceOrigPayment'] = @reference_orig_payment unless @reference_orig_payment.nil?
           hash
@@ -53,6 +57,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'providerId'
             @provider_id = hash['providerId']
+          end
+          if hash.has_key? 'providerMerchantId'
+            @provider_merchant_id = hash['providerMerchantId']
           end
           if hash.has_key? 'providerReference'
             @provider_reference = hash['providerReference']

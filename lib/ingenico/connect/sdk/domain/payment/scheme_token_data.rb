@@ -8,11 +8,14 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
+      # @attr [String] cardholder_name
       # @attr [String] cryptogram
       # @attr [String] eci
       # @attr [String] network_token
       # @attr [String] token_expiry_date
       class SchemeTokenData < Ingenico::Connect::SDK::DataObject
+
+        attr_accessor :cardholder_name
 
         attr_accessor :cryptogram
 
@@ -25,6 +28,7 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
+          hash['cardholderName'] = @cardholder_name unless @cardholder_name.nil?
           hash['cryptogram'] = @cryptogram unless @cryptogram.nil?
           hash['eci'] = @eci unless @eci.nil?
           hash['networkToken'] = @network_token unless @network_token.nil?
@@ -34,6 +38,9 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
+          if hash.has_key? 'cardholderName'
+            @cardholder_name = hash['cardholderName']
+          end
           if hash.has_key? 'cryptogram'
             @cryptogram = hash['cryptogram']
           end
