@@ -8,6 +8,7 @@ require 'ingenico/connect/sdk/merchant/disputes/disputes_client'
 require 'ingenico/connect/sdk/merchant/files/files_client'
 require 'ingenico/connect/sdk/merchant/hostedcheckouts/hostedcheckouts_client'
 require 'ingenico/connect/sdk/merchant/hostedmandatemanagements/hostedmandatemanagements_client'
+require 'ingenico/connect/sdk/merchant/installments/installments_client'
 require 'ingenico/connect/sdk/merchant/mandates/mandates_client'
 require 'ingenico/connect/sdk/merchant/payments/payments_client'
 require 'ingenico/connect/sdk/merchant/payouts/payouts_client'
@@ -113,6 +114,12 @@ module Ingenico::Connect::SDK
       # @return [Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient]
       def sessions
         Ingenico::Connect::SDK::Merchant::Sessions::SessionsClient.new(self, nil)
+      end
+
+      # Resource /!{merchantId}/installments
+      # @return [Ingenico::Connect::SDK::Merchant::Installments::InstallmentsClient]
+      def installments
+        Ingenico::Connect::SDK::Merchant::Installments::InstallmentsClient.new(self, nil)
       end
 
       # Resource /!{merchantId}/files
