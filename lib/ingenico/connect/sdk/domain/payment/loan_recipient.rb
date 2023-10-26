@@ -13,16 +13,27 @@ module Ingenico::Connect::SDK
       # @attr [String] partial_pan
       # @attr [String] surname
       # @attr [String] zip
+      # @deprecated No replacement
       class LoanRecipient < Ingenico::Connect::SDK::DataObject
 
+        #
+        # @deprecated No replacement
         attr_accessor :account_number
 
+        #
+        # @deprecated No replacement
         attr_accessor :date_of_birth
 
+        #
+        # @deprecated No replacement
         attr_accessor :partial_pan
 
+        #
+        # @deprecated No replacement
         attr_accessor :surname
 
+        #
+        # @deprecated No replacement
         attr_accessor :zip
 
         # @return (Hash)

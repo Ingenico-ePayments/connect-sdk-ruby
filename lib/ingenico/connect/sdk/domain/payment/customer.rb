@@ -20,6 +20,7 @@ module Ingenico::Connect::SDK
       # @attr [Ingenico::Connect::SDK::Domain::Payment::ContactDetails] contact_details
       # @attr [Ingenico::Connect::SDK::Domain::Payment::CustomerDevice] device
       # @attr [String] fiscal_number
+      # @attr [true/false] is_company
       # @attr [true/false] is_previous_customer
       # @attr [String] locale
       # @attr [Ingenico::Connect::SDK::Domain::Payment::PersonalInformation] personal_information
@@ -37,6 +38,8 @@ module Ingenico::Connect::SDK
         attr_accessor :device
 
         attr_accessor :fiscal_number
+
+        attr_accessor :is_company
 
         attr_accessor :is_previous_customer
 
@@ -57,6 +60,7 @@ module Ingenico::Connect::SDK
           hash['contactDetails'] = @contact_details.to_h unless @contact_details.nil?
           hash['device'] = @device.to_h unless @device.nil?
           hash['fiscalNumber'] = @fiscal_number unless @fiscal_number.nil?
+          hash['isCompany'] = @is_company unless @is_company.nil?
           hash['isPreviousCustomer'] = @is_previous_customer unless @is_previous_customer.nil?
           hash['locale'] = @locale unless @locale.nil?
           hash['personalInformation'] = @personal_information.to_h unless @personal_information.nil?
@@ -87,6 +91,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'fiscalNumber'
             @fiscal_number = hash['fiscalNumber']
+          end
+          if hash.has_key? 'isCompany'
+            @is_company = hash['isCompany']
           end
           if hash.has_key? 'isPreviousCustomer'
             @is_previous_customer = hash['isPreviousCustomer']
