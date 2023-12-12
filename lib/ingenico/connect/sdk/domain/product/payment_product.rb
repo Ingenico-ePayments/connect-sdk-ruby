@@ -28,6 +28,7 @@ module Ingenico::Connect::SDK
       # @attr [Array<Ingenico::Connect::SDK::Domain::Product::PaymentProductField>] fields
       # @attr [String] fields_warning
       # @attr [Integer] id
+      # @attr [true/false] is_authentication_supported
       # @attr [true/false] is_java_script_required
       # @attr [Integer] max_amount
       # @attr [Integer] min_amount
@@ -67,6 +68,8 @@ module Ingenico::Connect::SDK
 
         attr_accessor :id
 
+        attr_accessor :is_authentication_supported
+
         attr_accessor :is_java_script_required
 
         attr_accessor :max_amount
@@ -105,6 +108,7 @@ module Ingenico::Connect::SDK
           hash['fields'] = @fields.collect{|val| val.to_h} unless @fields.nil?
           hash['fieldsWarning'] = @fields_warning unless @fields_warning.nil?
           hash['id'] = @id unless @id.nil?
+          hash['isAuthenticationSupported'] = @is_authentication_supported unless @is_authentication_supported.nil?
           hash['isJavaScriptRequired'] = @is_java_script_required unless @is_java_script_required.nil?
           hash['maxAmount'] = @max_amount unless @max_amount.nil?
           hash['minAmount'] = @min_amount unless @min_amount.nil?
@@ -169,6 +173,9 @@ module Ingenico::Connect::SDK
           end
           if hash.has_key? 'id'
             @id = hash['id']
+          end
+          if hash.has_key? 'isAuthenticationSupported'
+            @is_authentication_supported = hash['isAuthenticationSupported']
           end
           if hash.has_key? 'isJavaScriptRequired'
             @is_java_script_required = hash['isJavaScriptRequired']

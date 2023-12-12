@@ -9,7 +9,6 @@ module Ingenico::Connect::SDK
   module Domain
     module Payment
 
-      # @attr [String] device_info
       # @attr [Ingenico::Connect::SDK::Domain::Payment::DeviceRenderOptions] device_render_options
       # @attr [String] sdk_app_id
       # @attr [String] sdk_encrypted_data
@@ -18,10 +17,6 @@ module Ingenico::Connect::SDK
       # @attr [String] sdk_reference_number
       # @attr [String] sdk_transaction_id
       class SdkDataInput < Ingenico::Connect::SDK::DataObject
-
-        #
-        # @deprecated No replacement
-        attr_accessor :device_info
 
         attr_accessor :device_render_options
 
@@ -40,7 +35,6 @@ module Ingenico::Connect::SDK
         # @return (Hash)
         def to_h
           hash = super
-          hash['deviceInfo'] = @device_info unless @device_info.nil?
           hash['deviceRenderOptions'] = @device_render_options.to_h unless @device_render_options.nil?
           hash['sdkAppId'] = @sdk_app_id unless @sdk_app_id.nil?
           hash['sdkEncryptedData'] = @sdk_encrypted_data unless @sdk_encrypted_data.nil?
@@ -53,9 +47,6 @@ module Ingenico::Connect::SDK
 
         def from_hash(hash)
           super
-          if hash.has_key? 'deviceInfo'
-            @device_info = hash['deviceInfo']
-          end
           if hash.has_key? 'deviceRenderOptions'
             raise TypeError, "value '%s' is not a Hash" % [hash['deviceRenderOptions']] unless hash['deviceRenderOptions'].is_a? Hash
             @device_render_options = Ingenico::Connect::SDK::Domain::Payment::DeviceRenderOptions.new_from_hash(hash['deviceRenderOptions'])
