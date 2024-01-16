@@ -74,5 +74,5 @@ def run_request(i, communicator, flag)
   flag.wait
   start_time = Time.now
   client.merchant(Integration::MERCHANT_ID).services.convert_amount(request)
-  return [start_time.to_i*1000, Time.now.to_i*1000]
+  [start_time.to_i*1000, Time.now.to_i*1000]
 end

@@ -1,29 +1,32 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/data_object'
 
-module Ingenico::Connect::SDK
-  module Domain
-    module Refund
+module Ingenico
+  module Connect
+    module SDK
+      module Domain
+        module Refund
+          # @attr [Integer] amount
+          class ApproveRefundRequest < Ingenico::Connect::SDK::DataObject
 
-      # @attr [Integer] amount
-      class ApproveRefundRequest < Ingenico::Connect::SDK::DataObject
+            attr_accessor :amount
 
-        attr_accessor :amount
+            # @return (Hash)
+            def to_h
+              hash = super
+              hash['amount'] = @amount unless @amount.nil?
+              hash
+            end
 
-        # @return (Hash)
-        def to_h
-          hash = super
-          hash['amount'] = @amount unless @amount.nil?
-          hash
-        end
-
-        def from_hash(hash)
-          super
-          if hash.has_key? 'amount'
-            @amount = hash['amount']
+            def from_hash(hash)
+              super
+              if hash.has_key? 'amount'
+                @amount = hash['amount']
+              end
+            end
           end
         end
       end

@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/factory'
 require 'ingenico/connect/sdk/domain/payment/approve_payment_non_sepa_direct_debit_payment_method_specific_input'

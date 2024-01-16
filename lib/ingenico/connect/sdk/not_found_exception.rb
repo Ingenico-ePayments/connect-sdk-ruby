@@ -1,16 +1,19 @@
-module Ingenico::Connect::SDK
+module Ingenico
+  module Connect
+    module SDK
+      # Raised when a resource is not found on the Ingenico ePayments platform.
+      # This error corresponds to a 404 HTTP response.
+      #
+      # @attr [Exception] cause The error that is the cause of this error.
+      class NotFoundException < RuntimeError
 
-  # Raised when a resource is not found on the Ingenico ePayments platform.
-  # This error corresponds to a 404 HTTP response.
-  #
-  # @attr [Exception] cause The error that is the cause of this error.
-  class NotFoundException < RuntimeError
+        def initialize(cause, message = nil)
+          super(message)
+          @cause = cause
+        end
 
-    def initialize(cause, message=nil)
-      super(message)
-      @cause = cause
+        attr_accessor :cause
+      end
     end
-
-    attr_accessor :cause
   end
 end

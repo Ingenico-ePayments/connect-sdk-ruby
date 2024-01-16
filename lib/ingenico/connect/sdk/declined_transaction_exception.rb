@@ -1,15 +1,20 @@
-module Ingenico::Connect::SDK
+require 'ingenico/connect/sdk/api_exception'
 
-  # Indicates that a transaction is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
-  class DeclinedTransactionException < ApiException
+module Ingenico
+  module Connect
+    module SDK
+      # Indicates that a transaction is declined by the Ingenico ePayments platform or one of its downstream partners/acquirers.
+      class DeclinedTransactionException < ApiException
 
-    # Create a new DeclinedTransactionException.
-    # @see ApiException#initialize
-    def initialize(status_code, response_body, error_id, errors, message=false)
-      if message == false
-        super(status_code, response_body, error_id, errors)
-      else
-        super(status_code, response_body, error_id, errors, message)
+        # Create a new DeclinedTransactionException.
+        # @see ApiException#initialize
+        def initialize(status_code, response_body, error_id, errors, message = false)
+          if message == false
+            super(status_code, response_body, error_id, errors)
+          else
+            super(status_code, response_body, error_id, errors, message)
+          end
+        end
       end
     end
   end

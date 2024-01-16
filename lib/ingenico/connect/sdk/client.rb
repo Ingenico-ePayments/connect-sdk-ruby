@@ -1,18 +1,17 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
+require 'base64'
 require 'ingenico/connect/sdk/api_resource'
 require 'ingenico/connect/sdk/data_object'
 require 'ingenico/connect/sdk/logging/logging_capable'
 require 'ingenico/connect/sdk/logging/obfuscation/obfuscation_capable'
 require 'ingenico/connect/sdk/merchant/merchant_client'
-require 'base64'
 
 module Ingenico
   module Connect
     module SDK
-
       # Ingenico ePayments platform client.
       #
       # This client and all its child clients are bound to one specific value for the X-GCS-ClientMetaInfo header.
@@ -31,7 +30,7 @@ module Ingenico
 
         # @param communicator     [Ingenico::Connect::SDK::Communicator]
         # @param client_meta_info [String]
-        def initialize(communicator, client_meta_info=nil)
+        def initialize(communicator, client_meta_info = nil)
           super(communicator, nil, client_meta_info)
         end
 

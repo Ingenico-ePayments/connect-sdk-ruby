@@ -1,33 +1,37 @@
 require 'English'
 require 'singleton'
+require 'ingenico/connect/sdk/logging/communicator_logger'
 
-module Ingenico::Connect::SDK
-  module Logging
+module Ingenico
+  module Connect
+    module SDK
+      module Logging
+        # Logging class that logs the messages to $stdout.
+        class StdoutCommunicatorLogger < CommunicatorLogger
+          include Singleton
 
-    # {Ingenico::Connect::SDK::Logging::CommunicatorLogger} that logs the messages to $stdout.
-    class StdoutCommunicatorLogger < CommunicatorLogger
-      include Singleton
+          def initialize
+            # implement the interface
+          end
 
-      def initialize
-        # implement the interface
-      end
+          # NOTE: this alias is needed to not break existing method calls depending on old interface
+          class << self
+            alias_method :INSTANCE, :instance
+          end
 
-      # NOTE: this alias is needed to not break existing method calls depending on old interface
-      class << self
-        alias_method :INSTANCE, :instance
-      end
+          # Logs a single error or non-error message to $stdout.
+          def log(msg, thrown = false)
+            $stdout.puts get_date_prefix + msg
+            $stdout.puts thrown.to_s if thrown
+            $stdout.puts thrown.backtrace.join($RS) if thrown
+          end
 
-      # Logs a single error or non-error message to $stdout.
-      def log(msg, thrown=false)
-        $stdout.puts get_date_prefix + msg
-        $stdout.puts thrown.to_s if thrown
-        $stdout.puts thrown.backtrace.join($RS) if thrown
-      end
+          private
 
-      private
-
-      def get_date_prefix
-        Time.now.strftime("%Y-%m-%dT%H:%M:%S ")
+          def get_date_prefix
+            Time.now.strftime("%Y-%m-%dT%H:%M:%S ")
+          end
+        end
       end
     end
   end

@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/factory'
 require 'ingenico/connect/sdk/merchant/products/get_product_params'

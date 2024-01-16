@@ -11,7 +11,8 @@ describe Webhooks::Webhooks do
     end
 
     it 'uses the given key store' do
-      expect(webhooks_helper.instance_variable_get(:@secret_key_store)).to eq(Webhooks::InMemorySecretKeyStore.instance)
+      signature_validator = webhooks_helper.instance_variable_get(:@signature_validator)
+      expect(signature_validator.instance_variable_get(:@secret_key_store)).to eq(Webhooks::InMemorySecretKeyStore.instance)
     end
   end
 end

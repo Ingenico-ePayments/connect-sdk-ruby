@@ -1,14 +1,17 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/data_object'
 
-module Ingenico::Connect::SDK
-  module Domain
-    module Product
-
-      class EmptyValidator < Ingenico::Connect::SDK::DataObject
+module Ingenico
+  module Connect
+    module SDK
+      module Domain
+        module Product
+          class EmptyValidator < Ingenico::Connect::SDK::DataObject
+          end
+        end
       end
     end
   end

@@ -1,31 +1,34 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/data_object'
 
-module Ingenico::Connect::SDK
-  module Domain
-    module Payment
+module Ingenico
+  module Connect
+    module SDK
+      module Domain
+        module Payment
+          # @attr [String] mandate_reference
+          class AbstractSepaDirectDebitPaymentProduct771SpecificInput < Ingenico::Connect::SDK::DataObject
 
-      # @attr [String] mandate_reference
-      class AbstractSepaDirectDebitPaymentProduct771SpecificInput < Ingenico::Connect::SDK::DataObject
+            #
+            # @deprecated Use existingUniqueMandateReference or mandate.uniqueMandateReference instead
+            attr_accessor :mandate_reference
 
-        #
-        # @deprecated Use existingUniqueMandateReference or mandate.uniqueMandateReference instead
-        attr_accessor :mandate_reference
+            # @return (Hash)
+            def to_h
+              hash = super
+              hash['mandateReference'] = @mandate_reference unless @mandate_reference.nil?
+              hash
+            end
 
-        # @return (Hash)
-        def to_h
-          hash = super
-          hash['mandateReference'] = @mandate_reference unless @mandate_reference.nil?
-          hash
-        end
-
-        def from_hash(hash)
-          super
-          if hash.has_key? 'mandateReference'
-            @mandate_reference = hash['mandateReference']
+            def from_hash(hash)
+              super
+              if hash.has_key? 'mandateReference'
+                @mandate_reference = hash['mandateReference']
+              end
+            end
           end
         end
       end

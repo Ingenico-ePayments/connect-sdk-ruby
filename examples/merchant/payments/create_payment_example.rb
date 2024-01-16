@@ -1,6 +1,6 @@
 #
 # This class was auto-generated from the API references found at
-# https://epayments-api.developer-ingenico.com/s2sapi/v1/
+# https://epayments-api.developer-ingenico.com/
 #
 require 'ingenico/connect/sdk/api_exception'
 require 'ingenico/connect/sdk/declined_payment_exception'

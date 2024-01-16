@@ -44,7 +44,7 @@ module ValidationDict
     expect(message).to match(GET_METHOD)
     expect(message).to match(%r(uri:          '/v1/1234/services/convert/amount\?source=EUR&target=USD&amount=1000'))
     validate_request_headers(message)
-    return id
+    id
   end
 
   def convertAmount_response(message)
@@ -58,7 +58,7 @@ module ValidationDict
     expect(message).to match(%r(content-type: 'application/json'))
     # token match to validate that a body is in the message
     expect(message).to match(%r("convertedAmount" : 4547504))
-    return id
+    id
   end
 
   def createPayment_failure_invalidCardNumber_request(message)
@@ -71,7 +71,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON_HEADER)
     expect(message).to match(DATA_JSON)
     expect(message).to match(%r("cardPaymentMethodSpecificInput":))  # token match to validate that a body is in the message
-    return id
+    id
   end
 
   def createPayment_failure_invalidCardNumber_response(message)
@@ -85,7 +85,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("VALUE \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* OF FIELD CREDITCARDNUMBER DID NOT PASS THE LUHNCHECK"))
-    return id
+    id
   end
 
   def createPayment_failure_rejected_request(message)
@@ -99,7 +99,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("cardPaymentMethodSpecificInput":))
-    return id
+    id
   end
 
   def createPayment_failure_rejected_response(message)
@@ -113,7 +113,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("message": "Not authorised"))
-    return id
+    id
   end
 
   def createPayment_unicode_request(message)
@@ -127,7 +127,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("cardPaymentMethodSpecificInput":))
-    return id
+    id
   end
 
   def createPayment_unicode_response(message)
@@ -142,7 +142,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     expect(message).to match(UNICODE_BODY_NAME)
     # token match to validate that a body is in the message
-    return id
+    id
   end
   def createPayment_request(message)
     expect(message).to match(REQUEST_START)
@@ -155,7 +155,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("cardPaymentMethodSpecificInput":))
-    return id
+    id
   end
 
   def createPayment_response(message)
@@ -170,7 +170,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("cardNumber": "\*\*\*\*\*\*\*\*\*\*\*\*3456"))
-    return id
+    id
   end
 
   def deleteToken_request(message)
@@ -180,7 +180,7 @@ module ValidationDict
     expect(message).to match(DELETE_METHOD)
     expect(message).to match(%r(uri:          '/v1/1234/tokens/5678'))
     validate_request_headers(message)
-    return id
+    id
   end
 
   def deleteToken_response(message)
@@ -190,7 +190,7 @@ module ValidationDict
     expect(message).to match(STATUS_204)
     # expect(message).to match(DUMMY_HEADER)
     expect(message).to match(DATEHEADER)
-    return id
+    id
   end
 
   def notFound_response(message)
@@ -203,7 +203,7 @@ module ValidationDict
     expect(message).to match(%r(Content-Type="text/html"))
     expect(message).to match(%r(content-type: 'text/html'))
     expect(message).to match(%r(body:         'Not Found'))
-    return id
+    id
   end
 
   def testConnection_request(message)
@@ -213,7 +213,7 @@ module ValidationDict
     expect(message).to match(GET_METHOD)
     expect(message).to match(%r(uri:          '/v1/1234/services/testconnection'))
     validate_request_headers(message)
-    return id
+    id
   end
 
   def testConnection_response(message)
@@ -227,7 +227,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("result": "OK"))
-    return id
+    id
   end
 
   def unknownServerError_response(message)
@@ -241,7 +241,7 @@ module ValidationDict
     expect(message).to match(DATA_JSON)
     # token match to validate that a body is in the message
     expect(message).to match(%r("message": "UNKNOWN_SERVER_ERROR"))
-    return id
+    id
   end
 end
 
@@ -509,7 +509,7 @@ end
 # Returns the request_id found in the request so it can be matched with a possible response or error
 def validate_request(request, request_resource_prefix)
   method = (request_resource_prefix + '_request').to_sym
-  return send(method, request[0])
+  send(method, request[0])
 end
 
 # Asserts that the response message matches the response format in _resource_prefix.response_.
