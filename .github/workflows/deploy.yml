@@ -1,0 +1,34 @@
+name: Deploy
+
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+*']
+
+env:
+  SDK_VERSION: ${{ github.ref_name }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+          rubygems: latest
+          bundler-cache: true
+      - name: Build
+        run: gem build connect-sdk-ruby.gemspec
+      - name: Deploy
+        run: |
+          mkdir -p ~/.gem
+          echo --- > ~/.gem/credentials
+          echo :rubygems_api_key: ${RUBYGEMS_API_KEY} >> ~/.gem/credentials
+          chmod 0600 ~/.gem/credentials
+          gem push connect-sdk-ruby-${SDK_VERSION}.gem
+        env:
+          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}

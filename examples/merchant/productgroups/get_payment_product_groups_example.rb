@@ -15,6 +15,7 @@ def example
     query.locale = 'en_US'
     query.amount = 1000
     query.is_recurring = true
+    query.is_installments = true
     query.add_hide('fields')
 
     response = client.merchant('merchantId').productgroups.find(query)

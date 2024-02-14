@@ -16,6 +16,7 @@ module Ingenico
           # @attr [String] locale
           # @attr [Integer] amount
           # @attr [true/false] is_recurring
+          # @attr [true/false] is_installments
           # @attr [Array<String>] hide
           class FindProductsParams < Ingenico::Connect::SDK::ParamRequest
 
@@ -28,6 +29,8 @@ module Ingenico
             attr_accessor :amount
 
             attr_accessor :is_recurring
+
+            attr_accessor :is_installments
 
             attr_accessor :hide
 
@@ -48,6 +51,7 @@ module Ingenico
               result << RequestParam.new('locale', @locale) unless @locale.nil?
               result << RequestParam.new('amount', @amount.to_s) unless @amount.nil?
               result << RequestParam.new('isRecurring', @is_recurring.to_s) unless @is_recurring.nil?
+              result << RequestParam.new('isInstallments', @is_installments.to_s) unless @is_installments.nil?
               unless @hide.nil?
                 @hide.each {|e| result << RequestParam.new('hide', e)}
               end
